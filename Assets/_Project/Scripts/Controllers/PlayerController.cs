@@ -6,23 +6,31 @@ using VContainer;
 namespace _Project.Scripts.Controllers
 {
     [RequireComponent(typeof(CharacterModel))]
-    [RequireComponent(typeof(Movement))]
+    [RequireComponent(typeof(MovementSystem))]
+    [RequireComponent(typeof(DetectionAim))]
+    [RequireComponent(typeof(DamageSystem))]
     public class PlayerController : MonoBehaviour
     {
         [Inject] private PlayerInputSystem playerInputSystem;
-        [SerializeField] private CharacterModel characterModel;
-        [SerializeField] private Movement movement;
+        private CharacterModel characterModel;
+        private MovementSystem movementSystem;
+        private DetectionAim detectionAim;
+        private DamageSystem damageSystem;
 
         private void OnValidate()
         {
             characterModel ??= GetComponent<CharacterModel>();
-            movement ??= GetComponent<Movement>();
+            movementSystem ??= GetComponent<MovementSystem>();
+            detectionAim ??= GetComponent<DetectionAim>();
+            damageSystem ??= GetComponent<DamageSystem>();
         }
 
         private void Update()
         {
             var movementDirection = playerInputSystem.GetInputVector();
-            movement.Move(movementDirection);
+            movementSystem.MoveTo(movementDirection);
+            detectionAim.DetectAim();
+            damageSystem.Attack();
         }
     }
 }

@@ -1,16 +1,12 @@
-using System;
 using _Project.Scripts.Models;
-using Unity.VisualScripting;
 using UnityEngine;
-using VContainer;
 
-namespace _Project.Scripts
+namespace _Project.Scripts.Systems
 {
     [RequireComponent(typeof(CharacterModel))]
-    public class Movement : MonoBehaviour
+    public class MovementSystem : MonoBehaviour
     {
-        [SerializeField] private CharacterModel characterModel;
-        
+        private CharacterModel characterModel;
         private Vector3 velocity;
 
         private void OnValidate()
@@ -18,14 +14,14 @@ namespace _Project.Scripts
             characterModel ??= GetComponent<CharacterModel>();
         }
 
-        public void Move(Vector3 input)
+        public void MoveTo(Vector3 inputVector)
         {
             if (characterModel.characterController.isGrounded && velocity.y < 0)
             {
                 velocity.y = -2f;
             }
             
-            var move = Vector3.ClampMagnitude(input, 1f);
+            var move = Vector3.ClampMagnitude(inputVector, 1f);
             
             if (move.magnitude > 0f)
             {
