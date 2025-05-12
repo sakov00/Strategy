@@ -1,5 +1,6 @@
 using _Project.Scripts.Models;
 using _Project.Scripts.Systems;
+using _Project.Scripts.Views;
 using UnityEngine;
 using VContainer;
 
@@ -9,12 +10,14 @@ namespace _Project.Scripts.Controllers
     [RequireComponent(typeof(MovementSystem))]
     [RequireComponent(typeof(DetectionAim))]
     [RequireComponent(typeof(DamageSystem))]
+    [RequireComponent(typeof(CharacterView))]
     public class UnitController : MonoBehaviour
     {
         private CharacterModel characterModel;
         private MovementSystem movementSystem;
         private DetectionAim detectionAim;
         private DamageSystem damageSystem;
+        private CharacterView characterView;
 
         private void OnValidate()
         {
@@ -22,6 +25,7 @@ namespace _Project.Scripts.Controllers
             movementSystem ??= GetComponent<MovementSystem>();
             detectionAim ??= GetComponent<DetectionAim>();
             damageSystem ??= GetComponent<DamageSystem>();
+            characterView ??= GetComponent<CharacterView>();
         }
 
         private void Update()
@@ -30,6 +34,7 @@ namespace _Project.Scripts.Controllers
             if(characterModel.InputVector.HasValue)
                 movementSystem.MoveTo(characterModel.InputVector.Value);
             damageSystem.Attack();
+            characterView.UpdateView();
         }
     }
 }
