@@ -15,8 +15,8 @@ namespace _Project.Scripts.Systems
 
         public void DetectAim()
         {
+            characterModel.InputVector = Vector3.zero;
             characterModel.aimCharacter = null;
-            characterModel.InputVector = null;
             var hitBuffer = Physics.OverlapSphere(transform.position, characterModel.detectionRadius);
             foreach (var hit in hitBuffer)
             {
@@ -25,10 +25,13 @@ namespace _Project.Scripts.Systems
                 
                 characterModel.aimCharacter = aimCharacterModel;
                 
-                Vector3 direction = (aimCharacterModel.transform.position - transform.position).normalized;
-                characterModel.InputVector = new Vector3(direction.x, 0, direction.z);
-                
-                
+                Vector3 direction = aimCharacterModel.transform.position - transform.position;
+                float distance = direction.magnitude;
+                if (distance > characterModel.attackRange)
+                {
+                    characterModel.InputVector = new Vector3(direction.x, 0, direction.z).normalized;
+                }
+
                 break;
             }
         }

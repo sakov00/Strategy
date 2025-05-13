@@ -25,6 +25,7 @@ namespace _Project.Scripts.Models
         public float delayAttack = 1f;
         public float detectionRadius = 10f;
         public WarSide warSide;
+        public TypeAttack typeAttack;
         public CharacterModel aimCharacter;
 
         private void OnValidate()

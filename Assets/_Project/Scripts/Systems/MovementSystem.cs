@@ -28,7 +28,7 @@ namespace _Project.Scripts.Systems
                 Quaternion targetRotation = Quaternion.LookRotation(move);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, characterModel.rotationSpeed * Time.deltaTime);
             }
-
+            
             characterModel.characterController.Move(move * characterModel.moveSpeed * Time.deltaTime);
 
             velocity.y += characterModel.gravity * Time.deltaTime;
