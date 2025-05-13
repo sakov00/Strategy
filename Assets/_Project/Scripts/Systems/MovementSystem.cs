@@ -1,4 +1,5 @@
 using _Project.Scripts.Models;
+using _Project.Scripts.Models.Characters;
 using UnityEngine;
 
 namespace _Project.Scripts.Systems

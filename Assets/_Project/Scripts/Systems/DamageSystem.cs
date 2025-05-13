@@ -1,6 +1,7 @@
 using System;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Models;
+using _Project.Scripts.Models.Characters;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -37,19 +38,19 @@ namespace _Project.Scripts.Systems
 
         private void MeleeAttack()
         {
-            var distance = Vector3.Distance(transform.position, characterModel.aimCharacter.transform.position);
+            var distance = Vector3.Distance(transform.position, characterModel.aimCharacter.Transform.position);
             if (distance <= characterModel.attackRange)
             {
                 lastAttackTime = Time.time;
-                characterModel.aimCharacter.currentHealth -= characterModel.damageAmount;
-                if (characterModel.aimCharacter.currentHealth <= 0)
-                    Destroy(characterModel.aimCharacter.gameObject);
+                characterModel.aimCharacter.CurrentHealth -= characterModel.damageAmount;
+                if (characterModel.aimCharacter.CurrentHealth <= 0)
+                    Destroy(characterModel.aimCharacter.Transform.gameObject);
             }
         }
         
         private void DistanceAttack()
         {
-            var distance = Vector3.Distance(transform.position, characterModel.aimCharacter.transform.position);
+            var distance = Vector3.Distance(transform.position, characterModel.aimCharacter.Transform.position);
             if (distance <= characterModel.attackRange)
             {
                 lastAttackTime = Time.time;
@@ -67,7 +68,7 @@ namespace _Project.Scripts.Systems
             if (rb == null)
                 return;
 
-            var velocity = CalculateBallisticVelocityVector(firePoint.position, characterModel.aimCharacter.transform.position, projectileSpeed);
+            var velocity = CalculateBallisticVelocityVector(firePoint.position, characterModel.aimCharacter.Transform.position, projectileSpeed);
             if (velocity.HasValue)
             {
                 rb.useGravity = true;
@@ -77,7 +78,7 @@ namespace _Project.Scripts.Systems
                 if (damageComponent != null)
                 {
                     damageComponent.damage = characterModel.damageAmount;
-                    damageComponent.ownerWarSide = characterModel.warSide;
+                    damageComponent.ownerWarSide = characterModel.WarSide;
                 }
             }
             else

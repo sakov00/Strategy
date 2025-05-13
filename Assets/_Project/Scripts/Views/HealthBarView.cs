@@ -1,18 +1,20 @@
+using _Project.Scripts.Interfaces;
 using _Project.Scripts.Models;
+using _Project.Scripts.Models.Characters;
 using UnityEngine;
 
 namespace _Project.Scripts.Views
 {
-    public class CharacterView : MonoBehaviour
+    public class HealthBarView : MonoBehaviour
     {
         [SerializeField] private MeshRenderer healthBarRenderer;
         MaterialPropertyBlock matBlock;
-        CharacterModel characterModel;
+        IDamagable damagable;
         Camera mainCamera;
 
         private void OnValidate() 
         {
-            characterModel ??= GetComponent<CharacterModel>(); 
+            damagable ??= GetComponent<IDamagable>(); 
         }
 
         private void Start() 
@@ -23,7 +25,7 @@ namespace _Project.Scripts.Views
 
         public void UpdateView() 
         {
-            if (characterModel.currentHealth < characterModel.maxHealth) 
+            if (damagable.CurrentHealth < damagable.MaxHealth) 
             {
                 healthBarRenderer.enabled = true;
                 HealthBarLookAtCamera();
@@ -38,7 +40,7 @@ namespace _Project.Scripts.Views
         private void UpdateHealthBar() 
         {
             healthBarRenderer.GetPropertyBlock(matBlock);
-            matBlock.SetFloat("_Fill", characterModel.currentHealth / characterModel.maxHealth);
+            matBlock.SetFloat("_Fill", damagable.CurrentHealth / damagable.MaxHealth);
             healthBarRenderer.SetPropertyBlock(matBlock);
         }
 

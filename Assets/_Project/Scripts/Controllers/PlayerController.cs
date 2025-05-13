@@ -1,4 +1,5 @@
 using _Project.Scripts.Models;
+using _Project.Scripts.Models.Characters;
 using _Project.Scripts.Systems;
 using _Project.Scripts.Views;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace _Project.Scripts.Controllers
     [RequireComponent(typeof(MovementSystem))]
     [RequireComponent(typeof(DetectionAim))]
     [RequireComponent(typeof(DamageSystem))]
-    [RequireComponent(typeof(CharacterView))]
+    [RequireComponent(typeof(HealthBarView))]
     public class PlayerController : MonoBehaviour
     {
         [Inject] private PlayerInputSystem playerInputSystem;
@@ -18,7 +19,7 @@ namespace _Project.Scripts.Controllers
         private MovementSystem movementSystem;
         private DetectionAim detectionAim;
         private DamageSystem damageSystem;
-        private CharacterView characterView;
+        private HealthBarView healthBarView;
 
         private void OnValidate()
         {
@@ -26,7 +27,7 @@ namespace _Project.Scripts.Controllers
             movementSystem ??= GetComponent<MovementSystem>();
             detectionAim ??= GetComponent<DetectionAim>();
             damageSystem ??= GetComponent<DamageSystem>();
-            characterView ??= GetComponent<CharacterView>();
+            healthBarView ??= GetComponent<HealthBarView>();
         }
 
         private void Update()
@@ -35,7 +36,7 @@ namespace _Project.Scripts.Controllers
             movementSystem.MoveTo(movementDirection);
             detectionAim.DetectAim();
             damageSystem.Attack();
-            characterView.UpdateView();
+            healthBarView.UpdateView();
         }
     }
 }

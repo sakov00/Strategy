@@ -1,4 +1,6 @@
+using _Project.Scripts.Interfaces;
 using _Project.Scripts.Models;
+using _Project.Scripts.Models.Characters;
 using UnityEngine;
 
 namespace _Project.Scripts.Systems
@@ -20,12 +22,12 @@ namespace _Project.Scripts.Systems
             var hitBuffer = Physics.OverlapSphere(transform.position, characterModel.detectionRadius);
             foreach (var hit in hitBuffer)
             {
-                var aimCharacterModel = hit.GetComponent<CharacterModel>();
-                if (aimCharacterModel == null || aimCharacterModel == characterModel || aimCharacterModel.warSide == characterModel.warSide) continue;
+                var damagable = hit.GetComponent<IDamagable>();
+                if (damagable == null || ReferenceEquals(damagable, characterModel) || damagable.WarSide == characterModel.WarSide) continue;
                 
-                characterModel.aimCharacter = aimCharacterModel;
+                characterModel.aimCharacter = damagable;
                 
-                Vector3 direction = aimCharacterModel.transform.position - transform.position;
+                Vector3 direction = damagable.Transform.position - transform.position;
                 float distance = direction.magnitude;
                 if (distance > characterModel.attackRange)
                 {
