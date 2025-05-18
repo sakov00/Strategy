@@ -1,0 +1,30 @@
+using UnityEngine;
+
+namespace _Project.Scripts.GameObjects.Characters.Unit
+{
+    [RequireComponent(typeof(UnitModel))]
+    public class UnitMovementSystem : MonoBehaviour
+    {
+        private UnitModel unitModel;
+        private Vector3 velocity;
+
+        private void OnValidate()
+        {
+            unitModel ??= GetComponent<UnitModel>();
+        }
+
+        public void MoveToAim()
+        {
+            if (unitModel.AimCharacter == null || unitModel.AimCharacter.Equals(null))
+            {
+                unitModel.agent.isStopped = true;
+                return;
+            }
+  
+            Vector3 direction = unitModel.AimCharacter.Transform.position - transform.position;
+            float distance = direction.magnitude;
+            unitModel.agent.isStopped = distance < unitModel.AttackRange;
+            unitModel.agent.SetDestination(unitModel.AimCharacter.Transform.position);
+        }
+    }
+}
