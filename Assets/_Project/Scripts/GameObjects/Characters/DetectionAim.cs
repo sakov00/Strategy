@@ -8,7 +8,7 @@ namespace _Project.Scripts.GameObjects.Characters
     {
         private IFightObject attackableModel;
 
-        private void OnValidate()
+        private void Awake()
         {
             attackableModel ??= GetComponent<IFightObject>();
         }

@@ -14,11 +14,11 @@ namespace _Project.Scripts.GameObjects._Controllers
     public class PlayerController : MonoBehaviour
     {
         [Inject] private PlayerInputSystem playerInputSystem;
-        private CharacterModel characterModel;
-        private PlayerMovementSystem playerMovementSystem;
-        private DetectionAim detectionAim;
-        private DamageSystem damageSystem;
-        private HealthBarView healthBarView;
+        [SerializeField, HideInInspector] private CharacterModel characterModel;
+        [SerializeField, HideInInspector]  private PlayerMovementSystem playerMovementSystem;
+        [SerializeField, HideInInspector] private DetectionAim detectionAim;
+        [SerializeField, HideInInspector] private DamageSystem damageSystem;
+        [SerializeField, HideInInspector] private HealthBarView healthBarView;
 
         private void OnValidate()
         {

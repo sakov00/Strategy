@@ -10,7 +10,7 @@ namespace _Project.Scripts.GameObjects._General
         private IDamagable damagable;
         private Camera mainCamera;
 
-        private void OnValidate() 
+        private void Awake() 
         {
             damagable ??= GetComponent<IDamagable>(); 
         }

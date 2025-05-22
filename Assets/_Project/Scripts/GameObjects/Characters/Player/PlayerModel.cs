@@ -5,7 +5,7 @@ namespace _Project.Scripts.GameObjects.Characters.Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerModel : CharacterModel
     {
-        public CharacterController characterController;
+        [SerializeField, HideInInspector] public CharacterController characterController;
         
         private void OnValidate()
         {

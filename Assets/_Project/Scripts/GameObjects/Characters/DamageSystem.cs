@@ -15,7 +15,7 @@ namespace _Project.Scripts.GameObjects.Characters
         private IFightObject characterModel;
         private float lastAttackTime = -Mathf.Infinity;
 
-        private void OnValidate()
+        private void Awake()
         {
             characterModel ??= GetComponent<IFightObject>();
         }

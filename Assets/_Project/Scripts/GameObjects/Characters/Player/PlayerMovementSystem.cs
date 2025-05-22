@@ -6,7 +6,7 @@ namespace _Project.Scripts.GameObjects.Characters
     [RequireComponent(typeof(PlayerModel))]
     public class PlayerMovementSystem : MonoBehaviour
     {
-        private PlayerModel playerModel;
+        [SerializeField, HideInInspector] private PlayerModel playerModel;
         private Vector3 velocity;
 
         private void OnValidate()

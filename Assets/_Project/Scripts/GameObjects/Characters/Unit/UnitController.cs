@@ -1,3 +1,4 @@
+using System;
 using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.GameObjects.Characters;
 using _Project.Scripts.GameObjects.Characters.Unit;
@@ -12,11 +13,11 @@ namespace _Project.Scripts.GameObjects._Controllers
     [RequireComponent(typeof(HealthBarView))]
     public class UnitController : MonoBehaviour
     {
-        private CharacterModel characterModel;
-        private UnitMovementSystem unitMovementSystem;
-        private DetectionAim detectionAim;
-        private DamageSystem damageSystem;
-        private HealthBarView healthBarView;
+        [SerializeField, HideInInspector] private CharacterModel characterModel;
+        [SerializeField, HideInInspector] private UnitMovementSystem unitMovementSystem;
+        [SerializeField, HideInInspector] private DetectionAim detectionAim;
+        [SerializeField, HideInInspector] private DamageSystem damageSystem;
+        [SerializeField, HideInInspector] private HealthBarView healthBarView;
 
         private void OnValidate()
         {

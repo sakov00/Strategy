@@ -5,7 +5,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
 {
     public class MoneyBuildSystem : MonoBehaviour
     {
-        [SerializeField] private MoneyBuildModel moneyBuildModel;
+        [SerializeField, HideInInspector] private MoneyBuildModel moneyBuildModel;
 
         private void OnValidate()
         {

@@ -7,7 +7,7 @@ namespace _Project.Scripts.GameObjects.BuildingZone
     [RequireComponent(typeof(BuildingZoneModel))]
     public class BuildingZoneSystem : MonoBehaviour
     {
-        private BuildingZoneModel buildingZoneModel;
+        [SerializeField, HideInInspector] private BuildingZoneModel buildingZoneModel;
         [SerializeField] private MoneyBuildModel buildingPrefab;
         [SerializeField] private MoneyBuildModel moneyBuildModel;
 

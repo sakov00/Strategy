@@ -7,7 +7,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
 {
     public class MoneyBuildingView : MonoBehaviour
     {
-        [SerializeField] private MoneyBuildModel moneyBuildModel;
+        [SerializeField, HideInInspector]  private MoneyBuildModel moneyBuildModel;
         [SerializeField] private TextMeshPro moneyUpText;
 
         private void OnValidate()
