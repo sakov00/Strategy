@@ -1,3 +1,4 @@
+using _Project.Scripts.Extentions;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Characters.Unit
@@ -21,8 +22,7 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
                 return;
             }
   
-            Vector3 direction = unitModel.AimCharacter.Transform.position - transform.position;
-            float distance = direction.magnitude;
+            var distance = PositionExtention.GetDistanceBetweenObjects(transform, unitModel.AimCharacter.Transform);
             unitModel.agent.isStopped = distance < unitModel.AttackRange;
             unitModel.agent.SetDestination(unitModel.AimCharacter.Transform.position);
         }

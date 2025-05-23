@@ -98,6 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4cd115d4324231b941fb37c7a81614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterModel: {fileID: 6254456157165669760}
+  unitMovementSystem: {fileID: 8246137830378868086}
+  detectionAim: {fileID: 903820722778351988}
+  damageSystem: {fileID: 2770078367106402333}
+  healthBarView: {fileID: 8872622995280357635}
 --- !u!114 &6254456157165669760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +121,7 @@ MonoBehaviour:
   <WarSide>k__BackingField: 1
   <MaxHealth>k__BackingField: 100
   <CurrentHealth>k__BackingField: 100
-  <AttackRange>k__BackingField: 2
+  <AttackRange>k__BackingField: 0.1
   <DamageAmount>k__BackingField: 20
   <DelayAttack>k__BackingField: 1
   <DetectionRadius>k__BackingField: 20
@@ -134,6 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d8d9963c48417686ce5beda5505702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitModel: {fileID: 6254456157165669760}
 --- !u!114 &903820722778351988
 MonoBehaviour:
   m_ObjectHideFlags: 0

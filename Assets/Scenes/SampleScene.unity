@@ -377,16 +377,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <WarSide>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <AttackRange>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -858,16 +848,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <WarSide>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <AttackRange>k__BackingField
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1409,16 +1389,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <WarSide>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <AttackRange>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1802,6 +1772,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeleeEnemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4522665851623559546, guid: 27682a56f64791f498aa7a12dcf0af1f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5096300367333259642, guid: 27682a56f64791f498aa7a12dcf0af1f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1851,6 +1826,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
+        type: 3}
+      propertyPath: <AttackRange>k__BackingField
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2128,21 +2108,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <WarSide>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <AttackRange>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27682a56f64791f498aa7a12dcf0af1f, type: 3}
+--- !u!1 &807616871 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 989450151262154562, guid: 1f9b46091784a89409ec1fb1df400bd8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1179442726}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &807616880
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807616871}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &828113388 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5096300367333259642, guid: 27682a56f64791f498aa7a12dcf0af1f,
@@ -2980,7 +2977,7 @@ PrefabInstance:
     - target: {fileID: 989450151262154562, guid: 1f9b46091784a89409ec1fb1df400bd8,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 989450151262154562, guid: 1f9b46091784a89409ec1fb1df400bd8,
         type: 3}
@@ -3052,10 +3049,15 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1839058449964225721, guid: 1f9b46091784a89409ec1fb1df400bd8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 989450151262154562, guid: 1f9b46091784a89409ec1fb1df400bd8,
+        type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 807616880}
   m_SourcePrefab: {fileID: 100100000, guid: 1f9b46091784a89409ec1fb1df400bd8, type: 3}
 --- !u!4 &1187064646 stripped
 Transform:
@@ -3520,7 +3522,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1297420799
 Transform:
   m_ObjectHideFlags: 0
@@ -3701,16 +3703,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <WarSide>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <AttackRange>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3862,16 +3854,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <WarSide>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <AttackRange>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3982,6 +3964,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 169361075}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1392948984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 989450151262154562, guid: 1f9b46091784a89409ec1fb1df400bd8,
+    type: 3}
+  m_PrefabInstance: {fileID: 6677748283854918067}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1392948993
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392948984}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1427492355 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 627083715738068696, guid: f08c4e2abd47fac409905273348aa11e,
@@ -4313,16 +4322,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <WarSide>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <AttackRange>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4401,16 +4400,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <WarSide>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <AttackRange>k__BackingField
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4636,7 +4625,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.13333334
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 9732098cf9d2bb54492ea3779ad2addb, type: 2}
   m_BuildHeightMesh: 0
@@ -4785,16 +4774,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <WarSide>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <AttackRange>k__BackingField
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5430,16 +5409,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <WarSide>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <AttackRange>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5769,11 +5738,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeleeEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 4522665851623559546, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5096300367333259642, guid: 27682a56f64791f498aa7a12dcf0af1f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5824,16 +5788,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <WarSide>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
-        type: 3}
-      propertyPath: <AttackRange>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5860,7 +5814,7 @@ PrefabInstance:
     - target: {fileID: 2983530950361520214, guid: 08a642a0595c20d4180778ff6bb8d4eb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 52.38
+      value: 56.95
       objectReference: {fileID: 0}
     - target: {fileID: 2983530950361520214, guid: 08a642a0595c20d4180778ff6bb8d4eb,
         type: 3}
@@ -6086,16 +6040,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerDefence
       objectReference: {fileID: 0}
-    - target: {fileID: 989450151262154562, guid: 1f9b46091784a89409ec1fb1df400bd8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 989450151262154562, guid: 1f9b46091784a89409ec1fb1df400bd8,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 3025024940981692589, guid: 1f9b46091784a89409ec1fb1df400bd8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6148,23 +6092,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3953740461317675544, guid: 1f9b46091784a89409ec1fb1df400bd8,
         type: 3}
-      propertyPath: <DamageAmount>k__BackingField
-      value: 50
+      propertyPath: <MaxHealth>k__BackingField
+      value: 1000
       objectReference: {fileID: 0}
-    - target: {fileID: 5023808525692731617, guid: 1f9b46091784a89409ec1fb1df400bd8,
+    - target: {fileID: 3953740461317675544, guid: 1f9b46091784a89409ec1fb1df400bd8,
         type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 5722643508099840270, guid: 1f9b46091784a89409ec1fb1df400bd8,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      propertyPath: <CurrentHealth>k__BackingField
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 989450151262154562, guid: 1f9b46091784a89409ec1fb1df400bd8,
+        type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1392948993}
   m_SourcePrefab: {fileID: 100100000, guid: 1f9b46091784a89409ec1fb1df400bd8, type: 3}
 --- !u!1001 &6887475800931703945
 PrefabInstance:

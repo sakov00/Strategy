@@ -1,3 +1,4 @@
+using _Project.Scripts.Extentions;
 using _Project.Scripts.Interfaces;
 using UnityEngine;
 
@@ -15,18 +16,25 @@ namespace _Project.Scripts.GameObjects.Characters
 
         public void DetectAim()
         {
-            if (attackableModel.AimCharacter != null && !attackableModel.AimCharacter.Equals(null))
-                return;
-            
             var hitBuffer = Physics.OverlapSphere(transform.position, attackableModel.DetectionRadius);
+            IDamagable nearestTarget = null;
+            var nearestDistanceSqr = float.MaxValue;
+
             foreach (var hit in hitBuffer)
             {
                 var damagable = hit.GetComponent<IDamagable>();
-                if (damagable == null || ReferenceEquals(damagable, attackableModel) || damagable.WarSide == attackableModel.WarSide) continue;
-                
-                attackableModel.AimCharacter = damagable;
-                break;
+                if (damagable == null || ReferenceEquals(damagable, attackableModel) || damagable.WarSide == attackableModel.WarSide)
+                    continue;
+
+                var distance = PositionExtention.GetDistanceBetweenObjects(transform, hit.transform);
+                if (distance < nearestDistanceSqr)
+                {
+                    nearestDistanceSqr = distance;
+                    nearestTarget = damagable;
+                }
             }
+
+            attackableModel.AimCharacter = nearestTarget;
         }
     }
 }

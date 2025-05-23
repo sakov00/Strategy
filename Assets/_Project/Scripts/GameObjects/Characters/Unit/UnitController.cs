@@ -28,27 +28,12 @@ namespace _Project.Scripts.GameObjects._Controllers
             healthBarView ??= GetComponent<HealthBarView>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             detectionAim.DetectAim();
             unitMovementSystem.MoveToAim();
             damageSystem.Attack();
             healthBarView.UpdateView();
-        }
-
-        private Vector3 CalculateDirection()
-        {
-            if (characterModel.AimCharacter == null || characterModel.AimCharacter.Equals(null))
-                return Vector3.zero;
-            
-            var inputVector = Vector3.zero;
-            Vector3 direction = characterModel.AimCharacter.Transform.position - transform.position;
-            float distance = direction.magnitude;
-            if (distance > characterModel.AttackRange)
-            {
-                inputVector = new Vector3(direction.x, 0, direction.z).normalized;
-            }
-            return inputVector;
         }
     }
 }

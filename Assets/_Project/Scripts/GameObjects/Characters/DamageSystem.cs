@@ -1,4 +1,5 @@
 using _Project.Scripts.Enums;
+using _Project.Scripts.Extentions;
 using _Project.Scripts.GameObjects.Projectiles;
 using _Project.Scripts.Interfaces;
 using UnityEngine;
@@ -36,7 +37,8 @@ namespace _Project.Scripts.GameObjects.Characters
 
         private void MeleeAttack()
         {
-            var distance = Vector3.Distance(transform.position, characterModel.AimCharacter.Transform.position);
+            var distance =
+                PositionExtention.GetDistanceBetweenObjects(transform, characterModel.AimCharacter.Transform);
             if (distance <= characterModel.AttackRange)
             {
                 lastAttackTime = Time.time;
