@@ -1,7 +1,6 @@
-using _Project.Scripts.GameObjects.Characters.Player;
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects.Characters
+namespace _Project.Scripts.GameObjects.Characters.Player
 {
     [RequireComponent(typeof(PlayerModel))]
     public class PlayerMovementSystem : MonoBehaviour

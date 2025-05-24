@@ -1,9 +1,8 @@
 using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.GameObjects.Characters;
-using _Project.Scripts.GameObjects.MoneyBuild;
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects._Controllers
+namespace _Project.Scripts.GameObjects.TowerDefence
 {
     [RequireComponent(typeof(TowerDefenceModel))]
     [RequireComponent(typeof(DetectionAim))]

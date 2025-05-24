@@ -1,10 +1,10 @@
 using _Project.Scripts.GameObjects._General;
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects.MoneyBuild
+namespace _Project.Scripts.GameObjects.FriendsBuild
 {
     [RequireComponent(typeof(HealthBarView))]
-    public class MoneyBuildController : MonoBehaviour
+    public class FriendsBuildController : MonoBehaviour
     {
         [SerializeField] private HealthBarView healthBarView;
 

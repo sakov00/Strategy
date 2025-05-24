@@ -1,10 +1,7 @@
-using System;
 using _Project.Scripts.GameObjects._General;
-using _Project.Scripts.GameObjects.Characters;
-using _Project.Scripts.GameObjects.Characters.Unit;
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects._Controllers
+namespace _Project.Scripts.GameObjects.Characters.Unit
 {
     [RequireComponent(typeof(CharacterModel))]
     [RequireComponent(typeof(UnitMovementSystem))]

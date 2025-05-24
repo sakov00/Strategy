@@ -181,8 +181,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6789648352950564687}
   - component: {fileID: 4783120647104150510}
-  - component: {fileID: 5417229989495952064}
   - component: {fileID: 874774694457490770}
+  - component: {fileID: 5417229989495952064}
   - component: {fileID: 883954068388926736}
   - component: {fileID: 5601930724049700635}
   - component: {fileID: 2134512366601252681}
@@ -232,6 +232,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &874774694457490770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4577219045295084836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66afec0ca51346c6baf7c99c098b658f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <CurrentLevel>k__BackingField: 1
+  <WarSide>k__BackingField: 0
+  <MaxHealth>k__BackingField: 500
+  <CurrentHealth>k__BackingField: 500
+  addMoneyValue: 1
 --- !u!114 &5417229989495952064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,22 +262,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarView: {fileID: 883954068388926736}
---- !u!114 &874774694457490770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4577219045295084836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66afec0ca51346c6baf7c99c098b658f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <WarSide>k__BackingField: 0
-  <MaxHealth>k__BackingField: 500
-  <CurrentHealth>k__BackingField: 500
-  addMoneyValue: 1
 --- !u!114 &883954068388926736
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,6 @@ namespace _Project.Scripts.GameObjects.Characters
         public float moveSpeed = 10f;
         public float rotationSpeed = 10f; 
         public float gravity = -20f;
-        
 
         [field: Header("Health")] 
         [field: SerializeField] public WarSide WarSide { get; set; }

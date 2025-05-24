@@ -2,10 +2,13 @@ using _Project.Scripts.Enums;
 using _Project.Scripts.Interfaces;
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects.MoneyBuild
+namespace _Project.Scripts.GameObjects.TowerDefence
 {
-    public class TowerDefenceModel : MonoBehaviour, IFightObject
+    public class TowerDefenceModel : MonoBehaviour, IFightObject, IUpgradable
     {
+        [field: Header("Upgrades")]
+        [field: SerializeField] public int CurrentLevel { get; set; }
+        
         [field: Header("Health")]
         [field: SerializeField] public WarSide WarSide { get; set; } = WarSide.Friend;
         [field: SerializeField] public float MaxHealth { get; set; } = 500f;

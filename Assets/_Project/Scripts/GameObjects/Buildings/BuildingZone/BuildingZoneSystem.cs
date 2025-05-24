@@ -1,15 +1,17 @@
+using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects.Characters.Player;
 using _Project.Scripts.GameObjects.MoneyBuild;
 using UnityEngine;
+using VContainer;
 
 namespace _Project.Scripts.GameObjects.BuildingZone
 {
     [RequireComponent(typeof(BuildingZoneModel))]
     public class BuildingZoneSystem : MonoBehaviour
     {
+        [Inject] private BuildFactory buildFactory;
+        
         [SerializeField, HideInInspector] private BuildingZoneModel buildingZoneModel;
-        [SerializeField] private MoneyBuildModel buildingPrefab;
-        [SerializeField] private MoneyBuildModel moneyBuildModel;
 
         private void OnValidate()
         {
@@ -21,14 +23,20 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             if(other.GetComponent<PlayerModel>() == null)
                 return;
             
-            if (moneyBuildModel == null)
+            if (buildingZoneModel.upgradableObject == null)
             {
-                moneyBuildModel = Instantiate(buildingPrefab, transform.position, Quaternion.identity);
+                buildingZoneModel.upgradableObject = 
+                    buildFactory.CreateBuild(buildingZoneModel.typeBuilding, transform.position, Quaternion.identity);
             }
             else
             {
-                moneyBuildModel.addMoneyValue++;
+                buildingZoneModel.upgradableObject.CurrentLevel++;
             }
+        }
+        
+        private void OnTriggerExit(Collider other)
+        {
+
         }
     }
 }

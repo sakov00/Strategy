@@ -19,7 +19,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
 
         private void AddMoneyToPlayer()
         {
-            GameData.Instance.levelData.Money += moneyBuildModel.addMoneyValue;
+            GameData.Instance.levelData.Money += moneyBuildModel.addMoneyValue * moneyBuildModel.CurrentLevel;
         }
 
         private void OnDestroy()

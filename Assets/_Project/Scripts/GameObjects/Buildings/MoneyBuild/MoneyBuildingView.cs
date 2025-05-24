@@ -23,7 +23,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
 
         private void MoneyUpActivate()
         {
-            moneyUpText.text = "+" + moneyBuildModel.addMoneyValue;
+            moneyUpText.text = "+" + moneyBuildModel.addMoneyValue * moneyBuildModel.CurrentLevel;
             moneyUpText.transform
                 .DOLocalMoveY(1, 0.5f)
                 .From(0);
