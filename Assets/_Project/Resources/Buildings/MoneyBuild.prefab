@@ -244,6 +244,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66afec0ca51346c6baf7c99c098b658f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objRenderer: {fileID: 5430927701415323773}
+  currentLevel: 0
+  <WarSide>k__BackingField: 0
+  <MaxHealth>k__BackingField: 500
+  <CurrentHealth>k__BackingField: 500
   <CurrentLevel>k__BackingField: 1
   <WarSide>k__BackingField: 0
   <MaxHealth>k__BackingField: 500
@@ -490,6 +495,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6ad975904cce2a4ab1ad9fe2d098510, type: 3}
+--- !u!23 &5430927701415323773 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: f6ad975904cce2a4ab1ad9fe2d098510,
+    type: 3}
+  m_PrefabInstance: {fileID: 6674073348547474681}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6563340207225017106 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f6ad975904cce2a4ab1ad9fe2d098510,

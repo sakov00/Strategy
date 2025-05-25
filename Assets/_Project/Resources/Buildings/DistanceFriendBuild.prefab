@@ -122,12 +122,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb48cb385004f0c92826c59a3e66dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objRenderer: {fileID: 9156949548575831712}
+  currentLevel: 1
   <WarSide>k__BackingField: 0
   <MaxHealth>k__BackingField: 500
   <CurrentHealth>k__BackingField: 500
   unitType: 1
   countUnits: 4
-  startPositionUnits: {x: 0, y: 0, z: 0}
+  buildUnitPositions: []
+  buildUnits: []
 --- !u!114 &4500152187228374450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc958e7da20412d9c1c188de348cc04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingZoneModel: {fileID: 1888641517364266148}
+  model: {fileID: 1888641517364266148}
 --- !u!114 &3030951604372674249
 MonoBehaviour:
   m_ObjectHideFlags: 0

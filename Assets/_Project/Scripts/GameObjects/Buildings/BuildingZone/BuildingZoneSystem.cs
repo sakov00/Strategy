@@ -23,14 +23,19 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             if(other.GetComponent<PlayerModel>() == null)
                 return;
             
-            if (buildingZoneModel.upgradableObject == null)
+            if (buildingZoneModel.buildModel == null)
             {
-                buildingZoneModel.upgradableObject = 
+                buildingZoneModel.buildModel = 
                     buildFactory.CreateBuild(buildingZoneModel.typeBuilding, transform.position, Quaternion.identity);
+                var newPosition = new Vector3(
+                    transform.position.x,
+                    buildingZoneModel.buildModel.objRenderer.bounds.size.y/2,
+                    transform.position.z);
+                buildingZoneModel.buildModel.transform.position = newPosition;
             }
             else
             {
-                buildingZoneModel.upgradableObject.CurrentLevel++;
+                buildingZoneModel.buildModel.CurrentLevel++;
             }
         }
         

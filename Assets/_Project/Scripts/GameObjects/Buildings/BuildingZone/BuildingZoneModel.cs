@@ -7,6 +7,6 @@ namespace _Project.Scripts.GameObjects.BuildingZone
     public class BuildingZoneModel : MonoBehaviour
     {
         [SerializeField] public TypeBuilding typeBuilding;
-        [SerializeField] public IUpgradable upgradableObject;
+        [SerializeField] public BuildModel buildModel;
     }
 }

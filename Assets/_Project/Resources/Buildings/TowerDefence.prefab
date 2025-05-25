@@ -140,7 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d21c7314c7af471fb6029ecbbab2676c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentLevel>k__BackingField: 0
+  objRenderer: {fileID: 6723468173963196906}
+  currentLevel: 0
   <WarSide>k__BackingField: 0
   <MaxHealth>k__BackingField: 1000
   <CurrentHealth>k__BackingField: 1000

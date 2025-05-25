@@ -4,17 +4,8 @@ using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.TowerDefence
 {
-    public class TowerDefenceModel : MonoBehaviour, IFightObject, IUpgradable
+    public class TowerDefenceModel : BuildModel, IFightObject
     {
-        [field: Header("Upgrades")]
-        [field: SerializeField] public int CurrentLevel { get; set; }
-        
-        [field: Header("Health")]
-        [field: SerializeField] public WarSide WarSide { get; set; } = WarSide.Friend;
-        [field: SerializeField] public float MaxHealth { get; set; } = 500f;
-        [field: SerializeField] public float CurrentHealth { get; set; } = 500f;
-        public Transform Transform => transform;
-        
         [field: Header("Attack")] 
         [field: SerializeField] public float AttackRange { get; set; } = 20f;
         [field: SerializeField] public int DamageAmount { get; set; } = 10;

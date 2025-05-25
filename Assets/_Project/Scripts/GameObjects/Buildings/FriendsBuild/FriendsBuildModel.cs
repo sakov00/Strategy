@@ -6,21 +6,12 @@ using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.FriendsBuild
 {
-    public class FriendsBuildModel : MonoBehaviour, IDamagable, IUpgradable
+    public class FriendsBuildModel : BuildModel
     {
-        [field: Header("Upgrades")]
-        [field: SerializeField] public int CurrentLevel { get; set; }
-        
-        [field: Header("Health")] 
-        [field: SerializeField] public WarSide WarSide { get; set; }
-        [field: SerializeField] public float MaxHealth { get; set; } = 500f;
-        [field: SerializeField] public float CurrentHealth { get; set; } = 500f;
-        public Transform Transform => transform;
-        
         [Header("Units")] 
         [SerializeField] public FriendUnitType unitType;
         [SerializeField] public int countUnits;
-        [SerializeField] public Vector3 startPositionUnits;
+        [SerializeField] public List<Transform> buildUnitPositions = new();
         [SerializeField] public List<UnitModel> buildUnits = new();
     }
 }

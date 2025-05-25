@@ -398,28 +398,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 28.01
       objectReference: {fileID: 0}
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
@@ -461,26 +446,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1580477547189303221, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2050305323301566128, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: buildingPrefab
-      value: 
-      objectReference: {fileID: 874774694457490770, guid: c9950e56c9c214e44b9c4627b465fefa,
-        type: 3}
     - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
       propertyPath: m_Name
       value: BuildZone (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7466758100266467519, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
@@ -718,28 +687,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 37.23
       objectReference: {fileID: 0}
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
@@ -781,26 +735,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1580477547189303221, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2050305323301566128, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: buildingPrefab
-      value: 
-      objectReference: {fileID: 874774694457490770, guid: c9950e56c9c214e44b9c4627b465fefa,
-        type: 3}
     - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
       propertyPath: m_Name
       value: BuildZone (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1547,28 +1485,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 26.84
       objectReference: {fileID: 0}
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
@@ -1610,26 +1533,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1580477547189303221, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2050305323301566128, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: buildingPrefab
-      value: 
-      objectReference: {fileID: 874774694457490770, guid: c9950e56c9c214e44b9c4627b465fefa,
-        type: 3}
     - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
       propertyPath: m_Name
       value: BuildZone (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2226,7 +2133,7 @@ PrefabInstance:
     - target: {fileID: 5096300367333259642, guid: 27682a56f64791f498aa7a12dcf0af1f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.064721
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5096300367333259642, guid: 27682a56f64791f498aa7a12dcf0af1f,
         type: 3}
@@ -2410,28 +2317,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 37.23
       objectReference: {fileID: 0}
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
@@ -2473,26 +2365,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1580477547189303221, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2050305323301566128, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: buildingPrefab
-      value: 
-      objectReference: {fileID: 874774694457490770, guid: c9950e56c9c214e44b9c4627b465fefa,
-        type: 3}
     - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
       propertyPath: m_Name
       value: BuildZone (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7466758100266467519, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
@@ -6131,28 +6007,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 47.19
       objectReference: {fileID: 0}
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 129612266770247724, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
@@ -6198,11 +6059,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BuildZone
-      objectReference: {fileID: 0}
-    - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

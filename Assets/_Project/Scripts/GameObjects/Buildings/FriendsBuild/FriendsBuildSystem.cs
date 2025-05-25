@@ -19,7 +19,7 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
         {
             for (int i = 0; i < model.countUnits; i++)
             {
-                model.buildUnits.Add(friendFactory.CreateFriendUnit(model.unitType, model.startPositionUnits));
+                model.buildUnits.Add(friendFactory.CreateFriendUnit(model.unitType, model.buildUnitPositions[i].position));
             }
         }
     }

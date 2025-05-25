@@ -1,4 +1,5 @@
 using _Project.Scripts.Enums;
+using _Project.Scripts.GameObjects;
 using _Project.Scripts.GameObjects.BuildingZone;
 using _Project.Scripts.GameObjects.FriendsBuild;
 using _Project.Scripts.GameObjects.MoneyBuild;
@@ -28,7 +29,7 @@ namespace _Project.Scripts.Factories
             this.distanceFriendsBuildModelPrefab = distanceFriendsBuildModelPrefab;
         }
         
-        public IUpgradable CreateBuild(TypeBuilding building, Vector3 position, Quaternion rotation)
+        public BuildModel CreateBuild(TypeBuilding building, Vector3 position, Quaternion rotation)
         {
             switch (building)
             {
@@ -44,22 +45,22 @@ namespace _Project.Scripts.Factories
             }
         }
 
-        private IUpgradable CreateMoneyBuilding(Vector3 position, Quaternion rotation)
+        private BuildModel CreateMoneyBuilding(Vector3 position, Quaternion rotation)
         {
             return resolver.Instantiate(moneyBuildModelPrefab, position, rotation);
         }
         
-        private IUpgradable CreateTowerDefenseBuilding(Vector3 position, Quaternion rotation)
+        private BuildModel CreateTowerDefenseBuilding(Vector3 position, Quaternion rotation)
         {
             return resolver.Instantiate(towerDefenceModelPrefab, position, rotation);
         }
         
-        private IUpgradable CreateMeleeFriendBuilding(Vector3 position, Quaternion rotation)
+        private BuildModel CreateMeleeFriendBuilding(Vector3 position, Quaternion rotation)
         {
             return resolver.Instantiate(meleeFriendsBuildModelPrefab, position, rotation);;
         }
         
-        private IUpgradable CreateDistanceFriendBuilding(Vector3 position, Quaternion rotation)
+        private BuildModel CreateDistanceFriendBuilding(Vector3 position, Quaternion rotation)
         {
             return resolver.Instantiate(distanceFriendsBuildModelPrefab, position, rotation);
         }
