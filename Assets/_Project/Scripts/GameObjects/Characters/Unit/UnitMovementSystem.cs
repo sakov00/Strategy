@@ -18,7 +18,7 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
         {
             if (unitModel.AimCharacter == null || unitModel.AimCharacter.Equals(null))
             {
-                unitModel.agent.isStopped = true;
+                unitModel.agent.SetDestination(unitModel.NoAimPosition);
                 return;
             }
   

@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using _Project.Scripts._GlobalLogic;
+using _Project.Scripts.Enums;
+using _Project.Scripts.Factories;
+using UnityEngine;
+using VContainer;
+
+namespace _Project.Scripts.SpawnPoint
+{
+    public class SpawnPoint : MonoBehaviour
+    {
+        [Inject] private EnemyFactory enemyFactory;
+        
+        [SerializeField] private float spawnRadius = 5f;
+        [SerializeField] private List<EnemyUnitType> enemyList = new();
+        
+        private Queue<EnemyUnitType> spawnQueue;
+        
+        private int spawnedMelee;
+        private int spawnedDistance;
+
+        private void Start()
+        {
+            StartSpawn();
+        }
+
+        public void StartSpawn()
+        {
+            spawnQueue = new Queue<EnemyUnitType>(enemyList);
+            GameTimer.Instance.OnEverySecond -= SpawnEnemy;
+            GameTimer.Instance.OnEverySecond += SpawnEnemy;
+        }
+
+        private void SpawnEnemy()
+        {
+            if (spawnQueue.Count == 0)
+            {
+                GameTimer.Instance.OnEverySecond -= SpawnEnemy;
+                return;
+            }
+            
+            var randomOffset2D = UnityEngine.Random.insideUnitCircle * spawnRadius;
+            var spawnOffset = new Vector3(randomOffset2D.x, 0, randomOffset2D.y);
+            var spawnPosition = transform.position + spawnOffset;
+            
+            var nextEnemyType = spawnQueue.Dequeue();
+            enemyFactory.CreateEnemyUnit(nextEnemyType, spawnPosition, new Vector3(58, 0, 94));
+        }
+        
+        private void OnDestroy()
+        {
+            GameTimer.Instance.OnEverySecond -= SpawnEnemy;
+        }
+    }
+}

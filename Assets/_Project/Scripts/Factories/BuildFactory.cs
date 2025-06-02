@@ -5,6 +5,7 @@ using _Project.Scripts.GameObjects.FriendsBuild;
 using _Project.Scripts.GameObjects.MoneyBuild;
 using _Project.Scripts.GameObjects.TowerDefence;
 using _Project.Scripts.Interfaces;
+using _Project.Scripts.SO;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -13,21 +14,8 @@ namespace _Project.Scripts.Factories
 {
     public class BuildFactory
     {
-        private readonly IObjectResolver resolver;
-        private readonly MoneyBuildModel moneyBuildModelPrefab;
-        private readonly TowerDefenceModel towerDefenceModelPrefab;
-        private readonly FriendsBuildModel meleeFriendsBuildModelPrefab;
-        private readonly FriendsBuildModel distanceFriendsBuildModelPrefab;
-        
-        public BuildFactory(IObjectResolver resolver, MoneyBuildModel moneyBuildModelPrefab, TowerDefenceModel towerDefenceModelPrefab,
-            FriendsBuildModel meleeFriendsBuildModelPrefab, FriendsBuildModel distanceFriendsBuildModelPrefab)
-        {
-            this.resolver = resolver;
-            this.moneyBuildModelPrefab = moneyBuildModelPrefab;
-            this.towerDefenceModelPrefab = towerDefenceModelPrefab;
-            this.meleeFriendsBuildModelPrefab = meleeFriendsBuildModelPrefab;
-            this.distanceFriendsBuildModelPrefab = distanceFriendsBuildModelPrefab;
-        }
+        [Inject] private IObjectResolver resolver;
+        [Inject] private BuildingPrefabConfig buildingPrefabConfig;
         
         public BuildModel CreateBuild(TypeBuilding building, Vector3 position, Quaternion rotation)
         {
@@ -47,22 +35,22 @@ namespace _Project.Scripts.Factories
 
         private BuildModel CreateMoneyBuilding(Vector3 position, Quaternion rotation)
         {
-            return resolver.Instantiate(moneyBuildModelPrefab, position, rotation);
+            return resolver.Instantiate(buildingPrefabConfig.moneyBuildingPrefab, position, rotation);
         }
         
         private BuildModel CreateTowerDefenseBuilding(Vector3 position, Quaternion rotation)
         {
-            return resolver.Instantiate(towerDefenceModelPrefab, position, rotation);
+            return resolver.Instantiate(buildingPrefabConfig.towerBuildingPrefab, position, rotation);
         }
         
         private BuildModel CreateMeleeFriendBuilding(Vector3 position, Quaternion rotation)
         {
-            return resolver.Instantiate(meleeFriendsBuildModelPrefab, position, rotation);;
+            return resolver.Instantiate(buildingPrefabConfig.meleeFriendBuildingPrefab, position, rotation);;
         }
         
         private BuildModel CreateDistanceFriendBuilding(Vector3 position, Quaternion rotation)
         {
-            return resolver.Instantiate(distanceFriendsBuildModelPrefab, position, rotation);
+            return resolver.Instantiate(buildingPrefabConfig.distanceFriendBuildingPrefab, position, rotation);
         }
     }
 }

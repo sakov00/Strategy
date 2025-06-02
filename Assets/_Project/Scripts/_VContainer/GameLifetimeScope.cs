@@ -6,6 +6,7 @@ using _Project.Scripts.GameObjects.Characters.Unit;
 using _Project.Scripts.GameObjects.FriendsBuild;
 using _Project.Scripts.GameObjects.MoneyBuild;
 using _Project.Scripts.GameObjects.TowerDefence;
+using _Project.Scripts.SO;
 using Joystick_Pack.Scripts.Base;
 using UnityEngine;
 using VContainer;
@@ -15,17 +16,13 @@ namespace _Project.Scripts._VContainer
 {
     public class GameLifetimeScope : LifetimeScope
     {
-        [Header("Build Prefabs")]
-        [SerializeField] private MoneyBuildModel moneyBuildModelPrefab;
-        [SerializeField] private TowerDefenceModel towerDefenceModelPrefab;
-        [SerializeField] private FriendsBuildModel meleeFriendsBuildModelPrefab;
-        [SerializeField] private FriendsBuildModel distanceFriendsBuildModelPrefab;
+        [Header("Configs")]
+        [SerializeField] private UnitPrefabConfig unitPrefabConfig;
+        [SerializeField] private BuildingPrefabConfig buildingPrefabConfig;
         
-        [Header("Friend Prefabs")]
-        [SerializeField] private UnitModel simpleMeleeFriendModelPrefab;
-        [SerializeField] private UnitModel simpleDistanceFriendModelPrefab;
-        
+        [Header("Joystick")]
         [SerializeField] private Joystick joystick;
+        
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponentInHierarchy<PlayerController>();
@@ -34,25 +31,22 @@ namespace _Project.Scripts._VContainer
             builder.Register<GameTimer>(Lifetime.Singleton).As<GameTimer, IInitializable, ITickable>();
             
             RegisterFactories(builder);
+            RegisterSO(builder);
             
             builder.RegisterComponent(joystick).AsSelf();
         }
 
         private void RegisterFactories(IContainerBuilder builder)
         {
-            builder.Register<BuildFactory>(Lifetime.Singleton).AsSelf()
-                .WithParameter(nameof(moneyBuildModelPrefab), moneyBuildModelPrefab)
-                .WithParameter(nameof(towerDefenceModelPrefab), towerDefenceModelPrefab)
-                .WithParameter(nameof(meleeFriendsBuildModelPrefab), meleeFriendsBuildModelPrefab)
-                .WithParameter(nameof(distanceFriendsBuildModelPrefab), distanceFriendsBuildModelPrefab);
-
-            // builder.Register<EnemyFactory>(Lifetime.Singleton).AsSelf()
-            //     .WithParameter(nameof(simpleMeleeFriendModelPrefab), simpleMeleeFriendModelPrefab)
-            //     .WithParameter(nameof(simpleDistanceFriendModelPrefab), simpleDistanceFriendModelPrefab);
-               
-            builder.Register<FriendFactory>(Lifetime.Singleton).AsSelf()
-                .WithParameter(nameof(simpleMeleeFriendModelPrefab), simpleMeleeFriendModelPrefab)
-                .WithParameter(nameof(simpleDistanceFriendModelPrefab), simpleDistanceFriendModelPrefab);
+            builder.Register<BuildFactory>(Lifetime.Singleton).AsSelf();
+            builder.Register<FriendFactory>(Lifetime.Singleton).AsSelf();
+            builder.Register<EnemyFactory>(Lifetime.Singleton).AsSelf();
+        }
+        
+        private void RegisterSO(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(unitPrefabConfig).AsSelf();
+            builder.RegisterInstance(buildingPrefabConfig).AsSelf();
         }
     }
 }
