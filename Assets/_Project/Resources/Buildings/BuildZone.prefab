@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 129612266770247724}
   - component: {fileID: 783433190333072799}
   - component: {fileID: 1580477547189303221}
-  - component: {fileID: 7466758100266467519}
   - component: {fileID: 2050305323301566128}
   - component: {fileID: 143796197727422425}
   m_Layer: 0
@@ -86,19 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7466758100266467519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6603924160436698042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bebfcfc1b854d039a9763eef7fe16ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeBuilding: 0
 --- !u!114 &2050305323301566128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de72e7db46c48b7a9cec155541947fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingZoneModel: {fileID: 7466758100266467519}
 --- !u!65 &143796197727422425
 BoxCollider:
   m_ObjectHideFlags: 0

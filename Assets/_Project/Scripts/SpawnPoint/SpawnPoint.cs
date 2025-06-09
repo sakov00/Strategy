@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _Project.Scripts._GlobalLogic;
+using _Project.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
 using UnityEngine;
@@ -22,6 +23,7 @@ namespace _Project.Scripts.SpawnPoint
 
         private void Start()
         {
+            InjectManager.Inject(this);
             StartSpawn();
         }
 

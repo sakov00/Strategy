@@ -1,12 +1,14 @@
+using System;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Interfaces;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.BuildingZone
 {
-    public class BuildingZoneModel : MonoBehaviour
+    [Serializable]
+    public class BuildingZoneModel
     {
         [SerializeField] public TypeBuilding typeBuilding;
-        [SerializeField] public BuildModel buildModel;
+        [SerializeField] public BuildModel createdBuild;
     }
 }

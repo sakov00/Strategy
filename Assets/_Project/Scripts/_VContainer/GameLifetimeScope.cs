@@ -23,10 +23,12 @@ namespace _Project.Scripts._VContainer
         
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<PlayerInputSystem>(Lifetime.Singleton).As<PlayerInputSystem, ITickable>();
+            builder.RegisterBuildCallback(InjectManager.Initialize);
+            
             builder.Register<GameTimer>(Lifetime.Singleton).As<GameTimer, IInitializable, ITickable>();
             
             builder.Register<InitializeGame>(Lifetime.Singleton).As<InitializeGame, IStartable>();
+            
             
             RegisterFactories(builder);
             RegisterSO(builder);

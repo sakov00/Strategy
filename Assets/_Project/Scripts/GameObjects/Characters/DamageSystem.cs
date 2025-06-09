@@ -1,3 +1,4 @@
+using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Extentions;
 using _Project.Scripts.GameObjects.Projectiles;
@@ -44,7 +45,10 @@ namespace _Project.Scripts.GameObjects.Characters
                 lastAttackTime = Time.time;
                 characterModel.AimCharacter.CurrentHealth -= characterModel.DamageAmount;
                 if (characterModel.AimCharacter.CurrentHealth <= 0)
+                {
+                    GlobalObjects.GameData.allDamagables.Remove(characterModel.AimCharacter);
                     Destroy(characterModel.AimCharacter.Transform.gameObject);
+                }
             }
         }
         

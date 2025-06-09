@@ -1,3 +1,4 @@
+using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Interfaces;
 using UnityEngine;
@@ -24,6 +25,7 @@ namespace _Project.Scripts.GameObjects.Projectiles
 
             if (target.CurrentHealth <= 0)
             {
+                GlobalObjects.GameData.allDamagables.Remove(target);
                 Destroy(target.Transform.gameObject);
             }
 

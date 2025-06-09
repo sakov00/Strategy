@@ -1,3 +1,4 @@
+using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.GameObjects._General;
 using UnityEngine;
 using VContainer;
@@ -11,7 +12,6 @@ namespace _Project.Scripts.GameObjects.Characters.Player
     [RequireComponent(typeof(HealthBarView))]
     public class PlayerController : MonoBehaviour
     {
-        [Inject] private PlayerInputSystem playerInputSystem;
         [SerializeField, HideInInspector] private CharacterModel characterModel;
         [SerializeField, HideInInspector]  private PlayerMovementSystem playerMovementSystem;
         [SerializeField, HideInInspector] private DetectionAim detectionAim;
@@ -29,8 +29,12 @@ namespace _Project.Scripts.GameObjects.Characters.Player
 
         private void Update()
         {
-            var movementDirection = playerInputSystem.GetInputVector();
-            playerMovementSystem.MoveTo(movementDirection);
+            var inputVector = new Vector3(
+                GlobalObjects.GameData.gameWindow.joystick.Direction.x,
+                0,
+                GlobalObjects.GameData.gameWindow.joystick.Direction.y);
+            
+            playerMovementSystem.MoveTo(inputVector);
             detectionAim.DetectAim();
             damageSystem.Attack();
             healthBarView.UpdateView();
