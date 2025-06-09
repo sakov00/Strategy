@@ -4,7 +4,7 @@ namespace _Project.Scripts
 {
     public class IsometricCameraFollow : MonoBehaviour
     {
-        [SerializeField] private Transform target;
+        [SerializeField] public Transform target;
         [SerializeField] private Vector3 offset = new (0f, 10f, -10f);
         [SerializeField] private float followSpeed = 5f;
 

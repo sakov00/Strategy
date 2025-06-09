@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using _Project.Scripts.Data;
+using _Project.Scripts.Interfaces;
+using _Project.Scripts.Windows;
 using LunarConsolePlugin;
 using UnityEngine;
 
@@ -6,20 +9,9 @@ namespace _Project.Scripts._GlobalLogic
 {
     public class GameData : MonoBehaviour
     {
-        public static GameData Instance { get; private set; }
-        [SerializeField] private LunarConsole lunarConsole;
         [SerializeField] public LevelData levelData = new();
-
-        private void Awake()
-        {
-            LunarConsole.Show();
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
-        }
+        [SerializeField] public List<IDamagable> allDamagables = new();
+        
+        public GameWindow gameWindow;
     }
 }

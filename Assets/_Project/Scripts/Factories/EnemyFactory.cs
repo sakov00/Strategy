@@ -1,3 +1,4 @@
+using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Characters.Unit;
 using _Project.Scripts.SO;
@@ -27,6 +28,7 @@ namespace _Project.Scripts.Factories
             }
             
             enemyModel.NoAimPosition = noAimPosition;
+            GlobalObjects.GameData.allDamagables.Add(enemyModel);
             return enemyModel;
         }
 

@@ -19,25 +19,22 @@ namespace _Project.Scripts._VContainer
         [Header("Configs")]
         [SerializeField] private UnitPrefabConfig unitPrefabConfig;
         [SerializeField] private BuildingPrefabConfig buildingPrefabConfig;
-        
-        [Header("Joystick")]
-        [SerializeField] private Joystick joystick;
+        [SerializeField] private WindowsConfig windowsConfig;
         
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterComponentInHierarchy<PlayerController>();
-
             builder.Register<PlayerInputSystem>(Lifetime.Singleton).As<PlayerInputSystem, ITickable>();
             builder.Register<GameTimer>(Lifetime.Singleton).As<GameTimer, IInitializable, ITickable>();
             
+            builder.Register<InitializeGame>(Lifetime.Singleton).As<InitializeGame, IStartable>();
+            
             RegisterFactories(builder);
             RegisterSO(builder);
-            
-            builder.RegisterComponent(joystick).AsSelf();
         }
 
         private void RegisterFactories(IContainerBuilder builder)
         {
+            builder.Register<WindowFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<BuildFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<FriendFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<EnemyFactory>(Lifetime.Singleton).AsSelf();
@@ -47,6 +44,7 @@ namespace _Project.Scripts._VContainer
         {
             builder.RegisterInstance(unitPrefabConfig).AsSelf();
             builder.RegisterInstance(buildingPrefabConfig).AsSelf();
+            builder.RegisterInstance(windowsConfig).AsSelf();
         }
     }
 }

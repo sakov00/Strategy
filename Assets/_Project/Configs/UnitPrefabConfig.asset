@@ -20,3 +20,7 @@ MonoBehaviour:
     type: 3}
   distanceEnemyPrefab: {fileID: 2977429261976075454, guid: f08c4e2abd47fac409905273348aa11e,
     type: 3}
+  playerPrefab: {fileID: 5246126235389141806, guid: 08a642a0595c20d4180778ff6bb8d4eb,
+    type: 3}
+  cameraPrefab: {fileID: 7117987020925613718, guid: c8f0af405673c4141a943c83fcbe24e6,
+    type: 3}

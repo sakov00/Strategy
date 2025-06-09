@@ -1,3 +1,4 @@
+using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects;
 using _Project.Scripts.GameObjects.BuildingZone;
@@ -19,18 +20,26 @@ namespace _Project.Scripts.Factories
         
         public BuildModel CreateBuild(TypeBuilding building, Vector3 position, Quaternion rotation)
         {
+            BuildModel model;
             switch (building)
             {
                 case TypeBuilding.MoneyBuilding:
-                    return CreateMoneyBuilding(position, rotation);
+                    model = CreateMoneyBuilding(position, rotation);
+                    break;
                 case TypeBuilding.TowerDefenseBuilding:
-                    return CreateTowerDefenseBuilding(position, rotation);
+                    model = CreateTowerDefenseBuilding(position, rotation);
+                    break;
                 case TypeBuilding.FriendMeleeBuilding:
-                    return CreateMeleeFriendBuilding(position, rotation);
+                    model = CreateMeleeFriendBuilding(position, rotation);
+                    break;
                 case TypeBuilding.FriendDistanceBuilding:
-                    return CreateDistanceFriendBuilding(position, rotation);
+                    model = CreateDistanceFriendBuilding(position, rotation);
+                    break;
                 default: return null;
             }
+            
+            GlobalObjects.GameData.allDamagables.Add(model);
+            return model;
         }
 
         private BuildModel CreateMoneyBuilding(Vector3 position, Quaternion rotation)
