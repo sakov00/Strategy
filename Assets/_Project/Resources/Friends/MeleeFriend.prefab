@@ -12,10 +12,6 @@ GameObject:
   - component: {fileID: 3052630911340187564}
   - component: {fileID: 5435124656432188814}
   - component: {fileID: 1300454423953340342}
-  - component: {fileID: 3864252111466100407}
-  - component: {fileID: 8708373002038428177}
-  - component: {fileID: 2160773920385767848}
-  - component: {fileID: 879200674675498094}
   - component: {fileID: 412062214044737953}
   m_Layer: 0
   m_Name: MeleeFriend
@@ -98,70 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4cd115d4324231b941fb37c7a81614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3864252111466100407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2804439903886800851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0ec4906f1184ae483249ea62430c50d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotationSpeed: 5
-  gravity: -20
-  <WarSide>k__BackingField: 0
-  <MaxHealth>k__BackingField: 100
-  <CurrentHealth>k__BackingField: 100
-  <AttackRange>k__BackingField: 2
-  <DamageAmount>k__BackingField: 20
-  <DelayAttack>k__BackingField: 1
-  <DetectionRadius>k__BackingField: 20
-  <TypeAttack>k__BackingField: 0
-  agent: {fileID: 5435124656432188814}
---- !u!114 &8708373002038428177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2804439903886800851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09d8d9963c48417686ce5beda5505702, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2160773920385767848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2804439903886800851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b014480a9784461099ab34f092498b0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &879200674675498094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2804439903886800851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62920d8bea64431296ae7fdaef8115b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 1232302952673697347, guid: aa49d42f2d1b0c240bb410973318b223,
-    type: 3}
-  firePoint: {fileID: 0}
-  projectileSpeed: 10
+  healthBarView: {fileID: 412062214044737953}
 --- !u!114 &412062214044737953
 MonoBehaviour:
   m_ObjectHideFlags: 0

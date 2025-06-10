@@ -7,55 +7,54 @@ using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Characters
 {
-    [RequireComponent(typeof(IDamagable))]
-    public class DamageSystem : MonoBehaviour
+    public class DamageSystem
     {
-        [SerializeField] private GameObject projectilePrefab;
-        [SerializeField] private Transform firePoint;
-        [SerializeField] private float projectileSpeed = 10f;
-        
-        private IFightObject characterModel;
+        private readonly IFightObject fightObject;
+        private readonly CharacterView characterView;
+        private readonly Transform transform;
         private float lastAttackTime = -Mathf.Infinity;
 
-        private void Awake()
+        public DamageSystem(IFightObject fightObject, CharacterView characterView, Transform transform)
         {
-            characterModel ??= GetComponent<IFightObject>();
+            this.fightObject = fightObject;
+            this.characterView = characterView;
+            this.transform = transform;
         }
 
         public void Attack()
         {
-            if (characterModel.AimCharacter == null || characterModel.AimCharacter.Equals(null))
+            if (fightObject.AimCharacter == null || fightObject.AimCharacter.Equals(null))
                 return;
             
-            if (Time.time - lastAttackTime < characterModel.DelayAttack)
+            if (Time.time - lastAttackTime < fightObject.DelayAttack)
                 return;
 
-            if (characterModel.TypeAttack == TypeAttack.Melee)
+            if (fightObject.TypeAttack == TypeAttack.Melee)
                 MeleeAttack();
-            if (characterModel.TypeAttack == TypeAttack.Distance)
+            if (fightObject.TypeAttack == TypeAttack.Distance)
                 DistanceAttack();
         }
 
         private void MeleeAttack()
         {
             var distance =
-                PositionExtention.GetDistanceBetweenObjects(transform, characterModel.AimCharacter.Transform);
-            if (distance <= characterModel.AttackRange)
+                PositionExtention.GetDistanceBetweenObjects(transform, fightObject.AimCharacter.Transform);
+            if (distance <= fightObject.AttackRange)
             {
                 lastAttackTime = Time.time;
-                characterModel.AimCharacter.CurrentHealth -= characterModel.DamageAmount;
-                if (characterModel.AimCharacter.CurrentHealth <= 0)
+                fightObject.AimCharacter.CurrentHealth -= fightObject.DamageAmount;
+                if (fightObject.AimCharacter.CurrentHealth <= 0)
                 {
-                    GlobalObjects.GameData.allDamagables.Remove(characterModel.AimCharacter);
-                    Destroy(characterModel.AimCharacter.Transform.gameObject);
+                    GlobalObjects.GameData.allDamagables.Remove(fightObject.AimCharacter);
+                    Object.Destroy(fightObject.AimCharacter.Transform.gameObject);
                 }
             }
         }
         
         private void DistanceAttack()
         {
-            var distance = Vector3.Distance(transform.position, characterModel.AimCharacter.Transform.position);
-            if (distance <= characterModel.AttackRange)
+            var distance = Vector3.Distance(transform.position, fightObject.AimCharacter.Transform.position);
+            if (distance <= fightObject.AttackRange)
             {
                 lastAttackTime = Time.time;
                 ShootProjectile();
@@ -64,15 +63,16 @@ namespace _Project.Scripts.GameObjects.Characters
         
         private void ShootProjectile()
         {
-            if (projectilePrefab == null || firePoint == null || characterModel.AimCharacter == null)
+            if (characterView.projectilePrefab == null || characterView.firePoint == null || fightObject.AimCharacter == null)
                 return;
 
-            GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+            GameObject projectile = Object.Instantiate(characterView.projectilePrefab, characterView.firePoint.position, Quaternion.identity);
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             if (rb == null)
                 return;
 
-            var velocity = CalculateBallisticVelocityVector(firePoint.position, characterModel.AimCharacter.Transform.position, projectileSpeed);
+            var velocity = CalculateBallisticVelocityVector(characterView.firePoint.position, 
+                fightObject.AimCharacter.Transform.position, characterView.projectileSpeed);
             if (velocity.HasValue)
             {
                 rb.useGravity = true;
@@ -81,14 +81,14 @@ namespace _Project.Scripts.GameObjects.Characters
                 var damageComponent = projectile.GetComponent<Projectile>();
                 if (damageComponent != null)
                 {
-                    damageComponent.damage = characterModel.DamageAmount;
-                    damageComponent.ownerWarSide = characterModel.WarSide;
+                    damageComponent.damage = fightObject.DamageAmount;
+                    damageComponent.ownerWarSide = fightObject.WarSide;
                 }
             }
             else
             {
                 Debug.LogWarning("Цель вне досягаемости с заданной скоростью!");
-                Destroy(projectile); // не тратить лишние объекты
+                Object.Destroy(projectile); // не тратить лишние объекты
             }
         }
         

@@ -36,7 +36,7 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             }
             else
             {
-                buildingZoneModel.createdBuild.CurrentLevel++;
+                buildingZoneModel.createdBuild.currentLevel++;
             }
         }
         

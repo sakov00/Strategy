@@ -1,17 +1,19 @@
+using System;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Interfaces;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.TowerDefence
 {
-    public class TowerDefenceModel : BuildModel, IFightObject
+    [Serializable]
+    public class TowerDefenceModel : BuildModel
     {
-        [field: Header("Attack")] 
-        [field: SerializeField] public float AttackRange { get; set; } = 20f;
-        [field: SerializeField] public int DamageAmount { get; set; } = 10;
-        [field: SerializeField] public float DelayAttack { get; set; } = 1f;
-        [field: SerializeField] public float DetectionRadius { get; set; } = 20f;
-        [field: SerializeField] public TypeAttack TypeAttack { get; set; } = TypeAttack.Distance;
-        [field: SerializeField] public IDamagable AimCharacter { get; set; }
+        [Header("Attack")] 
+        [SerializeField] public float attackRange = 20f;
+        [SerializeField] public int damageAmount = 10;
+        [SerializeField] public float delayAttack = 1f;
+        [SerializeField] public float detectionRadius = 20f;
+        [SerializeField] public TypeAttack typeAttack = TypeAttack.Distance;
+        [SerializeField] public IDamagable AimCharacter;
     }
 }

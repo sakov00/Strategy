@@ -1,31 +1,35 @@
 using _Project.Scripts.Extentions;
+using _Project.Scripts.GameObjects.Characters.Player;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Characters.Unit
 {
-    [RequireComponent(typeof(UnitModel))]
-    public class UnitMovementSystem : MonoBehaviour
+    public class UnitMovementSystem
     {
-        [SerializeField, HideInInspector] private UnitModel unitModel;
+        private readonly UnitModel unitModel;
+        private readonly UnitView unitView;
+        private readonly Transform transform;
         private Vector3 velocity;
-
-        private void OnValidate()
+        
+        public UnitMovementSystem(UnitModel unitModel, UnitView unitView, Transform transform)
         {
-            unitModel ??= GetComponent<UnitModel>();
+            this.unitModel = unitModel;
+            this.unitView = unitView;
+            this.transform = transform;
         }
 
         public void MoveToAim()
         {
             if (unitModel.AimCharacter == null || unitModel.AimCharacter.Equals(null))
             {
-                unitModel.agent.SetDestination(unitModel.NoAimPosition);
-                unitModel.agent.isStopped = false;
+                unitView.Agent.SetDestination(unitModel.noAimPosition);
+                unitView.Agent.isStopped = false;
                 return;
             }
   
             var distance = PositionExtention.GetDistanceBetweenObjects(transform, unitModel.AimCharacter.Transform);
-            unitModel.agent.isStopped = distance < unitModel.AttackRange;
-            unitModel.agent.SetDestination(unitModel.AimCharacter.Transform.position);
+            unitView.Agent.isStopped = distance < unitModel.attackRange;
+            unitView.Agent.SetDestination(unitModel.AimCharacter.Transform.position);
         }
     }
 }

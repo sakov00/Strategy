@@ -1,17 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace _Project.Scripts.GameObjects.Characters.Unit
 {
-    [RequireComponent(typeof(NavMeshAgent))]
+    [Serializable]
     public class UnitModel : CharacterModel
     {
-        public NavMeshAgent agent;
-        public Vector3 NoAimPosition;
-        
-        private void OnValidate()
-        {
-            agent ??= GetComponent<NavMeshAgent>();
-        }
+        public Vector3 noAimPosition;
     }
 }

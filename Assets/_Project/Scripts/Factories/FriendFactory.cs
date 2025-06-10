@@ -14,9 +14,9 @@ namespace _Project.Scripts.Factories
         [Inject] private IObjectResolver resolver;
         [Inject] private UnitPrefabConfig unitPrefabConfig;
         
-        public UnitModel CreateFriendUnit(FriendUnitType unitType, Vector3 position, Quaternion rotation = default)
+        public UnitController CreateFriendUnit(FriendUnitType unitType, Vector3 position, Quaternion rotation = default)
         {
-            UnitModel friendModel;
+            UnitController friendModel;
             switch (unitType)
             {
                 case FriendUnitType.SimpleMelee:
@@ -32,17 +32,17 @@ namespace _Project.Scripts.Factories
             return friendModel;
         }
 
-        private UnitModel CreateMeleeFriend(Vector3 position, Quaternion rotation)
+        private UnitController CreateMeleeFriend(Vector3 position, Quaternion rotation)
         {
             return resolver.Instantiate(unitPrefabConfig.meleeFriendPrefab, position, rotation);
         }
         
-        private UnitModel CreateDistanceFriend(Vector3 position, Quaternion rotation)
+        private UnitController CreateDistanceFriend(Vector3 position, Quaternion rotation)
         {
             return resolver.Instantiate(unitPrefabConfig.distanceFriendPrefab, position, rotation);
         }
 
-        public PlayerModel CreatePlayer(Vector3 position, Quaternion rotation = default)
+        public PlayerController CreatePlayer(Vector3 position, Quaternion rotation = default)
         {
             var playerModel = resolver.Instantiate(unitPrefabConfig.playerPrefab, position, rotation);
             GlobalObjects.GameData.allDamagables.Add(playerModel);

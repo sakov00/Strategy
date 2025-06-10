@@ -5,18 +5,18 @@ using UnityEngine;
 
 namespace _Project.Scripts.GameObjects
 {
-    public class BuildModel : MonoBehaviour, IDamagable, IUpgradable
+    [Serializable]
+    public class BuildModel
     {
         [Header("Render")]
         [SerializeField] public Renderer objRenderer;
-        
-        [field: Header("Upgrades")] 
-        [field: SerializeField]public int CurrentLevel { get; set; }
-        
-        [field: Header("Health")] 
-        [field: SerializeField] public WarSide WarSide { get; set; }
-        [field: SerializeField] public float MaxHealth { get; set; } = 500f;
-        [field: SerializeField] public float CurrentHealth { get; set; } = 500f;
-        public Transform Transform => transform;
+
+        [Header("Upgrades")] 
+        public int currentLevel;
+
+        [Header("Health")] 
+        public WarSide warSide;
+        public float maxHealth = 500f;
+        public float currentHealth = 500f;
     }
 }

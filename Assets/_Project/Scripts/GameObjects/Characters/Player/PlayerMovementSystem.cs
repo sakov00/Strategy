@@ -2,20 +2,23 @@ using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Characters.Player
 {
-    [RequireComponent(typeof(PlayerModel))]
-    public class PlayerMovementSystem : MonoBehaviour
+    public class PlayerMovementSystem
     {
-        [SerializeField, HideInInspector] private PlayerModel playerModel;
+        private readonly PlayerModel playerModel;
+        private readonly PlayerView playerView;
+        private readonly Transform transform;
         private Vector3 velocity;
 
-        private void OnValidate()
+        public PlayerMovementSystem(PlayerModel playerModel, PlayerView playerView, Transform transform)
         {
-            playerModel ??= GetComponent<PlayerModel>();
+            this.playerModel = playerModel;
+            this.playerView = playerView;
+            this.transform = transform;
         }
 
         public void MoveTo(Vector3 inputVector)
         {
-            if (playerModel.characterController.isGrounded && velocity.y < 0)
+            if (playerView.CharacterController.isGrounded && velocity.y < 0)
             {
                 velocity.y = -2f;
             }
@@ -28,10 +31,10 @@ namespace _Project.Scripts.GameObjects.Characters.Player
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, playerModel.rotationSpeed * Time.deltaTime);
             }
             
-            playerModel.characterController.Move(move * playerModel.moveSpeed * Time.deltaTime);
+            playerView.CharacterController.Move(move * playerModel.moveSpeed * Time.deltaTime);
 
             velocity.y += playerModel.gravity * Time.deltaTime;
-            playerModel.characterController.Move(velocity * Time.deltaTime);
+            playerView.CharacterController.Move(velocity * Time.deltaTime);
         }
     }
 }

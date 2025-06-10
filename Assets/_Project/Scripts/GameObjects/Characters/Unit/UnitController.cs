@@ -1,28 +1,68 @@
+using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
+using _Project.Scripts.GameObjects.Characters.Player;
+using _Project.Scripts.Interfaces;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Characters.Unit
 {
-    [RequireComponent(typeof(CharacterModel))]
-    [RequireComponent(typeof(UnitMovementSystem))]
-    [RequireComponent(typeof(DetectionAim))]
-    [RequireComponent(typeof(DamageSystem))]
     [RequireComponent(typeof(HealthBarView))]
-    public class UnitController : MonoBehaviour
+    public class UnitController : MonoBehaviour, IFightObject
     {
-        [SerializeField, HideInInspector] private CharacterModel characterModel;
-        [SerializeField, HideInInspector] private UnitMovementSystem unitMovementSystem;
-        [SerializeField, HideInInspector] private DetectionAim detectionAim;
-        [SerializeField, HideInInspector] private DamageSystem damageSystem;
-        [SerializeField, HideInInspector] private HealthBarView healthBarView;
+        [SerializeField] private UnitModel unitModel;
+        [SerializeField] private UnitView unitView;
+        [SerializeField] private HealthBarView healthBarView;
+        
+        private UnitMovementSystem unitMovementSystem;
+        private DetectionAim detectionAim;
+        private DamageSystem damageSystem;
 
-        private void OnValidate()
+        public Transform Transform => transform;
+        public WarSide WarSide => unitModel.warSide;
+        public float MaxHealth => unitModel.maxHealth;
+        public float CurrentHealth
         {
-            characterModel ??= GetComponent<CharacterModel>();
-            unitMovementSystem ??= GetComponent<UnitMovementSystem>();
-            detectionAim ??= GetComponent<DetectionAim>();
-            damageSystem ??= GetComponent<DamageSystem>();
-            healthBarView ??= GetComponent<HealthBarView>();
+            get => unitModel.currentHealth;
+            set => unitModel.currentHealth = value;
+        }
+
+        public float AttackRange
+        {
+            get => unitModel.attackRange;
+            set => unitModel.attackRange = value;
+        }
+        public int DamageAmount         
+        {
+            get => unitModel.damageAmount;
+            set => unitModel.damageAmount = value;
+        }
+        public float DelayAttack
+        {
+            get => unitModel.delayAttack;
+            set => unitModel.delayAttack = value;
+        }
+        public float DetectionRadius        
+        {
+            get => unitModel.detectionRadius;
+            set => unitModel.detectionRadius = value;
+        }
+        public TypeAttack TypeAttack
+        {
+            get => unitModel.typeAttack;
+            set => unitModel.typeAttack = value;
+        }
+        
+        public IDamagable AimCharacter
+        {
+            get => unitModel.AimCharacter;
+            set => unitModel.AimCharacter = value;
+        }
+        
+        private void Awake()
+        {
+            unitMovementSystem = new UnitMovementSystem(unitModel, unitView, transform);
+            detectionAim = new DetectionAim(this, transform);
+            damageSystem = new DamageSystem(this, unitView, transform);
         }
 
         private void FixedUpdate()
@@ -31,6 +71,11 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
             unitMovementSystem.MoveToAim();
             damageSystem.Attack();
             healthBarView.UpdateView();
+        }
+
+        public void SetNoAimPosition(Vector3 position)
+        {
+            unitModel.noAimPosition = position;
         }
     }
 }

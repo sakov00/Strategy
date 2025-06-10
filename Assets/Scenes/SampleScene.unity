@@ -883,7 +883,11 @@ PrefabInstance:
       propertyPath: m_BaseOffset
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f, type: 3}
+    - {fileID: 8246137830378868086, guid: 27682a56f64791f498aa7a12dcf0af1f, type: 3}
+    - {fileID: 903820722778351988, guid: 27682a56f64791f498aa7a12dcf0af1f, type: 3}
+    - {fileID: 2770078367106402333, guid: 27682a56f64791f498aa7a12dcf0af1f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

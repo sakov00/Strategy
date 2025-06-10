@@ -5,14 +5,15 @@ using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Characters
 {
-    [RequireComponent(typeof(IFightObject))]
-    public class DetectionAim : MonoBehaviour
+    public class DetectionAim
     {
-        private IFightObject attackableModel;
+        private readonly IFightObject attackableModel;
+        private readonly Transform transform;
 
-        private void Awake()
+        public DetectionAim(IFightObject attackableModel, Transform transform)
         {
-            attackableModel ??= GetComponent<IFightObject>();
+            this.attackableModel = attackableModel;
+            this.transform = transform;
         }
 
         public void DetectAim()

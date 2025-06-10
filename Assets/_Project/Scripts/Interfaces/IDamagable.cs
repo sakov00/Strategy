@@ -4,11 +4,10 @@ using UnityEngine;
 
 namespace _Project.Scripts.Interfaces
 {
-    public interface IDamagable
+    public interface IDamagable : IPositioned
     {
-        public WarSide WarSide { get; set; }
-        public float MaxHealth { get; set; }
+        public WarSide WarSide { get; }
+        public float MaxHealth { get; }
         public float CurrentHealth { get; set; }
-        public Transform Transform { get; }
     }
 }

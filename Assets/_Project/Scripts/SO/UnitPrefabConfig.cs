@@ -8,13 +8,13 @@ namespace _Project.Scripts.SO
     public class UnitPrefabConfig : ScriptableObject
     {
         [Header("Unit Prefabs")]
-        public UnitModel meleeFriendPrefab;
-        public UnitModel distanceFriendPrefab;
-        public UnitModel meleeEnemyPrefab;
-        public UnitModel distanceEnemyPrefab;
+        public UnitController meleeFriendPrefab;
+        public UnitController distanceFriendPrefab;
+        public UnitController meleeEnemyPrefab;
+        public UnitController distanceEnemyPrefab;
         
         [Header("Player Prefabs")]
-        public PlayerModel playerPrefab;
+        public PlayerController playerPrefab;
         public IsometricCameraFollow cameraPrefab;
     }
 }
