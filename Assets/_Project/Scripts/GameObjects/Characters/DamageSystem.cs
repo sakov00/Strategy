@@ -3,6 +3,7 @@ using _Project.Scripts.Enums;
 using _Project.Scripts.Extentions;
 using _Project.Scripts.GameObjects.Projectiles;
 using _Project.Scripts.Interfaces;
+using _Project.Scripts.Interfaces.View;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Characters
@@ -10,14 +11,14 @@ namespace _Project.Scripts.GameObjects.Characters
     public class DamageSystem
     {
         private readonly IFightObject fightObject;
-        private readonly CharacterView characterView;
+        private readonly IProjectTileView projectTileView;
         private readonly Transform transform;
         private float lastAttackTime = -Mathf.Infinity;
 
-        public DamageSystem(IFightObject fightObject, CharacterView characterView, Transform transform)
+        public DamageSystem(IFightObject fightObject, IProjectTileView projectTileView, Transform transform)
         {
             this.fightObject = fightObject;
-            this.characterView = characterView;
+            this.projectTileView = projectTileView;
             this.transform = transform;
         }
 
@@ -63,16 +64,16 @@ namespace _Project.Scripts.GameObjects.Characters
         
         private void ShootProjectile()
         {
-            if (characterView.projectilePrefab == null || characterView.firePoint == null || fightObject.AimCharacter == null)
+            if (projectTileView.ProjectilePrefab == null || projectTileView.FirePoint == null || fightObject.AimCharacter == null)
                 return;
 
-            GameObject projectile = Object.Instantiate(characterView.projectilePrefab, characterView.firePoint.position, Quaternion.identity);
+            GameObject projectile = Object.Instantiate(projectTileView.ProjectilePrefab, projectTileView.FirePoint.position, Quaternion.identity);
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             if (rb == null)
                 return;
 
-            var velocity = CalculateBallisticVelocityVector(characterView.firePoint.position, 
-                fightObject.AimCharacter.Transform.position, characterView.projectileSpeed);
+            var velocity = CalculateBallisticVelocityVector(projectTileView.FirePoint.position, 
+                fightObject.AimCharacter.Transform.position, projectTileView.ProjectileSpeed);
             if (velocity.HasValue)
             {
                 rb.useGravity = true;

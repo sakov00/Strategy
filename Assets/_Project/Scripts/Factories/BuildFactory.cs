@@ -18,9 +18,9 @@ namespace _Project.Scripts.Factories
         [Inject] private IObjectResolver resolver;
         [Inject] private BuildingPrefabConfig buildingPrefabConfig;
         
-        public BuildModel CreateBuild(TypeBuilding building, Vector3 position, Quaternion rotation)
+        public BuildController CreateBuild(TypeBuilding building, Vector3 position, Quaternion rotation)
         {
-            BuildModel model;
+            BuildController model;
             switch (building)
             {
                 case TypeBuilding.MoneyBuilding:
@@ -42,22 +42,22 @@ namespace _Project.Scripts.Factories
             return model;
         }
 
-        private BuildModel CreateMoneyBuilding(Vector3 position, Quaternion rotation)
+        private BuildController CreateMoneyBuilding(Vector3 position, Quaternion rotation)
         {
             return resolver.Instantiate(buildingPrefabConfig.moneyBuildingPrefab, position, rotation);
         }
         
-        private BuildModel CreateTowerDefenseBuilding(Vector3 position, Quaternion rotation)
+        private BuildController CreateTowerDefenseBuilding(Vector3 position, Quaternion rotation)
         {
             return resolver.Instantiate(buildingPrefabConfig.towerBuildingPrefab, position, rotation);
         }
         
-        private BuildModel CreateMeleeFriendBuilding(Vector3 position, Quaternion rotation)
+        private BuildController CreateMeleeFriendBuilding(Vector3 position, Quaternion rotation)
         {
             return resolver.Instantiate(buildingPrefabConfig.meleeFriendBuildingPrefab, position, rotation);;
         }
         
-        private BuildModel CreateDistanceFriendBuilding(Vector3 position, Quaternion rotation)
+        private BuildController CreateDistanceFriendBuilding(Vector3 position, Quaternion rotation)
         {
             return resolver.Instantiate(buildingPrefabConfig.distanceFriendBuildingPrefab, position, rotation);
         }

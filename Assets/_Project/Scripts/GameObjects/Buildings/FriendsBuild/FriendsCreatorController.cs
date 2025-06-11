@@ -4,18 +4,17 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.FriendsBuild
 {
-    [RequireComponent(typeof(FriendsBuildModel))]
-    public class FriendsBuildSystem : MonoBehaviour
+    public class FriendsCreatorController
     {
         [Inject] private FriendFactory friendFactory;
-        [SerializeField, HideInInspector] private FriendsBuildModel model;
+        private FriendsBuildModel model;
 
-        private void OnValidate()
+        public FriendsCreatorController(FriendsBuildModel model)
         {
-            model ??= GetComponent<FriendsBuildModel>();
+            this.model = model;
         }
 
-        private void Start()
+        public void CreateFriends()
         {
             for (int i = 0; i < model.countUnits; i++)
             {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Characters.Unit;
@@ -6,6 +7,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.FriendsBuild
 {
+    [Serializable]
     public class FriendsBuildModel : BuildModel
     {
         [Header("Units")] 

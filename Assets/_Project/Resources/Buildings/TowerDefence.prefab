@@ -13,9 +13,6 @@ GameObject:
   - component: {fileID: 6723468173963196906}
   - component: {fileID: 4325884475614545362}
   - component: {fileID: 2290805021666337803}
-  - component: {fileID: 3953740461317675544}
-  - component: {fileID: 5112583221664016033}
-  - component: {fileID: 8785306125505041760}
   - component: {fileID: 4555808668858142832}
   m_Layer: 0
   m_Name: TowerDefence
@@ -124,60 +121,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705c1891a90d49f6b2ca8f92240ba879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerDefenceModel: {fileID: 3953740461317675544}
-  detectionAim: {fileID: 5112583221664016033}
-  damageSystem: {fileID: 8785306125505041760}
+  towerDefenceModel:
+    objRenderer: {fileID: 0}
+    currentLevel: 0
+    warSide: 0
+    maxHealth: 500
+    currentHealth: 500
+    attackRange: 20
+    damageAmount: 10
+    delayAttack: 1
+    detectionRadius: 20
+    typeAttack: 1
+  towerDefenceView:
+    <ProjectilePrefab>k__BackingField: {fileID: 0}
+    <FirePoint>k__BackingField: {fileID: 0}
+    <ProjectileSpeed>k__BackingField: 10
   healthBarView: {fileID: 4555808668858142832}
---- !u!114 &3953740461317675544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989450151262154562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d21c7314c7af471fb6029ecbbab2676c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objRenderer: {fileID: 6723468173963196906}
-  currentLevel: 0
-  <WarSide>k__BackingField: 0
-  <MaxHealth>k__BackingField: 1000
-  <CurrentHealth>k__BackingField: 1000
-  <AttackRange>k__BackingField: 20
-  <DamageAmount>k__BackingField: 50
-  <DelayAttack>k__BackingField: 1
-  <DetectionRadius>k__BackingField: 20
-  <TypeAttack>k__BackingField: 1
---- !u!114 &5112583221664016033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989450151262154562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b014480a9784461099ab34f092498b0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8785306125505041760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989450151262154562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62920d8bea64431296ae7fdaef8115b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 1232302952673697347, guid: f0afd34565e49fa49bae59ad57415f6f,
-    type: 3}
-  firePoint: {fileID: 8486291038236301449}
-  projectileSpeed: 10
 --- !u!114 &4555808668858142832
 MonoBehaviour:
   m_ObjectHideFlags: 0

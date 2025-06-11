@@ -4,16 +4,23 @@ using UnityEngine;
 namespace _Project.Scripts.GameObjects.MoneyBuild
 {
     [RequireComponent(typeof(HealthBarView))]
-    public class MoneyBuildController : MonoBehaviour
+    public class MoneyBuildController : BuildController
     {
+        [SerializeField] private MoneyBuildModel model;
+        [SerializeField] private MoneyBuildingView view;
         [SerializeField] private HealthBarView healthBarView;
-
-        private void OnValidate()
+        
+        private MoneyController moneyController;
+        
+        private void Awake()
         {
-            healthBarView ??= GetComponent<HealthBarView>();
+            BuildModel = model;
+            BuildView = view;
+            
+            moneyController = new MoneyController(model, view);
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             healthBarView.UpdateView();
         }

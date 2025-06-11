@@ -7,23 +7,41 @@ using UnityEngine;
 namespace _Project.Scripts.GameObjects.TowerDefence
 {
     [RequireComponent(typeof(HealthBarView))]
-    public class TowerDefenceController : MonoBehaviour, IFightObject
+    public class TowerDefenceController : BuildController, IFightObject
     {
-        [SerializeField] private TowerDefenceModel towerDefenceModel;
+        [SerializeField] protected TowerDefenceModel towerDefenceModel;
+        [SerializeField] protected TowerDefenceView towerDefenceView;
         [SerializeField] private HealthBarView healthBarView;
         
         private DetectionAim detectionAim;
         private DamageSystem damageSystem;
-        
-        public Transform Transform => transform;
-        public WarSide WarSide => towerDefenceModel.warSide;
-        public float MaxHealth => towerDefenceModel.maxHealth;
-        public float CurrentHealth
-        {
-            get => towerDefenceModel.currentHealth;
-            set => towerDefenceModel.currentHealth = value;
-        }
 
+        public float AttackRange
+        {
+            get => towerDefenceModel.attackRange;
+            set => towerDefenceModel.attackRange = value;
+        }
+        public int DamageAmount         
+        {
+            get => towerDefenceModel.damageAmount;
+            set => towerDefenceModel.damageAmount = value;
+        }
+        public float DelayAttack
+        {
+            get => towerDefenceModel.delayAttack;
+            set => towerDefenceModel.delayAttack = value;
+        }
+        public float DetectionRadius        
+        {
+            get => towerDefenceModel.detectionRadius;
+            set => towerDefenceModel.detectionRadius = value;
+        }
+        public TypeAttack TypeAttack
+        {
+            get => towerDefenceModel.typeAttack;
+            set => towerDefenceModel.typeAttack = value;
+        }
+        
         public IDamagable AimCharacter
         {
             get => towerDefenceModel.AimCharacter;
@@ -32,8 +50,11 @@ namespace _Project.Scripts.GameObjects.TowerDefence
         
         private void Awake()
         {
+            BuildModel = towerDefenceModel;
+            BuildView = towerDefenceView;
+            
             detectionAim = new DetectionAim(this, transform);
-            damageSystem = new DamageSystem(towerDefenceModel, playerView, transform);
+            damageSystem = new DamageSystem(this, towerDefenceView, transform);
         }
 
         private void Update()

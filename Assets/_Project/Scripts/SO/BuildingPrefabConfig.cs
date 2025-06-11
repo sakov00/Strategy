@@ -7,10 +7,10 @@ namespace _Project.Scripts.SO
     [CreateAssetMenu(fileName = "BuildingPrefabConfig", menuName = "SO/Building Prefab Config")]
     public class BuildingPrefabConfig : ScriptableObject
     {
-        public BuildModel moneyBuildingPrefab;
-        public BuildModel meleeFriendBuildingPrefab;
-        public BuildModel distanceFriendBuildingPrefab;
-        public BuildModel towerBuildingPrefab;
-        public BuildModel mainBuildingPrefab;
+        public BuildController moneyBuildingPrefab;
+        public BuildController meleeFriendBuildingPrefab;
+        public BuildController distanceFriendBuildingPrefab;
+        public BuildController towerBuildingPrefab;
+        public BuildController mainBuildingPrefab;
     }
 }

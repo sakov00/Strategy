@@ -255,10 +255,6 @@ GameObject:
   - component: {fileID: 1965842239332045838}
   - component: {fileID: 7322175163735070510}
   - component: {fileID: 727004643926444983}
-  - component: {fileID: 5246126235389141806}
-  - component: {fileID: 2694281667530535886}
-  - component: {fileID: 7538877426793921143}
-  - component: {fileID: 3509831382643095440}
   - component: {fileID: 8948965394392875503}
   m_Layer: 0
   m_Name: Player
@@ -373,70 +369,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c37846a98243adba2b7631d8bc2944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5246126235389141806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8384456974013278440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8fd1096af974123bd989618b98a9b4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  rotationSpeed: 10
-  gravity: -20
-  characterController: {fileID: 7322175163735070510}
-  <WarSide>k__BackingField: 0
-  <MaxHealth>k__BackingField: 100
-  <CurrentHealth>k__BackingField: 100
-  <AttackRange>k__BackingField: 20
-  <DamageAmount>k__BackingField: 10
-  <DelayAttack>k__BackingField: 1
-  <DetectionRadius>k__BackingField: 20
-  <TypeAttack>k__BackingField: 1
---- !u!114 &2694281667530535886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8384456974013278440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef3808e2087d43a0978ac53576870075, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7538877426793921143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8384456974013278440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b014480a9784461099ab34f092498b0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3509831382643095440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8384456974013278440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62920d8bea64431296ae7fdaef8115b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 1232302952673697347, guid: aa49d42f2d1b0c240bb410973318b223,
-    type: 3}
-  firePoint: {fileID: 3287887312038049354}
-  projectileSpeed: 20
+  playerModel:
+    moveSpeed: 10
+    rotationSpeed: 10
+    gravity: -20
+    warSide: 0
+    maxHealth: 100
+    currentHealth: 100
+    attackRange: 10
+    damageAmount: 10
+    delayAttack: 1
+    detectionRadius: 20
+    typeAttack: 1
+  playerView:
+    <ProjectilePrefab>k__BackingField: {fileID: 0}
+    <FirePoint>k__BackingField: {fileID: 0}
+    <ProjectileSpeed>k__BackingField: 10
+    characterController: {fileID: 0}
+  healthBarView: {fileID: 8948965394392875503}
 --- !u!114 &8948965394392875503
 MonoBehaviour:
   m_ObjectHideFlags: 0

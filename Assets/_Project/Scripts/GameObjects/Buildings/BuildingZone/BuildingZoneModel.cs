@@ -9,6 +9,6 @@ namespace _Project.Scripts.GameObjects.BuildingZone
     public class BuildingZoneModel
     {
         [SerializeField] public TypeBuilding typeBuilding;
-        [SerializeField] public BuildModel createdBuild;
+        [SerializeField] public BuildController createdBuild;
     }
 }

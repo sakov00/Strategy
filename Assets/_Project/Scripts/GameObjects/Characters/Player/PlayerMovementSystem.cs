@@ -18,7 +18,7 @@ namespace _Project.Scripts.GameObjects.Characters.Player
 
         public void MoveTo(Vector3 inputVector)
         {
-            if (playerView.CharacterController.isGrounded && velocity.y < 0)
+            if (playerView.characterController.isGrounded && velocity.y < 0)
             {
                 velocity.y = -2f;
             }
@@ -31,10 +31,10 @@ namespace _Project.Scripts.GameObjects.Characters.Player
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, playerModel.rotationSpeed * Time.deltaTime);
             }
             
-            playerView.CharacterController.Move(move * playerModel.moveSpeed * Time.deltaTime);
+            playerView.characterController.Move(move * playerModel.moveSpeed * Time.deltaTime);
 
             velocity.y += playerModel.gravity * Time.deltaTime;
-            playerView.CharacterController.Move(velocity * Time.deltaTime);
+            playerView.characterController.Move(velocity * Time.deltaTime);
         }
     }
 }
