@@ -8,11 +8,11 @@ namespace _Project.Scripts._GlobalLogic
         public static GlobalObjects Instance { get; private set; }
         
         public static GameData GameData => Instance.gameData;
-        public static IsometricCameraFollow OneCamera => Instance.oneCamera;
+        public static IsometricCameraFollow CameraFollow => Instance.cameraFollow;
         public static LunarConsole LunarConsole => Instance.lunarConsole;
         
         [SerializeField] private GameData gameData;
-        [SerializeField] private IsometricCameraFollow oneCamera;
+        [SerializeField] private IsometricCameraFollow cameraFollow;
         [SerializeField] private LunarConsole lunarConsole;
         
         private void Awake()

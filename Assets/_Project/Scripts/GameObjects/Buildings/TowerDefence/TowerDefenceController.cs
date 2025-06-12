@@ -9,59 +9,58 @@ namespace _Project.Scripts.GameObjects.TowerDefence
     [RequireComponent(typeof(HealthBarView))]
     public class TowerDefenceController : BuildController, IFightObject
     {
-        [SerializeField] protected TowerDefenceModel towerDefenceModel;
-        [SerializeField] protected TowerDefenceView towerDefenceView;
-        [SerializeField] private HealthBarView healthBarView;
+        [SerializeField] protected TowerDefenceModel model;
+        [SerializeField] protected TowerDefenceView view;
         
         private DetectionAim detectionAim;
         private DamageSystem damageSystem;
 
         public float AttackRange
         {
-            get => towerDefenceModel.attackRange;
-            set => towerDefenceModel.attackRange = value;
+            get => model.attackRange;
+            set => model.attackRange = value;
         }
         public int DamageAmount         
         {
-            get => towerDefenceModel.damageAmount;
-            set => towerDefenceModel.damageAmount = value;
+            get => model.damageAmount;
+            set => model.damageAmount = value;
         }
         public float DelayAttack
         {
-            get => towerDefenceModel.delayAttack;
-            set => towerDefenceModel.delayAttack = value;
+            get => model.delayAttack;
+            set => model.delayAttack = value;
         }
         public float DetectionRadius        
         {
-            get => towerDefenceModel.detectionRadius;
-            set => towerDefenceModel.detectionRadius = value;
+            get => model.detectionRadius;
+            set => model.detectionRadius = value;
         }
         public TypeAttack TypeAttack
         {
-            get => towerDefenceModel.typeAttack;
-            set => towerDefenceModel.typeAttack = value;
+            get => model.typeAttack;
+            set => model.typeAttack = value;
         }
         
         public IDamagable AimCharacter
         {
-            get => towerDefenceModel.AimCharacter;
-            set => towerDefenceModel.AimCharacter = value;
+            get => model.AimCharacter;
+            set => model.AimCharacter = value;
         }
         
         private void Awake()
         {
-            BuildModel = towerDefenceModel;
-            BuildView = towerDefenceView;
+            BuildModel = model;
+            BuildView = view;
             
             detectionAim = new DetectionAim(this, transform);
-            damageSystem = new DamageSystem(this, towerDefenceView, transform);
+            damageSystem = new DamageSystem(this, view, transform);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {            
             detectionAim.DetectAim();
             damageSystem.Attack();
-            healthBarView.UpdateView();
+            view.UpdateHealthBar(model.currentHealth, model.maxHealth);
         }
     }
 }

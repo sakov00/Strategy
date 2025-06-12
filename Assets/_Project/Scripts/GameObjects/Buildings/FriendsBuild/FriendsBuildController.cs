@@ -1,24 +1,27 @@
 using System;
+using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects._General;
 using UnityEngine;
+using VContainer;
 
 namespace _Project.Scripts.GameObjects.FriendsBuild
 {
     [RequireComponent(typeof(HealthBarView))]
     public class FriendsBuildController : BuildController
     {
+        [Inject] private FriendFactory friendFactory;
+        
         [SerializeField] private FriendsBuildModel model;
-        //[SerializeField] private MoneyBuildingView view;
-        [SerializeField] private HealthBarView healthBarView;
+        [SerializeField] private FriendsBuildView view;
         
         private FriendsCreatorController friendsCreatorController;
         
         private void Awake()
         {
             BuildModel = model;
-            //BuildView = view;
+            BuildView = view;
             
-            friendsCreatorController = new FriendsCreatorController(model);
+            friendsCreatorController = new FriendsCreatorController(friendFactory, model, view);
         }
 
         private void Start()
@@ -26,14 +29,9 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
             friendsCreatorController.CreateFriends();
         }
 
-        private void Update()
-        {
-            healthBarView.UpdateView();
-        }
-
         private void FixedUpdate()
         {
-            healthBarView.UpdateView();
+            view.UpdateHealthBar(model.currentHealth, model.maxHealth);
         }
     }
 }

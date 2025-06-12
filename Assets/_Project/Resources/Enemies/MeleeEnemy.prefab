@@ -94,6 +94,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4cd115d4324231b941fb37c7a81614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitModel:
+    moveSpeed: 10
+    rotationSpeed: 10
+    gravity: -20
+    warSide: 1
+    maxHealth: 100
+    currentHealth: 100
+    attackRange: 1
+    damageAmount: 10
+    delayAttack: 1
+    detectionRadius: 20
+    typeAttack: 0
+    noAimPosition: {x: 0, y: 0, z: 0}
+  unitView:
+    animator: {fileID: 3336722843375494086}
+    <ProjectilePrefab>k__BackingField: {fileID: 0}
+    <FirePoint>k__BackingField: {fileID: 0}
+    <ProjectileSpeed>k__BackingField: 10
+    Agent: {fileID: 8794451098441058305}
   healthBarView: {fileID: 8872622995280357635}
 --- !u!114 &8872622995280357635
 MonoBehaviour:

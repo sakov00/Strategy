@@ -9,62 +9,56 @@ using VContainer;
 namespace _Project.Scripts.GameObjects.Characters.Player
 {
     [RequireComponent(typeof(HealthBarView))]
-    public class PlayerController : MonoBehaviour, IFightObject
+    public class PlayerController : CharacterSimpleController, IFightObject
     {
-        [SerializeField] private PlayerModel playerModel;
-        [SerializeField] private PlayerView playerView;
+        [SerializeField] private PlayerModel model;
+        [SerializeField] private PlayerView view;
         [SerializeField] private HealthBarView healthBarView;
         
         private PlayerMovementSystem playerMovementSystem;
         private DetectionAim detectionAim;
         private DamageSystem damageSystem;
-
-        public Transform Transform => transform;
-        public WarSide WarSide => playerModel.warSide;
-        public float MaxHealth => playerModel.maxHealth;
-        public float CurrentHealth
-        {
-            get => playerModel.currentHealth;
-            set => playerModel.currentHealth = value;
-        }
         
         public float AttackRange
         {
-            get => playerModel.attackRange;
-            set => playerModel.attackRange = value;
+            get => model.attackRange;
+            set => model.attackRange = value;
         }
         public int DamageAmount         
         {
-            get => playerModel.damageAmount;
-            set => playerModel.damageAmount = value;
+            get => model.damageAmount;
+            set => model.damageAmount = value;
         }
         public float DelayAttack
         {
-            get => playerModel.delayAttack;
-            set => playerModel.delayAttack = value;
+            get => model.delayAttack;
+            set => model.delayAttack = value;
         }
         public float DetectionRadius        
         {
-            get => playerModel.detectionRadius;
-            set => playerModel.detectionRadius = value;
+            get => model.detectionRadius;
+            set => model.detectionRadius = value;
         }
         public TypeAttack TypeAttack
         {
-            get => playerModel.typeAttack;
-            set => playerModel.typeAttack = value;
+            get => model.typeAttack;
+            set => model.typeAttack = value;
         }
         
         public IDamagable AimCharacter
         {
-            get => playerModel.AimCharacter;
-            set => playerModel.AimCharacter = value;
+            get => model.AimCharacter;
+            set => model.AimCharacter = value;
         }
 
         private void Awake()
         {
-            playerMovementSystem = new PlayerMovementSystem(playerModel, playerView, transform);
+            CharacterModel = model;
+            CharacterView = view;
+            
+            playerMovementSystem = new PlayerMovementSystem(model, view, transform);
             detectionAim = new DetectionAim(this, transform);
-            damageSystem = new DamageSystem(this, playerView, transform);
+            damageSystem = new DamageSystem(this, view, transform);
         }
 
         private void Update()

@@ -8,7 +8,6 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
     {
         [SerializeField] private MoneyBuildModel model;
         [SerializeField] private MoneyBuildingView view;
-        [SerializeField] private HealthBarView healthBarView;
         
         private MoneyController moneyController;
         
@@ -20,9 +19,9 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
             moneyController = new MoneyController(model, view);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            healthBarView.UpdateView();
+            view.UpdateHealthBar(model.currentHealth, model.maxHealth);
         }
     }
 }

@@ -12,9 +12,7 @@ GameObject:
   - component: {fileID: 7851637115227594051}
   - component: {fileID: 7345799183981944055}
   - component: {fileID: 8089973434820199287}
-  - component: {fileID: 1296406792533908343}
   - component: {fileID: 3108341575151675289}
-  - component: {fileID: 6657602239902096814}
   - component: {fileID: 451571340384055363}
   m_Layer: 0
   m_Name: MeleeFriendBuild
@@ -111,31 +109,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1296406792533908343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1353225968917812093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfb48cb385004f0c92826c59a3e66dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objRenderer: {fileID: 7345799183981944055}
-  currentLevel: 1
-  <WarSide>k__BackingField: 0
-  <MaxHealth>k__BackingField: 500
-  <CurrentHealth>k__BackingField: 500
-  unitType: 0
-  countUnits: 4
-  buildUnitPositions:
-  - {fileID: 2444088782556222454}
-  - {fileID: 2688157222307622312}
-  - {fileID: 5156740394820285834}
-  - {fileID: 311033272980556779}
-  buildUnits: []
 --- !u!114 &3108341575151675289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,20 +121,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d530c249e5cd4e19b6a03fa3cfea2dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model:
+    objRenderer: {fileID: 0}
+    currentLevel: 0
+    warSide: 0
+    maxHealth: 500
+    currentHealth: 500
+    unitType: 0
+    countUnits: 0
+    buildUnitPositions: []
+    buildUnits: []
   healthBarView: {fileID: 451571340384055363}
---- !u!114 &6657602239902096814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1353225968917812093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fc958e7da20412d9c1c188de348cc04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 1296406792533908343}
 --- !u!114 &451571340384055363
 MonoBehaviour:
   m_ObjectHideFlags: 0

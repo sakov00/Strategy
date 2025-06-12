@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa0fd45327b4f13ac8ffeeac655e068, type: 3}
   m_Name: UnitPrefabConfig
   m_EditorClassIdentifier: 
-  meleeFriendPrefab: {fileID: 3864252111466100407, guid: 540e1a8d322178847a3e3f10f3cd8f44,
+  meleeFriendPrefab: {fileID: 1300454423953340342, guid: 540e1a8d322178847a3e3f10f3cd8f44,
     type: 3}
-  distanceFriendPrefab: {fileID: 3584474600642908172, guid: 28dc6e094cf31fa4bade2478c744ced6,
+  distanceFriendPrefab: {fileID: 7271819039594461265, guid: 28dc6e094cf31fa4bade2478c744ced6,
     type: 3}
-  meleeEnemyPrefab: {fileID: 6254456157165669760, guid: 27682a56f64791f498aa7a12dcf0af1f,
+  meleeEnemyPrefab: {fileID: 5308742078515047453, guid: 27682a56f64791f498aa7a12dcf0af1f,
     type: 3}
-  distanceEnemyPrefab: {fileID: 2977429261976075454, guid: f08c4e2abd47fac409905273348aa11e,
+  distanceEnemyPrefab: {fileID: 1636366110536653870, guid: f08c4e2abd47fac409905273348aa11e,
     type: 3}
-  playerPrefab: {fileID: 5246126235389141806, guid: 08a642a0595c20d4180778ff6bb8d4eb,
+  playerPrefab: {fileID: 727004643926444983, guid: 08a642a0595c20d4180778ff6bb8d4eb,
     type: 3}
   cameraPrefab: {fileID: 7117987020925613718, guid: c8f0af405673c4141a943c83fcbe24e6,
     type: 3}

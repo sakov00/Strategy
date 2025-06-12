@@ -18,7 +18,7 @@ namespace _Project.Scripts._GlobalLogic
             GlobalObjects.GameData.gameWindow = gameWindow;
             
             var player = friendFactory.CreatePlayer(new Vector3(50, 10, 50));
-            GlobalObjects.OneCamera.target = player.transform;
+            GlobalObjects.CameraFollow.target = player.transform;
         }
     }
 }

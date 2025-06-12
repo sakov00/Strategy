@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 4644896214771048953}
-  oneCamera: {fileID: 4101682023423107873}
+  cameraFollow: {fileID: 4101682023423107873}
   lunarConsole: {fileID: 4043550889119453143}
 --- !u!1 &5245423409190473334
 GameObject:
@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aaf807ad4ad4f12b2c9c36f0c14a56f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameWindow: {fileID: 0}
 --- !u!1001 &6495370894072993207
 PrefabInstance:
   m_ObjectHideFlags: 0

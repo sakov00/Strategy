@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c37846a98243adba2b7631d8bc2944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerModel:
+  model:
     moveSpeed: 10
     rotationSpeed: 10
     gravity: -20
@@ -381,11 +381,12 @@ MonoBehaviour:
     delayAttack: 1
     detectionRadius: 20
     typeAttack: 1
-  playerView:
-    <ProjectilePrefab>k__BackingField: {fileID: 0}
-    <FirePoint>k__BackingField: {fileID: 0}
+  view:
+    <ProjectilePrefab>k__BackingField: {fileID: 1232302952673697347, guid: aa49d42f2d1b0c240bb410973318b223,
+      type: 3}
+    <FirePoint>k__BackingField: {fileID: 3287887312038049354}
     <ProjectileSpeed>k__BackingField: 10
-    characterController: {fileID: 0}
+    characterController: {fileID: 7322175163735070510}
   healthBarView: {fileID: 8948965394392875503}
 --- !u!114 &8948965394392875503
 MonoBehaviour:

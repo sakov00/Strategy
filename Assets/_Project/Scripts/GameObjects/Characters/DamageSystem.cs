@@ -30,6 +30,8 @@ namespace _Project.Scripts.GameObjects.Characters
             if (Time.time - lastAttackTime < fightObject.DelayAttack)
                 return;
 
+            
+            
             if (fightObject.TypeAttack == TypeAttack.Melee)
                 MeleeAttack();
             if (fightObject.TypeAttack == TypeAttack.Distance)

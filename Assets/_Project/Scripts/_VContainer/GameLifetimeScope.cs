@@ -29,11 +29,10 @@ namespace _Project.Scripts._VContainer
             
             builder.Register<InitializeGame>(Lifetime.Singleton).As<InitializeGame, IStartable>();
             
-            
             RegisterFactories(builder);
             RegisterSO(builder);
         }
-
+        
         private void RegisterFactories(IContainerBuilder builder)
         {
             builder.Register<WindowFactory>(Lifetime.Singleton).AsSelf();
