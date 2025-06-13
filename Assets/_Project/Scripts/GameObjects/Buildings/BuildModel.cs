@@ -6,7 +6,7 @@ using UnityEngine;
 namespace _Project.Scripts.GameObjects
 {
     [Serializable]
-    public class BuildModel
+    public class BuildModel : IHealthModel
     {
         [Header("Render")]
         [SerializeField] public Renderer objRenderer;
@@ -18,5 +18,14 @@ namespace _Project.Scripts.GameObjects
         public WarSide warSide;
         public float maxHealth = 500f;
         public float currentHealth = 500f;
+        
+        public Transform Transform { get; set; }
+        public WarSide WarSide => warSide;
+        public float MaxHealth => maxHealth;
+        public float CurrentHealth
+        {
+            get => currentHealth;
+            set => currentHealth = Mathf.Clamp(value, 0, maxHealth);
+        }
     }
 }

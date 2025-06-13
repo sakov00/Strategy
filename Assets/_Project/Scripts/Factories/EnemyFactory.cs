@@ -28,7 +28,7 @@ namespace _Project.Scripts.Factories
             }
             
             enemyController.SetNoAimPosition(noAimPosition);
-            GlobalObjects.GameData.allDamagables.Add(enemyController);
+            GlobalObjects.GameData.allDamagables.Add(enemyController.Model);
             return enemyController;
         }
 

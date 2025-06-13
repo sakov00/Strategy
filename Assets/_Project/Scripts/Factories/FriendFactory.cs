@@ -16,20 +16,20 @@ namespace _Project.Scripts.Factories
         
         public UnitController CreateFriendUnit(FriendUnitType unitType, Vector3 position, Quaternion rotation = default)
         {
-            UnitController friendModel;
+            UnitController friendContoller;
             switch (unitType)
             {
                 case FriendUnitType.SimpleMelee:
-                    friendModel = CreateMeleeFriend(position, rotation);
+                    friendContoller = CreateMeleeFriend(position, rotation);
                     break;
                 case FriendUnitType.SimpleDistance:
-                    friendModel = CreateDistanceFriend(position, rotation);
+                    friendContoller = CreateDistanceFriend(position, rotation);
                     break;
                 default: return null;
             }
             
-            GlobalObjects.GameData.allDamagables.Add(friendModel);
-            return friendModel;
+            GlobalObjects.GameData.allDamagables.Add(friendContoller.Model);
+            return friendContoller;
         }
 
         private UnitController CreateMeleeFriend(Vector3 position, Quaternion rotation)
@@ -44,9 +44,9 @@ namespace _Project.Scripts.Factories
 
         public PlayerController CreatePlayer(Vector3 position, Quaternion rotation = default)
         {
-            var playerModel = resolver.Instantiate(unitPrefabConfig.playerPrefab, position, rotation);
-            GlobalObjects.GameData.allDamagables.Add(playerModel);
-            return playerModel;
+            var playerController = resolver.Instantiate(unitPrefabConfig.playerPrefab, position, rotation);
+            GlobalObjects.GameData.allDamagables.Add(playerController.Model);
+            return playerController;
         }
     }
 }

@@ -28,12 +28,12 @@ namespace _Project.Scripts.GameObjects.Characters.Player
             if (move.magnitude > 0f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(move);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, playerModel.rotationSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, playerModel.RotationSpeed * Time.deltaTime);
             }
             
-            playerView.characterController.Move(move * playerModel.moveSpeed * Time.deltaTime);
+            playerView.characterController.Move(move * playerModel.MoveSpeed * Time.deltaTime);
 
-            velocity.y += playerModel.gravity * Time.deltaTime;
+            velocity.y += playerModel.Gravity * Time.deltaTime;
             playerView.characterController.Move(velocity * Time.deltaTime);
         }
     }

@@ -1,11 +1,11 @@
 using System;
+using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.Interfaces.View;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Characters
 {
-    [Serializable]
-    public class CharacterView : IProjectTileView
+    public class CharacterView : ObjectView, IAttackableView
     {
         private static readonly int IsWalking = Animator.StringToHash("IsWalking");
         private static readonly int IsAttack = Animator.StringToHash("IsAttack");
@@ -15,21 +15,32 @@ namespace _Project.Scripts.GameObjects.Characters
         [field:SerializeField] public Transform FirePoint { get; set; }
         [field:SerializeField] public float ProjectileSpeed { get; set; } = 10f;
         
+        public event Action AttackHitEvent;
+        
         public void SetWalking(bool isWalking)
         {
+            if(animator == null)
+                return;
+            
             ResetAnimations();
-            animator.SetBool(IsWalking, isWalking);
         }
         
         public void SetAttack(bool isAttacking)
         {
+            if(animator == null)
+                return;
+            
             ResetAnimations();
             animator.SetBool(IsAttack, isAttacking);
+        }
+        
+        public void OnAttackHit()
+        {
+            AttackHitEvent?.Invoke();
         }
 
         private void ResetAnimations()
         {
-            animator.SetBool(IsWalking, false);
             animator.SetBool(IsAttack, false);
         }
     }

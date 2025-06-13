@@ -1,81 +1,95 @@
+using System;
+using System.Collections;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Extentions;
 using _Project.Scripts.GameObjects.Projectiles;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Interfaces.View;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace _Project.Scripts.GameObjects.Characters
 {
     public class DamageSystem
     {
-        private readonly IFightObject fightObject;
-        private readonly IProjectTileView projectTileView;
+        private readonly IFightObjectModel fightObjectModel;
+        private readonly IAttackableView attackableView;
         private readonly Transform transform;
+        
         private float lastAttackTime = -Mathf.Infinity;
+        private Coroutine attackCoroutine;
 
-        public DamageSystem(IFightObject fightObject, IProjectTileView projectTileView, Transform transform)
+        public DamageSystem(IFightObjectModel fightObjectModel, IAttackableView attackableView, Transform transform)
         {
-            this.fightObject = fightObject;
-            this.projectTileView = projectTileView;
+            this.fightObjectModel = fightObjectModel;
+            this.attackableView = attackableView;
             this.transform = transform;
+
+            if (fightObjectModel.TypeAttack == TypeAttack.Melee)
+            {
+                attackableView.AttackHitEvent += MeleeAttack;
+            }
         }
 
         public void Attack()
         {
-            if (fightObject.AimCharacter == null || fightObject.AimCharacter.Equals(null))
+            if (fightObjectModel.AimCharacter == null || fightObjectModel.AimCharacter.Equals(null))
                 return;
             
-            if (Time.time - lastAttackTime < fightObject.DelayAttack)
+            if (Time.time - lastAttackTime < fightObjectModel.AllAnimAttackTime)
                 return;
-
             
+            var distance = PositionExtention.GetDistanceBetweenObjects(transform, fightObjectModel.AimCharacter.Transform);
+            if (distance > fightObjectModel.AttackRange)
+            {
+                attackableView.SetWalking(true);
+                return;
+            }
             
-            if (fightObject.TypeAttack == TypeAttack.Melee)
-                MeleeAttack();
-            if (fightObject.TypeAttack == TypeAttack.Distance)
+            lastAttackTime = Time.time;
+            
+            attackableView.SetAttack(true);
+            
+            if (fightObjectModel.TypeAttack == TypeAttack.Distance)
                 DistanceAttack();
         }
 
         private void MeleeAttack()
         {
-            var distance =
-                PositionExtention.GetDistanceBetweenObjects(transform, fightObject.AimCharacter.Transform);
-            if (distance <= fightObject.AttackRange)
+            var distance = PositionExtention.GetDistanceBetweenObjects(transform, fightObjectModel.AimCharacter.Transform);
+            if (distance > fightObjectModel.AttackRange)
             {
-                lastAttackTime = Time.time;
-                fightObject.AimCharacter.CurrentHealth -= fightObject.DamageAmount;
-                if (fightObject.AimCharacter.CurrentHealth <= 0)
-                {
-                    GlobalObjects.GameData.allDamagables.Remove(fightObject.AimCharacter);
-                    Object.Destroy(fightObject.AimCharacter.Transform.gameObject);
-                }
+                attackableView.SetWalking(true);
+                return;
+            }
+            
+            fightObjectModel.AimCharacter.CurrentHealth -= fightObjectModel.DamageAmount;
+            if (fightObjectModel.AimCharacter.CurrentHealth <= 0)
+            {
+                GlobalObjects.GameData.allDamagables.Remove(fightObjectModel.AimCharacter);
+                Object.Destroy(fightObjectModel.AimCharacter.Transform.gameObject);
             }
         }
         
         private void DistanceAttack()
         {
-            var distance = Vector3.Distance(transform.position, fightObject.AimCharacter.Transform.position);
-            if (distance <= fightObject.AttackRange)
-            {
-                lastAttackTime = Time.time;
-                ShootProjectile();
-            }
+            ShootProjectile();
         }
         
         private void ShootProjectile()
         {
-            if (projectTileView.ProjectilePrefab == null || projectTileView.FirePoint == null || fightObject.AimCharacter == null)
+            if (attackableView.ProjectilePrefab == null || attackableView.FirePoint == null || fightObjectModel.AimCharacter == null)
                 return;
 
-            GameObject projectile = Object.Instantiate(projectTileView.ProjectilePrefab, projectTileView.FirePoint.position, Quaternion.identity);
+            GameObject projectile = Object.Instantiate(attackableView.ProjectilePrefab, attackableView.FirePoint.position, Quaternion.identity);
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             if (rb == null)
                 return;
 
-            var velocity = CalculateBallisticVelocityVector(projectTileView.FirePoint.position, 
-                fightObject.AimCharacter.Transform.position, projectTileView.ProjectileSpeed);
+            var velocity = CalculateBallisticVelocityVector(attackableView.FirePoint.position, 
+                fightObjectModel.AimCharacter.Transform.position, attackableView.ProjectileSpeed);
             if (velocity.HasValue)
             {
                 rb.useGravity = true;
@@ -84,8 +98,8 @@ namespace _Project.Scripts.GameObjects.Characters
                 var damageComponent = projectile.GetComponent<Projectile>();
                 if (damageComponent != null)
                 {
-                    damageComponent.damage = fightObject.DamageAmount;
-                    damageComponent.ownerWarSide = fightObject.WarSide;
+                    damageComponent.damage = fightObjectModel.DamageAmount;
+                    damageComponent.ownerWarSide = fightObjectModel.WarSide;
                 }
             }
             else

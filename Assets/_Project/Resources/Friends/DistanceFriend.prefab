@@ -97,7 +97,6 @@ GameObject:
   - component: {fileID: 253004234346408404}
   - component: {fileID: 8760214948618722432}
   - component: {fileID: 7271819039594461265}
-  - component: {fileID: 7191396305288243631}
   m_Layer: 0
   m_Name: DistanceFriend
   m_TagString: Untagged
@@ -230,20 +229,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4cd115d4324231b941fb37c7a81614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarView: {fileID: 7191396305288243631}
---- !u!114 &7191396305288243631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5556611430182395226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5df5e78b9bf418bb8706f5284bd1edb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBarRenderer: {fileID: 3409585272852687059}
+  model:
+    warSide: 0
+    maxHealth: 100
+    currentHealth: 100
+    moveSpeed: 10
+    rotationSpeed: 10
+    gravity: -20
+    attackRange: 10
+    damageAmount: 10
+    delayAttack: 1
+    detectionRadius: 20
+    typeAttack: 1
+    noAimPosition: {x: 0, y: 0, z: 0}
+  view:
+    healthBarRenderer: {fileID: 3409585272852687059}
+    animator: {fileID: 0}
+    <ProjectilePrefab>k__BackingField: {fileID: 1232302952673697347, guid: aa49d42f2d1b0c240bb410973318b223,
+      type: 3}
+    <FirePoint>k__BackingField: {fileID: 3946377445745853680}
+    <ProjectileSpeed>k__BackingField: 10
+    Agent: {fileID: 253004234346408404}
 --- !u!1 &8111565066530959347
 GameObject:
   m_ObjectHideFlags: 0

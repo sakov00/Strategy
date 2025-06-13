@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3052630911340187564}
   - component: {fileID: 5435124656432188814}
   - component: {fileID: 1300454423953340342}
-  - component: {fileID: 412062214044737953}
   m_Layer: 0
   m_Name: MeleeFriend
   m_TagString: Untagged
@@ -94,20 +93,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4cd115d4324231b941fb37c7a81614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarView: {fileID: 412062214044737953}
---- !u!114 &412062214044737953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2804439903886800851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5df5e78b9bf418bb8706f5284bd1edb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBarRenderer: {fileID: 351811317915167694}
+  model:
+    warSide: 0
+    maxHealth: 100
+    currentHealth: 100
+    moveSpeed: 10
+    rotationSpeed: 10
+    gravity: -20
+    attackRange: 1
+    damageAmount: 10
+    delayAttack: 1
+    detectionRadius: 20
+    typeAttack: 0
+    noAimPosition: {x: 0, y: 0, z: 0}
+  view:
+    healthBarRenderer: {fileID: 351811317915167694}
+    animator: {fileID: 0}
+    <ProjectilePrefab>k__BackingField: {fileID: 0}
+    <FirePoint>k__BackingField: {fileID: 0}
+    <ProjectileSpeed>k__BackingField: 10
+    Agent: {fileID: 5435124656432188814}
 --- !u!1001 &970481426546825546
 PrefabInstance:
   m_ObjectHideFlags: 0

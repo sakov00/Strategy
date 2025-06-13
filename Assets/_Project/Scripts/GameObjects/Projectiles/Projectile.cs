@@ -1,5 +1,6 @@
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
+using _Project.Scripts.GameObjects.Characters;
 using _Project.Scripts.Interfaces;
 using UnityEngine;
 
@@ -12,21 +13,21 @@ namespace _Project.Scripts.GameObjects.Projectiles
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.TryGetComponent<IDamagable>(out var target))
+            if (!other.TryGetComponent<ObjectController>(out var target))
             {
                 Destroy(gameObject);
                 return;
             }
 
-            if (target.WarSide == ownerWarSide)
+            if (target.Model.WarSide == ownerWarSide)
                 return;
 
-            target.CurrentHealth -= damage;
+            target.Model.CurrentHealth -= damage;
 
-            if (target.CurrentHealth <= 0)
+            if (target.Model.CurrentHealth <= 0)
             {
-                GlobalObjects.GameData.allDamagables.Remove(target);
-                Destroy(target.Transform.gameObject);
+                GlobalObjects.GameData.allDamagables.Remove(target.Model);
+                Destroy(target.Model.Transform.gameObject);
             }
 
             Destroy(gameObject); 

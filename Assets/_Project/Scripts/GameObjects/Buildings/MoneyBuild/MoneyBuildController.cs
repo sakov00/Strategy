@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.MoneyBuild
 {
-    [RequireComponent(typeof(HealthBarView))]
     public class MoneyBuildController : BuildController
     {
         [SerializeField] private MoneyBuildModel model;

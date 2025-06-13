@@ -261,26 +261,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4cd115d4324231b941fb37c7a81614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitModel:
-    moveSpeed: 10
-    rotationSpeed: 10
-    gravity: -20
+  model:
     warSide: 1
     maxHealth: 100
     currentHealth: 100
+    moveSpeed: 10
+    rotationSpeed: 10
+    gravity: -20
     attackRange: 10
     damageAmount: 10
     delayAttack: 1
     detectionRadius: 20
     typeAttack: 1
     noAimPosition: {x: 0, y: 0, z: 0}
-  unitView:
+  view:
+    healthBarRenderer: {fileID: 4711292958764631907}
+    animator: {fileID: 0}
     <ProjectilePrefab>k__BackingField: {fileID: 1232302952673697347, guid: aa49d42f2d1b0c240bb410973318b223,
       type: 3}
     <FirePoint>k__BackingField: {fileID: 86871489382306349}
     <ProjectileSpeed>k__BackingField: 10
     Agent: {fileID: 2012997922600741819}
-  healthBarView: {fileID: 5799922729322352150}
 --- !u!114 &5799922729322352150
 MonoBehaviour:
   m_ObjectHideFlags: 0

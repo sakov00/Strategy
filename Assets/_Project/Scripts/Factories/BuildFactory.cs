@@ -20,26 +20,26 @@ namespace _Project.Scripts.Factories
         
         public BuildController CreateBuild(TypeBuilding building, Vector3 position, Quaternion rotation)
         {
-            BuildController model;
+            BuildController buildController;
             switch (building)
             {
                 case TypeBuilding.MoneyBuilding:
-                    model = CreateMoneyBuilding(position, rotation);
+                    buildController = CreateMoneyBuilding(position, rotation);
                     break;
                 case TypeBuilding.TowerDefenseBuilding:
-                    model = CreateTowerDefenseBuilding(position, rotation);
+                    buildController = CreateTowerDefenseBuilding(position, rotation);
                     break;
                 case TypeBuilding.FriendMeleeBuilding:
-                    model = CreateMeleeFriendBuilding(position, rotation);
+                    buildController = CreateMeleeFriendBuilding(position, rotation);
                     break;
                 case TypeBuilding.FriendDistanceBuilding:
-                    model = CreateDistanceFriendBuilding(position, rotation);
+                    buildController = CreateDistanceFriendBuilding(position, rotation);
                     break;
                 default: return null;
             }
             
-            GlobalObjects.GameData.allDamagables.Add(model);
-            return model;
+            GlobalObjects.GameData.allDamagables.Add(buildController.BuildModel);
+            return buildController;
         }
 
         private BuildController CreateMoneyBuilding(Vector3 position, Quaternion rotation)

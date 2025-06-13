@@ -6,7 +6,6 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.FriendsBuild
 {
-    [RequireComponent(typeof(HealthBarView))]
     public class FriendsBuildController : BuildController
     {
         [Inject] private FriendFactory friendFactory;

@@ -6,25 +6,17 @@ using UnityEngine;
 
 namespace _Project.Scripts.GameObjects
 {
-    public class CharacterSimpleController : MonoBehaviour, IUpgradable, IDamagable
+    public class CharacterSimpleController : ObjectController
     {
         protected CharacterModel CharacterModel;
         protected CharacterView CharacterView;
-        
-        public int CurrentLevel { get; set; }
-        
-        public Transform Transform => transform;
-        public WarSide WarSide => CharacterModel.warSide;
-        public float MaxHealth => CharacterModel.maxHealth;
-        public float CurrentHealth
-        {
-            get => CharacterModel.currentHealth;
-            set => CharacterModel.currentHealth = value;
-        }
 
-        private void Awake()
+        protected override void Initialize()
         {
-            CharacterView.SetWalking(true);
+            Model = CharacterModel;
+            View = CharacterView;
+            CharacterView?.SetWalking(true);
+            base.Initialize();
         }
     }
 }

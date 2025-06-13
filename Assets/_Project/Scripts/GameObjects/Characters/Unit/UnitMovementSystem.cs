@@ -28,7 +28,7 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
             }
   
             var distance = PositionExtention.GetDistanceBetweenObjects(transform, unitModel.AimCharacter.Transform);
-            unitView.Agent.isStopped = distance < unitModel.attackRange;
+            unitView.Agent.isStopped = distance < unitModel.AttackRange;
             unitView.Agent.SetDestination(unitModel.AimCharacter.Transform.position);
         }
     }

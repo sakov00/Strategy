@@ -8,57 +8,25 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Characters.Player
 {
-    [RequireComponent(typeof(HealthBarView))]
-    public class PlayerController : CharacterSimpleController, IFightObject
+    public class PlayerController : CharacterSimpleController
     {
         [SerializeField] private PlayerModel model;
         [SerializeField] private PlayerView view;
-        [SerializeField] private HealthBarView healthBarView;
         
         private PlayerMovementSystem playerMovementSystem;
         private DetectionAim detectionAim;
         private DamageSystem damageSystem;
-        
-        public float AttackRange
-        {
-            get => model.attackRange;
-            set => model.attackRange = value;
-        }
-        public int DamageAmount         
-        {
-            get => model.damageAmount;
-            set => model.damageAmount = value;
-        }
-        public float DelayAttack
-        {
-            get => model.delayAttack;
-            set => model.delayAttack = value;
-        }
-        public float DetectionRadius        
-        {
-            get => model.detectionRadius;
-            set => model.detectionRadius = value;
-        }
-        public TypeAttack TypeAttack
-        {
-            get => model.typeAttack;
-            set => model.typeAttack = value;
-        }
-        
-        public IDamagable AimCharacter
-        {
-            get => model.AimCharacter;
-            set => model.AimCharacter = value;
-        }
 
-        private void Awake()
+        protected override void Initialize()
         {
             CharacterModel = model;
             CharacterView = view;
             
             playerMovementSystem = new PlayerMovementSystem(model, view, transform);
-            detectionAim = new DetectionAim(this, transform);
-            damageSystem = new DamageSystem(this, view, transform);
+            detectionAim = new DetectionAim(model, transform);
+            damageSystem = new DamageSystem(model, view, transform);
+            
+            base.Initialize();
         }
 
         private void Update()
@@ -69,9 +37,13 @@ namespace _Project.Scripts.GameObjects.Characters.Player
                 GlobalObjects.GameData.gameWindow.joystick.Direction.y);
             
             playerMovementSystem.MoveTo(inputVector);
+        }
+        
+        protected override void FixedUpdate()
+        {
+            base.FixedUpdate();
             detectionAim.DetectAim();
             damageSystem.Attack();
-            healthBarView.UpdateView();
         }
     }
 }
