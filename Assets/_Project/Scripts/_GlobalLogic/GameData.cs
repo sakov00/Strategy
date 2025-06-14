@@ -5,13 +5,14 @@ using _Project.Scripts.Interfaces;
 using _Project.Scripts.SpawnPoints;
 using _Project.Scripts.Windows;
 using LunarConsolePlugin;
+using UniRx;
 using UnityEngine;
 
 namespace _Project.Scripts._GlobalLogic
 {
     public class GameData : MonoBehaviour
     {
-        [SerializeField] public List<IHealthModel> allDamagables = new();
+        [SerializeField] public ReactiveCollection<IHealthModel> allDamagables = new();
         [SerializeField] public LevelData levelData = new();
         
         [SerializeField] public List<SpawnPoint> spawnPoints;
