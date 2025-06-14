@@ -58,6 +58,12 @@ namespace _Project.Scripts.GameObjects.Characters
 
         private void MeleeAttack()
         {
+            if (fightObjectModel.AimCharacter == null)
+            {
+                attackableView.SetWalking(true);
+                return;
+            }
+
             var distance = PositionExtention.GetDistanceBetweenObjects(transform, fightObjectModel.AimCharacter.Transform);
             if (distance > fightObjectModel.AttackRange)
             {

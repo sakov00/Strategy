@@ -6,7 +6,8 @@ namespace _Project.Scripts.GameObjects._General
 {
     public class ObjectView : MonoBehaviour
     {
-        [SerializeField] private MeshRenderer healthBarRenderer;
+        [SerializeField] protected MeshRenderer healthBarRenderer;
+        [SerializeField] public Renderer objRenderer;
         
         private MaterialPropertyBlock matBlock;
 

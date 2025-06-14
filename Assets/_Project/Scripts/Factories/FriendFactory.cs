@@ -14,7 +14,7 @@ namespace _Project.Scripts.Factories
         [Inject] private IObjectResolver resolver;
         [Inject] private UnitPrefabConfig unitPrefabConfig;
         
-        public UnitController CreateFriendUnit(FriendUnitType unitType, Vector3 position, Quaternion rotation = default)
+        public UnitController CreateFriendUnit(FriendUnitType unitType, Vector3 position, Vector3 noAimPosition, Quaternion rotation = default)
         {
             UnitController friendContoller;
             switch (unitType)
@@ -27,7 +27,7 @@ namespace _Project.Scripts.Factories
                     break;
                 default: return null;
             }
-            
+            friendContoller.SetNoAimPosition(noAimPosition);
             GlobalObjects.GameData.allDamagables.Add(friendContoller.Model);
             return friendContoller;
         }

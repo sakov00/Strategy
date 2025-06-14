@@ -1,31 +1,21 @@
 using System;
 using _Project.Scripts.Enums;
+using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.Interfaces;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects
 {
     [Serializable]
-    public class BuildModel : IHealthModel
+    public class BuildModel : ObjectModel, IUpgradableModel
     {
-        [Header("Render")]
-        [SerializeField] public Renderer objRenderer;
-
         [Header("Upgrades")] 
-        public int currentLevel;
+        [SerializeField] private int currentLevel = 1;
 
-        [Header("Health")] 
-        public WarSide warSide;
-        public float maxHealth = 500f;
-        public float currentHealth = 500f;
-        
-        public Transform Transform { get; set; }
-        public WarSide WarSide => warSide;
-        public float MaxHealth => maxHealth;
-        public float CurrentHealth
+        public int CurrentLevel
         {
-            get => currentHealth;
-            set => currentHealth = Mathf.Clamp(value, 0, maxHealth);
+            get => currentLevel;
+            set => currentLevel = value;
         }
     }
 }

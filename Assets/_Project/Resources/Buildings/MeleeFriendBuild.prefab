@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7345799183981944055}
   - component: {fileID: 8089973434820199287}
   - component: {fileID: 3108341575151675289}
-  - component: {fileID: 451571340384055363}
+  - component: {fileID: 4564933277160738802}
   m_Layer: 0
   m_Name: MeleeFriendBuild
   m_TagString: Untagged
@@ -122,17 +122,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model:
-    objRenderer: {fileID: 0}
-    currentLevel: 0
     warSide: 0
     maxHealth: 500
     currentHealth: 500
     unitType: 0
-    countUnits: 0
-    buildUnitPositions: []
+    countUnits: 4
     buildUnits: []
-  healthBarView: {fileID: 451571340384055363}
---- !u!114 &451571340384055363
+  view: {fileID: 4564933277160738802}
+--- !u!114 &4564933277160738802
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,10 +138,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1353225968917812093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5df5e78b9bf418bb8706f5284bd1edb, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e97158bbbc74febbc410ce76f278621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarRenderer: {fileID: 258629854618691048}
+  objRenderer: {fileID: 7345799183981944055}
+  buildUnitPositions:
+  - {fileID: 2444088782556222454}
+  - {fileID: 2688157222307622312}
+  - {fileID: 5156740394820285834}
+  - {fileID: 311033272980556779}
 --- !u!1 &2182354429150069029
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
 
         private void AddMoneyToPlayer()
         {
-            var moneyAmount = moneyBuildModel.addMoneyValue * moneyBuildModel.currentLevel;
+            var moneyAmount = moneyBuildModel.addMoneyValue * moneyBuildModel.CurrentLevel;
             GlobalObjects.GameData.levelData.Money += moneyAmount;
             moneyBuildingView.MoneyUp(moneyAmount);
         }

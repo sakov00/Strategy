@@ -24,20 +24,20 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             if(other.GetComponent<PlayerController>() == null)
                 return;
             
-            // if (buildingZoneModel.createdBuild == null)
-            // {
-            //     buildingZoneModel.createdBuild = 
-            //         buildFactory.CreateBuild(buildingZoneModel.typeBuilding, transform.position, Quaternion.identity);
-            //     var newPosition = new Vector3(
-            //         transform.position.x,
-            //         buildingZoneModel.createdBuild.objRenderer.bounds.size.y/2,
-            //         transform.position.z);
-            //     buildingZoneModel.createdBuild.transform.position = newPosition;
-            // }
-            // else
-            // {
-            //     buildingZoneModel.createdBuild.currentLevel++;
-            // }
+            if (buildingZoneModel.createdBuild == null)
+            {
+                buildingZoneModel.createdBuild = 
+                    buildFactory.CreateBuild(buildingZoneModel.typeBuilding, transform.position, Quaternion.identity);
+                var newPosition = new Vector3(
+                    transform.position.x,
+                    buildingZoneModel.createdBuild.View.objRenderer.bounds.size.y/2,
+                    transform.position.z);
+                buildingZoneModel.createdBuild.transform.position = newPosition;
+            }
+            else
+            {
+                buildingZoneModel.createdBuild.BuildModel.CurrentLevel++;
+            }
         }
         
         private void OnTriggerExit(Collider other)

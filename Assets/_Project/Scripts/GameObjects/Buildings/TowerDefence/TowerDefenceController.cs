@@ -13,18 +13,21 @@ namespace _Project.Scripts.GameObjects.TowerDefence
         
         private DetectionAim detectionAim;
         private DamageSystem damageSystem;
-        
-        private void Awake()
+
+        protected override void Initialize()
         {
             BuildModel = model;
             BuildView = view;
             
             detectionAim = new DetectionAim(model, transform);
             damageSystem = new DamageSystem(model, view, transform);
+            
+            base.Initialize();
         }
 
-        private void FixedUpdate()
+        protected override void FixedUpdate()
         {            
+            base.FixedUpdate();
             detectionAim.DetectAim();
             damageSystem.Attack();
         }

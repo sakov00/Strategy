@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6723468173963196906}
   - component: {fileID: 4325884475614545362}
   - component: {fileID: 2290805021666337803}
-  - component: {fileID: 4555808668858142832}
+  - component: {fileID: 4059478537406520134}
   m_Layer: 0
   m_Name: TowerDefence
   m_TagString: Untagged
@@ -121,23 +121,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705c1891a90d49f6b2ca8f92240ba879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerDefenceModel:
-    objRenderer: {fileID: 0}
-    currentLevel: 0
+  model:
     warSide: 0
-    maxHealth: 500
-    currentHealth: 500
+    maxHealth: 100
+    currentHealth: 100
     attackRange: 20
     damageAmount: 10
-    delayAttack: 1
+    allAnimAttackTime: 1
+    animAttackTime: 1
     detectionRadius: 20
     typeAttack: 1
-  towerDefenceView:
-    <ProjectilePrefab>k__BackingField: {fileID: 0}
-    <FirePoint>k__BackingField: {fileID: 0}
-    <ProjectileSpeed>k__BackingField: 10
-  healthBarView: {fileID: 4555808668858142832}
---- !u!114 &4555808668858142832
+  view: {fileID: 4059478537406520134}
+--- !u!114 &4059478537406520134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,10 +141,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 989450151262154562}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5df5e78b9bf418bb8706f5284bd1edb, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a38f7c62afe4480882ce82b961de450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarRenderer: {fileID: 3279641296734555633}
+  objRenderer: {fileID: 6723468173963196906}
+  <ProjectilePrefab>k__BackingField: {fileID: 1232302952673697347, guid: f0afd34565e49fa49bae59ad57415f6f,
+    type: 3}
+  <FirePoint>k__BackingField: {fileID: 8486291038236301449}
+  <ProjectileSpeed>k__BackingField: 10
 --- !u!1 &5023808525692731617
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,22 +15,19 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
         
         private FriendsCreatorController friendsCreatorController;
         
-        private void Awake()
+        protected override void Initialize()
         {
             BuildModel = model;
             BuildView = view;
             
             friendsCreatorController = new FriendsCreatorController(friendFactory, model, view);
+
+            base.Initialize();
         }
 
         private void Start()
         {
             friendsCreatorController.CreateFriends();
-        }
-
-        private void FixedUpdate()
-        {
-            view.UpdateHealthBar(model.currentHealth, model.maxHealth);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace _Project.Scripts.GameObjects.Characters
         public void DetectAim()
         {
             IHealthModel nearestTarget = null;
-            var nearestDistanceSqr = float.MaxValue;
+            var nearestDistanceSqr = fightObjectModel.DetectionRadius;
 
             foreach (var damagable in GlobalObjects.GameData.allDamagables)
             {

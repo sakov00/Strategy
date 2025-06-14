@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
@@ -7,14 +6,14 @@ using _Project.Scripts.Factories;
 using UnityEngine;
 using VContainer;
 
-namespace _Project.Scripts.SpawnPoint
+namespace _Project.Scripts.SpawnPoints
 {
     public class SpawnPoint : MonoBehaviour
     {
         [Inject] private EnemyFactory enemyFactory;
         
         [SerializeField] private float spawnRadius = 5f;
-        [SerializeField] private List<EnemyUnitType> enemyList = new();
+        [SerializeField] private List<EnemyGroup> roundEnemyList = new();
         
         private Queue<EnemyUnitType> spawnQueue;
         
@@ -24,12 +23,13 @@ namespace _Project.Scripts.SpawnPoint
         private void Start()
         {
             InjectManager.Inject(this);
-            StartSpawn();
+            GlobalObjects.GameData.spawnPoints.Add(this);
         }
 
         public void StartSpawn()
         {
-            spawnQueue = new Queue<EnemyUnitType>(enemyList);
+            spawnQueue = new Queue<EnemyUnitType>(roundEnemyList[GlobalObjects.GameData.currentRound].enemies);
+            
             GameTimer.Instance.OnEverySecond -= SpawnEnemy;
             GameTimer.Instance.OnEverySecond += SpawnEnemy;
         }
@@ -54,5 +54,11 @@ namespace _Project.Scripts.SpawnPoint
         {
             GameTimer.Instance.OnEverySecond -= SpawnEnemy;
         }
+    }
+    
+    [System.Serializable]
+    public class EnemyGroup
+    {
+        public List<EnemyUnitType> enemies;
     }
 }

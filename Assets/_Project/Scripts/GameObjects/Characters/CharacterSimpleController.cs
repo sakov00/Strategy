@@ -1,15 +1,11 @@
-using System;
-using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects.Characters;
-using _Project.Scripts.Interfaces;
-using UnityEngine;
+using _Project.Scripts.GameObjects._General;
 
-namespace _Project.Scripts.GameObjects
+namespace _Project.Scripts.GameObjects.Characters
 {
-    public class CharacterSimpleController : ObjectController
+    public abstract class CharacterSimpleController : ObjectController
     {
-        protected CharacterModel CharacterModel;
-        protected CharacterView CharacterView;
+        public CharacterModel CharacterModel { get; protected set; }
+        public CharacterView CharacterView { get; protected set; }
 
         protected override void Initialize()
         {

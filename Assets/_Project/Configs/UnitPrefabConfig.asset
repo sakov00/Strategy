@@ -16,7 +16,7 @@ MonoBehaviour:
     type: 3}
   distanceFriendPrefab: {fileID: 7271819039594461265, guid: 28dc6e094cf31fa4bade2478c744ced6,
     type: 3}
-  meleeEnemyPrefab: {fileID: 5308742078515047453, guid: 27682a56f64791f498aa7a12dcf0af1f,
+  meleeEnemyPrefab: {fileID: 7054874310074094982, guid: 8b650d91bd11a004596abbbe366f51b1,
     type: 3}
   distanceEnemyPrefab: {fileID: 1636366110536653870, guid: f08c4e2abd47fac409905273348aa11e,
     type: 3}

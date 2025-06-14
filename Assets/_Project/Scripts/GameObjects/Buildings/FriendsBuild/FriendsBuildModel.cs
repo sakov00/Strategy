@@ -12,7 +12,6 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
     {
         [Header("Units")] 
         [SerializeField] public FriendUnitType unitType;
-        [SerializeField] public int countUnits;
         [SerializeField] public List<UnitController> buildUnits = new();
     }
 }

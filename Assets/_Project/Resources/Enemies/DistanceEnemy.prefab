@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 2012997922600741819}
   - component: {fileID: 1433012493515617970}
   - component: {fileID: 1636366110536653870}
-  - component: {fileID: 5799922729322352150}
+  - component: {fileID: 7604707806646909795}
   m_Layer: 0
   m_Name: DistanceEnemy
   m_TagString: Untagged
@@ -270,19 +270,13 @@ MonoBehaviour:
     gravity: -20
     attackRange: 10
     damageAmount: 10
-    delayAttack: 1
+    allAnimAttackTime: 1
+    animAttackTime: 1
     detectionRadius: 20
     typeAttack: 1
     noAimPosition: {x: 0, y: 0, z: 0}
-  view:
-    healthBarRenderer: {fileID: 4711292958764631907}
-    animator: {fileID: 0}
-    <ProjectilePrefab>k__BackingField: {fileID: 1232302952673697347, guid: aa49d42f2d1b0c240bb410973318b223,
-      type: 3}
-    <FirePoint>k__BackingField: {fileID: 86871489382306349}
-    <ProjectileSpeed>k__BackingField: 10
-    Agent: {fileID: 2012997922600741819}
---- !u!114 &5799922729322352150
+  view: {fileID: 7604707806646909795}
+--- !u!114 &7604707806646909795
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -291,10 +285,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7631332574630249688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5df5e78b9bf418bb8706f5284bd1edb, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f3859cff1c149118054c40c9538b54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarRenderer: {fileID: 4711292958764631907}
+  animator: {fileID: 0}
+  <ProjectilePrefab>k__BackingField: {fileID: 1232302952673697347, guid: aa49d42f2d1b0c240bb410973318b223,
+    type: 3}
+  <FirePoint>k__BackingField: {fileID: 86871489382306349}
+  <ProjectileSpeed>k__BackingField: 10
+  Agent: {fileID: 2012997922600741819}
 --- !u!1001 &5781901269744123042
 PrefabInstance:
   m_ObjectHideFlags: 0

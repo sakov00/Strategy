@@ -1,10 +1,8 @@
-using System;
-using _Project.Scripts.GameObjects._General;
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects.Characters
+namespace _Project.Scripts.GameObjects._General
 {
-    public class ObjectController : MonoBehaviour
+    public abstract class ObjectController : MonoBehaviour
     {
         public ObjectModel Model { get; protected set; }
         public ObjectView View { get; protected set; }

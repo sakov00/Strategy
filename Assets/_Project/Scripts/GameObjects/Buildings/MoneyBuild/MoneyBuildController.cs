@@ -10,17 +10,13 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
         
         private MoneyController moneyController;
         
-        private void Awake()
+        protected override void Initialize()
         {
             BuildModel = model;
             BuildView = view;
             
             moneyController = new MoneyController(model, view);
-        }
-
-        private void FixedUpdate()
-        {
-            view.UpdateHealthBar(model.currentHealth, model.maxHealth);
+            base.Initialize();
         }
     }
 }

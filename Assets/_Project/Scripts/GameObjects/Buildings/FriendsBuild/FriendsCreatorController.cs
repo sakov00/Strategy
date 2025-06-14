@@ -19,9 +19,10 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
 
         public void CreateFriends()
         {
-            for (int i = 0; i < model.countUnits; i++)
+            foreach (var friendUnit in view.buildUnitPositions)
             {
-                model.buildUnits.Add(friendFactory.CreateFriendUnit(model.unitType, view.buildUnitPositions[i].position));
+                model.buildUnits.Add(friendFactory.CreateFriendUnit(model.unitType, 
+                    friendUnit.position, friendUnit.position));
             }
         }
     }
