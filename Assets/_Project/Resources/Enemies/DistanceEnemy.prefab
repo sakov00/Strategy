@@ -289,11 +289,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarRenderer: {fileID: 4711292958764631907}
+  objRenderer: {fileID: 98599632233341954}
   animator: {fileID: 0}
   <ProjectilePrefab>k__BackingField: {fileID: 1232302952673697347, guid: aa49d42f2d1b0c240bb410973318b223,
     type: 3}
   <FirePoint>k__BackingField: {fileID: 86871489382306349}
-  <ProjectileSpeed>k__BackingField: 10
+  <ProjectileSpeed>k__BackingField: 30
   Agent: {fileID: 2012997922600741819}
 --- !u!1001 &5781901269744123042
 PrefabInstance:

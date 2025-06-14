@@ -263,7 +263,7 @@ MonoBehaviour:
   <ProjectilePrefab>k__BackingField: {fileID: 1232302952673697347, guid: aa49d42f2d1b0c240bb410973318b223,
     type: 3}
   <FirePoint>k__BackingField: {fileID: 3946377445745853680}
-  <ProjectileSpeed>k__BackingField: 10
+  <ProjectileSpeed>k__BackingField: 30
   Agent: {fileID: 253004234346408404}
 --- !u!1 &8111565066530959347
 GameObject:

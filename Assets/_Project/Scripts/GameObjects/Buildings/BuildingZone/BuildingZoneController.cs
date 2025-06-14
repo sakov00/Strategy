@@ -30,7 +30,7 @@ namespace _Project.Scripts.GameObjects.BuildingZone
                     buildFactory.CreateBuild(buildingZoneModel.typeBuilding, transform.position, Quaternion.identity);
                 var newPosition = new Vector3(
                     transform.position.x,
-                    buildingZoneModel.createdBuild.View.objRenderer.bounds.size.y/2,
+                    transform.position.y + buildingZoneModel.createdBuild.View.objRenderer.bounds.size.y/2,
                     transform.position.z);
                 buildingZoneModel.createdBuild.transform.position = newPosition;
             }

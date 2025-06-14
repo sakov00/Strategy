@@ -28,7 +28,7 @@ namespace _Project.Scripts.SpawnPoints
 
         public void StartSpawn()
         {
-            spawnQueue = new Queue<EnemyUnitType>(roundEnemyList[GlobalObjects.GameData.currentRound].enemies);
+            spawnQueue = new Queue<EnemyUnitType>(roundEnemyList[GlobalObjects.GameData.levelData.CurrentRound].enemies);
             
             GameTimer.Instance.OnEverySecond -= SpawnEnemy;
             GameTimer.Instance.OnEverySecond += SpawnEnemy;

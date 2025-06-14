@@ -220,6 +220,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2865682662467020708, guid: 944e80848bccbd64aba410d635ebf7c8,
         type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2865682662467020708, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: aed570118c613e04abc4c290e4a402c8, type: 2}
@@ -609,6 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarRenderer: {fileID: 1267406398184443593}
+  objRenderer: {fileID: 0}
   animator: {fileID: 5302487776187173605}
   <ProjectilePrefab>k__BackingField: {fileID: 0}
   <FirePoint>k__BackingField: {fileID: 0}

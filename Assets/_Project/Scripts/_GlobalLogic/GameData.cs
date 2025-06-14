@@ -15,7 +15,6 @@ namespace _Project.Scripts._GlobalLogic
         [SerializeField] public LevelData levelData = new();
         
         [SerializeField] public List<SpawnPoint> spawnPoints;
-        [SerializeField] public int currentRound;
         
         public GameWindow gameWindow;
     }

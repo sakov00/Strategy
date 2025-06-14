@@ -123,10 +123,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model:
     warSide: 0
-    maxHealth: 100
-    currentHealth: 100
+    maxHealth: 1000
+    currentHealth: 1000
+    currentLevel: 1
     attackRange: 20
-    damageAmount: 10
+    damageAmount: 50
     allAnimAttackTime: 1
     animAttackTime: 1
     detectionRadius: 20
