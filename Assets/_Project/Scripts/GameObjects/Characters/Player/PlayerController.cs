@@ -3,6 +3,7 @@ using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.Interfaces;
+using _Project.Scripts.Windows.Presenters;
 using UnityEngine;
 using VContainer;
 
@@ -10,12 +11,15 @@ namespace _Project.Scripts.GameObjects.Characters.Player
 {
     public class PlayerController : CharacterSimpleController
     {
+        [Inject] private GameWindowPresenter gameWindowPresenter;
+        
         [SerializeField] private PlayerModel model;
         [SerializeField] private PlayerView view;
         
         private PlayerMovementSystem playerMovementSystem;
         private DetectionAim detectionAim;
         private DamageSystem damageSystem;
+        
 
         protected override void Initialize()
         {
@@ -31,12 +35,7 @@ namespace _Project.Scripts.GameObjects.Characters.Player
 
         private void Update()
         {
-            var inputVector = new Vector3(
-                GlobalObjects.GameData.gameWindow.joystick.Direction.x,
-                0,
-                GlobalObjects.GameData.gameWindow.joystick.Direction.y);
-            
-            playerMovementSystem.MoveTo(inputVector);
+            playerMovementSystem.MoveTo(gameWindowPresenter.GetInputVector());
         }
         
         protected override void FixedUpdate()

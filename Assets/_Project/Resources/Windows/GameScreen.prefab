@@ -535,6 +535,7 @@ GameObject:
   - component: {fileID: 9021527711590414896}
   - component: {fileID: 6730330825431381875}
   - component: {fileID: 6642984544176430528}
+  - component: {fileID: 8954507623702955533}
   - component: {fileID: 9106743238255189466}
   m_Layer: 0
   m_Name: GameScreen
@@ -629,6 +630,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8954507623702955533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6348516472499966283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54279b69e5b84817b8541eb7e619dd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  view: {fileID: 9106743238255189466}
 --- !u!114 &9106743238255189466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,10 +655,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cba2e263fed43eb8b81e9e16f16864b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 6438448758408067909}
+  presenter: {fileID: 8954507623702955533}
   nextRoundButton: {fileID: 771048284349875591}
   moneyText: {fileID: 2409644265304561086}
   currentRoundText: {fileID: 5241397232031244199}
+  joystick: {fileID: 6438448758408067909}
 --- !u!1001 &2899122572628624708
 PrefabInstance:
   m_ObjectHideFlags: 0

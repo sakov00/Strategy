@@ -40,9 +40,9 @@ namespace _Project.Scripts.GameObjects._General
 
         private void HealthBarLookAtCamera() 
         {
-            if (GlobalObjects.CameraFollow.camera != null) 
+            if (GlobalObjects.OneCamera != null) 
             {
-                var camXform = GlobalObjects.CameraFollow.camera.transform;
+                var camXform = GlobalObjects.OneCamera.transform;
                 var forward = healthBarRenderer.transform.position - camXform.position;
                 forward.Normalize();
                 var up = Vector3.Cross(forward, camXform.right);

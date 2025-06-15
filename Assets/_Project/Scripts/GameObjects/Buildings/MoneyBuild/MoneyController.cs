@@ -1,4 +1,5 @@
 using _Project.Scripts._GlobalLogic;
+using _Project.Scripts.Windows.Presenters;
 
 namespace _Project.Scripts.GameObjects.MoneyBuild
 {
@@ -6,18 +7,20 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
     {
         private readonly MoneyBuildModel moneyBuildModel;
         private readonly MoneyBuildingView moneyBuildingView;
+        private readonly GameWindowPresenter gameWindowPresenter;
 
-        public MoneyController(MoneyBuildModel moneyBuildModel, MoneyBuildingView moneyBuildingView)
+        public MoneyController(MoneyBuildModel moneyBuildModel, MoneyBuildingView moneyBuildingView, GameWindowPresenter gameWindowPresenter)
         {
             this.moneyBuildModel = moneyBuildModel;
             this.moneyBuildingView = moneyBuildingView;
+            this.gameWindowPresenter = gameWindowPresenter;
             GameTimer.Instance.OnEverySecond += AddMoneyToPlayer;
         }
 
         private void AddMoneyToPlayer()
         {
             var moneyAmount = moneyBuildModel.addMoneyValue * moneyBuildModel.CurrentLevel;
-            GlobalObjects.GameData.levelData.Money += moneyAmount;
+            gameWindowPresenter.AddMoney(moneyAmount);
             moneyBuildingView.MoneyUp(moneyAmount);
         }
 

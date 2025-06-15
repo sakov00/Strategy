@@ -1,10 +1,10 @@
 using System;
 using UniRx;
 
-namespace _Project.Scripts.Data
+namespace _Project.Scripts.Windows.Models
 {
     [Serializable]
-    public class LevelData
+    public class GameWindowModel
     {
         private IntReactiveProperty currentRound = new (0);
         private IntReactiveProperty money = new(0);

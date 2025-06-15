@@ -417,7 +417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnRadius: 5
   roundEnemyList:
-  - enemies: 010000000100000001000000
+  - enemies: 000000000000000000000000
   - enemies: 00000000000000000000000000000000
   - enemies: 0000000000000000000000000000000000000000
   - enemies: 000000000000000000000000010000000100000001000000
@@ -1223,7 +1223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnRadius: 5
   roundEnemyList:
-  - enemies: 010000000100000001000000
+  - enemies: 000000000000000000000000
   - enemies: 00000000000000000000000000000000
   - enemies: 0000000000000000000000000000000000000000
   - enemies: 000000000000000000000000010000000100000001000000
@@ -1458,6 +1458,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GlobalObjects
       objectReference: {fileID: 0}
+    - target: {fileID: 6186282103008372570, guid: 9ea10d119dac0a94aa1cf4cd13d522d5,
+        type: 3}
+      propertyPath: oneCamera
+      value: 
+      objectReference: {fileID: 1915376442}
     - target: {fileID: 7504570818131509199, guid: 9ea10d119dac0a94aa1cf4cd13d522d5,
         type: 3}
       propertyPath: m_LocalPosition.x

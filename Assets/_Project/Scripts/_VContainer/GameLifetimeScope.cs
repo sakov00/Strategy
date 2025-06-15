@@ -7,6 +7,7 @@ using _Project.Scripts.GameObjects.FriendsBuild;
 using _Project.Scripts.GameObjects.MoneyBuild;
 using _Project.Scripts.GameObjects.TowerDefence;
 using _Project.Scripts.SO;
+using _Project.Scripts.Windows.Presenters;
 using Joystick_Pack.Scripts.Base;
 using UnityEngine;
 using VContainer;
@@ -29,8 +30,14 @@ namespace _Project.Scripts._VContainer
             
             builder.Register<InitializeGame>(Lifetime.Singleton).As<InitializeGame, IStartable>();
             
+            RegisterWindows(builder);
             RegisterFactories(builder);
             RegisterSO(builder);
+        }
+        
+        private void RegisterWindows(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInNewPrefab(windowsConfig.GameWindowPresenter, Lifetime.Singleton);
         }
         
         private void RegisterFactories(IContainerBuilder builder)

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 4644896214771048953}
-  cameraFollow: {fileID: 4101682023423107873}
+  oneCamera: {fileID: 8541052021403168177}
   lunarConsole: {fileID: 4043550889119453143}
 --- !u!1 &5245423409190473334
 GameObject:
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aaf807ad4ad4f12b2c9c36f0c14a56f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameWindow: {fileID: 0}
+  spawnPoints: []
 --- !u!1001 &6495370894072993207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -250,21 +250,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8f0af405673c4141a943c83fcbe24e6, type: 3}
---- !u!114 &4101682023423107873 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7117987020925613718, guid: c8f0af405673c4141a943c83fcbe24e6,
-    type: 3}
-  m_PrefabInstance: {fileID: 6495370894072993207}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a04b565dbd24160a8de0bd281f26497, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &5289860514453370997 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1390888215161499074, guid: c8f0af405673c4141a943c83fcbe24e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 6495370894072993207}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &8541052021403168177 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3216653039456745478, guid: c8f0af405673c4141a943c83fcbe24e6,
     type: 3}
   m_PrefabInstance: {fileID: 6495370894072993207}
   m_PrefabAsset: {fileID: 0}

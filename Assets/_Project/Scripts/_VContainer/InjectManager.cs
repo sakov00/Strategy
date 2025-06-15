@@ -6,33 +6,33 @@ namespace _Project.Scripts._VContainer
 {
     public class InjectManager
     {
-        private static IObjectResolver container;
+        private static IObjectResolver objectResolver;
         
-        public static void Initialize(IObjectResolver containerParam)
+        public static void Initialize(IObjectResolver objectResolverParam)
         {
-            container = containerParam;
+            objectResolver = objectResolverParam;
         }
 
         public static void Inject(object target)
         {
-            if (container == null)
+            if (objectResolver == null)
             {
                 Debug.LogError("InjectManager is not initialized.");
                 return;
             }
 
-            container.Inject(target);
+            objectResolver.Inject(target);
         }
 
         public static void InjectGameObject(GameObject gameObject)
         {
-            if (container == null)
+            if (objectResolver == null)
             {
                 Debug.LogError("InjectManager is not initialized.");
                 return;
             }
 
-            container.InjectGameObject(gameObject);
+            objectResolver.InjectGameObject(gameObject);
         }
     }
 }

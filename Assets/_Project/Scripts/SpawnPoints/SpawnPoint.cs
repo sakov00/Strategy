@@ -3,6 +3,7 @@ using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
+using _Project.Scripts.Windows.Presenters;
 using UnityEngine;
 using VContainer;
 
@@ -10,6 +11,7 @@ namespace _Project.Scripts.SpawnPoints
 {
     public class SpawnPoint : MonoBehaviour
     {
+        [Inject] private GameWindowPresenter gameWindowPresenter;
         [Inject] private EnemyFactory enemyFactory;
         
         [SerializeField] private float spawnRadius = 5f;
@@ -28,7 +30,7 @@ namespace _Project.Scripts.SpawnPoints
 
         public void StartSpawn()
         {
-            spawnQueue = new Queue<EnemyUnitType>(roundEnemyList[GlobalObjects.GameData.levelData.CurrentRound].enemies);
+            spawnQueue = new Queue<EnemyUnitType>(roundEnemyList[gameWindowPresenter.GetCurrentRound()].enemies);
             
             GameTimer.Instance.OnEverySecond -= SpawnEnemy;
             GameTimer.Instance.OnEverySecond += SpawnEnemy;

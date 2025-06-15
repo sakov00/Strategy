@@ -4,6 +4,7 @@ using _Project.Scripts.GameObjects.Characters.Player;
 using _Project.Scripts.GameObjects.Characters.Unit;
 using _Project.Scripts.SO;
 using _Project.Scripts.Windows;
+using _Project.Scripts.Windows.Presenters;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -16,9 +17,9 @@ namespace _Project.Scripts.Factories
         [Inject] private IObjectResolver resolver;
         [Inject] private WindowsConfig windowsConfig;
         
-        public T CreateWindow<T>() where T : BaseWindow
+        public T CreateWindow<T>() where T : BaseWindowPresenter
         {
-            if (typeof(T) == typeof(GameWindow))
+            if (typeof(T) == typeof(GameWindowPresenter))
             {
                 return CreateGameWindow() as T;
             }
@@ -26,9 +27,9 @@ namespace _Project.Scripts.Factories
             return null;
         }
 
-        private GameWindow CreateGameWindow()
+        private GameWindowPresenter CreateGameWindow()
         {
-            var gameWindow = resolver.Instantiate(windowsConfig.gameWindow);
+            var gameWindow = resolver.Instantiate(windowsConfig.GameWindowPresenter);
             return gameWindow;
         }
     }
