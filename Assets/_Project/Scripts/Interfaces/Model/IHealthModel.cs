@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Interfaces
 {
-    public interface IHealthModel : IPositionedController
+    public interface IHealthModel : IPositionedModel
     {
         public WarSide WarSide { get; }
         public float MaxHealth { get; }

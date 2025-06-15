@@ -2,15 +2,18 @@ using System.Linq;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Enums;
+using _Project.Scripts.Services;
 using _Project.Scripts.Windows.Models;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Rendering;
+using VContainer;
 
 namespace _Project.Scripts.Windows.Presenters
 {
     public class GameWindowPresenter : BaseWindowPresenter
     {
+        [Inject] private ResetController resetController;
         [SerializeField] private GameWindowModel model;
         [SerializeField] private GameWindowView view;
         
@@ -48,6 +51,7 @@ namespace _Project.Scripts.Windows.Presenters
         {
             if(GlobalObjects.GameData.allDamagables.Any(x => x.WarSide == WarSide.Enemy))
                 return;
+            resetController.ResetRound();
             
             model.CurrentRound++;
             view.SetEnableNextRoundButton(true);

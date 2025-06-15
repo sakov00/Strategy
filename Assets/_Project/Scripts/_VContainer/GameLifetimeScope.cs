@@ -6,6 +6,7 @@ using _Project.Scripts.GameObjects.Characters.Unit;
 using _Project.Scripts.GameObjects.FriendsBuild;
 using _Project.Scripts.GameObjects.MoneyBuild;
 using _Project.Scripts.GameObjects.TowerDefence;
+using _Project.Scripts.Services;
 using _Project.Scripts.SO;
 using _Project.Scripts.Windows.Presenters;
 using Joystick_Pack.Scripts.Base;
@@ -29,6 +30,7 @@ namespace _Project.Scripts._VContainer
             builder.Register<GameTimer>(Lifetime.Singleton).As<GameTimer, IInitializable, ITickable>();
             
             builder.Register<InitializeGame>(Lifetime.Singleton).As<InitializeGame, IStartable>();
+            builder.Register<ResetController>(Lifetime.Singleton).AsSelf();
             
             RegisterWindows(builder);
             RegisterFactories(builder);

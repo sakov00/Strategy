@@ -74,8 +74,15 @@ namespace _Project.Scripts.GameObjects.Characters
             fightObjectModel.AimCharacter.CurrentHealth -= fightObjectModel.DamageAmount;
             if (fightObjectModel.AimCharacter.CurrentHealth <= 0)
             {
-                GlobalObjects.GameData.allDamagables.Remove(fightObjectModel.AimCharacter);
-                Object.Destroy(fightObjectModel.AimCharacter.Transform.gameObject);
+                if (fightObjectModel.AimCharacter.WarSide == WarSide.Enemy)
+                {
+                    GlobalObjects.GameData.allDamagables.Remove(fightObjectModel.AimCharacter);
+                    Object.Destroy(fightObjectModel.AimCharacter.Transform.gameObject);
+                }
+                else
+                {
+                    fightObjectModel.AimCharacter.Transform.gameObject.SetActive(false);
+                }
             }
         }
         

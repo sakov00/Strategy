@@ -11,6 +11,7 @@ namespace _Project.Scripts.GameObjects._General
         {
             View.Initialize();
             Model.Transform = transform;
+            Model.NoAimPos = transform.position;
         }
 
         protected virtual void Awake()

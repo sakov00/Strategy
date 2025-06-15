@@ -27,8 +27,15 @@ namespace _Project.Scripts.GameObjects.Projectiles
 
             if (target.Model.CurrentHealth <= 0)
             {
-                GlobalObjects.GameData.allDamagables.Remove(target.Model);
-                Destroy(target.Model.Transform.gameObject);
+                if (target.Model.WarSide == WarSide.Enemy)
+                {
+                    GlobalObjects.GameData.allDamagables.Remove(target.Model);
+                    Destroy(target.Model.Transform.gameObject);
+                }
+                else
+                {
+                    target.gameObject.SetActive(false);
+                }
             }
 
             Destroy(gameObject); 
