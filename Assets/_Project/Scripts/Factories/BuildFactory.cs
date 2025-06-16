@@ -6,6 +6,7 @@ using _Project.Scripts.GameObjects.FriendsBuild;
 using _Project.Scripts.GameObjects.MoneyBuild;
 using _Project.Scripts.GameObjects.TowerDefence;
 using _Project.Scripts.Interfaces;
+using _Project.Scripts.Services;
 using _Project.Scripts.SO;
 using UnityEngine;
 using VContainer;
@@ -17,6 +18,7 @@ namespace _Project.Scripts.Factories
     {
         [Inject] private IObjectResolver resolver;
         [Inject] private BuildingPrefabConfig buildingPrefabConfig;
+        [Inject] private HealthRegistry healthRegistry;
         
         public BuildController CreateBuild(TypeBuilding building, Vector3 position, Quaternion rotation)
         {
@@ -38,7 +40,7 @@ namespace _Project.Scripts.Factories
                 default: return null;
             }
             
-            GlobalObjects.GameData.allDamagables.Add(buildController.BuildModel);
+            healthRegistry.Register(buildController.BuildModel);
             return buildController;
         }
 

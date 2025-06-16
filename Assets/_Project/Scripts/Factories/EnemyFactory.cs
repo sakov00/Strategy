@@ -1,6 +1,7 @@
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Characters.Unit;
+using _Project.Scripts.Services;
 using _Project.Scripts.SO;
 using UnityEngine;
 using VContainer;
@@ -12,6 +13,7 @@ namespace _Project.Scripts.Factories
     {
         [Inject] private IObjectResolver resolver;
         [Inject] private UnitPrefabConfig unitPrefabConfig;
+        [Inject] private HealthRegistry healthRegistry;
         
         public UnitController CreateEnemyUnit(EnemyUnitType unitType, Vector3 position, Vector3 noAimPosition, Quaternion rotation = default)
         {
@@ -28,7 +30,7 @@ namespace _Project.Scripts.Factories
             }
             
             enemyController.SetNoAimPosition(noAimPosition);
-            GlobalObjects.GameData.allDamagables.Add(enemyController.Model);
+            healthRegistry.Register(enemyController.Model);
             return enemyController;
         }
 

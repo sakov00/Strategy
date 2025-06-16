@@ -7,11 +7,9 @@ namespace _Project.Scripts._GlobalLogic
     {
         public static GlobalObjects Instance { get; private set; }
         
-        public static GameData GameData => Instance.gameData;
         public static Camera OneCamera => Instance.oneCamera;
         public static LunarConsole LunarConsole => Instance.lunarConsole;
         
-        [SerializeField] private GameData gameData;
         [SerializeField] private Camera oneCamera;
         [SerializeField] private LunarConsole lunarConsole;
         

@@ -3,12 +3,16 @@ using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.GameObjects.Characters;
 using _Project.Scripts.Interfaces;
+using _Project.Scripts.Services;
 using UnityEngine;
+using VContainer;
 
 namespace _Project.Scripts.GameObjects.Projectiles
 {
     public class Projectile : MonoBehaviour
     {
+        [Inject] private HealthRegistry healthRegistry;
+        
         public int damage;
         public WarSide ownerWarSide;
 
@@ -29,7 +33,7 @@ namespace _Project.Scripts.GameObjects.Projectiles
             {
                 if (target.Model.WarSide == WarSide.Enemy)
                 {
-                    GlobalObjects.GameData.allDamagables.Remove(target.Model);
+                    healthRegistry.Unregister(target.Model);
                     Destroy(target.Model.Transform.gameObject);
                 }
                 else

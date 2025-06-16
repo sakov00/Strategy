@@ -1324,6 +1324,8 @@ MonoBehaviour:
   unitPrefabConfig: {fileID: 11400000, guid: 9768599ec48076349993a7fe900a6ef2, type: 2}
   buildingPrefabConfig: {fileID: 11400000, guid: 4707147491c3e5b438d235a1093e9f5d,
     type: 2}
+  projectilePrefabConfig: {fileID: 11400000, guid: 9c14b83fbb27999448d2c0fddf7c6d9a,
+    type: 2}
   windowsConfig: {fileID: 11400000, guid: 6ac60502b6b93c94b8444ae1d1273191, type: 2}
 --- !u!1 &1983534208
 GameObject:

@@ -3,6 +3,7 @@ using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
+using _Project.Scripts.Services;
 using _Project.Scripts.Windows.Presenters;
 using UnityEngine;
 using VContainer;
@@ -13,6 +14,7 @@ namespace _Project.Scripts.SpawnPoints
     {
         [Inject] private GameWindowPresenter gameWindowPresenter;
         [Inject] private EnemyFactory enemyFactory;
+        [Inject] private SpawnRegistry spawnRegistry;
         
         [SerializeField] private float spawnRadius = 5f;
         [SerializeField] private List<EnemyGroup> roundEnemyList = new();
@@ -25,7 +27,7 @@ namespace _Project.Scripts.SpawnPoints
         private void Start()
         {
             InjectManager.Inject(this);
-            GlobalObjects.GameData.spawnPoints.Add(this);
+            spawnRegistry.Register(this);
         }
 
         public void StartSpawn()

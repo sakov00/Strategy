@@ -1,12 +1,17 @@
 using _Project.Scripts._GlobalLogic;
+using _Project.Scripts._VContainer;
 using _Project.Scripts.Extentions;
 using _Project.Scripts.Interfaces;
+using _Project.Scripts.Services;
 using UnityEngine;
+using VContainer;
 
 namespace _Project.Scripts.GameObjects.Characters
 {
     public class DetectionAim
     {
+        [Inject] private HealthRegistry healthRegistry;
+        
         private readonly IFightObjectModel fightObjectModel;
         private readonly Transform transform;
 
@@ -14,6 +19,8 @@ namespace _Project.Scripts.GameObjects.Characters
         {
             this.fightObjectModel = fightObjectModel;
             this.transform = transform;
+            
+            InjectManager.Inject(this);
         }
 
         public void DetectAim()
@@ -21,16 +28,16 @@ namespace _Project.Scripts.GameObjects.Characters
             IHealthModel nearestTarget = null;
             var nearestDistanceSqr = fightObjectModel.DetectionRadius;
 
-            foreach (var damagable in GlobalObjects.GameData.allDamagables)
+            foreach (var healthModel in healthRegistry.GetAll())
             {
-                if (damagable == null || ReferenceEquals(damagable, fightObjectModel) || damagable.WarSide == fightObjectModel.WarSide)
+                if (healthModel == null || ReferenceEquals(healthModel, fightObjectModel) || healthModel.WarSide == fightObjectModel.WarSide)
                     continue;
 
-                var distance = PositionExtention.GetDistanceBetweenObjects(transform, damagable.Transform);
+                var distance = PositionExtention.GetDistanceBetweenObjects(transform, healthModel.Transform);
                 if (distance < nearestDistanceSqr)
                 {
                     nearestDistanceSqr = distance;
-                    nearestTarget = damagable;
+                    nearestTarget = healthModel;
                 }
             }
 

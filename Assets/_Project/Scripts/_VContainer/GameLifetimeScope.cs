@@ -1,4 +1,5 @@
 using _Project.Scripts._GlobalLogic;
+using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects.BuildingZone;
 using _Project.Scripts.GameObjects.Characters.Player;
@@ -21,6 +22,7 @@ namespace _Project.Scripts._VContainer
         [Header("Configs")]
         [SerializeField] private UnitPrefabConfig unitPrefabConfig;
         [SerializeField] private BuildingPrefabConfig buildingPrefabConfig;
+        [SerializeField] private ProjectilePrefabConfig projectilePrefabConfig;
         [SerializeField] private WindowsConfig windowsConfig;
         
         protected override void Configure(IContainerBuilder builder)
@@ -30,7 +32,10 @@ namespace _Project.Scripts._VContainer
             builder.Register<GameTimer>(Lifetime.Singleton).As<GameTimer, IInitializable, ITickable>();
             
             builder.Register<InitializeGame>(Lifetime.Singleton).As<InitializeGame, IStartable>();
-            builder.Register<ResetController>(Lifetime.Singleton).AsSelf();
+            builder.Register<ResetService>(Lifetime.Singleton).AsSelf();
+            
+            builder.Register<SpawnRegistry>(Lifetime.Singleton).AsSelf();
+            builder.Register<HealthRegistry>(Lifetime.Singleton).AsSelf();
             
             RegisterWindows(builder);
             RegisterFactories(builder);
@@ -46,6 +51,7 @@ namespace _Project.Scripts._VContainer
         {
             builder.Register<WindowFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<BuildFactory>(Lifetime.Singleton).AsSelf();
+            builder.Register<ProjectileFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<FriendFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<EnemyFactory>(Lifetime.Singleton).AsSelf();
         }
@@ -54,6 +60,7 @@ namespace _Project.Scripts._VContainer
         {
             builder.RegisterInstance(unitPrefabConfig).AsSelf();
             builder.RegisterInstance(buildingPrefabConfig).AsSelf();
+            builder.RegisterInstance(projectilePrefabConfig).AsSelf();
             builder.RegisterInstance(windowsConfig).AsSelf();
         }
     }

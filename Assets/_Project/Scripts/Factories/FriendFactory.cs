@@ -2,6 +2,7 @@ using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Characters.Player;
 using _Project.Scripts.GameObjects.Characters.Unit;
+using _Project.Scripts.Services;
 using _Project.Scripts.SO;
 using UnityEngine;
 using VContainer;
@@ -13,6 +14,7 @@ namespace _Project.Scripts.Factories
     {
         [Inject] private IObjectResolver resolver;
         [Inject] private UnitPrefabConfig unitPrefabConfig;
+        [Inject] private HealthRegistry healthRegistry;
         
         public UnitController CreateFriendUnit(FriendUnitType unitType, Vector3 position, Vector3 noAimPosition, Quaternion rotation = default)
         {
@@ -28,7 +30,7 @@ namespace _Project.Scripts.Factories
                 default: return null;
             }
             friendContoller.SetNoAimPosition(noAimPosition);
-            GlobalObjects.GameData.allDamagables.Add(friendContoller.Model);
+            healthRegistry.Register(friendContoller.Model);
             return friendContoller;
         }
 
@@ -45,7 +47,7 @@ namespace _Project.Scripts.Factories
         public PlayerController CreatePlayer(Vector3 position, Quaternion rotation = default)
         {
             var playerController = resolver.Instantiate(unitPrefabConfig.playerPrefab, position, rotation);
-            GlobalObjects.GameData.allDamagables.Add(playerController.Model);
+            healthRegistry.Register(playerController.Model);
             return playerController;
         }
     }

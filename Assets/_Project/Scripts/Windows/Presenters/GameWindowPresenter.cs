@@ -13,13 +13,16 @@ namespace _Project.Scripts.Windows.Presenters
 {
     public class GameWindowPresenter : BaseWindowPresenter
     {
-        [Inject] private ResetController resetController;
+        [Inject] private ResetService resetService;
+        [Inject] private HealthRegistry healthRegistry;
+        [Inject] private SpawnRegistry spawnRegistry;
+        
         [SerializeField] private GameWindowModel model;
         [SerializeField] private GameWindowView view;
         
         private void Awake()
         {
-            GlobalObjects.GameData.allDamagables.ObserveRemove()    
+            healthRegistry.GetAll().ObserveRemove()    
                 .Subscribe(_ => SetNewRound())
                 .AddTo(this);
             
@@ -44,14 +47,17 @@ namespace _Project.Scripts.Windows.Presenters
         public void NextRoundOnClick()
         {
             view.SetEnableNextRoundButton(false);
-            GlobalObjects.GameData.spawnPoints.ForEach(x => x.StartSpawn());
+            foreach (var spawnPoint in spawnRegistry.GetAll())
+            {
+                spawnPoint.StartSpawn();
+            }
         }
         
         private void SetNewRound()
         {
-            if(GlobalObjects.GameData.allDamagables.Any(x => x.WarSide == WarSide.Enemy))
+            if(healthRegistry.GetAll().Any(x => x.WarSide == WarSide.Enemy))
                 return;
-            resetController.ResetRound();
+            resetService.ResetRound();
             
             model.CurrentRound++;
             view.SetEnableNextRoundButton(true);

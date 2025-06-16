@@ -1,19 +1,26 @@
 using System;
 using System.Collections;
 using _Project.Scripts._GlobalLogic;
+using _Project.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Extentions;
+using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects.Projectiles;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Interfaces.View;
+using _Project.Scripts.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using VContainer;
 using Object = UnityEngine.Object;
 
 namespace _Project.Scripts.GameObjects.Characters
 {
     public class DamageSystem
     {
+        [Inject] private ProjectileFactory projectileFactory;
+        [Inject] private HealthRegistry healthRegistry;
+        
         private readonly IFightObjectModel fightObjectModel;
         private readonly IAttackableView attackableView;
         private readonly Transform transform;
@@ -26,6 +33,8 @@ namespace _Project.Scripts.GameObjects.Characters
             this.fightObjectModel = fightObjectModel;
             this.attackableView = attackableView;
             this.transform = transform;
+            
+            InjectManager.Inject(this);
 
             if (fightObjectModel.TypeAttack == TypeAttack.Melee)
             {
@@ -76,7 +85,7 @@ namespace _Project.Scripts.GameObjects.Characters
             {
                 if (fightObjectModel.AimCharacter.WarSide == WarSide.Enemy)
                 {
-                    GlobalObjects.GameData.allDamagables.Remove(fightObjectModel.AimCharacter);
+                    healthRegistry.Unregister(fightObjectModel.AimCharacter);
                     Object.Destroy(fightObjectModel.AimCharacter.Transform.gameObject);
                 }
                 else
@@ -93,10 +102,10 @@ namespace _Project.Scripts.GameObjects.Characters
         
         private void ShootProjectile()
         {
-            if (attackableView.ProjectilePrefab == null || attackableView.FirePoint == null || fightObjectModel.AimCharacter == null)
+            if (attackableView.FirePoint == null || fightObjectModel.AimCharacter == null)
                 return;
 
-            GameObject projectile = Object.Instantiate(attackableView.ProjectilePrefab, attackableView.FirePoint.position, Quaternion.identity);
+            var projectile = projectileFactory.CreateProjectile(attackableView.ProjectileType, attackableView.FirePoint.position);
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             if (rb == null)
                 return;
@@ -107,18 +116,17 @@ namespace _Project.Scripts.GameObjects.Characters
             {
                 rb.useGravity = true;
                 rb.velocity = velocity.Value;
-
-                var damageComponent = projectile.GetComponent<Projectile>();
-                if (damageComponent != null)
+                
+                if (projectile != null)
                 {
-                    damageComponent.damage = fightObjectModel.DamageAmount;
-                    damageComponent.ownerWarSide = fightObjectModel.WarSide;
+                    projectile.damage = fightObjectModel.DamageAmount;
+                    projectile.ownerWarSide = fightObjectModel.WarSide;
                 }
             }
             else
             {
                 Debug.LogWarning("Цель вне досягаемости с заданной скоростью!");
-                Object.Destroy(projectile); // не тратить лишние объекты
+                Object.Destroy(projectile);
             }
         }
         
