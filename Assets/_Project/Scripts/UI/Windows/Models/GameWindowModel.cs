@@ -1,15 +1,24 @@
 using System;
 using UniRx;
+using UnityEngine;
 
 namespace _Project.Scripts.Windows.Models
 {
     [Serializable]
     public class GameWindowModel
     {
-        private IntReactiveProperty currentRound = new (0);
-        private IntReactiveProperty money = new(0);
+        [SerializeField] private BoolReactiveProperty isStrategyMode = new (false);
+        [SerializeField] private IntReactiveProperty currentRound = new (0);
+        [SerializeField] private IntReactiveProperty money = new(0);
+        public IReactiveProperty<bool> IsStrategyModeReactive => isStrategyMode;
         public IReactiveProperty<int> CurrentRoundReactive => currentRound;
         public IReactiveProperty<int> MoneyReactive => money;
+        
+        public bool IsStrategyMode
+        {
+            get => isStrategyMode.Value;
+            set => isStrategyMode.Value = value;
+        }
 
         public int CurrentRound
         {
