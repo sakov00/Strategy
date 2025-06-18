@@ -7,7 +7,7 @@ namespace _Project.Scripts._GlobalLogic
     {
         public static GlobalObjects Instance { get; private set; }
         
-        public static CameraController CameraControllerController => Instance.cameraController;
+        public static CameraController CameraController => Instance.cameraController;
         public static LunarConsole LunarConsole => Instance.lunarConsole;
         
         [SerializeField] private CameraController cameraController;

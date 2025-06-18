@@ -43,7 +43,7 @@ namespace _Project.Scripts.UI.Windows.GameWindow
                 {
                     joystick.gameObject.SetActive(!isStrategy);
                     touchAndMouseDragInput.gameObject.SetActive(isStrategy);
-                    GlobalObjects.CameraControllerController.cameraFollow.IsFollowing = !isStrategy;
+                    GlobalObjects.CameraController.cameraFollow.IsFollowing = !isStrategy;
                 })
                 .AddTo(this);
             

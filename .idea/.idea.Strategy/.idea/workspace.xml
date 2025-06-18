@@ -6,11 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="88568452-d695-402f-9604-02d22dfb2030" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Strategy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Strategy/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Configs/WindowsConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Configs/WindowsConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Player/Main Camera.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Player/Main Camera.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Windows/GameScreen.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Windows/GameScreen.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildingZone/BuildingZoneController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildingZone/BuildingZoneController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildingZone/BuildingZoneModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildingZone/BuildingZoneModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/_General/ObjectView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/_General/ObjectView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Interfaces/Controller/IUpgradableController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Interfaces/Controller/IUpgradableController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Elements/TouchAndMouseDragInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Elements/TouchAndMouseDragInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/_GlobalLogic/GlobalObjects.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/_GlobalLogic/GlobalObjects.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/_GlobalLogic/InitializeGame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/_GlobalLogic/InitializeGame.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,6 +180,7 @@
       <workItem from="1750007382976" duration="1883000" />
       <workItem from="1750090746006" duration="7436000" />
       <workItem from="1750257368066" duration="5623000" />
+      <workItem from="1750266104796" duration="3889000" />
     </task>
     <servers />
   </component>
@@ -198,13 +203,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/Elements/TouchAndMouseDragInput.cs</url>
-          <line>30</line>
+          <line>33</line>
           <properties documentPath="D:\Work\Strategy\Assets\_Project\Scripts\UI\Elements\TouchAndMouseDragInput.cs" containingFunctionPresentation="Method 'HandleMouseDrag'">
             <startOffsets>
-              <option value="749" />
+              <option value="850" />
             </startOffsets>
             <endOffsets>
-              <option value="805" />
+              <option value="906" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="15" />

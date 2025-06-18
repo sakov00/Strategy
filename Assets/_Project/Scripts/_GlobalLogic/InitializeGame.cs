@@ -17,7 +17,7 @@ namespace _Project.Scripts._GlobalLogic
         public void Start()
         {
             var player = friendFactory.CreatePlayer(new Vector3(50, 10, 50));
-            var cameraController = GlobalObjects.CameraControllerController;
+            var cameraController = GlobalObjects.CameraController;
             cameraController.cameraFollow.Init(cameraController.transform, player.transform);
         }
     }

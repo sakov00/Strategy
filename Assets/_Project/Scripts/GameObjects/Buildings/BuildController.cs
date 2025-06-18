@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.GameObjects
 {
-    public abstract class BuildController : ObjectController
+    public abstract class BuildController : ObjectController, IUpgradableController
     {
         public BuildModel BuildModel { get; protected set; }
         public BuildView BuildView { get; protected set; }
@@ -17,6 +17,11 @@ namespace _Project.Scripts.GameObjects
             View = BuildView;
             
             base.Initialize();
+        }
+
+        public virtual void Upgrade()
+        {
+            BuildModel.CurrentLevel++;
         }
     }
 }

@@ -19,25 +19,16 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             InjectManager.Inject(this);
         }
 
-        private void OnTriggerEnter(Collider other)
+        public void CreateBuild()
         {
-            if(other.GetComponent<PlayerController>() == null)
-                return;
-            
-            if (buildingZoneModel.createdBuild == null)
-            {
-                buildingZoneModel.createdBuild = 
-                    buildFactory.CreateBuild(buildingZoneModel.typeBuilding, transform.position, Quaternion.identity);
-                var newPosition = new Vector3(
-                    transform.position.x,
-                    transform.position.y + buildingZoneModel.createdBuild.View.objRenderer.bounds.size.y/2,
-                    transform.position.z);
-                buildingZoneModel.createdBuild.transform.position = newPosition;
-            }
-            else
-            {
-                buildingZoneModel.createdBuild.BuildModel.CurrentLevel++;
-            }
+            var createdBuild = 
+                buildFactory.CreateBuild(buildingZoneModel.typeBuilding, transform.position, Quaternion.identity);
+            var newPosition = new Vector3(
+                transform.position.x,
+                transform.position.y + createdBuild.View.objRenderer.bounds.size.y/2,
+                transform.position.z);
+            createdBuild.transform.position = newPosition;
+            Destroy(gameObject);
         }
         
         private void OnTriggerExit(Collider other)
