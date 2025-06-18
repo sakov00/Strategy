@@ -1,19 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using _Project.Scripts._GlobalLogic;
-using _Project.Scripts.Enums;
-using _Project.Scripts.SpawnPoints;
 using _Project.Scripts.UI.Elements;
+using _Project.Scripts.Windows;
 using _Project.Scripts.Windows.Presenters;
 using Joystick_Pack.Scripts.Base;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-using VContainer;
 
-namespace _Project.Scripts.Windows
+namespace _Project.Scripts.UI.Windows.GameWindow
 {
     public class GameWindowView : BaseWindowView
     {

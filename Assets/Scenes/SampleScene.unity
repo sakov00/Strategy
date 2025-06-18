@@ -1456,6 +1456,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4828723117971604511, guid: 9ea10d119dac0a94aa1cf4cd13d522d5,
+        type: 3}
+      propertyPath: cameraFollow.offset.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4828723117971604511, guid: 9ea10d119dac0a94aa1cf4cd13d522d5,
+        type: 3}
+      propertyPath: cameraFollow.offset.z
+      value: -15
+      objectReference: {fileID: 0}
     - target: {fileID: 5088980043866413547, guid: 9ea10d119dac0a94aa1cf4cd13d522d5,
         type: 3}
       propertyPath: m_Name
