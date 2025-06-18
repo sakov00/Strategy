@@ -696,6 +696,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 222317003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &825491462 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4828723117971604511, guid: 9ea10d119dac0a94aa1cf4cd13d522d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6499465765731980117}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e13ed7f92754800adb7dacc92162ceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,6 +1461,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GlobalObjects
       objectReference: {fileID: 0}
+    - target: {fileID: 6186282103008372570, guid: 9ea10d119dac0a94aa1cf4cd13d522d5,
+        type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 825491462}
     - target: {fileID: 7504570818131509199, guid: 9ea10d119dac0a94aa1cf4cd13d522d5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1500,7 +1517,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7005690769823618919, guid: 9ea10d119dac0a94aa1cf4cd13d522d5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ea10d119dac0a94aa1cf4cd13d522d5, type: 3}

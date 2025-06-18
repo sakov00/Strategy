@@ -1,3 +1,4 @@
+using _Project.Scripts.GameObjects.Camera;
 using _Project.Scripts.GameObjects.Characters.Player;
 using _Project.Scripts.GameObjects.Characters.Unit;
 using UnityEngine;
@@ -15,6 +16,6 @@ namespace _Project.Scripts.SO
         
         [Header("Player Prefabs")]
         public PlayerController playerPrefab;
-        public IsometricCameraFollow cameraPrefab;
+        public CameraFollow cameraPrefab;
     }
 }

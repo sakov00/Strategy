@@ -1,6 +1,7 @@
 using System.Linq;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
+using _Project.Scripts.GameObjects.Camera;
 using _Project.Scripts.Services;
 using _Project.Scripts.Windows.Models;
 using UniRx;
@@ -9,20 +10,31 @@ using VContainer;
 
 namespace _Project.Scripts.Windows.Presenters
 {
-    public class GameWindowPresenter : BaseWindowPresenter
+    public class GameWindowViewModel : BaseWindowPresenter
     {
         [Inject] private ResetService resetService;
         [Inject] private HealthRegistry healthRegistry;
         [Inject] private SpawnRegistry spawnRegistry;
 
         [SerializeField] private GameWindowModel model;
-        [SerializeField] private GameWindowView view;
-
+        
+        public ReactiveCommand NextRoundCommand { get; } = new();
+        public ReactiveCommand SetStrategyModeCommand { get; } = new();
+        public ReactiveProperty<bool> IsNextRoundAvailable { get; } = new (true);
+        
+        public IReadOnlyReactiveProperty<bool> IsStrategyMode => model.IsStrategyModeReactive;
+        public IReadOnlyReactiveProperty<int> CurrentRound => model.CurrentRoundReactive;
+        public IReadOnlyReactiveProperty<int> Money => model.MoneyReactive;
+        
+        public Vector3 MoveDirection { get; set; }
+        
+        public int GetCurrentRound() => model.CurrentRound;
+        public void AddMoney(int amount) => model.Money += amount;
 
         private void Awake()
         {
             BindHealthRegistry();
-            BindModel();
+            BindViewModel();
         }
 
         private void BindHealthRegistry()
@@ -34,43 +46,27 @@ namespace _Project.Scripts.Windows.Presenters
                 .AddTo(this);
         }
 
-        private void BindModel()
+        private void BindViewModel()
         {
-            model.MoneyReactive
-                .Subscribe(view.UpdateMoney)
+            SetStrategyModeCommand
+                .Subscribe(_ => SetStrategyMode())
                 .AddTo(this);
-
-            model.CurrentRoundReactive
-                .Subscribe(view.UpdateCurrentRound)
-                .AddTo(this);
-
-            model.CurrentRoundReactive
-                .Subscribe(_ => view.SetNextRoundButtonActive(true))
-                .AddTo(this);
-
-            model.IsStrategyModeReactive
-                .Subscribe(isStrategy =>
-                {
-                    view.SetJoystickActive(!isStrategy);
-                    view.SetTouchAndMouseDragInputActive(isStrategy);
-                    GlobalObjects.OneCamera.GetComponent<IsometricCameraFollow>().enabled = !isStrategy;
-                })
+            
+            NextRoundCommand
+                .Subscribe(_ => NextRoundOnClick())
                 .AddTo(this);
         }
-
-        public Vector3 GetInputVector() => view.GetJoystickInputVector();
-        public void SetStrategyMode() => model.IsStrategyMode = !model.IsStrategyMode;
-        public int GetCurrentRound() => model.CurrentRound;
-        public void AddMoney(int amount) => model.Money += amount;
-
-        public void NextRoundOnClick()
+        
+        private void SetStrategyMode() => model.IsStrategyMode = !model.IsStrategyMode;
+        
+        private void NextRoundOnClick()
         {
             foreach (var spawnPoint in spawnRegistry.GetAll())
             {
                 spawnPoint.StartSpawn();
             }
         }
-
+        
         private void TryStartNewRound()
         {
             bool enemiesRemain = healthRegistry.GetAll().Any(unit => unit.WarSide == WarSide.Enemy);

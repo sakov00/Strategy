@@ -9,6 +9,6 @@ namespace _Project.Scripts.SO
     [CreateAssetMenu(fileName = "WindowsConfig", menuName = "SO/Windows Config")]
     public class WindowsConfig : ScriptableObject
     {
-        public GameWindowPresenter GameWindowPresenter;
+        public GameWindowViewModel gameWindowViewModel;
     }
 }

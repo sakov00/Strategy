@@ -7,10 +7,10 @@ namespace _Project.Scripts._GlobalLogic
     {
         public static GlobalObjects Instance { get; private set; }
         
-        public static Camera OneCamera => Instance.oneCamera;
+        public static CameraController CameraControllerController => Instance.cameraController;
         public static LunarConsole LunarConsole => Instance.lunarConsole;
         
-        [SerializeField] private Camera oneCamera;
+        [SerializeField] private CameraController cameraController;
         [SerializeField] private LunarConsole lunarConsole;
         
         private void Awake()

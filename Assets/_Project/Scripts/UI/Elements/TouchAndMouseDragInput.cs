@@ -31,11 +31,11 @@ namespace _Project.Scripts.UI.Elements
                 Vector3 delta = Input.mousePosition - lastMousePosition;
                 lastMousePosition = Input.mousePosition;
 
-                Vector3 right = GlobalObjects.OneCamera.transform.right;
+                Vector3 right = GlobalObjects.CameraControllerController.transform.right;
                 Vector3 forward = Vector3.Cross(right, Vector3.up);
 
                 Vector3 move = (-right * delta.x - forward * delta.y) * dragSpeed * Time.deltaTime;
-                GlobalObjects.OneCamera.transform.position += move;
+                GlobalObjects.CameraControllerController.transform.position += move;
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -64,11 +64,11 @@ namespace _Project.Scripts.UI.Elements
                 Vector2 delta = touch.position - (Vector2)lastMousePosition;
                 lastMousePosition = touch.position;
 
-                Vector3 right = GlobalObjects.OneCamera.transform.right;
+                Vector3 right = GlobalObjects.CameraControllerController.transform.right;
                 Vector3 forward = Vector3.Cross(right, Vector3.up);
 
                 Vector3 move = (-right * delta.x - forward * delta.y) * dragSpeed * Time.deltaTime;
-                GlobalObjects.OneCamera.transform.position += move;
+                GlobalObjects.CameraControllerController.transform.position += move;
             }
         }
     }

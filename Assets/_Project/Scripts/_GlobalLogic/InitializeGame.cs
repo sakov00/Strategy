@@ -1,5 +1,6 @@
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
+using _Project.Scripts.GameObjects.Camera;
 using _Project.Scripts.Windows;
 using _Project.Scripts.Windows.Presenters;
 using UnityEngine;
@@ -16,8 +17,8 @@ namespace _Project.Scripts._GlobalLogic
         public void Start()
         {
             var player = friendFactory.CreatePlayer(new Vector3(50, 10, 50));
-            var isometricCameraFollow = GlobalObjects.OneCamera.GetComponent<IsometricCameraFollow>();
-            isometricCameraFollow.target = player.transform;
+            var cameraController = GlobalObjects.CameraControllerController;
+            cameraController.cameraFollow.Init(cameraController.transform, player.transform);
         }
     }
 }

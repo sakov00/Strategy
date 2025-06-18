@@ -12,7 +12,7 @@ namespace _Project.Scripts.SpawnPoints
 {
     public class SpawnPoint : MonoBehaviour
     {
-        [Inject] private GameWindowPresenter gameWindowPresenter;
+        [Inject] private GameWindowViewModel gameWindowViewModel;
         [Inject] private EnemyFactory enemyFactory;
         [Inject] private SpawnRegistry spawnRegistry;
         
@@ -32,7 +32,7 @@ namespace _Project.Scripts.SpawnPoints
 
         public void StartSpawn()
         {
-            spawnQueue = new Queue<EnemyUnitType>(roundEnemyList[gameWindowPresenter.GetCurrentRound()].enemies);
+            spawnQueue = new Queue<EnemyUnitType>(roundEnemyList[gameWindowViewModel.GetCurrentRound()].enemies);
             
             GameTimer.Instance.OnEverySecond -= SpawnEnemy;
             GameTimer.Instance.OnEverySecond += SpawnEnemy;

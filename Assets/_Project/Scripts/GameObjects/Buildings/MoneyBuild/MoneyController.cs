@@ -7,20 +7,20 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
     {
         private readonly MoneyBuildModel moneyBuildModel;
         private readonly MoneyBuildingView moneyBuildingView;
-        private readonly GameWindowPresenter gameWindowPresenter;
+        private readonly GameWindowViewModel gameWindowViewModel;
 
-        public MoneyController(MoneyBuildModel moneyBuildModel, MoneyBuildingView moneyBuildingView, GameWindowPresenter gameWindowPresenter)
+        public MoneyController(MoneyBuildModel moneyBuildModel, MoneyBuildingView moneyBuildingView, GameWindowViewModel gameWindowViewModel)
         {
             this.moneyBuildModel = moneyBuildModel;
             this.moneyBuildingView = moneyBuildingView;
-            this.gameWindowPresenter = gameWindowPresenter;
+            this.gameWindowViewModel = gameWindowViewModel;
             GameTimer.Instance.OnEverySecond += AddMoneyToPlayer;
         }
 
         private void AddMoneyToPlayer()
         {
             var moneyAmount = moneyBuildModel.addMoneyValue * moneyBuildModel.CurrentLevel;
-            gameWindowPresenter.AddMoney(moneyAmount);
+            gameWindowViewModel.AddMoney(moneyAmount);
             moneyBuildingView.MoneyUp(moneyAmount);
         }
 

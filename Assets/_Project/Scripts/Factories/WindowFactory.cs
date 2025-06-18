@@ -19,7 +19,7 @@ namespace _Project.Scripts.Factories
         
         public T CreateWindow<T>() where T : BaseWindowPresenter
         {
-            if (typeof(T) == typeof(GameWindowPresenter))
+            if (typeof(T) == typeof(GameWindowViewModel))
             {
                 return CreateGameWindow() as T;
             }
@@ -27,9 +27,9 @@ namespace _Project.Scripts.Factories
             return null;
         }
 
-        private GameWindowPresenter CreateGameWindow()
+        private GameWindowViewModel CreateGameWindow()
         {
-            var gameWindow = resolver.Instantiate(windowsConfig.GameWindowPresenter);
+            var gameWindow = resolver.Instantiate(windowsConfig.gameWindowViewModel);
             return gameWindow;
         }
     }

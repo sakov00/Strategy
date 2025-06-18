@@ -702,7 +702,6 @@ MonoBehaviour:
       value: 0
     money:
       value: 0
-  view: {fileID: 9106743238255189466}
 --- !u!114 &9106743238255189466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,7 +714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cba2e263fed43eb8b81e9e16f16864b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  presenter: {fileID: 8954507623702955533}
+  viewModel: {fileID: 8954507623702955533}
   nextRoundButton: {fileID: 771048284349875591}
   strategyModeButton: {fileID: 2127364649460484667}
   moneyText: {fileID: 2409644265304561086}
@@ -1000,12 +999,12 @@ PrefabInstance:
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
@@ -1020,12 +1019,12 @@ PrefabInstance:
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1920
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1080
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}

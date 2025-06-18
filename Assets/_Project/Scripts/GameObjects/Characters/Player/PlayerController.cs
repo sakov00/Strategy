@@ -11,7 +11,7 @@ namespace _Project.Scripts.GameObjects.Characters.Player
 {
     public class PlayerController : CharacterSimpleController
     {
-        [Inject] private GameWindowPresenter gameWindowPresenter;
+        [Inject] private GameWindowViewModel gameWindowViewModel;
         
         [SerializeField] private PlayerModel model;
         [SerializeField] private PlayerView view;
@@ -35,7 +35,7 @@ namespace _Project.Scripts.GameObjects.Characters.Player
 
         private void Update()
         {
-            playerMovementSystem.MoveTo(gameWindowPresenter.GetInputVector());
+            playerMovementSystem.MoveTo(gameWindowViewModel.MoveDirection);
         }
         
         protected override void FixedUpdate()

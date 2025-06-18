@@ -44,7 +44,7 @@ namespace _Project.Scripts._VContainer
         
         private void RegisterWindows(IContainerBuilder builder)
         {
-            builder.RegisterComponentInNewPrefab(windowsConfig.GameWindowPresenter, Lifetime.Singleton);
+            builder.RegisterComponentInNewPrefab(windowsConfig.gameWindowViewModel, Lifetime.Singleton);
         }
         
         private void RegisterFactories(IContainerBuilder builder)

@@ -8,7 +8,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
 {
     public class MoneyBuildController : BuildController
     {
-        [Inject] private GameWindowPresenter gameWindowPresenter;
+        [Inject] private GameWindowViewModel gameWindowViewModel;
         [SerializeField] private MoneyBuildModel model;
         [SerializeField] private MoneyBuildingView view;
         
@@ -19,7 +19,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
             BuildModel = model;
             BuildView = view;
             
-            moneyController = new MoneyController(model, view, gameWindowPresenter);
+            moneyController = new MoneyController(model, view, gameWindowViewModel);
             base.Initialize();
         }
     }
