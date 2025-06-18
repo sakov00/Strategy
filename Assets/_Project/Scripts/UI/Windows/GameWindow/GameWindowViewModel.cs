@@ -20,8 +20,8 @@ namespace _Project.Scripts.Windows.Presenters
         
         public ReactiveCommand NextRoundCommand { get; } = new();
         public ReactiveCommand SetStrategyModeCommand { get; } = new();
-        public ReactiveProperty<bool> IsNextRoundAvailable { get; } = new (true);
         
+        public IReadOnlyReactiveProperty<bool> IsNextRoundAvailable => model.IsNextRoundAvailableReactive;
         public IReadOnlyReactiveProperty<bool> IsStrategyMode => model.IsStrategyModeReactive;
         public IReadOnlyReactiveProperty<int> CurrentRound => model.CurrentRoundReactive;
         public IReadOnlyReactiveProperty<int> Money => model.MoneyReactive;
@@ -33,25 +33,15 @@ namespace _Project.Scripts.Windows.Presenters
 
         private void Awake()
         {
-            BindHealthRegistry();
-            BindViewModel();
-        }
-
-        private void BindHealthRegistry()
-        {
             healthRegistry
                 .GetAll()
                 .ObserveRemove()
                 .Subscribe(_ => TryStartNewRound())
                 .AddTo(this);
-        }
-
-        private void BindViewModel()
-        {
+            
             SetStrategyModeCommand
                 .Subscribe(_ => SetStrategyMode())
                 .AddTo(this);
-            
             NextRoundCommand
                 .Subscribe(_ => NextRoundOnClick())
                 .AddTo(this);
@@ -61,6 +51,7 @@ namespace _Project.Scripts.Windows.Presenters
         
         private void NextRoundOnClick()
         {
+            model.IsNextRoundAvailable = false;
             foreach (var spawnPoint in spawnRegistry.GetAll())
             {
                 spawnPoint.StartSpawn();
@@ -74,6 +65,7 @@ namespace _Project.Scripts.Windows.Presenters
 
             resetService.ResetRound();
             model.CurrentRound++;
+            model.IsNextRoundAvailable = true;
         }
     }
 }

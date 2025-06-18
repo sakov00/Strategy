@@ -5,38 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88568452-d695-402f-9604-02d22dfb2030" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Camera.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Camera/CameraController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Camera/CameraController.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Strategy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Strategy/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/GlobalObjects.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/GlobalObjects.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Configs/WindowsConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Configs/WindowsConfig.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Player/Main Camera.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Player/Main Camera.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Windows/GameScreen.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Windows/GameScreen.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/WindowFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/WindowFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyBuildController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyBuildController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Player/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/_General/ObjectView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/_General/ObjectView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/IsometricCameraFollow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Camera/CameraFollow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/IsometricCameraFollow.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Camera/CameraFollow.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/SO/UnitPrefabConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/SO/UnitPrefabConfig.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/SO/WindowsConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/SO/WindowsConfig.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/SpawnPoints/SpawnPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/SpawnPoints/SpawnPoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Elements/TouchAndMouseDragInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Elements/TouchAndMouseDragInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/Models.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/Models/GameWindowModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/Models/GameWindowModel.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowModel.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/Presenters.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/Presenters/GameWindowPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/Presenters/GameWindowPresenter.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowViewModel.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/View.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/View/GameWindowView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/View/GameWindowView.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowView.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/_GlobalLogic/GlobalObjects.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/_GlobalLogic/GlobalObjects.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/_GlobalLogic/InitializeGame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/_GlobalLogic/InitializeGame.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/_VContainer/GameLifetimeScope.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/_VContainer/GameLifetimeScope.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowViewModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +175,7 @@
       <workItem from="1749982933390" duration="5470000" />
       <workItem from="1750007382976" duration="1883000" />
       <workItem from="1750090746006" duration="7436000" />
-      <workItem from="1750257368066" duration="4787000" />
+      <workItem from="1750257368066" duration="5623000" />
     </task>
     <servers />
   </component>

@@ -7,12 +7,20 @@ namespace _Project.Scripts.Windows.Models
     [Serializable]
     public class GameWindowModel
     {
+        [SerializeField] private BoolReactiveProperty isNextRoundAvailable = new (true);
         [SerializeField] private BoolReactiveProperty isStrategyMode = new (false);
         [SerializeField] private IntReactiveProperty currentRound = new (0);
         [SerializeField] private IntReactiveProperty money = new(0);
+        public IReactiveProperty<bool> IsNextRoundAvailableReactive => isNextRoundAvailable;
         public IReactiveProperty<bool> IsStrategyModeReactive => isStrategyMode;
         public IReactiveProperty<int> CurrentRoundReactive => currentRound;
         public IReactiveProperty<int> MoneyReactive => money;
+        
+        public bool IsNextRoundAvailable
+        {
+            get => isNextRoundAvailable.Value;
+            set => isNextRoundAvailable.Value = value;
+        }
         
         public bool IsStrategyMode
         {

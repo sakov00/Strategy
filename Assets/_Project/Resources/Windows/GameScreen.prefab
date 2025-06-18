@@ -696,6 +696,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model:
+    isNextRoundAvailable:
+      value: 1
     isStrategyMode:
       value: 0
     currentRound:

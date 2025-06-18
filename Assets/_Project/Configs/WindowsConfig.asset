@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19615eb772034450a278698a02100861, type: 3}
   m_Name: WindowsConfig
   m_EditorClassIdentifier: 
-  GameWindowPresenter: {fileID: 8954507623702955533, guid: 9f0233e38ff9ec94492e3b2390b72211,
+  gameWindowViewModel: {fileID: 8954507623702955533, guid: 9f0233e38ff9ec94492e3b2390b72211,
     type: 3}
