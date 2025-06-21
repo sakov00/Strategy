@@ -125,8 +125,9 @@ MonoBehaviour:
     warSide: 0
     maxHealth: 500
     currentHealth: 500
+    priceList: 0400000006000000080000000a0000000c000000
+    currentLevel: 1
     unitType: 0
-    countUnits: 4
     buildUnits: []
   view: {fileID: 4564933277160738802}
 --- !u!114 &4564933277160738802

@@ -10,15 +10,14 @@ namespace _Project.Scripts.GameObjects.TowerDefence
     {
         [SerializeField] protected TowerDefenceModel model;
         [SerializeField] protected TowerDefenceView view;
+        public override BuildModel BuildModel => model;
+        public override BuildView BuildView => view;
         
         private DetectionAim detectionAim;
         private DamageSystem damageSystem;
 
         protected override void Initialize()
         {
-            BuildModel = model;
-            BuildView = view;
-            
             detectionAim = new DetectionAim(model, transform);
             damageSystem = new DamageSystem(model, view, transform);
             

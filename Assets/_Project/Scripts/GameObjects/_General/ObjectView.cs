@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.GameObjects._General
 {
-    public class ObjectView : MonoBehaviour
+    public abstract class ObjectView : MonoBehaviour
     {
         [SerializeField] protected MeshRenderer healthBarRenderer;
         [SerializeField] public Renderer objRenderer;

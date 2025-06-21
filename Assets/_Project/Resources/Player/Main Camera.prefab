@@ -151,6 +151,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraFollow:
-    offset: {x: 0, y: 15, z: -15}
+    offset: {x: 0, y: 20, z: -15}
     followSpeed: 5
   currentCamera: {fileID: 3216653039456745478}

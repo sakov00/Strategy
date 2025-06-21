@@ -30,7 +30,8 @@ namespace _Project.Scripts.GameObjects.Characters
 
             foreach (var healthModel in healthRegistry.GetAll())
             {
-                if (healthModel == null || ReferenceEquals(healthModel, fightObjectModel) || healthModel.WarSide == fightObjectModel.WarSide)
+                if (healthModel == null || healthModel.CurrentHealth <= 0 || 
+                    ReferenceEquals(healthModel, fightObjectModel) || healthModel.WarSide == fightObjectModel.WarSide)
                     continue;
 
                 var distance = PositionExtention.GetDistanceBetweenObjects(transform, healthModel.Transform);

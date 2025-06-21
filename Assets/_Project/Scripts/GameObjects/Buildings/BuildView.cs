@@ -6,7 +6,7 @@ using UnityEngine;
 namespace _Project.Scripts.GameObjects
 {
     [Serializable]
-    public class BuildView : ObjectView
+    public abstract class BuildView : ObjectView
     {
     }
 }

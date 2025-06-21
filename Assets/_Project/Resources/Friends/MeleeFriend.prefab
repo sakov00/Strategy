@@ -122,9 +122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarRenderer: {fileID: 351811317915167694}
-  objRenderer: {fileID: 0}
+  objRenderer: {fileID: 1924798556776072654}
   animator: {fileID: 0}
-  <ProjectilePrefab>k__BackingField: {fileID: 0}
+  <ProjectileType>k__BackingField: 0
   <FirePoint>k__BackingField: {fileID: 0}
   <ProjectileSpeed>k__BackingField: 10
   Agent: {fileID: 5435124656432188814}
@@ -229,6 +229,12 @@ PrefabInstance:
 --- !u!4 &791910924638060193 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7e4e45b3b44d8d8488d0858b48023e3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 970481426546825546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1924798556776072654 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 7e4e45b3b44d8d8488d0858b48023e3f,
     type: 3}
   m_PrefabInstance: {fileID: 970481426546825546}
   m_PrefabAsset: {fileID: 0}

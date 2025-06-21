@@ -30,7 +30,7 @@ namespace _Project.Scripts.Factories
                 default: return null;
             }
             friendContoller.SetNoAimPosition(noAimPosition);
-            healthRegistry.Register(friendContoller.Model);
+            healthRegistry.Register(friendContoller.ObjectModel);
             return friendContoller;
         }
 
@@ -47,7 +47,7 @@ namespace _Project.Scripts.Factories
         public PlayerController CreatePlayer(Vector3 position, Quaternion rotation = default)
         {
             var playerController = resolver.Instantiate(unitPrefabConfig.playerPrefab, position, rotation);
-            healthRegistry.Register(playerController.Model);
+            healthRegistry.Register(playerController.ObjectModel);
             return playerController;
         }
     }

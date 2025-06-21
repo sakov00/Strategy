@@ -1,26 +1,27 @@
-using System.Runtime.InteropServices;
-using _Project.Scripts.GameObjects._General;
-using _Project.Scripts.Windows.Presenters;
+using System;
+using _Project.Scripts.Interfaces;
 using UnityEngine;
-using VContainer;
 
 namespace _Project.Scripts.GameObjects.MoneyBuild
 {
     public class MoneyBuildController : BuildController
     {
-        [Inject] private GameWindowViewModel gameWindowViewModel;
-        [SerializeField] private MoneyBuildModel model;
-        [SerializeField] private MoneyBuildingView view;
+        [SerializeField] protected MoneyBuildModel model;
+        [SerializeField] protected MoneyBuildingView view;
+        public override BuildModel BuildModel => model;
+        public override BuildView BuildView => view;
         
         private MoneyController moneyController;
-        
+
         protected override void Initialize()
         {
-            BuildModel = model;
-            BuildView = view;
-            
-            moneyController = new MoneyController(model, view, gameWindowViewModel);
+            moneyController = new MoneyController(model, view);
             base.Initialize();
+        }
+
+        private void OnDestroy()
+        {
+            moneyController.Dispose();
         }
     }
 }

@@ -4,6 +4,6 @@ namespace _Project.Scripts.Interfaces
 {
     public interface IUpgradableController
     {
-        void Upgrade();
+        void TryUpgrade();
     }
 }

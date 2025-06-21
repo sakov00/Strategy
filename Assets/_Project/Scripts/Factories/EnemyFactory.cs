@@ -30,7 +30,7 @@ namespace _Project.Scripts.Factories
             }
             
             enemyController.SetNoAimPosition(noAimPosition);
-            healthRegistry.Register(enemyController.Model);
+            healthRegistry.Register(enemyController.ObjectModel);
             return enemyController;
         }
 

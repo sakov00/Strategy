@@ -1,17 +1,21 @@
+using _Project.Scripts._VContainer;
+using _Project.Scripts.GameObjects.Characters;
+using _Project.Scripts.Interfaces;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects._General
 {
-    public abstract class ObjectController : MonoBehaviour
+    public abstract class ObjectController: MonoBehaviour
     {
-        public ObjectModel Model { get; protected set; }
-        public ObjectView View { get; protected set; }
+        public abstract ObjectModel ObjectModel { get; }
+        public abstract ObjectView ObjectView { get; }
 
         protected virtual void Initialize()
         {
-            View.Initialize();
-            Model.Transform = transform;
-            Model.NoAimPos = transform.position;
+            InjectManager.Inject(this);
+            ObjectView.Initialize();
+            ObjectModel.Transform = transform;
+            ObjectModel.NoAimPos = transform.position;
         }
 
         protected virtual void Awake()
@@ -21,7 +25,7 @@ namespace _Project.Scripts.GameObjects._General
 
         protected virtual void FixedUpdate()
         {
-            View.UpdateHealthBar(Model.CurrentHealth, Model.MaxHealth);
+            ObjectView.UpdateHealthBar(ObjectModel.CurrentHealth, ObjectModel.MaxHealth);
         }
     }
 }

@@ -260,8 +260,7 @@ MonoBehaviour:
   healthBarRenderer: {fileID: 3409585272852687059}
   objRenderer: {fileID: 6325934801687606467}
   animator: {fileID: 0}
-  <ProjectilePrefab>k__BackingField: {fileID: 1232302952673697347, guid: aa49d42f2d1b0c240bb410973318b223,
-    type: 3}
+  <ProjectileType>k__BackingField: 1
   <FirePoint>k__BackingField: {fileID: 3946377445745853680}
   <ProjectileSpeed>k__BackingField: 30
   Agent: {fileID: 253004234346408404}

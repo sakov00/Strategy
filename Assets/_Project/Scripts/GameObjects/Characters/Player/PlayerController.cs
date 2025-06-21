@@ -9,23 +9,21 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Characters.Player
 {
-    public class PlayerController : CharacterSimpleController
+    public class PlayerController : MyCharacterController
     {
         [Inject] private GameWindowViewModel gameWindowViewModel;
-        
+
         [SerializeField] private PlayerModel model;
         [SerializeField] private PlayerView view;
+        protected override CharacterModel CharacterModel => model;
+        protected override CharacterView CharacterView => view;
         
         private PlayerMovementSystem playerMovementSystem;
         private DetectionAim detectionAim;
         private DamageSystem damageSystem;
         
-
         protected override void Initialize()
         {
-            CharacterModel = model;
-            CharacterView = view;
-            
             playerMovementSystem = new PlayerMovementSystem(model, view, transform);
             detectionAim = new DetectionAim(model, transform);
             damageSystem = new DamageSystem(model, view, transform);

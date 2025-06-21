@@ -19,6 +19,28 @@ namespace _Project.Scripts.Factories
         [Inject] private IObjectResolver resolver;
         [Inject] private BuildingPrefabConfig buildingPrefabConfig;
         [Inject] private HealthRegistry healthRegistry;
+
+        public BuildModel GetBuildModel(TypeBuilding building)
+        {
+            BuildController buildController;
+            switch (building)
+            {
+                case TypeBuilding.MoneyBuilding:
+                    buildController = buildingPrefabConfig.moneyBuildingPrefab;
+                    break;
+                case TypeBuilding.TowerDefenseBuilding:
+                    buildController = buildingPrefabConfig.towerBuildingPrefab;
+                    break;
+                case TypeBuilding.FriendMeleeBuilding:
+                    buildController = buildingPrefabConfig.meleeFriendBuildingPrefab;
+                    break;
+                case TypeBuilding.FriendDistanceBuilding:
+                    buildController = buildingPrefabConfig.distanceFriendBuildingPrefab;
+                    break;
+                default: return null;
+            }
+            return buildController.BuildModel;
+        }
         
         public BuildController CreateBuild(TypeBuilding building, Vector3 position, Quaternion rotation)
         {
@@ -40,7 +62,7 @@ namespace _Project.Scripts.Factories
                 default: return null;
             }
             
-            healthRegistry.Register(buildController.BuildModel);
+            healthRegistry.Register(buildController.ObjectModel);
             return buildController;
         }
 

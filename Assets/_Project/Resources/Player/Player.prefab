@@ -396,9 +396,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarRenderer: {fileID: 7095761400376034275}
+  objRenderer: {fileID: 1965842239332045838}
   animator: {fileID: 0}
-  <ProjectilePrefab>k__BackingField: {fileID: 1232302952673697347, guid: aa49d42f2d1b0c240bb410973318b223,
-    type: 3}
+  <ProjectileType>k__BackingField: 1
   <FirePoint>k__BackingField: {fileID: 3287887312038049354}
   <ProjectileSpeed>k__BackingField: 10
   characterController: {fileID: 7322175163735070510}

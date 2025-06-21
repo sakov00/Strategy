@@ -1,8 +1,5 @@
-using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
-using _Project.Scripts.GameObjects.Characters;
-using _Project.Scripts.Interfaces;
 using _Project.Scripts.Services;
 using UnityEngine;
 using VContainer;
@@ -24,17 +21,17 @@ namespace _Project.Scripts.GameObjects.Projectiles
                 return;
             }
 
-            if (target.Model.WarSide == ownerWarSide)
+            if (target.ObjectModel.WarSide == ownerWarSide)
                 return;
 
-            target.Model.CurrentHealth -= damage;
+            target.ObjectModel.CurrentHealth -= damage;
 
-            if (target.Model.CurrentHealth <= 0)
+            if (target.ObjectModel.CurrentHealth <= 0)
             {
-                if (target.Model.WarSide == WarSide.Enemy)
+                if (target.ObjectModel.WarSide == WarSide.Enemy)
                 {
-                    healthRegistry.Unregister(target.Model);
-                    Destroy(target.Model.Transform.gameObject);
+                    healthRegistry.Unregister(target.ObjectModel);
+                    Destroy(target.ObjectModel.Transform.gameObject);
                 }
                 else
                 {

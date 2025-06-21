@@ -245,7 +245,8 @@ MonoBehaviour:
     warSide: 0
     maxHealth: 500
     currentHealth: 500
-    currentLevel: 1
+    priceList: 0200000002000000030000000300000004000000
+    currentLevel: 0
     addMoneyValue: 1
   view: {fileID: 5363744833992997788}
 --- !u!114 &5363744833992997788

@@ -50,13 +50,13 @@ namespace _Project.Scripts.UI.Elements
                 
                 if (hit.collider.TryGetComponent<IUpgradableController>(out var upgradeable))
                 {
-                    upgradeable.Upgrade();
+                    upgradeable.TryUpgrade();
                     return;
                 }
 
                 if (hit.collider.TryGetComponent<BuildingZoneController>(out var creatable))
                 {
-                    creatable.CreateBuild();
+                    creatable.TryCreateBuild();
                 }
             }
         }

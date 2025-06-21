@@ -12,14 +12,13 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
         
         [SerializeField] private FriendsBuildModel model;
         [SerializeField] private FriendsBuildView view;
+        public override BuildModel BuildModel => model;
+        public override BuildView BuildView => view;
         
         private FriendsCreatorController friendsCreatorController;
         
         protected override void Initialize()
         {
-            BuildModel = model;
-            BuildView = view;
-            
             friendsCreatorController = new FriendsCreatorController(friendFactory, model, view);
 
             base.Initialize();
