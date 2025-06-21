@@ -87,6 +87,24 @@ namespace _Project.Scripts.UI.Elements
                 Vector3 move = (-right * delta.x - forward * delta.y) * dragSpeed * Time.deltaTime;
                 GlobalObjects.CameraController.transform.position += move;
             }
+            else if (touch.phase == TouchPhase.Ended)
+            {
+                isDragging = false;
+
+                var ray = GlobalObjects.CameraController.currentCamera.ScreenPointToRay(touch.position);
+                if (!Physics.Raycast(ray, out RaycastHit hit)) return;
+
+                if (hit.collider.TryGetComponent<IUpgradableController>(out var upgradeable))
+                {
+                    upgradeable.TryUpgrade();
+                    return;
+                }
+
+                if (hit.collider.TryGetComponent<BuildingZoneController>(out var creatable))
+                {
+                    creatable.TryCreateBuild();
+                }
+            }
         }
     }
 }
