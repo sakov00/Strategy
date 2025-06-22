@@ -3,6 +3,7 @@ using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.Interfaces.View;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace _Project.Scripts.GameObjects.Characters
 {
@@ -12,6 +13,7 @@ namespace _Project.Scripts.GameObjects.Characters
         private static readonly int IsAttack = Animator.StringToHash("IsAttack");
         
         [SerializeField] private Animator animator;
+        [field:SerializeField] public NavMeshAgent Agent { get; private set; }
         [field:SerializeField] public ProjectileType ProjectileType { get; set; }
         [field:SerializeField] public Transform FirePoint { get; set; }
         [field:SerializeField] public float ProjectileSpeed { get; set; } = 10f;

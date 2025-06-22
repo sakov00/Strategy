@@ -7,6 +7,5 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
     [Serializable]
     public class UnitView : CharacterView
     {
-        [SerializeField] public NavMeshAgent Agent;
     }
 }

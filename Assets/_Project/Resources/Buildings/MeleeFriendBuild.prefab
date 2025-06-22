@@ -14,12 +14,12 @@ GameObject:
   - component: {fileID: 8089973434820199287}
   - component: {fileID: 3108341575151675289}
   - component: {fileID: 4564933277160738802}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MeleeFriendBuild
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4153237039961208969
 Transform:
@@ -158,12 +158,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2688157222307622312}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UnitPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2688157222307622312
 Transform:
@@ -189,12 +189,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 437528896043863059}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UnitPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &437528896043863059
 Transform:
@@ -224,12 +224,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2444088782556222454}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UnitPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2444088782556222454
 Transform:
@@ -255,12 +255,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 311033272980556779}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UnitPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &311033272980556779
 Transform:
@@ -286,12 +286,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5156740394820285834}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UnitPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5156740394820285834
 Transform:
@@ -385,6 +385,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8337824269587287870, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8337824269587287870, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
         type: 3}

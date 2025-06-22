@@ -189,7 +189,7 @@ PrefabInstance:
     - target: {fileID: 2050305323301566128, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
       propertyPath: buildingZoneModel.typeBuilding
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
@@ -933,6 +933,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114798384334320778, guid: cf7d0713a791ec34c85886295f2bfd66,
+        type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: cf9560db921860d44a8be2a44d6d5317,
+        type: 2}
     - target: {fileID: 982633549813317046, guid: cf7d0713a791ec34c85886295f2bfd66,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1375,7 +1381,7 @@ PrefabInstance:
     - target: {fileID: 2050305323301566128, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
       propertyPath: buildingZoneModel.typeBuilding
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}

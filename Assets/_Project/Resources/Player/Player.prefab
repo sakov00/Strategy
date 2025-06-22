@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 2983530950361520214}
   - component: {fileID: 2325071721942970465}
   - component: {fileID: 1965842239332045838}
-  - component: {fileID: 7322175163735070510}
+  - component: {fileID: 8192558378893770235}
   - component: {fileID: 727004643926444983}
   - component: {fileID: 4816044730722103744}
   m_Layer: 0
@@ -331,32 +331,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!143 &7322175163735070510
-CharacterController:
+--- !u!195 &8192558378893770235
+NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8384456974013278440}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
+  m_AgentTypeID: 0
   m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.2
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &727004643926444983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,7 +394,7 @@ MonoBehaviour:
   healthBarRenderer: {fileID: 7095761400376034275}
   objRenderer: {fileID: 1965842239332045838}
   animator: {fileID: 0}
+  <Agent>k__BackingField: {fileID: 8192558378893770235}
   <ProjectileType>k__BackingField: 1
   <FirePoint>k__BackingField: {fileID: 3287887312038049354}
   <ProjectileSpeed>k__BackingField: 10
-  characterController: {fileID: 7322175163735070510}

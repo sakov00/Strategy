@@ -14,27 +14,32 @@ namespace _Project.Scripts.GameObjects.Characters.Player
             this.playerModel = playerModel;
             this.playerView = playerView;
             this.transform = transform;
+            
+            playerView.Agent.updateRotation = false;
+            playerView.Agent.acceleration = 100f;
+            playerView.Agent.autoBraking = false;
         }
 
         public void MoveTo(Vector3 inputVector)
         {
-            if (playerView.characterController.isGrounded && velocity.y < 0)
+            if (inputVector.sqrMagnitude < 0.01f)
             {
-                velocity.y = -2f;
+                playerView.Agent.isStopped = true;
+                return;
             }
-            
-            var move = Vector3.ClampMagnitude(inputVector, 1f);
-            
-            if (move.magnitude > 0f)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(move);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, playerModel.RotationSpeed * Time.deltaTime);
-            }
-            
-            playerView.characterController.Move(move * playerModel.MoveSpeed * Time.deltaTime);
 
-            velocity.y += playerModel.Gravity * Time.deltaTime;
-            playerView.characterController.Move(velocity * Time.deltaTime);
+            Vector3 direction = Vector3.ClampMagnitude(inputVector, 1f);
+            Vector3 destination = transform.position + direction * 2f;
+
+            playerView.Agent.isStopped = false;
+            playerView.Agent.speed = playerModel.MoveSpeed;
+            playerView.Agent.SetDestination(destination);
+
+            if (playerView.Agent.velocity.sqrMagnitude > 0.1f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(playerView.Agent.velocity.normalized);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, playerModel.RotationSpeed * Time.deltaTime * 3f);
+            }
         }
     }
 }
