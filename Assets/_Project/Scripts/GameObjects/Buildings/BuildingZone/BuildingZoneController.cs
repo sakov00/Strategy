@@ -3,13 +3,14 @@ using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects.Characters.Player;
+using _Project.Scripts.Interfaces;
 using _Project.Scripts.Windows.Presenters;
 using UnityEngine;
 using VContainer;
 
 namespace _Project.Scripts.GameObjects.BuildingZone
 {
-    public class BuildingZoneController : MonoBehaviour
+    public class BuildingZoneController : MonoBehaviour, IBuyController
     {
         [Inject] private BuildFactory buildFactory;
         [Inject] private GameWindowViewModel gameWindowViewModel;
@@ -21,7 +22,7 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             InjectManager.Inject(this);
         }
 
-        public void TryCreateBuild()
+        public void TryBuy()
         {
             var buildModel = buildFactory.GetBuildModel(buildingZoneModel.typeBuilding);
             if (buildModel.PriceList[0] > gameWindowViewModel.Money.Value)

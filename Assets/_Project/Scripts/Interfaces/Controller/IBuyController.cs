@@ -2,8 +2,8 @@ using UnityEditor.Rendering;
 
 namespace _Project.Scripts.Interfaces
 {
-    public interface IUpgradableController
+    public interface IBuyController
     {
-        void TryUpgrade();
+        void TryBuy();
     }
 }

@@ -8,7 +8,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects
 {
-    public abstract class BuildController : ObjectController, IUpgradableController
+    public abstract class BuildController : ObjectController, IBuyController
     {
         [Inject] protected GameWindowViewModel GameWindowViewModel;
         public abstract BuildModel BuildModel { get; }
@@ -16,7 +16,7 @@ namespace _Project.Scripts.GameObjects
         public override ObjectModel ObjectModel => BuildModel;
         public override ObjectView ObjectView => BuildView;
         
-        public virtual void TryUpgrade()
+        public virtual void TryBuy()
         {
             if (BuildModel.PriceList[BuildModel.CurrentLevel] > GameWindowViewModel.Money.Value)
             {

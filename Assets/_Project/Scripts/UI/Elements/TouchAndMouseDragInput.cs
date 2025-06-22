@@ -48,15 +48,9 @@ namespace _Project.Scripts.UI.Elements
                 var ray = GlobalObjects.CameraController.currentCamera.ScreenPointToRay(Input.mousePosition);
                 if (!Physics.Raycast(ray, out RaycastHit hit)) return;
                 
-                if (hit.collider.TryGetComponent<IUpgradableController>(out var upgradeable))
+                if (hit.collider.TryGetComponent<IBuyController>(out var upgradeable))
                 {
-                    upgradeable.TryUpgrade();
-                    return;
-                }
-
-                if (hit.collider.TryGetComponent<BuildingZoneController>(out var creatable))
-                {
-                    creatable.TryCreateBuild();
+                    upgradeable.TryBuy();
                 }
             }
         }
@@ -94,15 +88,9 @@ namespace _Project.Scripts.UI.Elements
                 var ray = GlobalObjects.CameraController.currentCamera.ScreenPointToRay(touch.position);
                 if (!Physics.Raycast(ray, out RaycastHit hit)) return;
 
-                if (hit.collider.TryGetComponent<IUpgradableController>(out var upgradeable))
+                if (hit.collider.TryGetComponent<IBuyController>(out var upgradeable))
                 {
-                    upgradeable.TryUpgrade();
-                    return;
-                }
-
-                if (hit.collider.TryGetComponent<BuildingZoneController>(out var creatable))
-                {
-                    creatable.TryCreateBuild();
+                    upgradeable.TryBuy();
                 }
             }
         }
