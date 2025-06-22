@@ -14,6 +14,7 @@ Library: D:\Work\Strategy\Temp\BurstOutput\tempburstlibs\armeabi-v7a\lib_burst_g
 --assembly-defines=Assembly-CSharp;
 --assembly-defines=UniTask.Addressables;
 --assembly-defines=Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary;
+--assembly-defines=MTE_script;
 --assembly-defines=UniTask.Linq;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
@@ -86,6 +87,7 @@ Library: D:\Work\Strategy\Temp\BurstOutput\tempburstlibs\armeabi-v7a\lib_burst_g
 --assembly-defines=Assembly-CSharp;
 --assembly-defines=UniTask.Addressables;
 --assembly-defines=Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary;
+--assembly-defines=MTE_script;
 --assembly-defines=UniTask.Linq;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
