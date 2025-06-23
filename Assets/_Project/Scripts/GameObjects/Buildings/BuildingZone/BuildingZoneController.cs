@@ -32,14 +32,7 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             }
             
             gameWindowViewModel.AddMoney(-buildModel.PriceList[0]);
-            
-            var createdBuild = 
-                buildFactory.CreateBuild(buildingZoneModel.typeBuilding, transform.position, Quaternion.identity);
-            var newPosition = new Vector3(
-                transform.position.x,
-                transform.position.y + createdBuild.BuildView.objRenderer.bounds.size.y/2,
-                transform.position.z);
-            createdBuild.transform.position = newPosition;
+            buildFactory.CreateBuild(buildingZoneModel.typeBuilding, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }

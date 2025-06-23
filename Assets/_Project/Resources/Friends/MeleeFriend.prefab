@@ -124,10 +124,10 @@ MonoBehaviour:
   healthBarRenderer: {fileID: 351811317915167694}
   objRenderer: {fileID: 1924798556776072654}
   animator: {fileID: 0}
+  <Agent>k__BackingField: {fileID: 5435124656432188814}
   <ProjectileType>k__BackingField: 0
   <FirePoint>k__BackingField: {fileID: 0}
   <ProjectileSpeed>k__BackingField: 10
-  Agent: {fileID: 5435124656432188814}
 --- !u!1001 &970481426546825546
 PrefabInstance:
   m_ObjectHideFlags: 0

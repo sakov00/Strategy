@@ -40,6 +40,10 @@ namespace _Project.Scripts.GameObjects.Characters
             {
                 attackableView.AttackHitEvent += MeleeAttack;
             }
+            if (fightObjectModel.TypeAttack == TypeAttack.Distance)
+            {
+                attackableView.AttackHitEvent += DistanceAttack;
+            }
         }
 
         public void Attack()
@@ -60,9 +64,6 @@ namespace _Project.Scripts.GameObjects.Characters
             lastAttackTime = Time.time;
             
             attackableView.SetAttack(true);
-            
-            if (fightObjectModel.TypeAttack == TypeAttack.Distance)
-                DistanceAttack();
         }
 
         private void MeleeAttack()

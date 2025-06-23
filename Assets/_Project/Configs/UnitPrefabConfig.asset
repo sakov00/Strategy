@@ -16,11 +16,12 @@ MonoBehaviour:
     type: 3}
   distanceFriendPrefab: {fileID: 7271819039594461265, guid: 28dc6e094cf31fa4bade2478c744ced6,
     type: 3}
-  meleeEnemyPrefab: {fileID: 7054874310074094982, guid: 8b650d91bd11a004596abbbe366f51b1,
+  meleeEnemyPrefab: {fileID: -6794352509851856110, guid: 39d72efaf1b66234ba30f80bed4305df,
     type: 3}
-  distanceEnemyPrefab: {fileID: 1636366110536653870, guid: f08c4e2abd47fac409905273348aa11e,
+  distanceEnemyPrefab: {fileID: 4494823080349588702, guid: 7a02f0b6d89b7634298f3073be2c69e2,
     type: 3}
   playerPrefab: {fileID: 727004643926444983, guid: 08a642a0595c20d4180778ff6bb8d4eb,
     type: 3}
-  cameraPrefab: {fileID: 7117987020925613718, guid: c8f0af405673c4141a943c83fcbe24e6,
-    type: 3}
+  cameraPrefab:
+    offset: {x: 0, y: 10, z: -10}
+    followSpeed: 5

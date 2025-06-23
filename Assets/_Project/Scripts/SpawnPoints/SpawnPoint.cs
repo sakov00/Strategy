@@ -32,7 +32,7 @@ namespace _Project.Scripts.SpawnPoints
 
         public void StartSpawn()
         {
-            spawnQueue = new Queue<EnemyUnitType>(roundEnemyList[gameWindowViewModel.GetCurrentRound()].enemies);
+            //spawnQueue = new Queue<EnemyUnitType>(roundEnemyList[gameWindowViewModel.GetCurrentRound()].enemies);
             
             GameTimer.Instance.OnEverySecond -= SpawnEnemy;
             GameTimer.Instance.OnEverySecond += SpawnEnemy;
@@ -63,6 +63,14 @@ namespace _Project.Scripts.SpawnPoints
     [System.Serializable]
     public class EnemyGroup
     {
-        public List<EnemyUnitType> enemies;
+        public List<EnemyWithTime> enemies;
+    }
+    
+    [System.Serializable]
+    public class EnemyWithTime
+    {
+        public float time;
+        public EnemyUnitType enemyType;
+        
     }
 }

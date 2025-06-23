@@ -260,10 +260,10 @@ MonoBehaviour:
   healthBarRenderer: {fileID: 3409585272852687059}
   objRenderer: {fileID: 6325934801687606467}
   animator: {fileID: 0}
+  <Agent>k__BackingField: {fileID: 253004234346408404}
   <ProjectileType>k__BackingField: 1
   <FirePoint>k__BackingField: {fileID: 3946377445745853680}
   <ProjectileSpeed>k__BackingField: 30
-  Agent: {fileID: 253004234346408404}
 --- !u!1 &8111565066530959347
 GameObject:
   m_ObjectHideFlags: 0
