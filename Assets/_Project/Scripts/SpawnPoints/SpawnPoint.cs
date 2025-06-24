@@ -15,14 +15,13 @@ namespace _Project.Scripts.SpawnPoints
         [Inject] private GameWindowViewModel gameWindowViewModel;
         [Inject] private EnemyFactory enemyFactory;
         [Inject] private SpawnRegistry spawnRegistry;
-        
+
         [SerializeField] private float spawnRadius = 5f;
         [SerializeField] private List<EnemyGroup> roundEnemyList = new();
-        
-        private Queue<EnemyUnitType> spawnQueue;
-        
-        private int spawnedMelee;
-        private int spawnedDistance;
+
+        private List<EnemyWithTime> currentEnemyList;
+        private int currentIndex;
+        private float elapsedTime;
 
         private void Start()
         {
@@ -32,45 +31,63 @@ namespace _Project.Scripts.SpawnPoints
 
         public void StartSpawn()
         {
-            //spawnQueue = new Queue<EnemyUnitType>(roundEnemyList[gameWindowViewModel.GetCurrentRound()].enemies);
-            
-            GameTimer.Instance.OnEverySecond -= SpawnEnemy;
-            GameTimer.Instance.OnEverySecond += SpawnEnemy;
-        }
-
-        private void SpawnEnemy()
-        {
-            if (spawnQueue.Count == 0)
+            int currentRound = gameWindowViewModel.GetCurrentRound();
+            if (currentRound >= roundEnemyList.Count)
             {
-                GameTimer.Instance.OnEverySecond -= SpawnEnemy;
+                Debug.LogWarning("Нет настроек для текущего раунда спавна.");
                 return;
             }
-            
-            var randomOffset2D = UnityEngine.Random.insideUnitCircle * spawnRadius;
-            var spawnOffset = new Vector3(randomOffset2D.x, 0, randomOffset2D.y);
-            var spawnPosition = transform.position + spawnOffset;
-            
-            var nextEnemyType = spawnQueue.Dequeue();
-            enemyFactory.CreateEnemyUnit(nextEnemyType, spawnPosition, new Vector3(58, 0, 94));
+
+            currentEnemyList = roundEnemyList[currentRound].enemies;
+            currentEnemyList.Sort((a, b) => a.time.CompareTo(b.time)); // сортировка на всякий случай
+            currentIndex = 0;
+            elapsedTime = 0f;
+
+            GameTimer.Instance.OnEverySecond -= Tick;
+            GameTimer.Instance.OnEverySecond += Tick;
         }
-        
+
+        private void Tick()
+        {
+            elapsedTime += 1f;
+
+            while (currentIndex < currentEnemyList.Count && elapsedTime >= currentEnemyList[currentIndex].time)
+            {
+                Spawn(currentEnemyList[currentIndex]);
+                currentIndex++;
+            }
+
+            if (currentIndex >= currentEnemyList.Count)
+            {
+                GameTimer.Instance.OnEverySecond -= Tick;
+            }
+        }
+
+        private void Spawn(EnemyWithTime enemyData)
+        {
+            var offset2D = Random.insideUnitCircle * spawnRadius;
+            var spawnPosition = transform.position + new Vector3(offset2D.x, 0, offset2D.y);
+
+            enemyFactory.CreateEnemyUnit(enemyData.enemyType, spawnPosition, new Vector3(58, 0, 94));
+        }
+
         private void OnDestroy()
         {
-            GameTimer.Instance.OnEverySecond -= SpawnEnemy;
+            GameTimer.Instance.OnEverySecond -= Tick;
         }
     }
-    
+
     [System.Serializable]
     public class EnemyGroup
     {
         public List<EnemyWithTime> enemies;
     }
-    
+
     [System.Serializable]
     public class EnemyWithTime
     {
+        [Min(0f)]
         public float time;
         public EnemyUnitType enemyType;
-        
     }
 }
