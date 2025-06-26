@@ -1,3 +1,4 @@
+using System;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.Services;
@@ -6,22 +7,24 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Projectiles
 {
-    public class Projectile : MonoBehaviour
+    public abstract class Projectile : MonoBehaviour
     {
-        [Inject] private HealthRegistry healthRegistry;
+        [Inject] protected HealthRegistry healthRegistry;
         
         public int damage;
         public WarSide ownerWarSide;
+        public abstract void LaunchToPoint(Vector3 targetPosition, float initialSpeed);
+
+        private void Start()
+        {
+            Destroy(gameObject, 5f);
+        }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.TryGetComponent<ObjectController>(out var target))
-            {
-                Destroy(gameObject);
-                return;
-            }
+            var target = other.GetComponent<ObjectController>();
 
-            if (target.ObjectModel.WarSide == ownerWarSide)
+            if (target == null || target.ObjectModel.WarSide == ownerWarSide)
                 return;
 
             target.ObjectModel.CurrentHealth -= damage;
@@ -38,7 +41,6 @@ namespace _Project.Scripts.GameObjects.Projectiles
                     target.gameObject.SetActive(false);
                 }
             }
-
             Destroy(gameObject); 
         }
     }

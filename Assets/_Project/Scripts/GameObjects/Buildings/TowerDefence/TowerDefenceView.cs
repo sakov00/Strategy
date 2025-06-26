@@ -19,7 +19,7 @@ namespace _Project.Scripts.GameObjects.TowerDefence
 
         public void SetAttack(bool isAttacking)
         {
-            
+            AttackHitEvent?.Invoke();
         }
 
         public event Action AttackHitEvent;

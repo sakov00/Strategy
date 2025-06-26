@@ -1,53 +1,29 @@
 using System;
 using _Project.Scripts._GlobalLogic;
+using _Project.Scripts.GameObjects.UI;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects._General
 {
     public abstract class ObjectView : MonoBehaviour
     {
-        [SerializeField] protected MeshRenderer healthBarRenderer;
-        [SerializeField] public Renderer objRenderer;
+        [SerializeField] protected Renderer objRenderer;
+        [SerializeField] protected HealthBar healthBar;
+        [SerializeField] protected Tooltip tooltip;
         
-        private MaterialPropertyBlock matBlock;
-
         public virtual void Initialize() 
         {
-            healthBarRenderer.enabled = false;
-            matBlock = new MaterialPropertyBlock();
         }
 
-        public void UpdateHealthBar(float currentHealth, float maxHealth) 
+        public void UpdateHealthBar(float currentHealth, float maxHealth) =>
+            healthBar.UpdateHealthBar(currentHealth, maxHealth);
+        
+        public void UpdateTooltip(int currentLvl, int costUpgrade) =>
+            tooltip.UpdateTooltip(currentLvl, costUpgrade);
+        
+        public float GetHeightObject()
         {
-            if (currentHealth < maxHealth) 
-            {
-                healthBarRenderer.enabled = true;
-                HealthBarLookAtCamera();
-                ChangeHealthBarValue(currentHealth, maxHealth);
-            } 
-            else 
-            {
-                healthBarRenderer.enabled = false;
-            }
-        }
-
-        private void ChangeHealthBarValue(float currentHealth, float maxHealth) 
-        {
-            healthBarRenderer.GetPropertyBlock(matBlock);
-            matBlock.SetFloat("_Fill", currentHealth / maxHealth);
-            healthBarRenderer.SetPropertyBlock(matBlock);
-        }
-
-        private void HealthBarLookAtCamera() 
-        {
-            if (GlobalObjects.CameraController != null) 
-            {
-                var camXform = GlobalObjects.CameraController.transform;
-                var forward = healthBarRenderer.transform.position - camXform.position;
-                forward.Normalize();
-                var up = Vector3.Cross(forward, camXform.right);
-                healthBarRenderer.transform.rotation = Quaternion.LookRotation(forward, up);
-            }
+            return objRenderer.bounds.size.y;
         }
     }
 }

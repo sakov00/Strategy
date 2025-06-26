@@ -102,7 +102,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8337824269587287870, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2286103889999993886}
   m_SourcePrefab: {fileID: 100100000, guid: 7991bbbe44995004f8967dc6b9d6b3c9, type: 3}
 --- !u!4 &1622632282601740692 stripped
 Transform:
@@ -110,6 +114,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6158666224120184197}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2792826271338377915 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8337824269587287870, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6158666224120184197}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2286103889999993886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2792826271338377915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 988c9940b5f24368a08fba2ddaa2e9cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarRenderer: {fileID: 4912113428068058692}
 --- !u!23 &4912113428068058692 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1251067684197333953, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
@@ -503,7 +526,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 49b7b0a46cf50c941b682697fc5cfa5f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2738380383846414878}
+      addedObject: {fileID: 9159454074139602563}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 49b7b0a46cf50c941b682697fc5cfa5f,
         type: 3}
       insertIndex: -1
@@ -545,7 +568,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 2
---- !u!136 &2738380383846414878
+--- !u!136 &9159454074139602563
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -564,10 +587,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.3729477
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: -0.1270523}
 --- !u!95 &7389295262489941797
 Animator:
   serializedVersion: 5
@@ -628,8 +651,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3859cff1c149118054c40c9538b54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarRenderer: {fileID: 4912113428068058692}
   objRenderer: {fileID: 8306672324081057310}
+  healthBar: {fileID: 2286103889999993886}
+  tooltip: {fileID: 0}
   animator: {fileID: 7389295262489941797}
   <Agent>k__BackingField: {fileID: 2010110707927957712}
   <ProjectileType>k__BackingField: 1

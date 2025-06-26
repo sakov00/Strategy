@@ -257,8 +257,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3859cff1c149118054c40c9538b54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarRenderer: {fileID: 3409585272852687059}
   objRenderer: {fileID: 6325934801687606467}
+  healthBar: {fileID: 7757102756358357087}
+  tooltip: {fileID: 0}
   animator: {fileID: 0}
   <Agent>k__BackingField: {fileID: 253004234346408404}
   <ProjectileType>k__BackingField: 1
@@ -363,12 +364,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7991bbbe44995004f8967dc6b9d6b3c9, type: 3}
---- !u!23 &3409585272852687059 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1251067684197333953, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
+--- !u!114 &7757102756358357087 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6173075028267324237, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
     type: 3}
   m_PrefabInstance: {fileID: 4471486000153285394}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 988c9940b5f24368a08fba2ddaa2e9cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &9078885111946753795 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4896333342933246993, guid: 7991bbbe44995004f8967dc6b9d6b3c9,

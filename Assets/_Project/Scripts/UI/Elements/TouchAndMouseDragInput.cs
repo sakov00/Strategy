@@ -1,6 +1,7 @@
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.GameObjects.BuildingZone;
 using _Project.Scripts.Interfaces;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Project.Scripts.UI.Elements
@@ -50,7 +51,7 @@ namespace _Project.Scripts.UI.Elements
                 
                 if (hit.collider.TryGetComponent<IBuyController>(out var upgradeable))
                 {
-                    upgradeable.TryBuy();
+                    upgradeable.TryBuy().Forget();
                 }
             }
         }
@@ -90,7 +91,7 @@ namespace _Project.Scripts.UI.Elements
 
                 if (hit.collider.TryGetComponent<IBuyController>(out var upgradeable))
                 {
-                    upgradeable.TryBuy();
+                    upgradeable.TryBuy().Forget();
                 }
             }
         }

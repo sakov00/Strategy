@@ -703,7 +703,7 @@ MonoBehaviour:
     currentRound:
       value: 0
     money:
-      value: 10
+      value: 30
 --- !u!114 &9106743238255189466
 MonoBehaviour:
   m_ObjectHideFlags: 0

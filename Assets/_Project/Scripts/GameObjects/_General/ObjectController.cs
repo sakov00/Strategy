@@ -15,6 +15,7 @@ namespace _Project.Scripts.GameObjects._General
             InjectManager.Inject(this);
             ObjectView.Initialize();
             ObjectModel.Transform = transform;
+            ObjectModel.HeightObject = ObjectView.GetHeightObject();
             ObjectModel.NoAimPos = transform.position;
         }
 

@@ -14,6 +14,7 @@ namespace _Project.Scripts.GameObjects._General
         [SerializeField] private float currentHealth = 100f;
         
         public Transform Transform { get; set; }
+        public float HeightObject { get; set; }
         public Vector3 NoAimPos { get; set; }
         public WarSide WarSide => warSide;
         public float MaxHealth => maxHealth;

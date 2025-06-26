@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1a3319018b4c49b6f25f560cb8092b, type: 3}
   m_Name: ProjectilePrefabConfig
   m_EditorClassIdentifier: 
-  arrowPrefab: {fileID: 5582386090834150535, guid: aa49d42f2d1b0c240bb410973318b223,
+  arrowPrefab: {fileID: 1764037662488493107, guid: aa49d42f2d1b0c240bb410973318b223,
     type: 3}
-  bigArrowPrefab: {fileID: 5582386090834150535, guid: f0afd34565e49fa49bae59ad57415f6f,
+  bigArrowPrefab: {fileID: 6949133347481730748, guid: f0afd34565e49fa49bae59ad57415f6f,
     type: 3}

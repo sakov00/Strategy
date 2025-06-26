@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2140298328758670809}
   - component: {fileID: 6257980385282480571}
   - component: {fileID: 460377541726705133}
-  - component: {fileID: 5582386090834150535}
+  - component: {fileID: 6949133347481730748}
   m_Layer: 0
   m_Name: BigProjectile
   m_TagString: Untagged
@@ -134,7 +134,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5582386090834150535
+--- !u!114 &6949133347481730748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,8 +143,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1232302952673697347}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e40b24538b914e3c9607d04873f45ce8, type: 3}
+  m_Script: {fileID: 11500000, guid: 46a271d935e44fd7851338bb2419a146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 0
   ownerWarSide: 0
+  launchAngle: 30
+  gravity: 9.81
