@@ -3,6 +3,7 @@ using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
+using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using _Project.Scripts.Windows.Presenters;
 using UnityEngine;

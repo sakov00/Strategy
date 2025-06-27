@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-using System.Linq;
 using _Project.Scripts.Interfaces;
 using UniRx;
 
-namespace _Project.Scripts.Services
+namespace _Project.Scripts.Registries
 {
     public class HealthRegistry
     {

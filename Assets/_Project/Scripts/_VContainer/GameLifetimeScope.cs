@@ -7,6 +7,8 @@ using _Project.Scripts.GameObjects.Characters.Unit;
 using _Project.Scripts.GameObjects.FriendsBuild;
 using _Project.Scripts.GameObjects.MoneyBuild;
 using _Project.Scripts.GameObjects.TowerDefence;
+using _Project.Scripts.Json;
+using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using _Project.Scripts.SO;
 using _Project.Scripts.Windows.Presenters;
@@ -33,11 +35,11 @@ namespace _Project.Scripts._VContainer
             
             builder.Register<InitializeGame>(Lifetime.Singleton).As<InitializeGame, IStartable>();
             builder.Register<ResetService>(Lifetime.Singleton).AsSelf();
-            
-            builder.Register<SpawnRegistry>(Lifetime.Singleton).AsSelf();
-            builder.Register<HealthRegistry>(Lifetime.Singleton).AsSelf();
+            builder.Register<LevelController>(Lifetime.Singleton).AsSelf();
+            builder.Register<JsonLoader<LevelJson>>(Lifetime.Singleton).AsSelf();
             
             RegisterWindows(builder);
+            RegisterRegistries(builder);
             RegisterFactories(builder);
             RegisterSO(builder);
         }
@@ -45,6 +47,14 @@ namespace _Project.Scripts._VContainer
         private void RegisterWindows(IContainerBuilder builder)
         {
             builder.RegisterComponentInNewPrefab(windowsConfig.gameWindowViewModel, Lifetime.Singleton);
+        }
+        
+        private void RegisterRegistries(IContainerBuilder builder)
+        {
+            builder.Register<BuildingZoneRegistry>(Lifetime.Singleton).AsSelf();
+            builder.Register<SpawnRegistry>(Lifetime.Singleton).AsSelf();
+            builder.Register<HealthRegistry>(Lifetime.Singleton).AsSelf();
+            builder.Register<TooltipRegistry>(Lifetime.Singleton).AsSelf();
         }
         
         private void RegisterFactories(IContainerBuilder builder)

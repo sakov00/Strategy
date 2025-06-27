@@ -2,6 +2,8 @@ using System.Linq;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Camera;
+using _Project.Scripts.Json;
+using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using _Project.Scripts.Windows.Models;
 using UniRx;
@@ -12,12 +14,16 @@ namespace _Project.Scripts.Windows.Presenters
 {
     public class GameWindowViewModel : BaseWindowPresenter
     {
-        [Inject] private ResetService resetService;
-        [Inject] private HealthRegistry healthRegistry;
-        [Inject] private SpawnRegistry spawnRegistry;
+        [Inject] private ResetService _resetService;
+        
+        [Inject] private HealthRegistry _healthRegistry;
+        [Inject] private SpawnRegistry _spawnRegistry;
+        [Inject] private BuildingZoneRegistry _buildingZoneRegistry;
+        [Inject] private JsonLoader<LevelJson> _jsonLoader;
 
         [SerializeField] private GameWindowModel model;
         
+        public ReactiveCommand SaveLevelCommand { get; } = new();
         public ReactiveCommand NextRoundCommand { get; } = new();
         public ReactiveCommand SetStrategyModeCommand { get; } = new();
         
@@ -33,7 +39,7 @@ namespace _Project.Scripts.Windows.Presenters
 
         private void Awake()
         {
-            healthRegistry
+            _healthRegistry
                 .GetAll()
                 .ObserveRemove()
                 .Subscribe(_ => TryStartNewRound())
@@ -45,6 +51,12 @@ namespace _Project.Scripts.Windows.Presenters
             NextRoundCommand
                 .Subscribe(_ => NextRoundOnClick())
                 .AddTo(this);
+            
+#if EDIT_MODE
+            SaveLevelCommand
+                .Subscribe(_ => SaveLevel())
+                .AddTo(this);
+#endif
         }
         
         private void SetStrategyMode() => model.IsStrategyMode = !model.IsStrategyMode;
@@ -52,7 +64,7 @@ namespace _Project.Scripts.Windows.Presenters
         private void NextRoundOnClick()
         {
             model.IsNextRoundAvailable = false;
-            foreach (var spawnPoint in spawnRegistry.GetAll())
+            foreach (var spawnPoint in _spawnRegistry.GetAll())
             {
                 spawnPoint.StartSpawn();
             }
@@ -60,12 +72,22 @@ namespace _Project.Scripts.Windows.Presenters
         
         private void TryStartNewRound()
         {
-            bool enemiesRemain = healthRegistry.GetAll().Any(unit => unit.WarSide == WarSide.Enemy);
+            bool enemiesRemain = _healthRegistry.GetAll().Any(unit => unit.WarSide == WarSide.Enemy);
             if (enemiesRemain) return;
 
-            resetService.ResetRound();
+            _resetService.ResetRound();
             model.CurrentRound++;
             model.IsNextRoundAvailable = true;
+        }
+
+        private void SaveLevel()
+        {
+            var levelJson = new LevelJson
+            {
+                spawnPoints = _spawnRegistry.GetAll().ToList(),
+                buildingZoneModels = _buildingZoneRegistry.GetAll().ToList()
+            };
+            _jsonLoader.Save(levelJson);
         }
     }
 }

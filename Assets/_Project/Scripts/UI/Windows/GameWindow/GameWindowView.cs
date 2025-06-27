@@ -18,6 +18,7 @@ namespace _Project.Scripts.UI.Windows.GameWindow
         [Header("Buttons")]
         [SerializeField] private Button nextRoundButton;
         [SerializeField] private Button strategyModeButton;
+        [SerializeField] private Button saveLevelButton;
 
         [Header("UI Text")]
         [SerializeField] private TextMeshProUGUI moneyText;
@@ -54,6 +55,10 @@ namespace _Project.Scripts.UI.Windows.GameWindow
             viewModel.CurrentRound
                 .Subscribe(roundIndex => currentRoundText.text = string.Format(RoundFormat, roundIndex + 1))
                 .AddTo(this);
+
+#if EDIT_MODE
+            viewModel.SaveLevelCommand.BindTo(saveLevelButton).AddTo(this);
+#endif
         }
 
         public void Update()

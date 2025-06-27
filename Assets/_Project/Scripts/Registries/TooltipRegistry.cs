@@ -1,7 +1,7 @@
 using UniRx;
 using UnityEngine;
 
-namespace _Project.Scripts.Services
+namespace _Project.Scripts.Registries
 {
     public class TooltipRegistry
     {

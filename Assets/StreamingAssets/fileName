@@ -1,0 +1,33 @@
+{
+    "spawnPoints": [
+        {
+            "instanceID": 30040
+        },
+        {
+            "instanceID": 30098
+        },
+        {
+            "instanceID": 30104
+        }
+    ],
+    "buildingZoneModels": [
+        {
+            "typeBuilding": 0
+        },
+        {
+            "typeBuilding": 1
+        },
+        {
+            "typeBuilding": 0
+        },
+        {
+            "typeBuilding": 3
+        },
+        {
+            "typeBuilding": 1
+        },
+        {
+            "typeBuilding": 2
+        }
+    ]
+}

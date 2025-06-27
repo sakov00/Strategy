@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using _Project.Scripts.Interfaces;
 using _Project.Scripts.SpawnPoints;
-using UniRx;
 
-namespace _Project.Scripts.Services
+namespace _Project.Scripts.Registries
 {
     public class SpawnRegistry
     {

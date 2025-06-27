@@ -8,6 +8,7 @@ using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects.Projectiles;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Interfaces.View;
+using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

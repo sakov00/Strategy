@@ -1,6 +1,7 @@
 using System;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
+using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using UnityEngine;
 using VContainer;

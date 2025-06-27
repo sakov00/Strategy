@@ -2,6 +2,7 @@ using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Extentions;
 using _Project.Scripts.Interfaces;
+using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using UnityEngine;
 using VContainer;
