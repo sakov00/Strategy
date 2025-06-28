@@ -1,16 +1,20 @@
+using System;
 using System.Collections.Generic;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
+using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using _Project.Scripts.Windows.Presenters;
 using UnityEngine;
 using VContainer;
+using Random = UnityEngine.Random;
 
 namespace _Project.Scripts.SpawnPoints
 {
+    [Serializable]
     public class SpawnPoint : MonoBehaviour
     {
         [Inject] private GameWindowViewModel gameWindowViewModel;
@@ -29,10 +33,27 @@ namespace _Project.Scripts.SpawnPoints
             InjectManager.Inject(this);
             spawnRegistry.Register(this);
         }
+        
+        public SpawnDataJson GetJsonData()
+        {
+            var spawnDataJson = new SpawnDataJson();
+            spawnDataJson.position = transform.position;
+            spawnDataJson.spawnRadius = spawnRadius;
+            spawnDataJson.roundEnemyList.AddRange(roundEnemyList);
+            return spawnDataJson;
+        }
+
+        public SpawnDataJson SetJsonData(SpawnDataJson spawnDataJson)
+        {
+            transform.position = spawnDataJson.position;
+            spawnRadius = spawnDataJson.spawnRadius;
+            roundEnemyList.AddRange(spawnDataJson.roundEnemyList);
+            return spawnDataJson;
+        }
 
         public void StartSpawn()
         {
-            int currentRound = gameWindowViewModel.GetCurrentRound();
+            int currentRound = gameWindowViewModel.CurrentRound.Value;
             if (currentRound >= roundEnemyList.Count)
             {
                 Debug.LogWarning("Нет настроек для текущего раунда спавна.");
@@ -78,13 +99,13 @@ namespace _Project.Scripts.SpawnPoints
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class EnemyGroup
     {
         public List<EnemyWithTime> enemies;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class EnemyWithTime
     {
         [Min(0f)]

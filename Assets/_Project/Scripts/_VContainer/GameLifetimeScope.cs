@@ -22,6 +22,7 @@ namespace _Project.Scripts._VContainer
     public class GameLifetimeScope : LifetimeScope
     {
         [Header("Configs")]
+        [SerializeField] private OthersPrefabConfig othersPrefabConfig;
         [SerializeField] private UnitPrefabConfig unitPrefabConfig;
         [SerializeField] private BuildingPrefabConfig buildingPrefabConfig;
         [SerializeField] private ProjectilePrefabConfig projectilePrefabConfig;
@@ -35,8 +36,8 @@ namespace _Project.Scripts._VContainer
             
             builder.Register<InitializeGame>(Lifetime.Singleton).As<InitializeGame, IStartable>();
             builder.Register<ResetService>(Lifetime.Singleton).AsSelf();
-            builder.Register<LevelController>(Lifetime.Singleton).AsSelf();
-            builder.Register<JsonLoader<LevelJson>>(Lifetime.Singleton).AsSelf();
+            builder.Register<LevelController>(Lifetime.Singleton).As<LevelController, IInitializable>();
+            builder.Register<JsonLoader>(Lifetime.Singleton).AsSelf();
             
             RegisterWindows(builder);
             RegisterRegistries(builder);
@@ -60,6 +61,7 @@ namespace _Project.Scripts._VContainer
         private void RegisterFactories(IContainerBuilder builder)
         {
             builder.Register<WindowFactory>(Lifetime.Singleton).AsSelf();
+            builder.Register<OthersFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<BuildFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<ProjectileFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<FriendFactory>(Lifetime.Singleton).AsSelf();
@@ -68,6 +70,7 @@ namespace _Project.Scripts._VContainer
         
         private void RegisterSO(IContainerBuilder builder)
         {
+            builder.RegisterInstance(othersPrefabConfig).AsSelf();
             builder.RegisterInstance(unitPrefabConfig).AsSelf();
             builder.RegisterInstance(buildingPrefabConfig).AsSelf();
             builder.RegisterInstance(projectilePrefabConfig).AsSelf();

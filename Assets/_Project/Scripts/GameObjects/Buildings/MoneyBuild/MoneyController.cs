@@ -34,7 +34,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
         private void AddMoneyToPlayer()
         {
             var moneyAmount = moneyBuildModel.addMoneyValue * (moneyBuildModel.CurrentLevel + 1);
-            gameWindowViewModel.AddMoney(moneyAmount);
+            gameWindowViewModel.Money.Value += moneyAmount;
             moneyBuildingView.MoneyUp(moneyAmount);
         }
 

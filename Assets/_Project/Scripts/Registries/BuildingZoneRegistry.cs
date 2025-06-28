@@ -6,19 +6,19 @@ namespace _Project.Scripts.Registries
 {
     public class BuildingZoneRegistry
     {
-        private readonly ReactiveCollection<BuildingZoneModel> _buildingZoneModels = new();
+        private readonly ReactiveCollection<BuildingZoneController> _buildingZoneModels = new();
 
-        public void Register(BuildingZoneModel damageable)
+        public void Register(BuildingZoneController damageable)
         {
             _buildingZoneModels.Add(damageable);
         }
 
-        public void Unregister(BuildingZoneModel damageable)
+        public void Unregister(BuildingZoneController damageable)
         {
             _buildingZoneModels.Remove(damageable);
         }
 
-        public IReactiveCollection<BuildingZoneModel> GetAll()
+        public IReactiveCollection<BuildingZoneController> GetAll()
         {
             return _buildingZoneModels;
         }

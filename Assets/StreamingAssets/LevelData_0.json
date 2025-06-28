@@ -1,0 +1,218 @@
+{
+    "spawnDataJsons": [
+        {
+            "position": {
+                "x": 31.59000015258789,
+                "y": 1.559999942779541,
+                "z": 23.559999465942384
+            },
+            "spawnRadius": 5.0,
+            "roundEnemyList": [
+                {
+                    "enemies": [
+                        {
+                            "time": 1.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 2.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 3.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 4.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 5.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 6.0,
+                            "enemyType": 0
+                        }
+                    ]
+                },
+                {
+                    "enemies": []
+                },
+                {
+                    "enemies": []
+                }
+            ]
+        },
+        {
+            "position": {
+                "x": 59.43000030517578,
+                "y": 1.559999942779541,
+                "z": 23.559999465942384
+            },
+            "spawnRadius": 5.0,
+            "roundEnemyList": [
+                {
+                    "enemies": [
+                        {
+                            "time": 1.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 1.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 2.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 2.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 3.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 3.0,
+                            "enemyType": 0
+                        }
+                    ]
+                },
+                {
+                    "enemies": [
+                        {
+                            "time": 1.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 1.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 2.0,
+                            "enemyType": 1
+                        },
+                        {
+                            "time": 2.0,
+                            "enemyType": 1
+                        },
+                        {
+                            "time": 3.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 3.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 4.0,
+                            "enemyType": 1
+                        },
+                        {
+                            "time": 4.0,
+                            "enemyType": 1
+                        }
+                    ]
+                },
+                {
+                    "enemies": [
+                        {
+                            "time": 1.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 1.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 2.0,
+                            "enemyType": 1
+                        },
+                        {
+                            "time": 2.0,
+                            "enemyType": 1
+                        },
+                        {
+                            "time": 3.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 3.0,
+                            "enemyType": 0
+                        },
+                        {
+                            "time": 4.0,
+                            "enemyType": 1
+                        },
+                        {
+                            "time": 4.0,
+                            "enemyType": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "position": {
+                "x": 82.5,
+                "y": 1.559999942779541,
+                "z": 23.559999465942384
+            },
+            "spawnRadius": 5.0,
+            "roundEnemyList": []
+        }
+    ],
+    "buildingZoneJsons": [
+        {
+            "position": {
+                "x": 47.62000274658203,
+                "y": 0.11999999731779099,
+                "z": 90.56999969482422
+            },
+            "typeBuilding": 0
+        },
+        {
+            "position": {
+                "x": 42.970001220703128,
+                "y": 3.0399999618530275,
+                "z": 50.279998779296878
+            },
+            "typeBuilding": 1
+        },
+        {
+            "position": {
+                "x": 48.790000915527347,
+                "y": 0.11999999731779099,
+                "z": 80.5
+            },
+            "typeBuilding": 2
+        },
+        {
+            "position": {
+                "x": 68.58000183105469,
+                "y": 3.559999942779541,
+                "z": 51.93000030517578
+            },
+            "typeBuilding": 1
+        },
+        {
+            "position": {
+                "x": 67.97000122070313,
+                "y": 0.11999999731779099,
+                "z": 90.19999694824219
+            },
+            "typeBuilding": 3
+        },
+        {
+            "position": {
+                "x": 58.01000213623047,
+                "y": 0.11999999731779099,
+                "z": 94.8499984741211
+            },
+            "typeBuilding": 0
+        }
+    ],
+    "buildJsons": []
+}

@@ -43,7 +43,7 @@ namespace _Project.Scripts.GameObjects
                 Debug.Log("Not enough money");
                 return;
             }
-            GameWindowViewModel.AddMoney(-BuildModel.PriceList[0]);
+            GameWindowViewModel.Money.Value -= BuildModel.PriceList[0];
             BuildModel.CurrentLevel++;
         }
     }

@@ -4,6 +4,7 @@ using _Project.Scripts._VContainer;
 using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects.Characters.Player;
 using _Project.Scripts.Interfaces;
+using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using _Project.Scripts.Windows.Presenters;
@@ -27,7 +28,22 @@ namespace _Project.Scripts.GameObjects.BuildingZone
         private void Start()
         {
             InjectManager.Inject(this);
-            _buildingZoneRegistry.Register(buildingZoneModel);
+            _buildingZoneRegistry.Register(this);
+        }
+        
+        public BuildingZoneJson GetJsonData()
+        {
+            var buildingZoneJson = new BuildingZoneJson();
+            buildingZoneJson.position = transform.position;
+            buildingZoneJson.typeBuilding = buildingZoneModel.typeBuilding;
+            return buildingZoneJson;
+        }
+
+        public void SetJsonData(BuildingZoneJson buildingZoneJson)
+        {
+            transform.position = buildingZoneJson.position;
+            buildingZoneModel.typeBuilding = buildingZoneJson.typeBuilding;
+            _buildingZoneRegistry.Register(this);
         }
 
         public async UniTask TryBuy()
@@ -49,7 +65,7 @@ namespace _Project.Scripts.GameObjects.BuildingZone
                 return;
             }
             
-            _gameWindowViewModel.AddMoney(-buildModel.PriceList[0]);
+            _gameWindowViewModel.Money.Value -= buildModel.PriceList[0];
             _buildFactory.CreateBuild(buildingZoneModel.typeBuilding, transform.position, transform.rotation);
             Destroy(gameObject);
         }

@@ -5,26 +5,28 @@ namespace _Project.Scripts.Registries
 {
     public class SpawnRegistry
     {
-        private readonly HashSet<SpawnPoint> spawnPoints = new();
+        private readonly HashSet<SpawnPoint> _spawnPoints = new();
 
         public void Register(SpawnPoint spawnPoint)
         {
-            spawnPoints.Add(spawnPoint);
+            if (!_spawnPoints.Contains(spawnPoint))
+                _spawnPoints.Add(spawnPoint);
         }
 
         public void Unregister(SpawnPoint spawnPoint)
         {
-            spawnPoints.Remove(spawnPoint);
+            if (_spawnPoints.Contains(spawnPoint))
+                _spawnPoints.Remove(spawnPoint);
         }
 
         public HashSet<SpawnPoint> GetAll()
         {
-            return spawnPoints;
+            return _spawnPoints;
         }
 
         public void Clear()
         {
-            spawnPoints.Clear();
+            _spawnPoints.Clear();
         }
     }
 }

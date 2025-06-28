@@ -3,31 +3,26 @@ using UnityEngine;
 
 namespace _Project.Scripts.Json
 {
-    public class JsonLoader<T>
+    public class JsonLoader
     {
-        private readonly string _fileName;
-        
-        public JsonLoader()
+        public void Save<T>(T data, int levelIndex)
         {
-            _fileName = Path.Combine(Application.streamingAssetsPath, "fileName");
-        }
-        
-        public void Save(T data)
-        {
-            string json = JsonUtility.ToJson(data, prettyPrint: true);
-            File.WriteAllText(_fileName, json);
-            Debug.Log($"Данные сохранены в {_fileName}");
+            var fileName = Path.Combine(Application.streamingAssetsPath, $"LevelData_{levelIndex}.json");
+            var json = JsonUtility.ToJson(data, prettyPrint: true);
+            File.WriteAllText(fileName, json);
+            Debug.Log($"Данные сохранены в {fileName}");
         }
 
-        public T Load()
+        public T Load<T>(int levelIndex)
         {
-            if (!File.Exists(_fileName))
+            var fileName = Path.Combine(Application.streamingAssetsPath, $"LevelData_{levelIndex}.json");
+            if (!File.Exists(fileName))
             {
-                Debug.LogWarning("Файл не найден: " + _fileName);
+                Debug.LogWarning("Файл не найден: " + fileName);
                 return default;
             }
 
-            string json = File.ReadAllText(_fileName);
+            var json = File.ReadAllText(fileName);
             T data = JsonUtility.FromJson<T>(json);
             Debug.Log("Данные загружены");
             return data;
