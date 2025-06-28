@@ -53,6 +53,7 @@ namespace _Project.Scripts._VContainer
         private void RegisterRegistries(IContainerBuilder builder)
         {
             builder.Register<BuildingZoneRegistry>(Lifetime.Singleton).AsSelf();
+            builder.Register<BuildRegistry>(Lifetime.Singleton).AsSelf();
             builder.Register<SpawnRegistry>(Lifetime.Singleton).AsSelf();
             builder.Register<HealthRegistry>(Lifetime.Singleton).AsSelf();
             builder.Register<TooltipRegistry>(Lifetime.Singleton).AsSelf();

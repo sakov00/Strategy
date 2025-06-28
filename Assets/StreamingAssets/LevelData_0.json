@@ -2,6 +2,15 @@
     "spawnDataJsons": [
         {
             "position": {
+                "x": 82.5,
+                "y": 1.559999942779541,
+                "z": 23.559999465942384
+            },
+            "spawnRadius": 5.0,
+            "roundEnemyList": []
+        },
+        {
+            "position": {
                 "x": 31.59000015258789,
                 "y": 1.559999942779541,
                 "z": 23.559999465942384
@@ -153,58 +162,9 @@
                     ]
                 }
             ]
-        },
-        {
-            "position": {
-                "x": 82.5,
-                "y": 1.559999942779541,
-                "z": 23.559999465942384
-            },
-            "spawnRadius": 5.0,
-            "roundEnemyList": []
         }
     ],
     "buildingZoneJsons": [
-        {
-            "position": {
-                "x": 47.62000274658203,
-                "y": 0.11999999731779099,
-                "z": 90.56999969482422
-            },
-            "typeBuilding": 0
-        },
-        {
-            "position": {
-                "x": 42.970001220703128,
-                "y": 3.0399999618530275,
-                "z": 50.279998779296878
-            },
-            "typeBuilding": 1
-        },
-        {
-            "position": {
-                "x": 48.790000915527347,
-                "y": 0.11999999731779099,
-                "z": 80.5
-            },
-            "typeBuilding": 2
-        },
-        {
-            "position": {
-                "x": 68.58000183105469,
-                "y": 3.559999942779541,
-                "z": 51.93000030517578
-            },
-            "typeBuilding": 1
-        },
-        {
-            "position": {
-                "x": 67.97000122070313,
-                "y": 0.11999999731779099,
-                "z": 90.19999694824219
-            },
-            "typeBuilding": 3
-        },
         {
             "position": {
                 "x": 58.01000213623047,
@@ -214,5 +174,183 @@
             "typeBuilding": 0
         }
     ],
-    "buildJsons": []
+    "moneyBuildJsons": [
+        {
+            "position": {
+                "x": 47.62000274658203,
+                "y": 0.11999999731779099,
+                "z": 90.56999969482422
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": 0.0
+            },
+            "moneyBuildModel": {
+                "warSide": 0,
+                "maxHealth": 500.0,
+                "currentHealth": 500.0,
+                "priceList": [
+                    2,
+                    2,
+                    3,
+                    3,
+                    4
+                ],
+                "currentLevel": 1,
+                "addMoneyValue": 1
+            }
+        }
+    ],
+    "friendsBuildJsons": [
+        {
+            "position": {
+                "x": 48.790000915527347,
+                "y": 0.11999999731779099,
+                "z": 80.5
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "friendsBuildModel": {
+                "warSide": 0,
+                "maxHealth": 500.0,
+                "currentHealth": 500.0,
+                "priceList": [
+                    4,
+                    6,
+                    8,
+                    10,
+                    12
+                ],
+                "currentLevel": 1,
+                "unitType": 0,
+                "buildUnits": [
+                    {
+                        "instanceID": -25568
+                    },
+                    {
+                        "instanceID": -25598
+                    },
+                    {
+                        "instanceID": -25628
+                    },
+                    {
+                        "instanceID": -25658
+                    }
+                ]
+            }
+        },
+        {
+            "position": {
+                "x": 67.97000122070313,
+                "y": 0.11999999731779099,
+                "z": 90.19999694824219
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "friendsBuildModel": {
+                "warSide": 0,
+                "maxHealth": 500.0,
+                "currentHealth": 500.0,
+                "priceList": [
+                    4,
+                    6,
+                    8,
+                    10,
+                    12
+                ],
+                "currentLevel": 1,
+                "unitType": 1,
+                "buildUnits": [
+                    {
+                        "instanceID": -25882
+                    },
+                    {
+                        "instanceID": -25920
+                    },
+                    {
+                        "instanceID": -25958
+                    },
+                    {
+                        "instanceID": -25996
+                    }
+                ]
+            }
+        }
+    ],
+    "towerDefenceBuildJsons": [
+        {
+            "position": {
+                "x": 42.970001220703128,
+                "y": 3.0399999618530275,
+                "z": 50.279998779296878
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "towerDefenceModel": {
+                "warSide": 0,
+                "maxHealth": 1000.0,
+                "currentHealth": 1000.0,
+                "priceList": [
+                    4,
+                    6,
+                    8,
+                    10,
+                    12
+                ],
+                "currentLevel": 1,
+                "attackRange": 20.0,
+                "damageAmount": 50,
+                "allAnimAttackTime": 1.0,
+                "animAttackTime": 1.0,
+                "detectionRadius": 20.0,
+                "typeAttack": 1
+            }
+        },
+        {
+            "position": {
+                "x": 68.58000183105469,
+                "y": 3.559999942779541,
+                "z": 51.93000030517578
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "towerDefenceModel": {
+                "warSide": 0,
+                "maxHealth": 1000.0,
+                "currentHealth": 1000.0,
+                "priceList": [
+                    4,
+                    6,
+                    8,
+                    10,
+                    12
+                ],
+                "currentLevel": 1,
+                "attackRange": 20.0,
+                "damageAmount": 50,
+                "allAnimAttackTime": 1.0,
+                "animAttackTime": 1.0,
+                "detectionRadius": 20.0,
+                "typeAttack": 1
+            }
+        }
+    ]
 }

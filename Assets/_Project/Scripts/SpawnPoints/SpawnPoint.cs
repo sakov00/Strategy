@@ -43,12 +43,11 @@ namespace _Project.Scripts.SpawnPoints
             return spawnDataJson;
         }
 
-        public SpawnDataJson SetJsonData(SpawnDataJson spawnDataJson)
+        public void SetJsonData(SpawnDataJson spawnDataJson)
         {
             transform.position = spawnDataJson.position;
             spawnRadius = spawnDataJson.spawnRadius;
             roundEnemyList.AddRange(spawnDataJson.roundEnemyList);
-            return spawnDataJson;
         }
 
         public void StartSpawn()

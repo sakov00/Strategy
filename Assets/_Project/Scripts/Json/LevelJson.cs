@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects;
 using _Project.Scripts.GameObjects.BuildingZone;
+using _Project.Scripts.GameObjects.FriendsBuild;
+using _Project.Scripts.GameObjects.MoneyBuild;
+using _Project.Scripts.GameObjects.TowerDefence;
 using _Project.Scripts.SpawnPoints;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -14,7 +17,9 @@ namespace _Project.Scripts.Json
     {
         public List<SpawnDataJson> spawnDataJsons;
         public List<BuildingZoneJson> buildingZoneJsons;
-        public List<BuildJson> buildJsons;
+        public List<MoneyBuildJson> moneyBuildJsons;
+        public List<FriendsBuildJson> friendsBuildJsons;
+        public List<TowerDefenceBuildJson> towerDefenceBuildJsons;
     }
     
     [Serializable]
@@ -33,9 +38,26 @@ namespace _Project.Scripts.Json
     }
     
     [Serializable]
-    public class BuildJson
+    public class MoneyBuildJson
     {
         public Vector3 position;
-        public List<BuildModel> BuildModels = new();
+        public Quaternion rotation;
+        public MoneyBuildModel moneyBuildModel = new();
+    }
+        
+    [Serializable]
+    public class FriendsBuildJson
+    {
+        public Vector3 position;
+        public Quaternion rotation;
+        public FriendsBuildModel friendsBuildModel = new();
+    }
+        
+    [Serializable]
+    public class TowerDefenceBuildJson
+    {
+        public Vector3 position;
+        public Quaternion rotation;
+        public TowerDefenceModel towerDefenceModel = new();
     }
 }

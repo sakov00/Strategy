@@ -196,6 +196,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildZone (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7466758100266467519, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
       propertyPath: typeBuilding
@@ -269,6 +274,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildZone (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -290,7 +300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &339365326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,6 +526,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildZone (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -640,6 +655,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -720,6 +740,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BuildZone (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7466758100266467519, guid: 3461a685f65ebb74c8a455b782d3af71,
         type: 3}
@@ -889,7 +914,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1593400254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,6 +1059,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 1212198908020506707, guid: f1357beefcc1a964f996252c18882112,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8911413645352159369, guid: f1357beefcc1a964f996252c18882112,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1156,6 +1186,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BuildZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 6603924160436698042, guid: 3461a685f65ebb74c8a455b782d3af71,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -2,6 +2,7 @@ using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.GameObjects.Characters;
 using _Project.Scripts.Interfaces;
+using _Project.Scripts.Json;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.TowerDefence
@@ -22,6 +23,22 @@ namespace _Project.Scripts.GameObjects.TowerDefence
             damageSystem = new DamageSystem(model, view, transform);
             
             base.Initialize();
+        }
+        
+        public TowerDefenceBuildJson GetJsonData()
+        {
+            var towerDefenceBuildJson = new TowerDefenceBuildJson();
+            towerDefenceBuildJson.position = transform.position;
+            towerDefenceBuildJson.rotation = transform.rotation;
+            towerDefenceBuildJson.towerDefenceModel = model;
+            return towerDefenceBuildJson;
+        }
+
+        public void SetJsonData(TowerDefenceBuildJson towerDefenceBuildJson)
+        {
+            transform.position = towerDefenceBuildJson.position;
+            transform.rotation = towerDefenceBuildJson.rotation;
+            model = towerDefenceBuildJson.towerDefenceModel;
         }
 
         protected override void FixedUpdate()

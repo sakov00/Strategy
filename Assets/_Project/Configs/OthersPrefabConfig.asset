@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPointPrefab: {fileID: 7880600659771358763, guid: f1357beefcc1a964f996252c18882112,
     type: 3}
+  buildingZonePrefab: {fileID: 2050305323301566128, guid: 3461a685f65ebb74c8a455b782d3af71,
+    type: 3}

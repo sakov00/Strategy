@@ -1,6 +1,7 @@
 using System;
 using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects._General;
+using _Project.Scripts.Json;
 using UnityEngine;
 using VContainer;
 
@@ -20,8 +21,23 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
         protected override void Initialize()
         {
             friendsCreatorController = new FriendsCreatorController(friendFactory, model, view);
-
             base.Initialize();
+        }
+        
+        public FriendsBuildJson GetJsonData()
+        {
+            var friendsBuildJson = new FriendsBuildJson();
+            friendsBuildJson.position = transform.position;
+            friendsBuildJson.rotation = transform.rotation;
+            friendsBuildJson.friendsBuildModel = model;
+            return friendsBuildJson;
+        }
+
+        public void SetJsonData(FriendsBuildJson friendsBuildJson)
+        {
+            transform.position = friendsBuildJson.position;
+            transform.rotation = friendsBuildJson.rotation;
+            model = friendsBuildJson.friendsBuildModel;
         }
 
         private void Start()
