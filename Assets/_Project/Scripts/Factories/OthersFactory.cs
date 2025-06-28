@@ -1,18 +1,9 @@
 using System.Collections.Generic;
-using _Project.Scripts._GlobalLogic;
-using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects;
 using _Project.Scripts.GameObjects.BuildingZone;
-using _Project.Scripts.GameObjects.FriendsBuild;
-using _Project.Scripts.GameObjects.MoneyBuild;
-using _Project.Scripts.GameObjects.TowerDefence;
-using _Project.Scripts.Interfaces;
 using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
-using _Project.Scripts.Services;
 using _Project.Scripts.SO;
 using _Project.Scripts.SpawnPoints;
-using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -24,8 +15,7 @@ namespace _Project.Scripts.Factories
         [Inject] private OthersPrefabConfig _othersPrefabConfig;
         
         [Inject] private SpawnRegistry _spawnRegistry;
-        [Inject] private BuildingZoneRegistry _buildingZoneRegistry;
-        
+        [Inject] private SaveRegistry _saveRegistry;
         
         public List<SpawnPoint> CreateSpawnPoints(List<SpawnDataJson> spawnDataJsons)
         {
@@ -42,6 +32,7 @@ namespace _Project.Scripts.Factories
             var spawnPoint = _resolver.Instantiate(_othersPrefabConfig.spawnPointPrefab);
             spawnPoint.SetJsonData(spawnDataJson);
             _spawnRegistry.Register(spawnPoint);
+            _saveRegistry.Register(spawnPoint);
             return spawnPoint;
         }
         
@@ -59,7 +50,7 @@ namespace _Project.Scripts.Factories
         {
             var buildingZoneController = _resolver.Instantiate(_othersPrefabConfig.buildingZonePrefab);
             buildingZoneController.SetJsonData(buildingZoneJson);
-            _buildingZoneRegistry.Register(buildingZoneController);
+            _saveRegistry.Register(buildingZoneController);
             return buildingZoneController;
         }
     }

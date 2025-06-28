@@ -1,13 +1,15 @@
-using System;
 using System.Linq;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
+using _Project.Scripts.GameObjects.BuildingZone;
+using _Project.Scripts.GameObjects.Characters.Player;
+using _Project.Scripts.GameObjects.Characters.Unit;
 using _Project.Scripts.GameObjects.FriendsBuild;
 using _Project.Scripts.GameObjects.MoneyBuild;
 using _Project.Scripts.GameObjects.TowerDefence;
 using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
-using _Project.Scripts.Windows.Presenters;
+using _Project.Scripts.SpawnPoints;
 using UniRx;
 using VContainer;
 using VContainer.Unity;
@@ -18,8 +20,7 @@ namespace _Project.Scripts.Services
     {
         [Inject] private HealthRegistry _healthRegistry;
         [Inject] private SpawnRegistry _spawnRegistry;
-        [Inject] private BuildingZoneRegistry _buildingZoneRegistry;
-        [Inject] private BuildRegistry _buildRegistry;
+        [Inject] private SaveRegistry _saveRegistry;
         
         [Inject] private ResetService _resetService;
         [Inject] private OthersFactory _othersFactory;
@@ -41,6 +42,7 @@ namespace _Project.Scripts.Services
             var levelJson = _jsonLoader.Load<LevelJson>(index);
             if (levelJson != null)
             {
+                //TODO add player and unit
                 _othersFactory.CreateSpawnPoints(levelJson.spawnDataJsons);
                 _othersFactory.CreateBuildingZones(levelJson.buildingZoneJsons);
                 _buildFactory.CreateMoneyBuilding(levelJson.moneyBuildJsons);
@@ -54,18 +56,22 @@ namespace _Project.Scripts.Services
         
         public void SaveLevel()
         {
-            var spawnDataJsons = _spawnRegistry.GetAll().Select(x => x.GetJsonData()).ToList();
-            var buildingZoneJsons = _buildingZoneRegistry.GetAll().Select(x => x.GetJsonData()).ToList();
-            var moneyBuildJsons = _buildRegistry.GetAll<MoneyBuildController>().Select(x => x.GetJsonData()).ToList();
-            var friendsBuildJsons = _buildRegistry.GetAll<FriendsBuildController>().Select(x => x.GetJsonData()).ToList();
-            var towerDefenceBuildJsons = _buildRegistry.GetAll<TowerDefenceController>().Select(x => x.GetJsonData()).ToList();
+            var spawnDataJsons = _saveRegistry.GetAll<SpawnPoint>().Select(x => x.GetJsonData()).ToList();
+            var buildingZoneJsons = _saveRegistry.GetAll<BuildingZoneController>().Select(x => x.GetJsonData()).ToList();
+            var moneyBuildJsons = _saveRegistry.GetAll<MoneyBuildController>().Select(x => x.GetJsonData()).ToList();
+            var friendsBuildJsons = _saveRegistry.GetAll<FriendsBuildController>().Select(x => x.GetJsonData()).ToList();
+            var towerDefenceBuildJsons = _saveRegistry.GetAll<TowerDefenceController>().Select(x => x.GetJsonData()).ToList();
+            var playerJsons = _saveRegistry.GetAll<PlayerController>().Select(x => x.GetJsonData()).ToList();
+            var unitJsons = _saveRegistry.GetAll<UnitController>().Select(x => x.GetJsonData()).ToList();
             var levelJson = new LevelJson
             {
                 spawnDataJsons = spawnDataJsons,
                 buildingZoneJsons = buildingZoneJsons,
                 moneyBuildJsons = moneyBuildJsons,
                 friendsBuildJsons = friendsBuildJsons,
-                towerDefenceBuildJsons = towerDefenceBuildJsons
+                towerDefenceBuildJsons = towerDefenceBuildJsons,
+                playerJsons = playerJsons,
+                unitJsons = unitJsons,
             };
             _jsonLoader.Save(levelJson, 0);
         }

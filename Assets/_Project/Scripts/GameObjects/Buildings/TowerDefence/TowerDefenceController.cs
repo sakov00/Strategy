@@ -3,12 +3,16 @@ using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.GameObjects.Characters;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Json;
+using _Project.Scripts.Registries;
 using UnityEngine;
+using VContainer;
 
 namespace _Project.Scripts.GameObjects.TowerDefence
 {
-    public class TowerDefenceController : BuildController
+    public class TowerDefenceController : BuildController, ISavable<TowerDefenceBuildJson>
     {
+        [Inject] private SaveRegistry _saveRegistry;
+        
         [SerializeField] protected TowerDefenceModel model;
         [SerializeField] protected TowerDefenceView view;
         public override BuildModel BuildModel => model;
@@ -19,9 +23,11 @@ namespace _Project.Scripts.GameObjects.TowerDefence
 
         protected override void Initialize()
         {
+#if EDIT_MODE
+            _saveRegistry.Register(this);
+#endif
             detectionAim = new DetectionAim(model, transform);
             damageSystem = new DamageSystem(model, view, transform);
-            
             base.Initialize();
         }
         

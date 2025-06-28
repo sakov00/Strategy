@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects;
 using _Project.Scripts.GameObjects.BuildingZone;
+using _Project.Scripts.GameObjects.Characters.Player;
+using _Project.Scripts.GameObjects.Characters.Unit;
 using _Project.Scripts.GameObjects.FriendsBuild;
 using _Project.Scripts.GameObjects.MoneyBuild;
 using _Project.Scripts.GameObjects.TowerDefence;
@@ -20,6 +22,8 @@ namespace _Project.Scripts.Json
         public List<MoneyBuildJson> moneyBuildJsons;
         public List<FriendsBuildJson> friendsBuildJsons;
         public List<TowerDefenceBuildJson> towerDefenceBuildJsons;
+        public List<PlayerJson> playerJsons;
+        public List<UnitJson> unitJsons;
     }
     
     [Serializable]
@@ -42,7 +46,7 @@ namespace _Project.Scripts.Json
     {
         public Vector3 position;
         public Quaternion rotation;
-        public MoneyBuildModel moneyBuildModel = new();
+        public MoneyBuildModel moneyBuildModel;
     }
         
     [Serializable]
@@ -50,7 +54,7 @@ namespace _Project.Scripts.Json
     {
         public Vector3 position;
         public Quaternion rotation;
-        public FriendsBuildModel friendsBuildModel = new();
+        public FriendsBuildModel friendsBuildModel;
     }
         
     [Serializable]
@@ -58,6 +62,22 @@ namespace _Project.Scripts.Json
     {
         public Vector3 position;
         public Quaternion rotation;
-        public TowerDefenceModel towerDefenceModel = new();
+        public TowerDefenceModel towerDefenceModel;
+    }
+    
+    [Serializable]
+    public class PlayerJson
+    {
+        public Vector3 position;
+        public Quaternion rotation;
+        public PlayerModel playerModel;
+    }
+    
+    [Serializable]
+    public class UnitJson
+    {
+        public Vector3 position;
+        public Quaternion rotation;
+        public UnitModel unitModel;
     }
 }

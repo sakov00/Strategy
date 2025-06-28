@@ -1,6 +1,4 @@
 using _Project.Scripts._VContainer;
-using _Project.Scripts.GameObjects.Characters;
-using _Project.Scripts.Interfaces;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects._General
@@ -12,7 +10,9 @@ namespace _Project.Scripts.GameObjects._General
 
         protected virtual void Initialize()
         {
+#if EDIT_MODE
             InjectManager.Inject(this);
+#endif
             ObjectView.Initialize();
             ObjectModel.Transform = transform;
             ObjectModel.HeightObject = ObjectView.GetHeightObject();

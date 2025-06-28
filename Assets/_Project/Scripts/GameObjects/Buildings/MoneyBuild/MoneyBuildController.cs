@@ -1,12 +1,15 @@
-using System;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Json;
+using _Project.Scripts.Registries;
 using UnityEngine;
+using VContainer;
 
 namespace _Project.Scripts.GameObjects.MoneyBuild
 {
-    public class MoneyBuildController : BuildController
+    public class MoneyBuildController : BuildController, ISavable<MoneyBuildJson>
     {
+        [Inject] private SaveRegistry _saveRegistry;
+        
         [SerializeField] protected MoneyBuildModel model;
         [SerializeField] protected MoneyBuildingView view;
         public override BuildModel BuildModel => model;
@@ -16,6 +19,9 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
 
         protected override void Initialize()
         {
+#if EDIT_MODE
+            _saveRegistry.Register(this);
+#endif
             moneyController = new MoneyController(model, view);
             base.Initialize();
         }

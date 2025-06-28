@@ -1,16 +1,15 @@
-using System;
-using _Project.Scripts._GlobalLogic;
-using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.Interfaces;
+using _Project.Scripts.Json;
+using _Project.Scripts.Registries;
 using _Project.Scripts.Windows.Presenters;
 using UnityEngine;
 using VContainer;
 
 namespace _Project.Scripts.GameObjects.Characters.Player
 {
-    public class PlayerController : MyCharacterController
+    public class PlayerController : MyCharacterController, ISavable<PlayerJson>
     {
+        [Inject] private SaveRegistry _saveRegistry;
         [Inject] private GameWindowViewModel gameWindowViewModel;
 
         [SerializeField] private PlayerModel model;
@@ -24,11 +23,32 @@ namespace _Project.Scripts.GameObjects.Characters.Player
         
         protected override void Initialize()
         {
+#if EDIT_MODE
+            _saveRegistry.Register(this);
+#endif
             playerMovementSystem = new PlayerMovementSystem(model, view, transform);
             detectionAim = new DetectionAim(model, transform);
             damageSystem = new DamageSystem(model, view, transform);
             
             base.Initialize();
+        }
+        
+        public PlayerJson GetJsonData()
+        {
+            var playerJson = new PlayerJson
+            {
+                position = transform.position,
+                rotation = transform.rotation,
+                playerModel = model
+            };
+            return playerJson;
+        }
+
+        public void SetJsonData(PlayerJson playerJson)
+        {
+            transform.position = playerJson.position;
+            transform.rotation = playerJson.rotation;
+            model = playerJson.playerModel;
         }
 
         private void Update()

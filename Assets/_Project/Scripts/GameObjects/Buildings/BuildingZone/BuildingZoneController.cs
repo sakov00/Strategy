@@ -1,12 +1,8 @@
-using System;
-using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Factories;
-using _Project.Scripts.GameObjects.Characters.Player;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
-using _Project.Scripts.Services;
 using _Project.Scripts.Windows.Presenters;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -15,9 +11,9 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.BuildingZone
 {
-    public class BuildingZoneController : MonoBehaviour, IBuyController
+    public class BuildingZoneController : MonoBehaviour, IBuyController, ISavable<BuildingZoneJson>
     {
-        [Inject] private BuildingZoneRegistry _buildingZoneRegistry;
+        [Inject] private SaveRegistry _saveRegistry;
         [Inject] private BuildFactory _buildFactory;
         [Inject] private GameWindowViewModel _gameWindowViewModel;
         
@@ -27,8 +23,10 @@ namespace _Project.Scripts.GameObjects.BuildingZone
 
         private void Start()
         {
+#if EDIT_MODE
             InjectManager.Inject(this);
-            _buildingZoneRegistry.Register(this);
+            _saveRegistry.Register(this);
+#endif
         }
         
         public BuildingZoneJson GetJsonData()
@@ -43,7 +41,6 @@ namespace _Project.Scripts.GameObjects.BuildingZone
         {
             transform.position = buildingZoneJson.position;
             buildingZoneModel.typeBuilding = buildingZoneJson.typeBuilding;
-            _buildingZoneRegistry.Register(this);
         }
 
         public async UniTask TryBuy()
@@ -67,7 +64,6 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             
             _gameWindowViewModel.Money.Value -= buildModel.PriceList[0];
             _buildFactory.CreateBuild(buildingZoneModel.typeBuilding, transform.position, transform.rotation);
-            _buildingZoneRegistry.Unregister(this);
             Destroy(gameObject);
         }
     }

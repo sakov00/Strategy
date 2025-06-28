@@ -5,22 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88568452-d695-402f-9604-02d22dfb2030" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/BuildRegistry.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/BuildRegistry.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/SavableRegistry.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/SavableRegistry.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Interfaces/ISavable.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Interfaces/ISavable.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Strategy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Strategy/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/LevelData_0.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/LevelData_0.json.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/BuildFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/BuildFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/OthersFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/OthersFactory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildingZone/BuildingZoneController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildingZone/BuildingZoneController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/FriendsBuild/FriendsBuildController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/FriendsBuild/FriendsBuildController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyBuildController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyBuildController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/TowerDefence/TowerDefenceController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/TowerDefence/TowerDefenceController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Unit/UnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Unit/UnitController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/_General/ObjectController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/_General/ObjectController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Json/LevelJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Json/LevelJson.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/SO/BuildingPrefabConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/SO/BuildingPrefabConfig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/BuildRegistry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/SaveRegistry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/BuildRegistry.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/SaveRegistry.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/BuildingZoneRegistry.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/BuildingZoneRegistry.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/SavableRegistry.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/SavableRegistry.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Services/LevelController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Services/LevelController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/SpawnPoints/SpawnPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/SpawnPoints/SpawnPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/SpawnPoints.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/SpawnPoints.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/SpawnPoints/SpawnPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/SpawnPoints/SpawnPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/SpawnPoints/SpawnPoint.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/SpawnPoints/SpawnPoint.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/_VContainer/GameLifetimeScope.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/_VContainer/GameLifetimeScope.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,6 +69,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7ec8e29954a6455daa48484a381ec41846ac00/a3/5c0d4944/Lazy`1.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7ec8e29954a6455daa48484a381ec41846ac00/b3/8de0ec7c/ThrowHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9b3502c626dd433da43ca50f8c32f6ba175a00/af/96d2f7ef/ITransform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Interfaces/Controller/IPositionedController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@14.0.9/Shaders/Terrain/TerrainLit.shader" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/MaterialReferenceManager.cs" root0="SKIP_HIGHLIGHTING" />
@@ -212,7 +220,7 @@
       <workItem from="1751043204177" duration="1217000" />
       <workItem from="1751044442291" duration="3082000" />
       <workItem from="1751120855701" duration="7904000" />
-      <workItem from="1751133746061" duration="3458000" />
+      <workItem from="1751133746061" duration="8236000" />
     </task>
     <servers />
   </component>

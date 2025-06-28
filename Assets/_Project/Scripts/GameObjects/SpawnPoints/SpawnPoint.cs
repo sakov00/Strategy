@@ -4,6 +4,7 @@ using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
+using _Project.Scripts.Interfaces;
 using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
@@ -15,23 +16,27 @@ using Random = UnityEngine.Random;
 namespace _Project.Scripts.SpawnPoints
 {
     [Serializable]
-    public class SpawnPoint : MonoBehaviour
+    public class SpawnPoint : MonoBehaviour, ISavable<SpawnDataJson>
     {
-        [Inject] private GameWindowViewModel gameWindowViewModel;
-        [Inject] private EnemyFactory enemyFactory;
-        [Inject] private SpawnRegistry spawnRegistry;
+        [Inject] private GameWindowViewModel _gameWindowViewModel;
+        [Inject] private EnemyFactory _enemyFactory;
+        [Inject] private SpawnRegistry _spawnRegistry;
+        [Inject] private SaveRegistry _saveRegistry;
 
         [SerializeField] private float spawnRadius = 5f;
         [SerializeField] private List<EnemyGroup> roundEnemyList = new();
 
-        private List<EnemyWithTime> currentEnemyList;
-        private int currentIndex;
-        private float elapsedTime;
+        private List<EnemyWithTime> _currentEnemyList;
+        private int _currentIndex;
+        private float _elapsedTime;
 
         private void Start()
         {
+#if EDIT_MODE
             InjectManager.Inject(this);
-            spawnRegistry.Register(this);
+            _saveRegistry.Register(this);
+#endif
+            _spawnRegistry.Register(this);
         }
         
         public SpawnDataJson GetJsonData()
@@ -52,17 +57,17 @@ namespace _Project.Scripts.SpawnPoints
 
         public void StartSpawn()
         {
-            int currentRound = gameWindowViewModel.CurrentRound.Value;
+            int currentRound = _gameWindowViewModel.CurrentRound.Value;
             if (currentRound >= roundEnemyList.Count)
             {
                 Debug.LogWarning("Нет настроек для текущего раунда спавна.");
                 return;
             }
 
-            currentEnemyList = roundEnemyList[currentRound].enemies;
-            currentEnemyList.Sort((a, b) => a.time.CompareTo(b.time)); // сортировка на всякий случай
-            currentIndex = 0;
-            elapsedTime = 0f;
+            _currentEnemyList = roundEnemyList[currentRound].enemies;
+            _currentEnemyList.Sort((a, b) => a.time.CompareTo(b.time)); // сортировка на всякий случай
+            _currentIndex = 0;
+            _elapsedTime = 0f;
 
             GameTimer.Instance.OnEverySecond -= Tick;
             GameTimer.Instance.OnEverySecond += Tick;
@@ -70,15 +75,15 @@ namespace _Project.Scripts.SpawnPoints
 
         private void Tick()
         {
-            elapsedTime += 1f;
+            _elapsedTime += 1f;
 
-            while (currentIndex < currentEnemyList.Count && elapsedTime >= currentEnemyList[currentIndex].time)
+            while (_currentIndex < _currentEnemyList.Count && _elapsedTime >= _currentEnemyList[_currentIndex].time)
             {
-                Spawn(currentEnemyList[currentIndex]);
-                currentIndex++;
+                Spawn(_currentEnemyList[_currentIndex]);
+                _currentIndex++;
             }
 
-            if (currentIndex >= currentEnemyList.Count)
+            if (_currentIndex >= _currentEnemyList.Count)
             {
                 GameTimer.Instance.OnEverySecond -= Tick;
             }
@@ -89,7 +94,7 @@ namespace _Project.Scripts.SpawnPoints
             var offset2D = Random.insideUnitCircle * spawnRadius;
             var spawnPosition = transform.position + new Vector3(offset2D.x, 0, offset2D.y);
 
-            enemyFactory.CreateEnemyUnit(enemyData.enemyType, spawnPosition, new Vector3(58, 0, 94));
+            _enemyFactory.CreateEnemyUnit(enemyData.enemyType, spawnPosition, new Vector3(58, 0, 94));
         }
 
         private void OnDestroy()
