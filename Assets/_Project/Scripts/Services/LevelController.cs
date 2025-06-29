@@ -39,19 +39,19 @@ namespace _Project.Scripts.Services
 
         public void LoadLevelOnScene(int index)
         {
-            var levelJson = _jsonLoader.Load<LevelJson>(index);
-            if (levelJson != null)
-            {
-                //TODO add player and unit
-                _othersFactory.CreateSpawnPoints(levelJson.spawnDataJsons);
-                _othersFactory.CreateBuildingZones(levelJson.buildingZoneJsons);
-                _buildFactory.CreateMoneyBuilding(levelJson.moneyBuildJsons);
-                _buildFactory.CreateMeleeFriendBuilding(levelJson.friendsBuildJsons
-                    .Where(x => x.friendsBuildModel.unitType == FriendUnitType.SimpleMelee));
-                _buildFactory.CreateDistanceFriendBuilding(levelJson.friendsBuildJsons
-                    .Where(x => x.friendsBuildModel.unitType == FriendUnitType.SimpleDistance));
-                _buildFactory.CreateTowerDefenseBuilding(levelJson.towerDefenceBuildJsons);
-            }
+            // var levelJson = _jsonLoader.Load<LevelJson>(index);
+            // if (levelJson != null)
+            // {
+            //     //TODO add player and unit
+            //     _othersFactory.CreateSpawnPoints(levelJson.spawnDataJsons);
+            //     _othersFactory.CreateBuildingZones(levelJson.buildingZoneJsons);
+            //     _buildFactory.CreateMoneyBuilding(levelJson.moneyBuildJsons);
+            //     _buildFactory.CreateMeleeFriendBuilding(levelJson.friendsBuildJsons
+            //         .Where(x => x.friendsBuildModel.unitType == FriendUnitType.SimpleMelee));
+            //     _buildFactory.CreateDistanceFriendBuilding(levelJson.friendsBuildJsons
+            //         .Where(x => x.friendsBuildModel.unitType == FriendUnitType.SimpleDistance));
+            //     _buildFactory.CreateTowerDefenseBuilding(levelJson.towerDefenceBuildJsons);
+            // }
         }
         
         public void SaveLevel()
