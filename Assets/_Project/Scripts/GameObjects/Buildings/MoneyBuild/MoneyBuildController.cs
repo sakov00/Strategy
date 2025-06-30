@@ -19,9 +19,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
 
         protected override void Initialize()
         {
-#if EDIT_MODE
             _saveRegistry.Register(this);
-#endif
             moneyController = new MoneyController(model, view);
             base.Initialize();
         }

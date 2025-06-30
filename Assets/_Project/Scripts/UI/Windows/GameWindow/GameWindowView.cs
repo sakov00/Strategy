@@ -19,6 +19,8 @@ namespace _Project.Scripts.UI.Windows.GameWindow
         [SerializeField] private Button nextRoundButton;
         [SerializeField] private Button strategyModeButton;
         [SerializeField] private Button saveLevelButton;
+        [SerializeField] private Button loadLevelButton;
+        [SerializeField] private TMP_InputField selectLevelInputField;
 
         [Header("UI Text")]
         [SerializeField] private TextMeshProUGUI moneyText;
@@ -58,6 +60,7 @@ namespace _Project.Scripts.UI.Windows.GameWindow
 
 #if EDIT_MODE
             viewModel.SaveLevelCommand.BindTo(saveLevelButton).AddTo(this);
+            loadLevelButton.onClick.AddListener(() => viewModel.LoadLevelCommand.Execute(int.Parse(selectLevelInputField.text)));
 #endif
         }
 

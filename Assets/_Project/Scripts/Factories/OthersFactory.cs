@@ -31,8 +31,6 @@ namespace _Project.Scripts.Factories
         {
             var spawnPoint = _resolver.Instantiate(_othersPrefabConfig.spawnPointPrefab);
             spawnPoint.SetJsonData(spawnDataJson);
-            _spawnRegistry.Register(spawnPoint);
-            _saveRegistry.Register(spawnPoint);
             return spawnPoint;
         }
         
@@ -50,7 +48,6 @@ namespace _Project.Scripts.Factories
         {
             var buildingZoneController = _resolver.Instantiate(_othersPrefabConfig.buildingZonePrefab);
             buildingZoneController.SetJsonData(buildingZoneJson);
-            _saveRegistry.Register(buildingZoneController);
             return buildingZoneController;
         }
     }

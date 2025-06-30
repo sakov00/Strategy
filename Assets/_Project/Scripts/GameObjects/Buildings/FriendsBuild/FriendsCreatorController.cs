@@ -21,8 +21,7 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
         {
             foreach (var friendUnit in view.buildUnitPositions)
             {
-                model.buildUnits.Add(friendFactory.CreateFriendUnit(model.unitType, 
-                    friendUnit.position, friendUnit.position));
+                model.buildUnits.Add(friendFactory.CreateFriendUnit(model.unitType, friendUnit.position));
             }
         }
     }

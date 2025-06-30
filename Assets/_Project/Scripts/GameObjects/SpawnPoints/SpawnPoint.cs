@@ -32,10 +32,8 @@ namespace _Project.Scripts.SpawnPoints
 
         private void Start()
         {
-#if EDIT_MODE
             InjectManager.Inject(this);
             _saveRegistry.Register(this);
-#endif
             _spawnRegistry.Register(this);
         }
         
@@ -114,6 +112,6 @@ namespace _Project.Scripts.SpawnPoints
     {
         [Min(0f)]
         public float time;
-        public EnemyUnitType enemyType;
+        public UnitType enemyType;
     }
 }

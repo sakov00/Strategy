@@ -24,9 +24,7 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
         
         protected override void Initialize()
         {
-#if EDIT_MODE
             _saveRegistry.Register(this);
-#endif
             friendsCreatorController = new FriendsCreatorController(friendFactory, model, view);
             base.Initialize();
         }

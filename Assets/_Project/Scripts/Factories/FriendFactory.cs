@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Characters.Player;
 using _Project.Scripts.GameObjects.Characters.Unit;
+using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using _Project.Scripts.SO;
@@ -17,22 +19,32 @@ namespace _Project.Scripts.Factories
         [Inject] private UnitPrefabConfig unitPrefabConfig;
         [Inject] private HealthRegistry healthRegistry;
         
-        public UnitController CreateFriendUnit(FriendUnitType unitType, Vector3 position, Vector3 noAimPosition, Quaternion rotation = default)
+        public UnitController CreateFriendUnit(UnitType unitType, Vector3 position, Quaternion rotation = default)
         {
             UnitController friendContoller;
             switch (unitType)
             {
-                case FriendUnitType.SimpleMelee:
+                case UnitType.SimpleMelee:
                     friendContoller = CreateMeleeFriend(position, rotation);
                     break;
-                case FriendUnitType.SimpleDistance:
+                case UnitType.SimpleDistance:
                     friendContoller = CreateDistanceFriend(position, rotation);
                     break;
                 default: return null;
             }
-            friendContoller.SetNoAimPosition(noAimPosition);
+            friendContoller.SetNoAimPosition(position);
             healthRegistry.Register(friendContoller.ObjectModel);
             return friendContoller;
+        }
+        
+        public List<UnitController> CreateFriendUnits(List<UnitJson> buildingZoneJsons)
+        {
+            var buildingZones = new List<UnitController>();
+            foreach (var buildingZoneJson in buildingZoneJsons)
+            {
+                buildingZones.Add(CreateFriendUnit(buildingZoneJson.unitModel.unitType, buildingZoneJson.position));
+            }
+            return buildingZones;
         }
 
         private UnitController CreateMeleeFriend(Vector3 position, Quaternion rotation)
@@ -44,11 +56,25 @@ namespace _Project.Scripts.Factories
         {
             return resolver.Instantiate(unitPrefabConfig.distanceFriendPrefab, position, rotation);
         }
+        
+        public List<PlayerController> CreatePlayers(List<PlayerJson> playerJsons)
+        {
+            var players = new List<PlayerController>();
+            foreach (var playerJson in playerJsons)
+            {
+                var player = CreatePlayer();
+                player.SetJsonData(playerJson);
+                players.Add(player);
+            }
+            return players;
+        }
 
-        public PlayerController CreatePlayer(Vector3 position, Quaternion rotation = default)
+        public PlayerController CreatePlayer(Vector3 position = default, Quaternion rotation = default)
         {
             var playerController = resolver.Instantiate(unitPrefabConfig.playerPrefab, position, rotation);
             healthRegistry.Register(playerController.ObjectModel);
+            var cameraController = GlobalObjects.CameraController;
+            cameraController.cameraFollow.Init(cameraController.transform, playerController.transform);
             return playerController;
         }
     }

@@ -1,10 +1,3 @@
-using System.Linq;
-using _Project.Scripts._GlobalLogic;
-using _Project.Scripts.Enums;
-using _Project.Scripts.Extentions;
-using _Project.Scripts.GameObjects.Camera;
-using _Project.Scripts.Json;
-using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using _Project.Scripts.Windows.Models;
 using UniRx;
@@ -19,6 +12,7 @@ namespace _Project.Scripts.Windows.Presenters
         [SerializeField] private GameWindowModel model;
         
         public ReactiveCommand SaveLevelCommand { get; } = new();
+        public ReactiveCommand<int> LoadLevelCommand { get; } = new();
         public ReactiveCommand NextRoundCommand { get; } = new();
         public ReactiveCommand SetStrategyModeCommand { get; } = new();
         
@@ -36,6 +30,7 @@ namespace _Project.Scripts.Windows.Presenters
             NextRoundCommand.Subscribe(_ => NextRoundOnClick()).AddTo(this);
 #if EDIT_MODE
             SaveLevelCommand.Subscribe(_ => _levelController.SaveLevel()).AddTo(this);
+            LoadLevelCommand.Subscribe(levelIndex => _levelController.LoadLevel(levelIndex)).AddTo(this);
 #endif
         }
 

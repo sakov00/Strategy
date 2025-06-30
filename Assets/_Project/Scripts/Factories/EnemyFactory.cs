@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Characters.Unit;
+using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using _Project.Scripts.SO;
@@ -16,16 +18,16 @@ namespace _Project.Scripts.Factories
         [Inject] private UnitPrefabConfig unitPrefabConfig;
         [Inject] private HealthRegistry healthRegistry;
         
-        public UnitController CreateEnemyUnit(EnemyUnitType unitType, Vector3 position, Vector3 noAimPosition, Quaternion rotation = default)
+        public UnitController CreateEnemyUnit(UnitType unitType, Vector3 position, Vector3 noAimPosition, Quaternion rotation = default)
         {
             UnitController enemyController;
             switch (unitType)
             {
-                case EnemyUnitType.SimpleMelee:
-                    enemyController = CreateMoneyBuilding(position, rotation);
+                case UnitType.SimpleMelee:
+                    enemyController = CreateMelee(position, rotation);
                     break;
-                case EnemyUnitType.SimpleDistance:
-                    enemyController = CreateTowerDefenseBuilding(position, rotation);
+                case UnitType.SimpleDistance:
+                    enemyController = CreateDistance(position, rotation);
                     break;
                 default: return null;
             }
@@ -35,12 +37,12 @@ namespace _Project.Scripts.Factories
             return enemyController;
         }
 
-        private UnitController CreateMoneyBuilding(Vector3 position, Quaternion rotation)
+        private UnitController CreateMelee(Vector3 position, Quaternion rotation)
         {
             return resolver.Instantiate(unitPrefabConfig.meleeEnemyPrefab, position, rotation);
         }
         
-        private UnitController CreateTowerDefenseBuilding(Vector3 position, Quaternion rotation)
+        private UnitController CreateDistance(Vector3 position, Quaternion rotation)
         {
             return resolver.Instantiate(unitPrefabConfig.distanceEnemyPrefab, position, rotation);
         }

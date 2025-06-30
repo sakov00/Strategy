@@ -23,9 +23,7 @@ namespace _Project.Scripts.GameObjects.Characters.Player
         
         protected override void Initialize()
         {
-#if EDIT_MODE
             _saveRegistry.Register(this);
-#endif
             playerMovementSystem = new PlayerMovementSystem(model, view, transform);
             detectionAim = new DetectionAim(model, transform);
             damageSystem = new DamageSystem(model, view, transform);

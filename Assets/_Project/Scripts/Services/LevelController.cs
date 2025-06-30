@@ -25,6 +25,7 @@ namespace _Project.Scripts.Services
         [Inject] private ResetService _resetService;
         [Inject] private OthersFactory _othersFactory;
         [Inject] private BuildFactory _buildFactory;
+        [Inject] private FriendFactory _friendFactory;
         [Inject] private JsonLoader _jsonLoader;
         
         public readonly ReactiveCommand RoundUpdated = new();
@@ -37,32 +38,34 @@ namespace _Project.Scripts.Services
                 .Subscribe(_ => TryStartNewRound());
         }
 
-        public void LoadLevelOnScene(int index)
+        public void LoadLevel(int index)
         {
-            // var levelJson = _jsonLoader.Load<LevelJson>(index);
-            // if (levelJson != null)
-            // {
-            //     //TODO add player and unit
-            //     _othersFactory.CreateSpawnPoints(levelJson.spawnDataJsons);
-            //     _othersFactory.CreateBuildingZones(levelJson.buildingZoneJsons);
-            //     _buildFactory.CreateMoneyBuilding(levelJson.moneyBuildJsons);
-            //     _buildFactory.CreateMeleeFriendBuilding(levelJson.friendsBuildJsons
-            //         .Where(x => x.friendsBuildModel.unitType == FriendUnitType.SimpleMelee));
-            //     _buildFactory.CreateDistanceFriendBuilding(levelJson.friendsBuildJsons
-            //         .Where(x => x.friendsBuildModel.unitType == FriendUnitType.SimpleDistance));
-            //     _buildFactory.CreateTowerDefenseBuilding(levelJson.towerDefenceBuildJsons);
-            // }
+            var levelJson = _jsonLoader.Load<LevelJson>(index);
+            if (levelJson != null)
+            {
+                //TODO add player and unit
+                _othersFactory.CreateSpawnPoints(levelJson.spawnDataJsons);
+                _othersFactory.CreateBuildingZones(levelJson.buildingZoneJsons);
+                _buildFactory.CreateMoneyBuildings(levelJson.moneyBuildJsons);
+                _buildFactory.CreateMeleeFriendBuildings(levelJson.friendsBuildJsons
+                    .Where(x => x.friendsBuildModel.unitType == UnitType.SimpleMelee));
+                _buildFactory.CreateDistanceFriendBuildings(levelJson.friendsBuildJsons
+                    .Where(x => x.friendsBuildModel.unitType == UnitType.SimpleDistance));
+                _buildFactory.CreateTowerDefenseBuildings(levelJson.towerDefenceBuildJsons);
+                _friendFactory.CreateFriendUnits(levelJson.unitJsons);
+                _friendFactory.CreatePlayers(levelJson.playerJsons);
+            }
         }
         
         public void SaveLevel()
         {
-            var spawnDataJsons = _saveRegistry.GetAll<SpawnPoint>().Select(x => x.GetJsonData()).ToList();
-            var buildingZoneJsons = _saveRegistry.GetAll<BuildingZoneController>().Select(x => x.GetJsonData()).ToList();
-            var moneyBuildJsons = _saveRegistry.GetAll<MoneyBuildController>().Select(x => x.GetJsonData()).ToList();
-            var friendsBuildJsons = _saveRegistry.GetAll<FriendsBuildController>().Select(x => x.GetJsonData()).ToList();
-            var towerDefenceBuildJsons = _saveRegistry.GetAll<TowerDefenceController>().Select(x => x.GetJsonData()).ToList();
-            var playerJsons = _saveRegistry.GetAll<PlayerController>().Select(x => x.GetJsonData()).ToList();
-            var unitJsons = _saveRegistry.GetAll<UnitController>().Select(x => x.GetJsonData()).ToList();
+            var spawnDataJsons = _saveRegistry.GetAll<SpawnDataJson>().Select(x => x.GetJsonData()).ToList();
+            var buildingZoneJsons = _saveRegistry.GetAll<BuildingZoneJson>().Select(x => x.GetJsonData()).ToList();
+            var moneyBuildJsons = _saveRegistry.GetAll<MoneyBuildJson>().Select(x => x.GetJsonData()).ToList();
+            var friendsBuildJsons = _saveRegistry.GetAll<FriendsBuildJson>().Select(x => x.GetJsonData()).ToList();
+            var towerDefenceBuildJsons = _saveRegistry.GetAll<TowerDefenceBuildJson>().Select(x => x.GetJsonData()).ToList();
+            var playerJsons = _saveRegistry.GetAll<PlayerJson>().Select(x => x.GetJsonData()).ToList();
+            var unitJsons = _saveRegistry.GetAll<UnitJson>().Select(x => x.GetJsonData()).ToList();
             var levelJson = new LevelJson
             {
                 spawnDataJsons = spawnDataJsons,

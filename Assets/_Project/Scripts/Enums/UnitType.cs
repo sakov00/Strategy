@@ -1,6 +1,6 @@
 namespace _Project.Scripts.Enums
 {
-    public enum FriendUnitType
+    public enum UnitType
     {
         SimpleMelee,
         SimpleDistance,

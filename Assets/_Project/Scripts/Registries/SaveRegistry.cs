@@ -41,16 +41,16 @@ namespace _Project.Scripts.Registries
             }
         }
 
-        public List<T> GetAll<T>()
+        public List<ISavable<T>> GetAll<T>()
         {
-            var type = typeof(T);
+            var type = typeof(ISavable<T>);
 
             if (_typedCollections.TryGetValue(type, out var listObj))
             {
-                return (List<T>)listObj;
+                return (List<ISavable<T>>)listObj;
             }
 
-            var newList = new List<T>();
+            var newList = new List<ISavable<T>>();
             _typedCollections[type] = newList;
             return newList;
         }

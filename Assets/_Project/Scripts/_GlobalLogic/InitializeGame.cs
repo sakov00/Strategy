@@ -13,18 +13,14 @@ namespace _Project.Scripts._GlobalLogic
     public class InitializeGame : IStartable
     {
         [Inject] private LevelController _levelController;
-        [Inject] private WindowFactory _windowFactory;
+        [Inject] private WindowsManager _windowsManager;
         [Inject] private FriendFactory _friendFactory;
         
         public void Start()
         {
             Application.targetFrameRate = 120;
-            
-            var player = _friendFactory.CreatePlayer(new Vector3(50, 10, 50));
-            var cameraController = GlobalObjects.CameraController;
-            cameraController.cameraFollow.Init(cameraController.transform, player.transform);
-            
-            _levelController.LoadLevelOnScene(0);
+            _windowsManager.OpenWindow<GameWindowViewModel>();
+            // _levelController.LoadLevelOnScene(0);
         }
     }
 }

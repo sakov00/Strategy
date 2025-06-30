@@ -11,6 +11,7 @@ using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using _Project.Scripts.SO;
+using _Project.Scripts.Windows;
 using _Project.Scripts.Windows.Presenters;
 using Joystick_Pack.Scripts.Base;
 using UnityEngine;
@@ -47,6 +48,7 @@ namespace _Project.Scripts._VContainer
         
         private void RegisterWindows(IContainerBuilder builder)
         {
+            builder.Register<WindowsManager>(Lifetime.Singleton).AsSelf();
             builder.RegisterComponentInNewPrefab(windowsConfig.gameWindowViewModel, Lifetime.Singleton);
         }
         
@@ -60,7 +62,6 @@ namespace _Project.Scripts._VContainer
         
         private void RegisterFactories(IContainerBuilder builder)
         {
-            builder.Register<WindowFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<OthersFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<BuildFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<ProjectileFactory>(Lifetime.Singleton).AsSelf();

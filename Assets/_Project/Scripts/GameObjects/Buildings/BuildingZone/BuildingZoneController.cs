@@ -23,10 +23,8 @@ namespace _Project.Scripts.GameObjects.BuildingZone
 
         private void Start()
         {
-#if EDIT_MODE
             InjectManager.Inject(this);
             _saveRegistry.Register(this);
-#endif
         }
         
         public BuildingZoneJson GetJsonData()
@@ -64,6 +62,7 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             
             _gameWindowViewModel.Money.Value -= buildModel.PriceList[0];
             _buildFactory.CreateBuild(buildingZoneModel.typeBuilding, transform.position, transform.rotation);
+            _saveRegistry.Unregister(this);
             Destroy(gameObject);
         }
     }

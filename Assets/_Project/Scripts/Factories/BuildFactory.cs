@@ -69,16 +69,16 @@ namespace _Project.Scripts.Factories
         
 #region JSON Create List
         
-        public List<MoneyBuildController> CreateMoneyBuilding(IEnumerable<MoneyBuildJson> moneyBuildJsons)
+        public List<MoneyBuildController> CreateMoneyBuildings(IEnumerable<MoneyBuildJson> moneyBuildJsons)
             => moneyBuildJsons.Select(CreateMoneyBuilding).ToList();
         
-        public List<TowerDefenceController> CreateTowerDefenseBuilding(IEnumerable<TowerDefenceBuildJson> towerDefenceBuildJsons) 
+        public List<TowerDefenceController> CreateTowerDefenseBuildings(IEnumerable<TowerDefenceBuildJson> towerDefenceBuildJsons) 
             => towerDefenceBuildJsons.Select(CreateTowerDefenseBuilding).ToList();
         
-        public List<FriendsBuildController> CreateMeleeFriendBuilding(IEnumerable<FriendsBuildJson> friendsBuildJsons)
+        public List<FriendsBuildController> CreateMeleeFriendBuildings(IEnumerable<FriendsBuildJson> friendsBuildJsons)
             => friendsBuildJsons.Select(CreateMeleeFriendBuilding).ToList();
         
-        public List<FriendsBuildController> CreateDistanceFriendBuilding(IEnumerable<FriendsBuildJson> friendsBuildJsons)
+        public List<FriendsBuildController> CreateDistanceFriendBuildings(IEnumerable<FriendsBuildJson> friendsBuildJsons)
             => friendsBuildJsons.Select(CreateDistanceFriendBuilding).ToList();
         
 #endregion
@@ -120,28 +120,24 @@ namespace _Project.Scripts.Factories
         private MoneyBuildController CreateMoneyBuilding(Vector3 position = default, Quaternion rotation = default)
         {
             var moneyBuild = _resolver.Instantiate(_buildingPrefabConfig.moneyBuildingPrefab, position, rotation);
-            _saveRegistry.Register(moneyBuild);
             return moneyBuild;
         }
         
         private TowerDefenceController CreateTowerDefenseBuilding(Vector3 position = default, Quaternion rotation = default)
         {
             var towerDefence = _resolver.Instantiate(_buildingPrefabConfig.towerBuildingPrefab, position, rotation);
-            _saveRegistry.Register(towerDefence);
             return towerDefence;
         }
         
         private FriendsBuildController CreateMeleeFriendBuilding(Vector3 position = default, Quaternion rotation = default)
         {
             var meleeFriendsBuild = _resolver.Instantiate(_buildingPrefabConfig.meleeFriendBuildingPrefab, position, rotation);
-            _saveRegistry.Register(meleeFriendsBuild);
             return meleeFriendsBuild;
         }
         
         private FriendsBuildController CreateDistanceFriendBuilding(Vector3 position = default, Quaternion rotation = default)
         {
             var distanceFriendBuild = _resolver.Instantiate(_buildingPrefabConfig.distanceFriendBuildingPrefab, position, rotation);
-            _saveRegistry.Register(distanceFriendBuild);
             return distanceFriendBuild;
         }
         

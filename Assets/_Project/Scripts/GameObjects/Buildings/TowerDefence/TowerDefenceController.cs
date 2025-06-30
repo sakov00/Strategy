@@ -23,9 +23,7 @@ namespace _Project.Scripts.GameObjects.TowerDefence
 
         protected override void Initialize()
         {
-#if EDIT_MODE
             _saveRegistry.Register(this);
-#endif
             detectionAim = new DetectionAim(model, transform);
             damageSystem = new DamageSystem(model, view, transform);
             base.Initialize();
