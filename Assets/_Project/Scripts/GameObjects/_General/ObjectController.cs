@@ -10,9 +10,7 @@ namespace _Project.Scripts.GameObjects._General
 
         protected virtual void Initialize()
         {
-#if EDIT_MODE
             InjectManager.Inject(this);
-#endif
             ObjectView.Initialize();
             ObjectModel.Transform = transform;
             ObjectModel.HeightObject = ObjectView.GetHeightObject();

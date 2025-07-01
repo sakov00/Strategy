@@ -20,7 +20,6 @@ namespace _Project.Scripts.Json
         public List<FriendsBuildJson> friendsBuildJsons;
         public List<TowerDefenceBuildJson> towerDefenceBuildJsons;
         public List<PlayerJson> playerJsons;
-        public List<UnitJson> unitJsons;
     }
     
     [Serializable]
@@ -53,6 +52,7 @@ namespace _Project.Scripts.Json
     public class FriendsBuildJson : ConcreteObjectJson
     {
         public FriendsBuildModel friendsBuildModel;
+        public List<UnitJson> unitJsons;
     }
         
     [Serializable]

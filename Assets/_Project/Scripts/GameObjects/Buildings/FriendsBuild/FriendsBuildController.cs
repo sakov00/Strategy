@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects._General;
@@ -35,6 +36,7 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
             friendsBuildJson.position = transform.position;
             friendsBuildJson.rotation = transform.rotation;
             friendsBuildJson.friendsBuildModel = model;
+            friendsBuildJson.unitJsons = model.buildUnits.Select(x => x.GetJsonData()).ToList();
             return friendsBuildJson;
         }
 
@@ -43,11 +45,18 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
             transform.position = friendsBuildJson.position;
             transform.rotation = friendsBuildJson.rotation;
             model = friendsBuildJson.friendsBuildModel;
+            friendFactory.CreateFriendUnits(friendsBuildJson.unitJsons);
         }
 
         private void Start()
         {
-            friendsCreatorController.CreateFriends();
+            if(model.buildUnits.Count == 0)
+                friendsCreatorController.CreateFriends();
+        }
+        
+        public void ClearData()
+        {
+            Destroy(gameObject);
         }
     }
 }

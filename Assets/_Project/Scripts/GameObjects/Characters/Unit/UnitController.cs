@@ -63,5 +63,10 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
         {
             model.noAimPosition = position;
         }
+        
+        public void ClearData()
+        {
+            Destroy(gameObject);
+        }
     }
 }

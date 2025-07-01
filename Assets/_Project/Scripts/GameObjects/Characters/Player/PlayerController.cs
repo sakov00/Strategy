@@ -23,12 +23,11 @@ namespace _Project.Scripts.GameObjects.Characters.Player
         
         protected override void Initialize()
         {
+            base.Initialize();
             _saveRegistry.Register(this);
             playerMovementSystem = new PlayerMovementSystem(model, view, transform);
             detectionAim = new DetectionAim(model, transform);
             damageSystem = new DamageSystem(model, view, transform);
-            
-            base.Initialize();
         }
         
         public PlayerJson GetJsonData()
@@ -59,6 +58,11 @@ namespace _Project.Scripts.GameObjects.Characters.Player
             base.FixedUpdate();
             detectionAim.DetectAim();
             damageSystem.Attack();
+        }
+        
+        public void ClearData()
+        {
+            Destroy(gameObject);
         }
     }
 }

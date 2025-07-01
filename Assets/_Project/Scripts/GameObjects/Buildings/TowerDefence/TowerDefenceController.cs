@@ -51,5 +51,10 @@ namespace _Project.Scripts.GameObjects.TowerDefence
             detectionAim.DetectAim();
             damageSystem.Attack();
         }
+        
+        public void ClearData()
+        {
+            Destroy(gameObject);
+        }
     }
 }

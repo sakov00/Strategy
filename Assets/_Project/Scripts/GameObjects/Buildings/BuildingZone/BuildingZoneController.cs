@@ -65,5 +65,10 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             _saveRegistry.Unregister(this);
             Destroy(gameObject);
         }
+
+        public void ClearData()
+        {
+            Destroy(gameObject);
+        }
     }
 }

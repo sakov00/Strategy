@@ -1,4 +1,5 @@
 using _Project.Scripts.Factories;
+using _Project.Scripts.GameObjects.Characters.Unit;
 using UnityEngine;
 using VContainer;
 
@@ -21,7 +22,8 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
         {
             foreach (var friendUnit in view.buildUnitPositions)
             {
-                model.buildUnits.Add(friendFactory.CreateFriendUnit(model.unitType, friendUnit.position));
+                var unitController = friendFactory.CreateFriendUnit(model.unitType, friendUnit.position);
+                model.buildUnits.Add(unitController);
             }
         }
     }

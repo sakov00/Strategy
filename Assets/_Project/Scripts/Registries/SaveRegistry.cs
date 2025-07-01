@@ -57,6 +57,16 @@ namespace _Project.Scripts.Registries
 
         public void Clear()
         {
+            foreach (var list in _typedCollections.Values)
+            {
+                foreach (var obj in list)
+                {
+                    var savable = obj as IClearData;
+                    savable?.ClearData();
+                }
+            }
+
+            _typedCollections.Clear();
             _typedCollections.Clear();
         }
     }

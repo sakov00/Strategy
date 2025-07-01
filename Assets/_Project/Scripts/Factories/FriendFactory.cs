@@ -37,14 +37,16 @@ namespace _Project.Scripts.Factories
             return friendContoller;
         }
         
-        public List<UnitController> CreateFriendUnits(List<UnitJson> buildingZoneJsons)
+        public List<UnitController> CreateFriendUnits(List<UnitJson> unitJsons)
         {
-            var buildingZones = new List<UnitController>();
-            foreach (var buildingZoneJson in buildingZoneJsons)
+            var unitControllers = new List<UnitController>();
+            foreach (var unitJson in unitJsons)
             {
-                buildingZones.Add(CreateFriendUnit(buildingZoneJson.unitModel.unitType, buildingZoneJson.position));
+                var unit = CreateFriendUnit(unitJson.unitModel.unitType, unitJson.unitModel.noAimPosition);
+                unit.SetJsonData(unitJson);
+                unitControllers.Add(unit);
             }
-            return buildingZones;
+            return unitControllers;
         }
 
         private UnitController CreateMeleeFriend(Vector3 position, Quaternion rotation)

@@ -1,3 +1,4 @@
+using System;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.UI.Elements;
 using _Project.Scripts.Windows;
@@ -59,7 +60,7 @@ namespace _Project.Scripts.UI.Windows.GameWindow
                 .AddTo(this);
 
 #if EDIT_MODE
-            viewModel.SaveLevelCommand.BindTo(saveLevelButton).AddTo(this);
+            saveLevelButton.onClick.AddListener(() => viewModel.SaveLevelCommand.Execute(int.Parse(selectLevelInputField.text)));
             loadLevelButton.onClick.AddListener(() => viewModel.LoadLevelCommand.Execute(int.Parse(selectLevelInputField.text)));
 #endif
         }

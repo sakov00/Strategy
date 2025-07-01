@@ -99,6 +99,11 @@ namespace _Project.Scripts.SpawnPoints
         {
             GameTimer.Instance.OnEverySecond -= Tick;
         }
+        
+        public void ClearData()
+        {
+            Destroy(gameObject);
+        }
     }
 
     [Serializable]

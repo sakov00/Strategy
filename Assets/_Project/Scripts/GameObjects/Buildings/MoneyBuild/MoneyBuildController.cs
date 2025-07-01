@@ -44,5 +44,10 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
         {
             moneyController.Dispose();
         }
+        
+        public void ClearData()
+        {
+            Destroy(gameObject);
+        }
     }
 }

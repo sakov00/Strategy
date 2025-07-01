@@ -638,6 +638,7 @@ MonoBehaviour:
     detectionRadius: 20
     typeAttack: 1
     noAimPosition: {x: 0, y: 0, z: 0}
+    unitType: 1
   view: {fileID: 7933941872836951361}
 --- !u!114 &7933941872836951361
 MonoBehaviour:

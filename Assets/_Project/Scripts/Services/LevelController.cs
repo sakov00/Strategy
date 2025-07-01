@@ -40,6 +40,7 @@ namespace _Project.Scripts.Services
 
         public void LoadLevel(int index)
         {
+            _resetService.ResetLevel();
             var levelJson = _jsonLoader.Load<LevelJson>(index);
             if (levelJson != null)
             {
@@ -52,12 +53,11 @@ namespace _Project.Scripts.Services
                 _buildFactory.CreateDistanceFriendBuildings(levelJson.friendsBuildJsons
                     .Where(x => x.friendsBuildModel.unitType == UnitType.SimpleDistance));
                 _buildFactory.CreateTowerDefenseBuildings(levelJson.towerDefenceBuildJsons);
-                _friendFactory.CreateFriendUnits(levelJson.unitJsons);
                 _friendFactory.CreatePlayers(levelJson.playerJsons);
             }
         }
         
-        public void SaveLevel()
+        public void SaveLevel(int index)
         {
             var spawnDataJsons = _saveRegistry.GetAll<SpawnDataJson>().Select(x => x.GetJsonData()).ToList();
             var buildingZoneJsons = _saveRegistry.GetAll<BuildingZoneJson>().Select(x => x.GetJsonData()).ToList();
@@ -65,7 +65,6 @@ namespace _Project.Scripts.Services
             var friendsBuildJsons = _saveRegistry.GetAll<FriendsBuildJson>().Select(x => x.GetJsonData()).ToList();
             var towerDefenceBuildJsons = _saveRegistry.GetAll<TowerDefenceBuildJson>().Select(x => x.GetJsonData()).ToList();
             var playerJsons = _saveRegistry.GetAll<PlayerJson>().Select(x => x.GetJsonData()).ToList();
-            var unitJsons = _saveRegistry.GetAll<UnitJson>().Select(x => x.GetJsonData()).ToList();
             var levelJson = new LevelJson
             {
                 spawnDataJsons = spawnDataJsons,
@@ -74,9 +73,8 @@ namespace _Project.Scripts.Services
                 friendsBuildJsons = friendsBuildJsons,
                 towerDefenceBuildJsons = towerDefenceBuildJsons,
                 playerJsons = playerJsons,
-                unitJsons = unitJsons,
             };
-            _jsonLoader.Save(levelJson, 0);
+            _jsonLoader.Save(levelJson, index);
         }
 
         public void NextRound()

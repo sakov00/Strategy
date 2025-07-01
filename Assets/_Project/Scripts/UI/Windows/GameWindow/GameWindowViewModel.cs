@@ -11,7 +11,7 @@ namespace _Project.Scripts.Windows.Presenters
         [Inject] private LevelController _levelController;
         [SerializeField] private GameWindowModel model;
         
-        public ReactiveCommand SaveLevelCommand { get; } = new();
+        public ReactiveCommand<int> SaveLevelCommand { get; } = new();
         public ReactiveCommand<int> LoadLevelCommand { get; } = new();
         public ReactiveCommand NextRoundCommand { get; } = new();
         public ReactiveCommand SetStrategyModeCommand { get; } = new();
@@ -29,7 +29,7 @@ namespace _Project.Scripts.Windows.Presenters
             SetStrategyModeCommand.Subscribe(_ => SetStrategyMode()).AddTo(this);
             NextRoundCommand.Subscribe(_ => NextRoundOnClick()).AddTo(this);
 #if EDIT_MODE
-            SaveLevelCommand.Subscribe(_ => _levelController.SaveLevel()).AddTo(this);
+            SaveLevelCommand.Subscribe(levelIndex => _levelController.SaveLevel(levelIndex)).AddTo(this);
             LoadLevelCommand.Subscribe(levelIndex => _levelController.LoadLevel(levelIndex)).AddTo(this);
 #endif
         }

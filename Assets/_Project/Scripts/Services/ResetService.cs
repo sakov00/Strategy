@@ -9,6 +9,7 @@ namespace _Project.Scripts.Services
     public class ResetService
     {
         [Inject] private HealthRegistry _healthRegistry;
+        [Inject] private SaveRegistry _saveRegistry;
         
         public void NewRound()
         {
@@ -21,6 +22,11 @@ namespace _Project.Scripts.Services
                     healthModel.Transform.gameObject.SetActive(true);
                 }
             }
+        }
+        
+        public void ResetLevel()
+        {
+            _saveRegistry.Clear();
         }
     }
 }
