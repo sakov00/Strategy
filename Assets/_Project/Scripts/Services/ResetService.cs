@@ -9,6 +9,7 @@ namespace _Project.Scripts.Services
     public class ResetService
     {
         [Inject] private HealthRegistry _healthRegistry;
+        [Inject] private SpawnRegistry _spawnRegistry;
         [Inject] private SaveRegistry _saveRegistry;
         
         public void NewRound()
@@ -27,6 +28,8 @@ namespace _Project.Scripts.Services
         public void ResetLevel()
         {
             _saveRegistry.Clear();
+            _spawnRegistry.Clear();
+            _healthRegistry.Clear();
         }
     }
 }
