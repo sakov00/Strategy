@@ -1,14 +1,23 @@
-using _Project.Scripts.GameObjects.Characters.Player;
-using _Project.Scripts.GameObjects.Characters.Unit;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using _Project.Scripts.UI.Windows;
 using _Project.Scripts.Windows;
-using _Project.Scripts.Windows.Presenters;
 using UnityEngine;
+using VContainer.Unity;
 
 namespace _Project.Scripts.SO
 {
     [CreateAssetMenu(fileName = "WindowsConfig", menuName = "SO/Windows Config")]
-    public class WindowsConfig : ScriptableObject
+    public class WindowsConfig : ScriptableObject, IInitializable
     {
-        public GameWindowViewModel gameWindowViewModel;
+        [SerializeField] private List<BaseWindowView> windowsList = new();
+        
+        public Dictionary<Type, BaseWindowView> Windows;
+        
+        public void Initialize()
+        {
+            Windows = windowsList.ToDictionary(w => w.GetType(), w => w);
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System.Linq;
+using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects.BuildingZone;
@@ -28,8 +29,6 @@ namespace _Project.Scripts.Services
         [Inject] private FriendFactory _friendFactory;
         [Inject] private EnvironmentFactory _environmentFactory;
         [Inject] private JsonLoader _jsonLoader;
-        
-        public readonly ReactiveCommand RoundUpdated = new();
 
         public void Initialize()
         {
@@ -95,7 +94,8 @@ namespace _Project.Scripts.Services
             if (enemiesRemain) return;
 
             _resetService.NewRound();
-            RoundUpdated.Execute();
+            AppData.LevelData.CurrentRound++;
+            AppData.LevelData.IsNextRoundAvailable = true;
         }
     }
 }

@@ -17,6 +17,7 @@ namespace _Project.Scripts.UI.Windows.GameWindow
         [SerializeField] private GameWindowViewModel viewModel;
 
         [Header("Buttons")]
+        [SerializeField] private Button openPauseMenuButton;
         [SerializeField] private Button nextRoundButton;
         [SerializeField] private Button strategyModeButton;
         [SerializeField] private Button saveLevelButton;
@@ -36,8 +37,9 @@ namespace _Project.Scripts.UI.Windows.GameWindow
 
         private void Start()
         {
+            viewModel.OpenPauseWindowCommand.BindTo(openPauseMenuButton).AddTo(this);
             viewModel.NextRoundCommand.BindTo(nextRoundButton).AddTo(this);
-            viewModel.IsNextRoundAvailable
+            AppData.LevelData.IsNextRoundAvailableReactive
                 .Subscribe(isVisible => nextRoundButton.gameObject.SetActive(isVisible))
                 .AddTo(this);
             
@@ -51,11 +53,11 @@ namespace _Project.Scripts.UI.Windows.GameWindow
                 })
                 .AddTo(this);
             
-            viewModel.Money
+            AppData.User.MoneyReactive
                 .Subscribe(money => moneyText.text = string.Format(MoneyFormat, money))
                 .AddTo(this);
             
-            viewModel.CurrentRound
+            AppData.LevelData.CurrentRoundReactive
                 .Subscribe(roundIndex => currentRoundText.text = string.Format(RoundFormat, roundIndex + 1))
                 .AddTo(this);
 
@@ -69,8 +71,8 @@ namespace _Project.Scripts.UI.Windows.GameWindow
         {
             var direction = joystick.Direction;
             
-            if(!Mathf.Approximately(direction.x, viewModel.MoveDirection.x) && !Mathf.Approximately(direction.y, viewModel.MoveDirection.z))
-                viewModel.MoveDirection = new Vector3(direction.x, 0f, direction.y);
+            if(!Mathf.Approximately(direction.x, AppData.LevelData.MoveDirection.x) && !Mathf.Approximately(direction.y, AppData.LevelData.MoveDirection.z))
+                AppData.LevelData.MoveDirection = new Vector3(direction.x, 0f, direction.y);
         }
     }
 }

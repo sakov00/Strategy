@@ -1,3 +1,4 @@
+using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
@@ -10,7 +11,6 @@ namespace _Project.Scripts.GameObjects.Characters.Player
     public class PlayerController : MyCharacterController, ISavable<PlayerJson>
     {
         [Inject] private SaveRegistry _saveRegistry;
-        [Inject] private GameWindowViewModel gameWindowViewModel;
 
         [SerializeField] private PlayerModel model;
         [SerializeField] private PlayerView view;
@@ -50,7 +50,7 @@ namespace _Project.Scripts.GameObjects.Characters.Player
 
         private void Update()
         {
-            playerMovementSystem.MoveTo(gameWindowViewModel.MoveDirection);
+            playerMovementSystem.MoveTo(AppData.LevelData.MoveDirection);
         }
         
         protected override void FixedUpdate()

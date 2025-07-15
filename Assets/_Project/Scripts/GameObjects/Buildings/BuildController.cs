@@ -1,3 +1,4 @@
+using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.GameObjects.Characters;
@@ -12,7 +13,6 @@ namespace _Project.Scripts.GameObjects
 {
     public abstract class BuildController : ObjectController, IBuyController
     {
-        [Inject] protected GameWindowViewModel GameWindowViewModel;
         public abstract BuildModel BuildModel { get; }
         public abstract BuildView BuildView  { get; }
         public override ObjectModel ObjectModel => BuildModel;
@@ -38,12 +38,12 @@ namespace _Project.Scripts.GameObjects
             sequence.Append(transform.DOScale(originalScale, 0.25f));
             await sequence.Play();
             
-            if (BuildModel.PriceList[BuildModel.CurrentLevel] > GameWindowViewModel.Money.Value)
+            if (BuildModel.PriceList[BuildModel.CurrentLevel] > AppData.User.Money)
             {
                 Debug.Log("Not enough money");
                 return;
             }
-            GameWindowViewModel.Money.Value -= BuildModel.PriceList[0];
+            AppData.User.Money -= BuildModel.PriceList[0];
             BuildModel.CurrentLevel++;
         }
     }

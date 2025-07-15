@@ -18,7 +18,6 @@ namespace _Project.Scripts.SpawnPoints
     [Serializable]
     public class SpawnPoint : MonoBehaviour, ISavable<SpawnDataJson>
     {
-        [Inject] private GameWindowViewModel _gameWindowViewModel;
         [Inject] private EnemyFactory _enemyFactory;
         [Inject] private SpawnRegistry _spawnRegistry;
         [Inject] private SaveRegistry _saveRegistry;
@@ -55,7 +54,7 @@ namespace _Project.Scripts.SpawnPoints
 
         public void StartSpawn()
         {
-            int currentRound = _gameWindowViewModel.CurrentRound.Value;
+            int currentRound = AppData.LevelData.CurrentRound;
             if (currentRound >= roundEnemyList.Count)
             {
                 Debug.LogWarning("Нет настроек для текущего раунда спавна.");

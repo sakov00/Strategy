@@ -9,8 +9,6 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
 {
     public class MoneyController
     {
-        [Inject] private GameWindowViewModel gameWindowViewModel;
-        
         private readonly MoneyBuildModel moneyBuildModel;
         private readonly MoneyBuildingView moneyBuildingView;
         
@@ -22,7 +20,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
             this.moneyBuildingView = moneyBuildingView;
             
             InjectManager.Inject(this);
-            gameWindowViewModel.IsNextRoundAvailable
+            AppData.LevelData.IsNextRoundAvailableReactive
                 .Skip(1)
                 .Subscribe(isNextRound =>
                 {
@@ -34,7 +32,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
         private void AddMoneyToPlayer()
         {
             var moneyAmount = moneyBuildModel.addMoneyValue * (moneyBuildModel.CurrentLevel + 1);
-            gameWindowViewModel.Money.Value += moneyAmount;
+            AppData.User.Money += moneyAmount;
             moneyBuildingView.MoneyUp(moneyAmount);
         }
 

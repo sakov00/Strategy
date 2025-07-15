@@ -11,6 +11,7 @@ using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using _Project.Scripts.SO;
+using _Project.Scripts.UI.Windows;
 using _Project.Scripts.Windows;
 using _Project.Scripts.Windows.Presenters;
 using Joystick_Pack.Scripts.Base;
@@ -22,6 +23,8 @@ namespace _Project.Scripts._VContainer
 {
     public class GameLifetimeScope : LifetimeScope
     {
+        [SerializeField] private WindowsManager windowsManager;
+        
         [Header("Configs")]
         [SerializeField] private EnvironmentPrefabConfig environmentPrefabConfig;
         [SerializeField] private OthersPrefabConfig othersPrefabConfig;
@@ -35,6 +38,7 @@ namespace _Project.Scripts._VContainer
             builder.RegisterBuildCallback(InjectManager.Initialize);
             
             builder.Register<GameTimer>(Lifetime.Singleton).As<GameTimer, IInitializable, ITickable>();
+            builder.Register<AppData>(Lifetime.Singleton).AsSelf().As<IInitializable>();
             
             builder.Register<InitializeGame>(Lifetime.Singleton).As<InitializeGame, IStartable>();
             builder.Register<ResetService>(Lifetime.Singleton).AsSelf();
@@ -49,8 +53,8 @@ namespace _Project.Scripts._VContainer
         
         private void RegisterWindows(IContainerBuilder builder)
         {
-            builder.Register<WindowsManager>(Lifetime.Singleton).AsSelf();
-            builder.RegisterComponentInNewPrefab(windowsConfig.gameWindowViewModel, Lifetime.Singleton);
+            builder.RegisterInstance(windowsManager).AsSelf().As<IInitializable>();
+            //builder.RegisterComponentInNewPrefab(windowsConfig.gameWindowViewModel, Lifetime.Singleton);
         }
         
         private void RegisterRegistries(IContainerBuilder builder)
@@ -78,7 +82,7 @@ namespace _Project.Scripts._VContainer
             builder.RegisterInstance(unitPrefabConfig).AsSelf();
             builder.RegisterInstance(buildingPrefabConfig).AsSelf();
             builder.RegisterInstance(projectilePrefabConfig).AsSelf();
-            builder.RegisterInstance(windowsConfig).AsSelf();
+            builder.RegisterInstance(windowsConfig).AsSelf().As<IInitializable>();
         }
     }
 }

@@ -1,8 +1,7 @@
-using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
-using _Project.Scripts.GameObjects.Camera;
 using _Project.Scripts.Services;
-using _Project.Scripts.Windows;
+using _Project.Scripts.UI.Windows;
+using _Project.Scripts.UI.Windows.GameWindow;
 using _Project.Scripts.Windows.Presenters;
 using UnityEngine;
 using VContainer;
@@ -19,7 +18,7 @@ namespace _Project.Scripts._GlobalLogic
         public void Start()
         {
             Application.targetFrameRate = 120;
-            _windowsManager.OpenWindow<GameWindowViewModel>();
+            _windowsManager.ShowWindow<GameWindowView>();
             _levelController.LoadLevel(0);
         }
     }

@@ -1,3 +1,4 @@
+using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Factories;
 using _Project.Scripts.Interfaces;
@@ -15,7 +16,6 @@ namespace _Project.Scripts.GameObjects.BuildingZone
     {
         [Inject] private SaveRegistry _saveRegistry;
         [Inject] private BuildFactory _buildFactory;
-        [Inject] private GameWindowViewModel _gameWindowViewModel;
         
         [SerializeField] private BuildingZoneModel buildingZoneModel;
         
@@ -54,13 +54,13 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             await sequence.Play();
             
             var buildModel = _buildFactory.GetBuildModel(buildingZoneModel.typeBuilding);
-            if (buildModel.PriceList[0] > _gameWindowViewModel.Money.Value)
+            if (buildModel.PriceList[0] > AppData.User.Money)
             {
                 Debug.Log("Not enough money");
                 return;
             }
             
-            _gameWindowViewModel.Money.Value -= buildModel.PriceList[0];
+            AppData.User.Money -= buildModel.PriceList[0];
             _buildFactory.CreateBuild(buildingZoneModel.typeBuilding, transform.position, transform.rotation);
             _saveRegistry.Unregister(this);
             Destroy(gameObject);
