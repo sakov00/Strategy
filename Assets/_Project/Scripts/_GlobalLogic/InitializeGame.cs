@@ -20,7 +20,7 @@ namespace _Project.Scripts._GlobalLogic
         {
             Application.targetFrameRate = 120;
             _windowsManager.OpenWindow<GameWindowViewModel>();
-            // _levelController.LoadLevelOnScene(0);
+            _levelController.LoadLevel(0);
         }
     }
 }

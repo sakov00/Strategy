@@ -38,11 +38,11 @@ namespace _Project.Scripts.GameObjects.TowerDefence
             return towerDefenceBuildJson;
         }
 
-        public void SetJsonData(TowerDefenceBuildJson towerDefenceBuildJson)
+        public void SetJsonData(TowerDefenceBuildJson environmentJson)
         {
-            transform.position = towerDefenceBuildJson.position;
-            transform.rotation = towerDefenceBuildJson.rotation;
-            model = towerDefenceBuildJson.towerDefenceModel;
+            transform.position = environmentJson.position;
+            transform.rotation = environmentJson.rotation;
+            model = environmentJson.towerDefenceModel;
         }
 
         protected override void FixedUpdate()

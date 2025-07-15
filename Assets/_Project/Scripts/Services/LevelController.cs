@@ -26,6 +26,7 @@ namespace _Project.Scripts.Services
         [Inject] private OthersFactory _othersFactory;
         [Inject] private BuildFactory _buildFactory;
         [Inject] private FriendFactory _friendFactory;
+        [Inject] private EnvironmentFactory _environmentFactory;
         [Inject] private JsonLoader _jsonLoader;
         
         public readonly ReactiveCommand RoundUpdated = new();
@@ -45,6 +46,7 @@ namespace _Project.Scripts.Services
             if (levelJson != null)
             {
                 //TODO add player and unit
+                _environmentFactory.CreateEnvironments(index, levelJson.environments);
                 _othersFactory.CreateSpawnPoints(levelJson.spawnDataJsons);
                 _othersFactory.CreateBuildingZones(levelJson.buildingZoneJsons);
                 _buildFactory.CreateMoneyBuildings(levelJson.moneyBuildJsons);
@@ -59,6 +61,7 @@ namespace _Project.Scripts.Services
         
         public void SaveLevel(int index)
         {
+            var environmentJsons = _saveRegistry.GetAll<EnvironmentJson>().Select(x => x.GetJsonData()).ToList();
             var spawnDataJsons = _saveRegistry.GetAll<SpawnDataJson>().Select(x => x.GetJsonData()).ToList();
             var buildingZoneJsons = _saveRegistry.GetAll<BuildingZoneJson>().Select(x => x.GetJsonData()).ToList();
             var moneyBuildJsons = _saveRegistry.GetAll<MoneyBuildJson>().Select(x => x.GetJsonData()).ToList();
@@ -67,6 +70,7 @@ namespace _Project.Scripts.Services
             var playerJsons = _saveRegistry.GetAll<PlayerJson>().Select(x => x.GetJsonData()).ToList();
             var levelJson = new LevelJson
             {
+                environments = environmentJsons,
                 spawnDataJsons = spawnDataJsons,
                 buildingZoneJsons = buildingZoneJsons,
                 moneyBuildJsons = moneyBuildJsons,

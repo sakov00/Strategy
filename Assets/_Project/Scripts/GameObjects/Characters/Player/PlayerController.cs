@@ -41,11 +41,11 @@ namespace _Project.Scripts.GameObjects.Characters.Player
             return playerJson;
         }
 
-        public void SetJsonData(PlayerJson playerJson)
+        public void SetJsonData(PlayerJson environmentJson)
         {
-            transform.position = playerJson.position;
-            transform.rotation = playerJson.rotation;
-            model = playerJson.playerModel;
+            transform.position = environmentJson.position;
+            transform.rotation = environmentJson.rotation;
+            model = environmentJson.playerModel;
         }
 
         private void Update()

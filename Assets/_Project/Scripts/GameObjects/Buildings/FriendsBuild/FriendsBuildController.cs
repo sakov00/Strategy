@@ -40,12 +40,12 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
             return friendsBuildJson;
         }
 
-        public void SetJsonData(FriendsBuildJson friendsBuildJson)
+        public void SetJsonData(FriendsBuildJson environmentJson)
         {
-            transform.position = friendsBuildJson.position;
-            transform.rotation = friendsBuildJson.rotation;
-            model = friendsBuildJson.friendsBuildModel;
-            friendFactory.CreateFriendUnits(friendsBuildJson.unitJsons);
+            transform.position = environmentJson.position;
+            transform.rotation = environmentJson.rotation;
+            model = environmentJson.friendsBuildModel;
+            friendFactory.CreateFriendUnits(environmentJson.unitJsons);
         }
 
         private void Start()

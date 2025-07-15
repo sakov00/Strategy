@@ -35,10 +35,10 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             return buildingZoneJson;
         }
 
-        public void SetJsonData(BuildingZoneJson buildingZoneJson)
+        public void SetJsonData(BuildingZoneJson environmentJson)
         {
-            transform.position = buildingZoneJson.position;
-            buildingZoneModel.typeBuilding = buildingZoneJson.typeBuilding;
+            transform.position = environmentJson.position;
+            buildingZoneModel.typeBuilding = environmentJson.typeBuilding;
         }
 
         public async UniTask TryBuy()

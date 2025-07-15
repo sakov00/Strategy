@@ -33,11 +33,11 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
             return moneyBuildJson;
         }
 
-        public void SetJsonData(MoneyBuildJson moneyBuildJson)
+        public void SetJsonData(MoneyBuildJson environmentJson)
         {
-            transform.position = moneyBuildJson.position;
-            transform.rotation = moneyBuildJson.rotation;
-            model = moneyBuildJson.moneyBuildModel;
+            transform.position = environmentJson.position;
+            transform.rotation = environmentJson.rotation;
+            model = environmentJson.moneyBuildModel;
         }
 
         private void OnDestroy()

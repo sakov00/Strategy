@@ -23,6 +23,7 @@ namespace _Project.Scripts._VContainer
     public class GameLifetimeScope : LifetimeScope
     {
         [Header("Configs")]
+        [SerializeField] private EnvironmentPrefabConfig environmentPrefabConfig;
         [SerializeField] private OthersPrefabConfig othersPrefabConfig;
         [SerializeField] private UnitPrefabConfig unitPrefabConfig;
         [SerializeField] private BuildingPrefabConfig buildingPrefabConfig;
@@ -67,10 +68,12 @@ namespace _Project.Scripts._VContainer
             builder.Register<ProjectileFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<FriendFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<EnemyFactory>(Lifetime.Singleton).AsSelf();
+            builder.Register<EnvironmentFactory>(Lifetime.Singleton).AsSelf();
         }
         
         private void RegisterSO(IContainerBuilder builder)
         {
+            builder.RegisterInstance(environmentPrefabConfig).AsSelf();
             builder.RegisterInstance(othersPrefabConfig).AsSelf();
             builder.RegisterInstance(unitPrefabConfig).AsSelf();
             builder.RegisterInstance(buildingPrefabConfig).AsSelf();

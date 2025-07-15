@@ -44,11 +44,11 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
             return unitJson;
         }
 
-        public void SetJsonData(UnitJson unitJson)
+        public void SetJsonData(UnitJson environmentJson)
         {
-            transform.position = unitJson.position;
-            transform.rotation = unitJson.rotation;
-            model = unitJson.unitModel;
+            transform.position = environmentJson.position;
+            transform.rotation = environmentJson.rotation;
+            model = environmentJson.unitModel;
         }
 
         protected override void FixedUpdate()

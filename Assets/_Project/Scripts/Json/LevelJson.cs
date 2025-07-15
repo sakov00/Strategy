@@ -14,6 +14,7 @@ namespace _Project.Scripts.Json
     [Serializable]
     public class LevelJson
     {
+        public List<EnvironmentJson> environments;
         public List<SpawnDataJson> spawnDataJsons;
         public List<BuildingZoneJson> buildingZoneJsons;
         public List<MoneyBuildJson> moneyBuildJsons;
@@ -71,5 +72,11 @@ namespace _Project.Scripts.Json
     public class UnitJson : ConcreteObjectJson
     {
         public UnitModel unitModel;
+    }
+    
+    [Serializable]
+    public class EnvironmentJson : ConcreteObjectJson
+    {
+        public EnvironmentType environmentType;
     }
 }
