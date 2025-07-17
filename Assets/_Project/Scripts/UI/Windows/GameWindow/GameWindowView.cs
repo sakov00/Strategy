@@ -39,7 +39,7 @@ namespace _Project.Scripts.UI.Windows.GameWindow
         {
             viewModel.OpenPauseWindowCommand.BindTo(openPauseMenuButton).AddTo(this);
             viewModel.NextRoundCommand.BindTo(nextRoundButton).AddTo(this);
-            AppData.LevelData.IsNextRoundAvailableReactive
+            viewModel.IsNextRoundAvailable
                 .Subscribe(isVisible => nextRoundButton.gameObject.SetActive(isVisible))
                 .AddTo(this);
             
@@ -73,6 +73,11 @@ namespace _Project.Scripts.UI.Windows.GameWindow
             
             if(!Mathf.Approximately(direction.x, AppData.LevelData.MoveDirection.x) && !Mathf.Approximately(direction.y, AppData.LevelData.MoveDirection.z))
                 AppData.LevelData.MoveDirection = new Vector3(direction.x, 0f, direction.y);
+        }
+
+        public void Reset()
+        {
+            viewModel.Reset();
         }
     }
 }

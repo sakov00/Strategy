@@ -1,3 +1,5 @@
+using System.Linq;
+using _Project.Scripts.Enums;
 using _Project.Scripts.Interfaces;
 using UniRx;
 
@@ -25,6 +27,11 @@ namespace _Project.Scripts.Registries
         public void Clear()
         {
             damageables.Clear();
+        }
+
+        public bool HasEnemies()
+        {
+            return damageables.Any(unit => unit.WarSide == WarSide.Enemy);
         }
     }
 }

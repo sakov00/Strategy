@@ -6,7 +6,7 @@ namespace _Project.Scripts.UI.Windows
 {
     public abstract class BaseWindowView : MonoBehaviour
     {
-        [SerializeField] private CanvasGroup canvasGroup;
+        [SerializeField] protected CanvasGroup canvasGroup;
         [SerializeField] protected Button closeButton;
         
         public virtual Tween Show()

@@ -7,12 +7,9 @@ namespace _Project.Scripts._GlobalData.AppDataProvider
     {
         private readonly IntReactiveProperty _currentLevel = new (0);
         private readonly IntReactiveProperty _currentRound = new (0);
-        private readonly BoolReactiveProperty _isNextRoundAvailable = new (true);
-                        
+        
         public IReactiveProperty<int> CurrentLevelReactive => _currentLevel;
         public IReactiveProperty<int> CurrentRoundReactive => _currentRound;
-        
-        public IReactiveProperty<bool> IsNextRoundAvailableReactive => _isNextRoundAvailable;
         
         public int CurrentLevel
         {
@@ -26,11 +23,6 @@ namespace _Project.Scripts._GlobalData.AppDataProvider
             set => _currentRound.Value = value;
         }
         
-        public bool IsNextRoundAvailable
-        {
-            get => _isNextRoundAvailable.Value;
-            set => _isNextRoundAvailable.Value = value;
-        }
         public Vector3 MoveDirection { get; set; }
     }
 }

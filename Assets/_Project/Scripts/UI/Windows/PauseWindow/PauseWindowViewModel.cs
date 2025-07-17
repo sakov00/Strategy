@@ -1,12 +1,16 @@
+using _Project.Scripts._GlobalLogic;
+using _Project.Scripts.Services;
 using _Project.Scripts.Windows;
 using UniRx;
 using UnityEngine;
+using VContainer;
 
 namespace _Project.Scripts.UI.Windows.PauseWindow
 {
     public class PauseWindowViewModel : BaseWindowViewModel
     {
         [SerializeField] private PauseWindowModel model;
+        [Inject] private GameManager _gameManager;
         
         public ReactiveCommand HomeCommand { get; } = new();
         public ReactiveCommand RestartCommand { get; } = new();
@@ -24,30 +28,22 @@ namespace _Project.Scripts.UI.Windows.PauseWindow
         
         private void HomeOnClick()
         {
-            model.IsPaused = false;
-            WindowsManager.HideWindow<PauseWindowView>();
         }
         
         private void RestartOnClick()
         {
-            model.IsPaused = false;
+            _gameManager.StartLevel(0);
+            WindowsManager.HideWindow<PauseWindowView>();
         }
         
         private void ContinueOnClick()
         {
-            model.IsPaused = false;
+            WindowsManager.HideWindow<PauseWindowView>();
         }
 
         private void PauseGame(bool isPaused)
         {
-            if (isPaused)
-            {
-                Time.timeScale = 0;
-            }
-            else
-            {
-                Time.timeScale = 1;
-            }
+            Time.timeScale = isPaused ? 0 : 1;
         }
     }
 }

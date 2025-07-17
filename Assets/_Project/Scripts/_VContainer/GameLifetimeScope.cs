@@ -40,9 +40,9 @@ namespace _Project.Scripts._VContainer
             builder.Register<GameTimer>(Lifetime.Singleton).As<GameTimer, IInitializable, ITickable>();
             builder.Register<AppData>(Lifetime.Singleton).AsSelf().As<IInitializable>();
             
-            builder.Register<InitializeGame>(Lifetime.Singleton).As<InitializeGame, IStartable>();
-            builder.Register<ResetService>(Lifetime.Singleton).AsSelf();
-            builder.Register<LevelController>(Lifetime.Singleton).As<LevelController, IInitializable>();
+            builder.Register<GameManager>(Lifetime.Singleton).As<GameManager, IStartable>();
+            builder.Register<ResetService>(Lifetime.Singleton).AsSelf().As<IInitializable>();
+            builder.Register<LevelController>(Lifetime.Singleton).AsSelf();
             builder.Register<JsonLoader>(Lifetime.Singleton).AsSelf();
             
             RegisterWindows(builder);

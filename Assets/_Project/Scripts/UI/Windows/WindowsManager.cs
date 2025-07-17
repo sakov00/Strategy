@@ -21,6 +21,11 @@ namespace _Project.Scripts.UI.Windows
             InjectManager.Inject(this);
         }
         
+        public T GetWindow<T>() where T : BaseWindowView
+        {
+            return _cachedWindows.TryGetValue(typeof(T), out var window) ? (T)window : null;
+        }
+        
         public void ShowWindow<T>() where T : BaseWindowView
         {
             if (!_cachedWindows.TryGetValue(typeof(T), out var window))

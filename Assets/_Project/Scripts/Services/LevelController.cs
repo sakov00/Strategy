@@ -1,46 +1,26 @@
 using System.Linq;
-using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
-using _Project.Scripts.GameObjects.BuildingZone;
-using _Project.Scripts.GameObjects.Characters.Player;
-using _Project.Scripts.GameObjects.Characters.Unit;
-using _Project.Scripts.GameObjects.FriendsBuild;
-using _Project.Scripts.GameObjects.MoneyBuild;
-using _Project.Scripts.GameObjects.TowerDefence;
 using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
-using _Project.Scripts.SpawnPoints;
-using UniRx;
 using VContainer;
 using VContainer.Unity;
 
 namespace _Project.Scripts.Services
 {
-    public class LevelController : IInitializable
+    public class LevelController
     {
         [Inject] private HealthRegistry _healthRegistry;
-        [Inject] private SpawnRegistry _spawnRegistry;
         [Inject] private SaveRegistry _saveRegistry;
         
-        [Inject] private ResetService _resetService;
         [Inject] private OthersFactory _othersFactory;
         [Inject] private BuildFactory _buildFactory;
         [Inject] private FriendFactory _friendFactory;
         [Inject] private EnvironmentFactory _environmentFactory;
         [Inject] private JsonLoader _jsonLoader;
 
-        public void Initialize()
-        {
-            _healthRegistry
-                .GetAll()
-                .ObserveRemove()
-                .Subscribe(_ => TryStartNewRound());
-        }
-
         public void LoadLevel(int index)
         {
-            _resetService.ResetLevel();
             var levelJson = _jsonLoader.Load<LevelJson>(index);
             if (levelJson != null)
             {
@@ -78,24 +58,6 @@ namespace _Project.Scripts.Services
                 playerJsons = playerJsons,
             };
             _jsonLoader.Save(levelJson, index);
-        }
-
-        public void NextRound()
-        {
-            foreach (var spawnPoint in _spawnRegistry.GetAll())
-            {
-                spawnPoint.StartSpawn();
-            }
-        }
-        
-        private void TryStartNewRound()
-        {
-            var enemiesRemain = _healthRegistry.GetAll().Any(unit => unit.WarSide == WarSide.Enemy);
-            if (enemiesRemain) return;
-
-            _resetService.NewRound();
-            AppData.LevelData.CurrentRound++;
-            AppData.LevelData.IsNextRoundAvailable = true;
         }
     }
 }
