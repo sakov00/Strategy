@@ -3,7 +3,6 @@ using System.Linq;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Registries;
-using _Project.Scripts.Windows.Presenters;
 using UniRx;
 using VContainer;
 

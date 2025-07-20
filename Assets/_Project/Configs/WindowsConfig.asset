@@ -15,3 +15,5 @@ MonoBehaviour:
   windowsList:
   - {fileID: 9106743238255189466, guid: ccd5fcaa13f5e954d852296f2024b3e2, type: 3}
   - {fileID: 5436953499590225558, guid: 8f642652600f38a418f2021060436551, type: 3}
+  - {fileID: 7216117274241126373, guid: 8969d26f96ac6aa409c50ac46d9bceb7, type: 3}
+  - {fileID: 2085309277717422037, guid: 548bbf50320baa140a041e53346e4c1e, type: 3}

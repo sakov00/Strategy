@@ -1,15 +1,13 @@
-using _Project.Scripts.Windows;
-using DG.Tweening;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.Scripts.UI.Windows.PauseWindow
+namespace _Project.Scripts.UI.Windows.WinWindow
 {
-    public class PauseWindowView : BaseWindowView
+    public class WinWindowView : BaseWindowView
     {
         [Header("Presenter")]
-        [SerializeField] private PauseWindowViewModel _viewModel;
+        [SerializeField] private WinWindowViewModel _viewModel;
 
         [Header("Buttons")]
         [SerializeField] private Button _homeButton;

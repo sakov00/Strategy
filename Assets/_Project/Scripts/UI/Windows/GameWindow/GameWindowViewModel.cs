@@ -1,36 +1,41 @@
-using System;
-using System.Linq;
 using _Project.Scripts._GlobalLogic;
-using _Project.Scripts.Enums;
 using _Project.Scripts.Registries;
-using _Project.Scripts.Services;
-using _Project.Scripts.UI.Windows;
+using _Project.Scripts.UI.Windows.FailWindow;
 using _Project.Scripts.UI.Windows.PauseWindow;
+using _Project.Scripts.UI.Windows.WinWindow;
 using _Project.Scripts.Windows.Models;
 using UniRx;
 using UnityEngine;
 using VContainer;
 
-namespace _Project.Scripts.Windows.Presenters
+namespace _Project.Scripts.UI.Windows.GameWindow
 {
     public class GameWindowViewModel : BaseWindowViewModel
     {
-        [SerializeField] private GameWindowModel model;
+        [SerializeField] private GameWindowModel _model;
         
         [Inject] private GameManager _gameManager;
         [Inject] private HealthRegistry _healthRegistry;
         
+        protected override BaseWindowModel BaseModel => _model;
+        
         public ReactiveCommand OpenPauseWindowCommand { get; } = new();
-        public ReactiveCommand<int> SaveLevelCommand { get; } = new();
-        public ReactiveCommand<int> LoadLevelCommand { get; } = new();
         public ReactiveCommand NextRoundCommand { get; } = new();
         public ReactiveCommand SetStrategyModeCommand { get; } = new();
         
-        public IReactiveProperty<bool> IsStrategyMode => model.IsStrategyModeReactive;
-        public IReactiveProperty<bool> IsNextRoundAvailable => model.IsNextRoundAvailableReactive;
+#if EDIT_MODE
+        public ReactiveCommand FastFailCommand { get; } = new();
+        public ReactiveCommand FastWinCommand { get; } = new();
+        public ReactiveCommand<int> SaveLevelCommand { get; } = new();
+        public ReactiveCommand<int> LoadLevelCommand { get; } = new();
+#endif
+        
+        public IReactiveProperty<bool> IsStrategyMode => _model.IsStrategyModeReactive;
+        public IReactiveProperty<bool> IsNextRoundAvailable => _model.IsNextRoundAvailableReactive;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             OpenPauseWindowCommand.Subscribe(_ => OpenPauseWindow()).AddTo(this);
             SetStrategyModeCommand.Subscribe(_ => SetStrategyMode()).AddTo(this);
             NextRoundCommand.Subscribe(_ => NextRoundOnClick()).AddTo(this);
@@ -40,9 +45,21 @@ namespace _Project.Scripts.Windows.Presenters
                 .ObserveRemove()
                 .Subscribe(_ => AllEnemiesDestroyed());
 #if EDIT_MODE
+            FastFailCommand.Subscribe(_ => OpenFailWindow());
+            FastWinCommand.Subscribe(_ => OpenWinWindow());
             SaveLevelCommand.Subscribe(levelIndex => _gameManager.SaveLevel(levelIndex)).AddTo(this);
             LoadLevelCommand.Subscribe(levelIndex => _gameManager.StartLevel(levelIndex)).AddTo(this);
 #endif
+        }
+        
+        private void OpenFailWindow()
+        {
+            WindowsManager.ShowWindow<FailWindowView>();
+        }
+        
+        private void OpenWinWindow()
+        {
+            WindowsManager.ShowWindow<WinWindowView>();
         }
 
         private void OpenPauseWindow()
@@ -50,11 +67,11 @@ namespace _Project.Scripts.Windows.Presenters
             WindowsManager.ShowWindow<PauseWindowView>();
         }
         
-        private void SetStrategyMode() => model.IsStrategyMode = !model.IsStrategyMode;
+        private void SetStrategyMode() => _model.IsStrategyMode = !_model.IsStrategyMode;
         
         private void NextRoundOnClick()
         {
-            model.IsNextRoundAvailable = false;
+            _model.IsNextRoundAvailable = false;
             _gameManager.NextRound();
         }
 
@@ -63,13 +80,13 @@ namespace _Project.Scripts.Windows.Presenters
             if (_healthRegistry.HasEnemies()) 
                 return;
 
-            model.IsNextRoundAvailable = true;
+            _model.IsNextRoundAvailable = true;
         }
 
         public void Reset()
         {
-            model.IsStrategyMode = false;
-            model.IsNextRoundAvailable = true;
+            _model.IsStrategyMode = false;
+            _model.IsNextRoundAvailable = true;
         }
     }
 }

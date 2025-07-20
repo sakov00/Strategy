@@ -2,7 +2,7 @@ using System;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.UI.Elements;
 using _Project.Scripts.Windows;
-using _Project.Scripts.Windows.Presenters;
+using DG.Tweening;
 using Joystick_Pack.Scripts.Base;
 using TMPro;
 using UniRx;
@@ -14,62 +14,86 @@ namespace _Project.Scripts.UI.Windows.GameWindow
     public class GameWindowView : BaseWindowView
     {
         [Header("Presenter")]
-        [SerializeField] private GameWindowViewModel viewModel;
+        [SerializeField] private GameWindowViewModel _viewModel;
 
         [Header("Buttons")]
-        [SerializeField] private Button openPauseMenuButton;
-        [SerializeField] private Button nextRoundButton;
-        [SerializeField] private Button strategyModeButton;
-        [SerializeField] private Button saveLevelButton;
-        [SerializeField] private Button loadLevelButton;
-        [SerializeField] private TMP_InputField selectLevelInputField;
+        [SerializeField] private Button _openPauseMenuButton;
+        [SerializeField] private Button _nextRoundButton;
+        [SerializeField] private Button _strategyModeButton;
+        
+        [Header("Dev")]
+        [SerializeField] private Button _fastFailButton;
+        [SerializeField] private Button _fastWinButton;
+        [SerializeField] private Button _saveLevelButton;
+        [SerializeField] private Button _loadLevelButton;
+        [SerializeField] private TMP_InputField _selectLevelInputField;
 
         [Header("UI Text")]
-        [SerializeField] private TextMeshProUGUI moneyText;
-        [SerializeField] private TextMeshProUGUI currentRoundText;
+        [SerializeField] private TextMeshProUGUI _moneyText;
+        [SerializeField] private TextMeshProUGUI _currentRoundText;
 
         [Header("Controls")]
-        [SerializeField] private Joystick joystick;
-        [SerializeField] private TouchAndMouseDragInput touchAndMouseDragInput;
+        [SerializeField] private Joystick _joystick;
+        [SerializeField] private TouchAndMouseDragInput _touchAndMouseDragInput;
+        
+        protected override BaseWindowViewModel BaseViewModel => _viewModel;
         
         private const string MoneyFormat = "Money: {0}";
         private const string RoundFormat = "Round: {0}";
 
         private void Start()
         {
-            viewModel.OpenPauseWindowCommand.BindTo(openPauseMenuButton).AddTo(this);
-            viewModel.NextRoundCommand.BindTo(nextRoundButton).AddTo(this);
-            viewModel.IsNextRoundAvailable
-                .Subscribe(isVisible => nextRoundButton.gameObject.SetActive(isVisible))
+            _viewModel.OpenPauseWindowCommand.BindTo(_openPauseMenuButton).AddTo(this);
+            _viewModel.NextRoundCommand.BindTo(_nextRoundButton).AddTo(this);
+            _viewModel.IsNextRoundAvailable
+                .Subscribe(isVisible => _nextRoundButton.gameObject.SetActive(isVisible))
                 .AddTo(this);
             
-            viewModel.SetStrategyModeCommand.BindTo(strategyModeButton).AddTo(this);
-            viewModel.IsStrategyMode
+            _viewModel.SetStrategyModeCommand.BindTo(_strategyModeButton).AddTo(this);
+            _viewModel.IsStrategyMode
                 .Subscribe(isStrategy =>
                 {
-                    joystick.gameObject.SetActive(!isStrategy);
-                    touchAndMouseDragInput.gameObject.SetActive(isStrategy);
+                    _joystick.gameObject.SetActive(!isStrategy);
+                    _touchAndMouseDragInput.gameObject.SetActive(isStrategy);
                     GlobalObjects.CameraController.cameraFollow.IsFollowing = !isStrategy;
                 })
                 .AddTo(this);
             
             AppData.User.MoneyReactive
-                .Subscribe(money => moneyText.text = string.Format(MoneyFormat, money))
+                .Subscribe(money => _moneyText.text = string.Format(MoneyFormat, money))
                 .AddTo(this);
             
             AppData.LevelData.CurrentRoundReactive
-                .Subscribe(roundIndex => currentRoundText.text = string.Format(RoundFormat, roundIndex + 1))
+                .Subscribe(roundIndex => _currentRoundText.text = string.Format(RoundFormat, roundIndex + 1))
                 .AddTo(this);
 
 #if EDIT_MODE
-            saveLevelButton.onClick.AddListener(() => viewModel.SaveLevelCommand.Execute(int.Parse(selectLevelInputField.text)));
-            loadLevelButton.onClick.AddListener(() => viewModel.LoadLevelCommand.Execute(int.Parse(selectLevelInputField.text)));
+            _viewModel.FastFailCommand.BindTo(_fastFailButton).AddTo(this);
+            _viewModel.FastWinCommand.BindTo(_fastWinButton).AddTo(this);
+            _saveLevelButton.onClick.AddListener(() => _viewModel.SaveLevelCommand.Execute(int.Parse(_selectLevelInputField.text)));
+            _loadLevelButton.onClick.AddListener(() => _viewModel.LoadLevelCommand.Execute(int.Parse(_selectLevelInputField.text)));
 #endif
+        }
+        
+        public override Tween Show()
+        {
+            var sequence = DOTween.Sequence();
+            sequence.AppendCallback(() => gameObject.SetActive(true));
+            sequence.Append(_canvasGroup.DOFade(1f, 0.5f).From(0));
+            return sequence;
+        }
+
+        public override Tween Hide()
+        {
+            var sequence = DOTween.Sequence();
+            sequence.Append(_canvasGroup.DOFade(0f, 0.5f).From(1));
+            sequence.AppendCallback(() => gameObject.SetActive(false));
+            return sequence;
         }
 
         public void Update()
         {
-            var direction = joystick.Direction;
+            var direction = _joystick.Direction;
             
             if(!Mathf.Approximately(direction.x, AppData.LevelData.MoveDirection.x) && !Mathf.Approximately(direction.y, AppData.LevelData.MoveDirection.z))
                 AppData.LevelData.MoveDirection = new Vector3(direction.x, 0f, direction.y);
@@ -77,7 +101,7 @@ namespace _Project.Scripts.UI.Windows.GameWindow
 
         public void Reset()
         {
-            viewModel.Reset();
+            _viewModel.Reset();
         }
     }
 }

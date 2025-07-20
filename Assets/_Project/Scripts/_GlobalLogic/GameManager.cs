@@ -3,7 +3,6 @@ using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using _Project.Scripts.UI.Windows;
 using _Project.Scripts.UI.Windows.GameWindow;
-using _Project.Scripts.Windows.Presenters;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
