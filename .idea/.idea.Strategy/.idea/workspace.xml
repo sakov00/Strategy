@@ -5,48 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88568452-d695-402f-9604-02d22dfb2030" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/BaseWindowModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/BaseWindowModel.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/FailWindow.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/FailWindow/FailWindowModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/FailWindow/FailWindowModel.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/FailWindow/FailWindowView.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/FailWindow/FailWindowView.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/FailWindow/FailWindowViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/FailWindow/FailWindowViewModel.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/LoaderWindow.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/WinWindow.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/WinWindow/WinWindowModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/WinWindow/WinWindowModel.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/WinWindow/WinWindowView.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/WinWindow/WinWindowView.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/WinWindow/WinWindowViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/WinWindow/WinWindowViewModel.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Elements/SplineAnimateStartPos.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Elements/SplineAnimateStartPos.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Strategy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Strategy/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Configs/WindowsConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Configs/WindowsConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Windows/GameWindow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Windows/GameWindow.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Windows/PauseWindow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Windows/PauseWindow.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Windows/WindowsManager.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Windows/WindowsManager.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Enums/WindowType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Enums/WindowType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildingZone/BuildingZoneController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildingZone/BuildingZoneController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Player/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/SpawnPoints/SpawnPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/SpawnPoints/SpawnPoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Services/ResetService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Services/ResetService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/BaseWindowView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/BaseWindowView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/BaseWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/BaseWindowViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/PauseWindow/PauseWindowModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/PauseWindow/PauseWindowModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/PauseWindow/PauseWindowView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/PauseWindow/PauseWindowView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/PauseWindow/PauseWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/PauseWindow/PauseWindowViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/WindowsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/WindowsManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/_GlobalLogic/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/_GlobalLogic/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/_VContainer/GameLifetimeScope.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/_VContainer/GameLifetimeScope.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +38,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/26a91ac688e14e5888dcd8558371eecd1fe00/19/b6ece965/Physics.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/26a91ac688e14e5888dcd8558371eecd1fe00/6e/4adf834c/CharacterController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5879d8d225474494bcffdfe64965038e174000/01/1c472afe/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5879d8d225474494bcffdfe64965038e174000/01/1c472afe/Vector3.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5879d8d225474494bcffdfe64965038e174000/1e/bcc616cb/Behaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5879d8d225474494bcffdfe64965038e174000/28/3ed5b573/Object.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5879d8d225474494bcffdfe64965038e174000/75/10f95930/Component.cs" root0="FORCE_HIGHLIGHTING" />
@@ -95,6 +59,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Interfaces/Controller/IPositionedController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/PauseWindow/PauseWindowModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@14.0.9/Shaders/Terrain/TerrainLit.shader" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.splines@2.5.2/Runtime/SplineInstantiate.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/MaterialReferenceManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/ExecuteEvents.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/jp.hadashikick.vcontainer@5e6f5cc14b/Runtime/Container.cs" root0="SKIP_HIGHLIGHTING" />
@@ -255,6 +220,7 @@
       <workItem from="1752775514898" duration="6030000" />
       <workItem from="1752997756942" duration="2860000" />
       <workItem from="1753006870121" duration="4593000" />
+      <workItem from="1754407125458" duration="4033000" />
     </task>
     <servers />
   </component>
