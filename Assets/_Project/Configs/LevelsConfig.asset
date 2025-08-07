@@ -10,8 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe4bbb2adad240988eef68090d318c5c, type: 3}
-  m_Name: EnvironmentPrefabConfig
+  m_Name: LevelsConfig
   m_EditorClassIdentifier: 
   terrainControllers:
   - {fileID: 3605369138447199681, guid: cf7d0713a791ec34c85886295f2bfd66, type: 3}
   environmentPrefabs: []
+  roadPrefabs:
+  - roads:
+    - {fileID: 616772021935541075, guid: 4b84ea31d8d824e439a7508f62f16681, type: 3}
+    - {fileID: 7396711417374319938, guid: 078b9826d3289684eb3c442867c9f337, type: 3}
+    - {fileID: 2627960456978242629, guid: 45e0597555754e04bab6b77bfb9c8069, type: 3}

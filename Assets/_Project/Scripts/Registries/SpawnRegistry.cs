@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using _Project.Scripts.SpawnPoints;
+using _Project.Scripts.GameObjects.SpawnPoints;
 
 namespace _Project.Scripts.Registries
 {

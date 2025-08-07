@@ -4,51 +4,46 @@ using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
-using _Project.Scripts.Interfaces;
-using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
-using _Project.Scripts.Services;
 using UnityEngine;
+using UnityEngine.Splines;
 using VContainer;
 using Random = UnityEngine.Random;
 
-namespace _Project.Scripts.SpawnPoints
+namespace _Project.Scripts.GameObjects.SpawnPoints
 {
     [Serializable]
-    public class SpawnPoint : MonoBehaviour, ISavable<SpawnDataJson>
+    [RequireComponent(typeof(SplineContainer))]
+    public class SpawnPoint : MonoBehaviour
     {
         [Inject] private EnemyFactory _enemyFactory;
         [Inject] private SpawnRegistry _spawnRegistry;
         [Inject] private SaveRegistry _saveRegistry;
 
-        [SerializeField] private float spawnRadius = 5f;
+        [SerializeField] private SplineContainer _splineContainer = new();
         [SerializeField] private List<EnemyGroup> roundEnemyList = new();
 
+        private List<Vector3> _worldPositions = new();
         private List<EnemyWithTime> _currentEnemyList;
         private int _currentIndex;
         private float _elapsedTime;
 
+        private void OnValidate()
+        {
+            _splineContainer ??= GetComponent<SplineContainer>();
+        }
+
         private void Start()
         {
             InjectManager.Inject(this);
-            _saveRegistry.Register(this);
             _spawnRegistry.Register(this);
-        }
-        
-        public SpawnDataJson GetJsonData()
-        {
-            var spawnDataJson = new SpawnDataJson();
-            spawnDataJson.position = transform.position;
-            spawnDataJson.spawnRadius = spawnRadius;
-            spawnDataJson.roundEnemyList.AddRange(roundEnemyList);
-            return spawnDataJson;
-        }
 
-        public void SetJsonData(SpawnDataJson environmentJson)
-        {
-            transform.position = environmentJson.position;
-            spawnRadius = environmentJson.spawnRadius;
-            roundEnemyList.AddRange(environmentJson.roundEnemyList);
+            foreach (var knot in _splineContainer.Spline)
+            {
+                Vector3 localPosition = knot.Position;
+                Vector3 worldPosition = _splineContainer.transform.TransformPoint(localPosition);
+                _worldPositions.Add(worldPosition);
+            }
         }
 
         public void StartSpawn()
@@ -87,10 +82,13 @@ namespace _Project.Scripts.SpawnPoints
 
         private void Spawn(EnemyWithTime enemyData)
         {
-            var offset2D = Random.insideUnitCircle * spawnRadius;
-            var spawnPosition = transform.position + new Vector3(offset2D.x, 0, offset2D.y);
-
-            _enemyFactory.CreateEnemyUnit(enemyData.enemyType, spawnPosition, new Vector3(58, 0, 94));
+            var offsetX = Random.Range(-5f, 5f);
+            var wayPoints = new List<Vector3>();
+            foreach (var position in _worldPositions)
+            {
+                wayPoints.Add(position + new Vector3(offsetX, 0f, 0f));
+            }
+            _enemyFactory.CreateEnemyUnit(enemyData.enemyType, wayPoints[0], wayPoints);
         }
 
         private void OnDestroy()

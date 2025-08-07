@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Json;
@@ -59,9 +60,9 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
             damageSystem.Attack();
         }
 
-        public void SetNoAimPosition(Vector3 position)
+        public void SetNoAimPosition(List<Vector3> positions)
         {
-            model.noAimPosition = position;
+            model.wayToAim = positions;
         }
         
         public void ClearData()

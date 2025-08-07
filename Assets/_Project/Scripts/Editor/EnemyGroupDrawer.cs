@@ -1,4 +1,4 @@
-using _Project.Scripts.SpawnPoints;
+using _Project.Scripts.GameObjects.SpawnPoints;
 using UnityEditor;
 using UnityEngine;
 

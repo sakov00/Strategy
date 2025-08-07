@@ -1,7 +1,7 @@
 using _Project.Scripts.GameObjects;
 using _Project.Scripts.GameObjects.BuildingZone;
 using _Project.Scripts.GameObjects.Characters.Unit;
-using _Project.Scripts.SpawnPoints;
+using _Project.Scripts.GameObjects.SpawnPoints;
 using UnityEngine;
 
 namespace _Project.Scripts.SO

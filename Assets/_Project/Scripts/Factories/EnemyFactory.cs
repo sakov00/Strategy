@@ -18,7 +18,7 @@ namespace _Project.Scripts.Factories
         [Inject] private UnitPrefabConfig unitPrefabConfig;
         [Inject] private HealthRegistry healthRegistry;
         
-        public UnitController CreateEnemyUnit(UnitType unitType, Vector3 position, Vector3 noAimPosition, Quaternion rotation = default)
+        public UnitController CreateEnemyUnit(UnitType unitType, Vector3 position, List<Vector3> wayToAim, Quaternion rotation = default)
         {
             UnitController enemyController;
             switch (unitType)
@@ -32,7 +32,7 @@ namespace _Project.Scripts.Factories
                 default: return null;
             }
             
-            enemyController.SetNoAimPosition(noAimPosition);
+            enemyController.SetNoAimPosition(wayToAim);
             healthRegistry.Register(enemyController.ObjectModel);
             return enemyController;
         }

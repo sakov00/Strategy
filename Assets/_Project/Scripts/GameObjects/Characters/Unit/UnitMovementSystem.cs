@@ -20,9 +20,18 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
 
         public void MoveToAim()
         {
+            var thresholdSqr = 0.5f;
+            if (unitModel.currentWaypointIndex < unitModel.wayToAim.Count - 1)
+            {
+                if ((transform.position - unitModel.wayToAim[unitModel.currentWaypointIndex]).sqrMagnitude < thresholdSqr)
+                {
+                    unitModel.currentWaypointIndex++;
+                }
+            }
+            
             if (unitModel.AimCharacter == null || unitModel.AimCharacter.Equals(null))
             {
-                unitView.Agent.SetDestination(unitModel.noAimPosition);
+                unitView.Agent.SetDestination(unitModel.wayToAim[unitModel.currentWaypointIndex]);
                 unitView.Agent.isStopped = false;
                 return;
             }

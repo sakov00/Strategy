@@ -1,6 +1,6 @@
+using _Project.Scripts.GameObjects.SpawnPoints;
 using UnityEditor;
 using UnityEngine;
-using _Project.Scripts.SpawnPoints;
 
 namespace _Project.Scripts.Editor
 {

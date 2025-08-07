@@ -33,7 +33,6 @@ namespace _Project.Scripts._GlobalLogic
         public void SaveLevel(int levelIndex)
         {
             _levelController.SaveLevel(levelIndex);
-            _resetService.ResetLevel();
         }
         
         public void NextRound()

@@ -1,19 +1,10 @@
 using _Project.Scripts._GlobalLogic;
-using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
-using _Project.Scripts.GameObjects.BuildingZone;
-using _Project.Scripts.GameObjects.Characters.Player;
-using _Project.Scripts.GameObjects.Characters.Unit;
-using _Project.Scripts.GameObjects.FriendsBuild;
-using _Project.Scripts.GameObjects.MoneyBuild;
-using _Project.Scripts.GameObjects.TowerDefence;
 using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
 using _Project.Scripts.Services;
 using _Project.Scripts.SO;
 using _Project.Scripts.UI.Windows;
-using _Project.Scripts.Windows;
-using Joystick_Pack.Scripts.Base;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -25,7 +16,7 @@ namespace _Project.Scripts._VContainer
         [SerializeField] private WindowsManager windowsManager;
         
         [Header("Configs")]
-        [SerializeField] private EnvironmentPrefabConfig environmentPrefabConfig;
+        [SerializeField] private LevelsConfig _levelsConfig;
         [SerializeField] private OthersPrefabConfig othersPrefabConfig;
         [SerializeField] private UnitPrefabConfig unitPrefabConfig;
         [SerializeField] private BuildingPrefabConfig buildingPrefabConfig;
@@ -71,12 +62,12 @@ namespace _Project.Scripts._VContainer
             builder.Register<ProjectileFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<FriendFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<EnemyFactory>(Lifetime.Singleton).AsSelf();
-            builder.Register<EnvironmentFactory>(Lifetime.Singleton).AsSelf();
+            builder.Register<LevelFactory>(Lifetime.Singleton).AsSelf();
         }
         
         private void RegisterSO(IContainerBuilder builder)
         {
-            builder.RegisterInstance(environmentPrefabConfig).AsSelf();
+            builder.RegisterInstance(_levelsConfig).AsSelf();
             builder.RegisterInstance(othersPrefabConfig).AsSelf();
             builder.RegisterInstance(unitPrefabConfig).AsSelf();
             builder.RegisterInstance(buildingPrefabConfig).AsSelf();

@@ -16,7 +16,7 @@ namespace _Project.Scripts.Services
         [Inject] private OthersFactory _othersFactory;
         [Inject] private BuildFactory _buildFactory;
         [Inject] private FriendFactory _friendFactory;
-        [Inject] private EnvironmentFactory _environmentFactory;
+        [Inject] private LevelFactory _levelFactory;
         [Inject] private JsonLoader _jsonLoader;
 
         public void LoadLevel(int index)
@@ -25,8 +25,7 @@ namespace _Project.Scripts.Services
             if (levelJson != null)
             {
                 //TODO add player and unit
-                _environmentFactory.CreateEnvironments(index, levelJson.environments);
-                _othersFactory.CreateSpawnPoints(levelJson.spawnDataJsons);
+                _levelFactory.CreateLevel(index);
                 _othersFactory.CreateBuildingZones(levelJson.buildingZoneJsons);
                 _buildFactory.CreateMoneyBuildings(levelJson.moneyBuildJsons);
                 _buildFactory.CreateMeleeFriendBuildings(levelJson.friendsBuildJsons
@@ -41,7 +40,6 @@ namespace _Project.Scripts.Services
         public void SaveLevel(int index)
         {
             var environmentJsons = _saveRegistry.GetAll<EnvironmentJson>().Select(x => x.GetJsonData()).ToList();
-            var spawnDataJsons = _saveRegistry.GetAll<SpawnDataJson>().Select(x => x.GetJsonData()).ToList();
             var buildingZoneJsons = _saveRegistry.GetAll<BuildingZoneJson>().Select(x => x.GetJsonData()).ToList();
             var moneyBuildJsons = _saveRegistry.GetAll<MoneyBuildJson>().Select(x => x.GetJsonData()).ToList();
             var friendsBuildJsons = _saveRegistry.GetAll<FriendsBuildJson>().Select(x => x.GetJsonData()).ToList();
@@ -50,7 +48,6 @@ namespace _Project.Scripts.Services
             var levelJson = new LevelJson
             {
                 environments = environmentJsons,
-                spawnDataJsons = spawnDataJsons,
                 buildingZoneJsons = buildingZoneJsons,
                 moneyBuildJsons = moneyBuildJsons,
                 friendsBuildJsons = friendsBuildJsons,

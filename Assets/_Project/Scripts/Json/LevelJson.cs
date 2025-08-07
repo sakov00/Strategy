@@ -5,8 +5,8 @@ using _Project.Scripts.GameObjects.Characters.Player;
 using _Project.Scripts.GameObjects.Characters.Unit;
 using _Project.Scripts.GameObjects.FriendsBuild;
 using _Project.Scripts.GameObjects.MoneyBuild;
+using _Project.Scripts.GameObjects.SpawnPoints;
 using _Project.Scripts.GameObjects.TowerDefence;
-using _Project.Scripts.SpawnPoints;
 using UnityEngine;
 
 namespace _Project.Scripts.Json
@@ -15,7 +15,6 @@ namespace _Project.Scripts.Json
     public class LevelJson
     {
         public List<EnvironmentJson> environments;
-        public List<SpawnDataJson> spawnDataJsons;
         public List<BuildingZoneJson> buildingZoneJsons;
         public List<MoneyBuildJson> moneyBuildJsons;
         public List<FriendsBuildJson> friendsBuildJsons;
@@ -28,13 +27,6 @@ namespace _Project.Scripts.Json
     {
         public Vector3 position;
         public Quaternion rotation;
-    }
-    
-    [Serializable]
-    public class SpawnDataJson : ConcreteObjectJson
-    {
-        public float spawnRadius;
-        public List<EnemyGroup> roundEnemyList = new();
     }
     
     [Serializable]

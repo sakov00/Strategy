@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Characters.Player;
@@ -32,7 +33,7 @@ namespace _Project.Scripts.Factories
                     break;
                 default: return null;
             }
-            friendContoller.SetNoAimPosition(position);
+            friendContoller.SetNoAimPosition(new List<Vector3>{position});
             healthRegistry.Register(friendContoller.ObjectModel);
             return friendContoller;
         }
@@ -42,7 +43,7 @@ namespace _Project.Scripts.Factories
             var unitControllers = new List<UnitController>();
             foreach (var unitJson in unitJsons)
             {
-                var unit = CreateFriendUnit(unitJson.unitModel.unitType, unitJson.unitModel.noAimPosition);
+                var unit = CreateFriendUnit(unitJson.unitModel.unitType, unitJson.unitModel.wayToAim.First());
                 unit.SetJsonData(unitJson);
                 unitControllers.Add(unit);
             }

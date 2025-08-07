@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using _Project.Scripts.GameObjects.BuildingZone;
+using _Project.Scripts.GameObjects.SpawnPoints;
 using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
 using _Project.Scripts.SO;
-using _Project.Scripts.SpawnPoints;
 using VContainer;
 using VContainer.Unity;
 
@@ -16,23 +16,6 @@ namespace _Project.Scripts.Factories
         
         [Inject] private SpawnRegistry _spawnRegistry;
         [Inject] private SaveRegistry _saveRegistry;
-        
-        public List<SpawnPoint> CreateSpawnPoints(List<SpawnDataJson> spawnDataJsons)
-        {
-            var spawnPoints = new List<SpawnPoint>();
-            foreach (var spawnDataJson in spawnDataJsons)
-            {
-                spawnPoints.Add(CreateSpawnPoint(spawnDataJson));
-            }
-            return spawnPoints;
-        }
-        
-        public SpawnPoint CreateSpawnPoint(SpawnDataJson spawnDataJson)
-        {
-            var spawnPoint = _resolver.Instantiate(_othersPrefabConfig.spawnPointPrefab);
-            spawnPoint.SetJsonData(spawnDataJson);
-            return spawnPoint;
-        }
         
         public List<BuildingZoneController> CreateBuildingZones(List<BuildingZoneJson> buildingZoneJsons)
         {
