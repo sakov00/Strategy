@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
 using _Project.Scripts.Registries;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Splines;
 using VContainer;
@@ -22,6 +24,7 @@ namespace _Project.Scripts.GameObjects.SpawnPoints
 
         [SerializeField] private SplineContainer _splineContainer = new();
         [SerializeField] private List<EnemyGroup> roundEnemyList = new();
+        [SerializeField] private List<TextMeshPro> enemyIconTexts = new();
 
         private List<Vector3> _worldPositions = new();
         private List<EnemyWithTime> _currentEnemyList;
@@ -44,6 +47,7 @@ namespace _Project.Scripts.GameObjects.SpawnPoints
                 Vector3 worldPosition = _splineContainer.transform.TransformPoint(localPosition);
                 _worldPositions.Add(worldPosition);
             }
+            RefreshView();
         }
 
         public void StartSpawn()
@@ -89,6 +93,21 @@ namespace _Project.Scripts.GameObjects.SpawnPoints
                 wayPoints.Add(position + new Vector3(offsetX, 0f, 0f));
             }
             _enemyFactory.CreateEnemyUnit(enemyData.enemyType, wayPoints[0], wayPoints);
+        }
+
+        public void RefreshView()
+        {
+            for (int i = 0; i < Enum.GetValues(typeof(UnitType)).Length; i++)
+            {
+                var countEnemy = roundEnemyList[AppData.LevelData.CurrentRound].enemies.Count(x => (int)x.enemyType == i);
+                if (countEnemy > 0)
+                {
+                    enemyIconTexts[i].gameObject.SetActive(true);
+                    enemyIconTexts[i].text = countEnemy.ToString();
+                }
+                else
+                    enemyIconTexts[i].gameObject.SetActive(false); 
+            }
         }
 
         private void OnDestroy()

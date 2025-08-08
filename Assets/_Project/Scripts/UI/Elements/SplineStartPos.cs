@@ -32,6 +32,7 @@ namespace _Project.Scripts.UI.Elements
             {
                 var percentIcon = (wayLenght - (i + 1) * _distanceBetweenIcons) / wayLenght;
                 _enemyIcons[i].position = _splineContainer.EvaluatePosition(percentIcon);
+                _enemyIcons[i].position += new Vector3(0, 0.1f, 0);
             }
         }
     }

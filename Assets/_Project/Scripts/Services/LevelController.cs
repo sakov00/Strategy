@@ -10,7 +10,6 @@ namespace _Project.Scripts.Services
 {
     public class LevelController
     {
-        [Inject] private HealthRegistry _healthRegistry;
         [Inject] private SaveRegistry _saveRegistry;
         
         [Inject] private OthersFactory _othersFactory;

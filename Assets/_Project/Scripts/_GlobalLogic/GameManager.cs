@@ -21,7 +21,8 @@ namespace _Project.Scripts._GlobalLogic
         {
             Application.targetFrameRate = 120;
             _windowsManager.ShowWindow<GameWindowView>();
-            StartLevel(0);
+            _friendFactory.CreatePlayer(new Vector3(60, 1, 70));
+            //StartLevel(0);
         }
 
         public void StartLevel(int levelIndex)

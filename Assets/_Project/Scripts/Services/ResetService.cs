@@ -35,6 +35,8 @@ namespace _Project.Scripts.Services
                     healthModel.Transform.gameObject.SetActive(true);
                 }
             }
+            foreach (var spawn in _spawnRegistry.GetAll())
+                spawn.RefreshView();
         }
         
         private void AllEnemiesDestroyed()
@@ -42,8 +44,8 @@ namespace _Project.Scripts.Services
             if (_healthRegistry.HasEnemies()) 
                 return;
 
-            NewRound();
             AppData.LevelData.CurrentRound++;
+            NewRound();
         }
         
         public void ResetLevel()
@@ -51,6 +53,8 @@ namespace _Project.Scripts.Services
             _saveRegistry.Clear();
             _spawnRegistry.Clear();
             _healthRegistry.Clear();
+            foreach (var spawn in _spawnRegistry.GetAll())
+                spawn.RefreshView();
             _windowsManager.GetWindow<GameWindowView>().Reset();
         }
     }
