@@ -6,39 +6,39 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
 {
     public class UnitMovementSystem
     {
-        private readonly UnitModel unitModel;
-        private readonly UnitView unitView;
-        private readonly Transform transform;
-        private Vector3 velocity;
+        private readonly UnitModel _unitModel;
+        private readonly UnitView _unitView;
+        private readonly Transform _transform;
+        private Vector3 _velocity;
         
         public UnitMovementSystem(UnitModel unitModel, UnitView unitView, Transform transform)
         {
-            this.unitModel = unitModel;
-            this.unitView = unitView;
-            this.transform = transform;
+            _unitModel = unitModel;
+            _unitView = unitView;
+            _transform = transform;
         }
 
         public void MoveToAim()
         {
             var thresholdSqr = 0.5f;
-            if (unitModel.currentWaypointIndex < unitModel.wayToAim.Count - 1)
+            if (_unitModel.CurrentWaypointIndex < _unitModel.WayToAim.Count - 1)
             {
-                if ((transform.position - unitModel.wayToAim[unitModel.currentWaypointIndex]).sqrMagnitude < thresholdSqr)
+                if ((_transform.position - _unitModel.WayToAim[_unitModel.CurrentWaypointIndex]).sqrMagnitude < thresholdSqr)
                 {
-                    unitModel.currentWaypointIndex++;
+                    _unitModel.CurrentWaypointIndex++;
                 }
             }
             
-            if (unitModel.AimCharacter == null || unitModel.AimCharacter.Equals(null))
+            if (_unitModel.AimCharacter == null || _unitModel.AimCharacter.Equals(null))
             {
-                unitView.Agent.SetDestination(unitModel.wayToAim[unitModel.currentWaypointIndex]);
-                unitView.Agent.isStopped = false;
+                _unitView.Agent.SetDestination(_unitModel.WayToAim[_unitModel.CurrentWaypointIndex]);
+                _unitView.Agent.isStopped = false;
                 return;
             }
   
-            var distance = PositionExtention.GetDistanceBetweenObjects(transform, unitModel.AimCharacter.Transform);
-            unitView.Agent.isStopped = distance < unitModel.AttackRange;
-            unitView.Agent.SetDestination(unitModel.AimCharacter.Transform.position);
+            var distance = PositionExtention.GetDistanceBetweenObjects(_transform, _unitModel.AimCharacter.Transform);
+            _unitView.Agent.isStopped = distance < _unitModel.AttackRange;
+            _unitView.Agent.SetDestination(_unitModel.AimCharacter.Transform.position);
         }
     }
 }

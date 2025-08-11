@@ -46,7 +46,7 @@ namespace _Project.Scripts.UI.Elements
             {
                 isDragging = false;
                 
-                var ray = GlobalObjects.CameraController.currentCamera.ScreenPointToRay(Input.mousePosition);
+                var ray = GlobalObjects.CameraController._currentCamera.ScreenPointToRay(Input.mousePosition);
                 if (!Physics.Raycast(ray, out RaycastHit hit)) return;
                 
                 if (hit.collider.TryGetComponent<IBuyController>(out var upgradeable))
@@ -86,7 +86,7 @@ namespace _Project.Scripts.UI.Elements
             {
                 isDragging = false;
 
-                var ray = GlobalObjects.CameraController.currentCamera.ScreenPointToRay(touch.position);
+                var ray = GlobalObjects.CameraController._currentCamera.ScreenPointToRay(touch.position);
                 if (!Physics.Raycast(ray, out RaycastHit hit)) return;
 
                 if (hit.collider.TryGetComponent<IBuyController>(out var upgradeable))

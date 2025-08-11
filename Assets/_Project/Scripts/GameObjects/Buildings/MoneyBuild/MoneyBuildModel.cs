@@ -1,6 +1,4 @@
 using System;
-using _Project.Scripts.Enums;
-using _Project.Scripts.Interfaces;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.MoneyBuild
@@ -9,7 +7,12 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
     public class MoneyBuildModel : BuildModel
     {
         [Header("Money")]
-        public int addMoneyValue = 1;
+        public int _addMoneyValue = 1;
 
+        public int AddMoneyValue
+        {
+            get => _addMoneyValue;
+            set => _addMoneyValue = value;
+        }
     }
 }

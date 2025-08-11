@@ -1725,7 +1725,6 @@ GameObject:
   - component: {fileID: 3580695541136233465}
   - component: {fileID: 4674275906125606597}
   - component: {fileID: 7943696995639670705}
-  - component: {fileID: 5653576716566182812}
   - component: {fileID: 6779291198023534625}
   m_Layer: 0
   m_Name: SplineLVL0 (2)
@@ -1747,8 +1746,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2275368416635599496}
   - {fileID: 8449751617608856165}
+  - {fileID: 2275368416635599496}
   - {fileID: 3668929915293851234}
   - {fileID: 1713521700041450186}
   - {fileID: 1396975605539216253}
@@ -2076,18 +2075,40 @@ MonoBehaviour:
   m_SegmentsPerMeter: 1
   m_Mesh: {fileID: 0}
   m_TextureScale: 1
---- !u!114 &5653576716566182812
+--- !u!114 &6779291198023534625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4333248419942046630}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ea85542cbe248b58d8343189c100a7c, type: 3}
+  m_Script: {fileID: 11500000, guid: e510430e65b545909c2e5f8c07642b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _roundEnemyList:
+  - enemies:
+    - time: 0
+      enemyType: 0
+    - time: 0
+      enemyType: 0
+    - time: 0
+      enemyType: 1
+    - time: 0
+      enemyType: 1
+  - enemies:
+    - time: 0
+      enemyType: 0
+    - time: 0
+      enemyType: 0
+    - time: 0
+      enemyType: 0
+  - enemies:
+    - time: 0
+      enemyType: 0
+    - time: 0
+      enemyType: 0
   _splineContainer: {fileID: 3804626938007919390}
   _splineAnimates:
   - {fileID: 2618182553258614637}
@@ -2126,62 +2147,9 @@ MonoBehaviour:
   - {fileID: 8153649968811469362}
   - {fileID: 1740677484183261799}
   _enemyIcons:
-  - {fileID: 8449751617608856165}
-  - {fileID: 2275368416635599496}
-  _distanceBetweenIcons: 4
---- !u!114 &6779291198023534625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4333248419942046630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e510430e65b545909c2e5f8c07642b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _splineContainer: {fileID: 3804626938007919390}
-  roundEnemyList:
-  - enemies:
-    - time: 1
-      enemyType: 0
-  - enemies:
-    - time: 1
-      enemyType: 0
-    - time: 2
-      enemyType: 0
-    - time: 3
-      enemyType: 0
-    - time: 3
-      enemyType: 0
-    - time: 3
-      enemyType: 0
-    - time: 3
-      enemyType: 0
-  - enemies:
-    - time: 1
-      enemyType: 0
-  - enemies:
-    - time: 1
-      enemyType: 0
-    - time: 2
-      enemyType: 0
-  - enemies:
-    - time: 1
-      enemyType: 0
-    - time: 2
-      enemyType: 0
-    - time: 3
-      enemyType: 0
-  - enemies:
-    - time: 1
-      enemyType: 0
-    - time: 2
-      enemyType: 0
-  enemyIconTexts:
   - {fileID: 5770965851191384754}
   - {fileID: 5287236869166779411}
+  _distanceBetweenIcons: 4
 --- !u!1 &4372101948819533803
 GameObject:
   m_ObjectHideFlags: 0

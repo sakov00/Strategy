@@ -108,6 +108,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2286103889999993886}
   m_SourcePrefab: {fileID: 100100000, guid: 7991bbbe44995004f8967dc6b9d6b3c9, type: 3}
+--- !u!114 &62154589785583304 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6173075028267324237, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6158666224120184197}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2792826271338377915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 988c9940b5f24368a08fba2ddaa2e9cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1622632282601740692 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4896333342933246993, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
@@ -132,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 988c9940b5f24368a08fba2ddaa2e9cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarRenderer: {fileID: 4912113428068058692}
+  _healthBarRenderer: {fileID: 4912113428068058692}
 --- !u!23 &4912113428068058692 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1251067684197333953, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
@@ -624,22 +636,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4cd115d4324231b941fb37c7a81614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model:
-    warSide: 1
-    maxHealth: 100
-    currentHealth: 100
-    moveSpeed: 10
-    rotationSpeed: 10
-    gravity: -20
-    attackRange: 10
-    damageAmount: 10
-    allAnimAttackTime: 1
-    animAttackTime: 1
-    detectionRadius: 20
-    typeAttack: 1
-    noAimPosition: {x: 0, y: 0, z: 0}
-    unitType: 1
-  view: {fileID: 7933941872836951361}
+  _model:
+    _warSide: 1
+    _maxHealth: 100
+    _currentHealth: 100
+    _moveSpeed: 10
+    _rotationSpeed: 10
+    _gravity: -20
+    _attackRange: 10
+    _damageAmount: 10
+    _allAnimAttackTime: 1
+    _animAttackTime: 1
+    _detectionRadius: 20
+    _typeAttack: 1
+    _currentWaypointIndex: 0
+    _wayToAim: []
+    _unitType: 1
+  _view: {fileID: 7933941872836951361}
 --- !u!114 &7933941872836951361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -652,10 +665,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3859cff1c149118054c40c9538b54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objRenderer: {fileID: 8306672324081057310}
-  healthBar: {fileID: 2286103889999993886}
-  tooltip: {fileID: 0}
-  animator: {fileID: 7389295262489941797}
+  _objRenderer: {fileID: 8306672324081057310}
+  _healthBar: {fileID: 62154589785583304}
+  _tooltip: {fileID: 0}
+  _animator: {fileID: 7389295262489941797}
   <Agent>k__BackingField: {fileID: 2010110707927957712}
   <ProjectileType>k__BackingField: 1
   <FirePoint>k__BackingField: {fileID: 7880186478471826682}

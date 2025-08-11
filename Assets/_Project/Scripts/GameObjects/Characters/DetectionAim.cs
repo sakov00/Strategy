@@ -11,15 +11,15 @@ namespace _Project.Scripts.GameObjects.Characters
 {
     public class DetectionAim
     {
-        [Inject] private HealthRegistry healthRegistry;
+        [Inject] private HealthRegistry _healthRegistry;
         
-        private readonly IFightObjectModel fightObjectModel;
-        private readonly Transform transform;
+        private readonly IFightObjectModel _fightObjectModel;
+        private readonly Transform _transform;
 
         public DetectionAim(IFightObjectModel fightObjectModel, Transform transform)
         {
-            this.fightObjectModel = fightObjectModel;
-            this.transform = transform;
+            _fightObjectModel = fightObjectModel;
+            _transform = transform;
             
             InjectManager.Inject(this);
         }
@@ -27,15 +27,15 @@ namespace _Project.Scripts.GameObjects.Characters
         public void DetectAim()
         {
             IHealthModel nearestTarget = null;
-            var nearestDistanceSqr = fightObjectModel.DetectionRadius;
+            var nearestDistanceSqr = _fightObjectModel.DetectionRadius;
 
-            foreach (var healthModel in healthRegistry.GetAll())
+            foreach (var healthModel in _healthRegistry.GetAll())
             {
                 if (healthModel == null || healthModel.CurrentHealth <= 0 || 
-                    ReferenceEquals(healthModel, fightObjectModel) || healthModel.WarSide == fightObjectModel.WarSide)
+                    ReferenceEquals(healthModel, _fightObjectModel) || healthModel.WarSide == _fightObjectModel.WarSide)
                     continue;
 
-                var distance = PositionExtention.GetDistanceBetweenObjects(transform, healthModel.Transform);
+                var distance = PositionExtention.GetDistanceBetweenObjects(_transform, healthModel.Transform);
                 if (distance < nearestDistanceSqr)
                 {
                     nearestDistanceSqr = distance;
@@ -43,7 +43,7 @@ namespace _Project.Scripts.GameObjects.Characters
                 }
             }
 
-            fightObjectModel.AimCharacter = nearestTarget;
+            _fightObjectModel.AimCharacter = nearestTarget;
         }
     }
 }

@@ -7,6 +7,6 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
     [Serializable]
     public class FriendsBuildView : BuildView
     {
-        [SerializeField] public List<Transform> buildUnitPositions = new();
+        [SerializeField] public List<Transform> _buildUnitPositions = new();
     }
 }

@@ -12,15 +12,15 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
     {
         [Inject] private HealthRegistry _healthRegistry;
         
-        private readonly MoneyBuildModel moneyBuildModel;
-        private readonly MoneyBuildingView moneyBuildingView;
+        private readonly MoneyBuildModel _moneyBuildModel;
+        private readonly MoneyBuildingView _moneyBuildingView;
         
-        private readonly CompositeDisposable disposables = new();
+        private readonly CompositeDisposable _disposables = new();
 
         public MoneyController(MoneyBuildModel moneyBuildModel, MoneyBuildingView moneyBuildingView)
         {
-            this.moneyBuildModel = moneyBuildModel;
-            this.moneyBuildingView = moneyBuildingView;
+            _moneyBuildModel = moneyBuildModel;
+            _moneyBuildingView = moneyBuildingView;
             
             InjectManager.Inject(this);
             _healthRegistry
@@ -28,7 +28,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
                 .ObserveRemove()
                 .Skip(1)
                 .Subscribe(_ => AllEnemiesDestroyed())
-                .AddTo(disposables);
+                .AddTo(_disposables);
         }
         
         private void AllEnemiesDestroyed()
@@ -41,14 +41,14 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
 
         private void AddMoneyToPlayer()
         {
-            var moneyAmount = moneyBuildModel.addMoneyValue * (moneyBuildModel.CurrentLevel + 1);
+            var moneyAmount = _moneyBuildModel.AddMoneyValue * (_moneyBuildModel.CurrentLevel + 1);
             AppData.User.Money += moneyAmount;
-            moneyBuildingView.MoneyUp(moneyAmount);
+            _moneyBuildingView.MoneyUp(moneyAmount);
         }
 
         public void Dispose()
         {
-            disposables?.Dispose();
+            _disposables?.Dispose();
         }
     }
 }

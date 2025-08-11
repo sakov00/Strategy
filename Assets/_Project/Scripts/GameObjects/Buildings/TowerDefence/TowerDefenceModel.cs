@@ -9,54 +9,54 @@ namespace _Project.Scripts.GameObjects.TowerDefence
     public class TowerDefenceModel : BuildModel, IFightObjectModel
     {
         [Header("Attack")] 
-        [SerializeField] private float attackRange = 20f;
-        [SerializeField] private int damageAmount = 10;
-        [SerializeField] private float allAnimAttackTime = 1f;
-        [SerializeField] private float animAttackTime = 1f;
-        [SerializeField] private float detectionRadius = 20f;
-        [SerializeField] private TypeAttack typeAttack = TypeAttack.Distance;
-        [SerializeField] private IHealthModel aimCharacter;
+        [SerializeField] private float _attackRange = 20f;
+        [SerializeField] private int _damageAmount = 10;
+        [SerializeField] private float _allAnimAttackTime = 1f;
+        [SerializeField] private float _animAttackTime = 1f;
+        [SerializeField] private float _detectionRadius = 20f;
+        [SerializeField] private TypeAttack _typeAttack = TypeAttack.Distance;
+        [SerializeField] private IHealthModel _aimCharacter;
 
         public float AttackRange
         {
-            get => attackRange;
-            set => attackRange = value;
+            get => _attackRange;
+            set => _attackRange = value;
         }
 
         public int DamageAmount
         {
-            get => damageAmount;
-            set => damageAmount = value;
+            get => _damageAmount;
+            set => _damageAmount = value;
         }
         
         public float AllAnimAttackTime
         {
-            get => allAnimAttackTime;
-            set => allAnimAttackTime = value;
+            get => _allAnimAttackTime;
+            set => _allAnimAttackTime = value;
         }
 
         public float AnimAttackTime
         {
-            get => animAttackTime;
-            set => animAttackTime = value;
+            get => _animAttackTime;
+            set => _animAttackTime = value;
         }
 
         public float DetectionRadius
         {
-            get => detectionRadius;
-            set => detectionRadius = value;
+            get => _detectionRadius;
+            set => _detectionRadius = value;
         }
 
         public TypeAttack TypeAttack
         {
-            get => typeAttack;
-            set => typeAttack = value;
+            get => _typeAttack;
+            set => _typeAttack = value;
         }
 
         public IHealthModel AimCharacter
         {
-            get => aimCharacter;
-            set => aimCharacter = value;
+            get => _aimCharacter;
+            set => _aimCharacter = value;
         }
     }
 }

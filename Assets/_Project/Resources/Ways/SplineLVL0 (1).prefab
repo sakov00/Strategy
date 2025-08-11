@@ -2062,8 +2062,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7281137803261651254}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0000000960357, y: -0.41314667, z: 0.00000007265895, w: 0.9106645}
-  m_LocalPosition: {x: -10.815079, y: -0.000003516674, z: 5.596227}
+  m_LocalRotation: {x: -0.00000018233415, y: 0.08402013, z: 9.877061e-10, w: 0.9964641}
+  m_LocalPosition: {x: -12.282158, y: -0.0000010430813, z: 76.6399}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2262,7 +2262,6 @@ GameObject:
   - component: {fileID: 8513067740495203826}
   - component: {fileID: 8253647659237676492}
   - component: {fileID: 3105557914856198836}
-  - component: {fileID: 2053642742831796632}
   - component: {fileID: 4950854334057394265}
   m_Layer: 0
   m_Name: SplineLVL0 (1)
@@ -2588,18 +2587,40 @@ MonoBehaviour:
   m_SegmentsPerMeter: 1
   m_Mesh: {fileID: 0}
   m_TextureScale: 1
---- !u!114 &2053642742831796632
+--- !u!114 &4950854334057394265
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7497022733213040111}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ea85542cbe248b58d8343189c100a7c, type: 3}
+  m_Script: {fileID: 11500000, guid: e510430e65b545909c2e5f8c07642b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _roundEnemyList:
+  - enemies:
+    - time: 0
+      enemyType: 0
+    - time: 0
+      enemyType: 0
+    - time: 0
+      enemyType: 1
+    - time: 0
+      enemyType: 1
+  - enemies:
+    - time: 0
+      enemyType: 0
+    - time: 0
+      enemyType: 0
+  - enemies:
+    - time: 0
+      enemyType: 0
+    - time: 0
+      enemyType: 0
+    - time: 0
+      enemyType: 0
   _splineContainer: {fileID: 7772257007095172480}
   _splineAnimates:
   - {fileID: 7599730462128760206}
@@ -2633,56 +2654,9 @@ MonoBehaviour:
   - {fileID: 2284412166938604266}
   - {fileID: 7068811167984206225}
   _enemyIcons:
-  - {fileID: 3468222284424302514}
-  - {fileID: 7880861258631177167}
-  _distanceBetweenIcons: 4
---- !u!114 &4950854334057394265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7497022733213040111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e510430e65b545909c2e5f8c07642b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _splineContainer: {fileID: 7772257007095172480}
-  roundEnemyList:
-  - enemies:
-    - time: 1
-      enemyType: 0
-    - time: 2
-      enemyType: 0
-    - time: 3
-      enemyType: 0
-  - enemies:
-    - time: 1
-      enemyType: 0
-  - enemies:
-    - time: 1
-      enemyType: 0
-  - enemies:
-    - time: 1
-      enemyType: 0
-    - time: 2
-      enemyType: 0
-  - enemies:
-    - time: 1
-      enemyType: 0
-    - time: 2
-      enemyType: 0
-  - enemies:
-    - time: 1
-      enemyType: 0
-    - time: 2
-      enemyType: 0
-    - time: 3
-      enemyType: 0
-  enemyIconTexts:
   - {fileID: 1546004902957016933}
   - {fileID: 4300308590283232596}
+  _distanceBetweenIcons: 4
 --- !u!1 &7874093848985219982
 GameObject:
   m_ObjectHideFlags: 0

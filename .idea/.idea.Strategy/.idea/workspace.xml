@@ -5,21 +5,84 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88568452-d695-402f-9604-02d22dfb2030" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/ClearDataRegistry.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/ClearDataRegistry.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/EnemyRoadRegistry.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Strategy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Strategy/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/LevelData_0.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/LevelData_0.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Configs/LevelsConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Configs/LevelsConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Graphics/Materials/Direction.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Graphics/Materials/Direction.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Graphics/Materials/WarriorIcon.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Graphics/Materials/WarriorIcon.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Ways/EnemyIcon.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Ways/EnemyIcon.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Buildings/DistanceFriendBuild.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Buildings/DistanceFriendBuild.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Buildings/MeleeFriendBuild.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Buildings/MeleeFriendBuild.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Buildings/MoneyBuild.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Buildings/MoneyBuild.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Buildings/TowerDefence.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Buildings/TowerDefence.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Enemies/EnemyArcher.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Enemies/EnemyArcher.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Enemies/MeleeEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Enemies/MeleeEnemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Friends/DistanceFriend.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Friends/DistanceFriend.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Friends/MeleeFriend.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Friends/MeleeFriend.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Player/Main Camera.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Player/Main Camera.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Player/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/UI/Tooltip.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/UI/Tooltip.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Ways/SplineLVL0 (0).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Ways/SplineLVL0 (0).prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Ways/SplineLVL0 (1).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Ways/SplineLVL0 (1).prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Resources/Ways/SplineLVL0 (2).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Resources/Ways/SplineLVL0 (2).prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/SpawnPoints/SpawnPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/SpawnPoints/SpawnPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Editor/EnemyGroupDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Editor/EnemyGroupDrawer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Editor/EnemyWithTimeDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Editor/EnemyWithTimeDrawer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/FriendFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/FriendFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/LevelFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/LevelFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/OthersFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/OthersFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildingZone/BuildingZoneController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildingZone/BuildingZoneController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildingZone/BuildingZoneModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/BuildingZone/BuildingZoneModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/FriendsBuild/FriendsBuildController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/FriendsBuild/FriendsBuildController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/FriendsBuild/FriendsBuildModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/FriendsBuild/FriendsBuildModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/FriendsBuild/FriendsBuildView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/FriendsBuild/FriendsBuildView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/FriendsBuild/FriendsCreatorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/FriendsBuild/FriendsCreatorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyBuildController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyBuildController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyBuildModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyBuildModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyBuildingView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyBuildingView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/MoneyBuild/MoneyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/TowerDefence/TowerDefenceController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/TowerDefence/TowerDefenceController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/TowerDefence/TowerDefenceModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Buildings/TowerDefence/TowerDefenceModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Camera/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Camera/CameraController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Camera/CameraFollow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Camera/CameraFollow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/CharacterModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/CharacterModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/CharacterView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/CharacterView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/DamageSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/DamageSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/DetectionAim.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/DetectionAim.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Player/PlayerMovementSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Player/PlayerMovementSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Unit/UnitController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Unit/UnitController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Unit/UnitModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Unit/UnitModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Unit/UnitMovementSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Characters/Unit/UnitMovementSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Environment/EnvironmentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Environment/EnvironmentController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Environment/TerrainController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Environment/TerrainController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/SpawnPoints.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/EnemyRoads.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/SpawnPoints/SpawnPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/EnemyRoads/EnemyRoad.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/SpawnPoints/SpawnPoint.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/EnemyRoads/EnemyRoad.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/UI.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Info.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/UI/HealthBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Info/HealthBar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/UI/HealthBar.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Info/HealthBar.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/UI/Tooltip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Info/Tooltip.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/UI/Tooltip.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/Info/Tooltip.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/_General/ObjectModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/_General/ObjectModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/_General/ObjectView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/_General/ObjectView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Json/LevelJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Json/LevelJson.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/SaveRegistry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/SaveRegistry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/SpawnRegistry.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/SpawnRegistry.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Registries/EnemyRoadRegistry.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/SO/LevelConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/SO/LevelConfig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/SO/OthersPrefabConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/SO/OthersPrefabConfig.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Services/LevelController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Services/LevelController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Services/ResetService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Services/ResetService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Elements/SplineStartPos.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Elements/SplineStartPos.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Elements/SplineStartPos.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Elements/SplineStartPos.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Elements/TouchAndMouseDragInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Elements/TouchAndMouseDragInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Windows/GameWindow/GameWindowView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/_GlobalLogic/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/_GlobalLogic/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/_GlobalLogic/GlobalObjects.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/_GlobalLogic/GlobalObjects.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/_VContainer/GameLifetimeScope.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/_VContainer/GameLifetimeScope.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,15 +208,13 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="19220">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="19220" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />
@@ -242,6 +303,7 @@
       <workItem from="1754586559399" duration="1414000" />
       <workItem from="1754641284956" duration="615000" />
       <workItem from="1754672438516" duration="4328000" />
+      <workItem from="1754925402264" duration="5691000" />
     </task>
     <servers />
   </component>
@@ -260,36 +322,6 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/_Project/Scripts/GameObjects/SpawnPoints/SpawnPoint.cs</url>
-          <line>94</line>
-          <properties documentPath="D:\Work\Strategy\Assets\_Project\Scripts\GameObjects\SpawnPoints\SpawnPoint.cs" containingFunctionPresentation="Method 'Spawn'">
-            <startOffsets>
-              <option value="3098" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3174" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/Elements/SplineStartPos.cs</url>
-          <line>30</line>
-          <properties documentPath="D:\Work\Strategy\Assets\_Project\Scripts\UI\Elements\SplineStartPos.cs" containingFunctionPresentation="Method 'Awake'">
-            <startOffsets>
-              <option value="985" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1028" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="UNITY_DEBUG_RUN_CONFIGURATION">
         <watch expression="objectControllerBase as ObjectController&lt;CharacterModel, CharacterView&gt;" language="C#" />

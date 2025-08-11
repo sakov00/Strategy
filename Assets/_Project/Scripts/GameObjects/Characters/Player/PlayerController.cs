@@ -10,23 +10,25 @@ namespace _Project.Scripts.GameObjects.Characters.Player
     public class PlayerController : MyCharacterController, ISavable<PlayerJson>
     {
         [Inject] private SaveRegistry _saveRegistry;
+        [Inject] private ClearDataRegistry _clearDataRegistry;
 
-        [SerializeField] private PlayerModel model;
-        [SerializeField] private PlayerView view;
-        protected override CharacterModel CharacterModel => model;
-        protected override CharacterView CharacterView => view;
+        [SerializeField] private PlayerModel _model;
+        [SerializeField] private PlayerView _view;
+        protected override CharacterModel CharacterModel => _model;
+        protected override CharacterView CharacterView => _view;
         
-        private PlayerMovementSystem playerMovementSystem;
-        private DetectionAim detectionAim;
-        private DamageSystem damageSystem;
+        private PlayerMovementSystem _playerMovementSystem;
+        private DetectionAim _detectionAim;
+        private DamageSystem _damageSystem;
         
         protected override void Initialize()
         {
             base.Initialize();
+            _playerMovementSystem = new PlayerMovementSystem(_model, _view, transform);
+            _detectionAim = new DetectionAim(_model, transform);
+            _damageSystem = new DamageSystem(_model, _view, transform);
             _saveRegistry.Register(this);
-            playerMovementSystem = new PlayerMovementSystem(model, view, transform);
-            detectionAim = new DetectionAim(model, transform);
-            damageSystem = new DamageSystem(model, view, transform);
+            _clearDataRegistry.Register(this);
         }
         
         public PlayerJson GetJsonData()
@@ -35,7 +37,7 @@ namespace _Project.Scripts.GameObjects.Characters.Player
             {
                 position = transform.position,
                 rotation = transform.rotation,
-                playerModel = model
+                playerModel = _model
             };
             return playerJson;
         }
@@ -44,19 +46,19 @@ namespace _Project.Scripts.GameObjects.Characters.Player
         {
             transform.position = environmentJson.position;
             transform.rotation = environmentJson.rotation;
-            model = environmentJson.playerModel;
+            _model = environmentJson.playerModel;
         }
 
         private void Update()
         {
-            playerMovementSystem.MoveTo(AppData.LevelData.MoveDirection);
+            _playerMovementSystem.MoveTo(AppData.LevelData.MoveDirection);
         }
         
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            detectionAim.DetectAim();
-            damageSystem.Attack();
+            _detectionAim.DetectAim();
+            _damageSystem.Attack();
         }
         
         public void ClearData()

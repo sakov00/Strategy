@@ -283,7 +283,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 764ed5f149f551947ad3f022baa9613d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 764ed5f149f551947ad3f022baa9613d,
         type: 3}
@@ -293,12 +293,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 764ed5f149f551947ad3f022baa9613d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 764ed5f149f551947ad3f022baa9613d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 764ed5f149f551947ad3f022baa9613d,
         type: 3}
@@ -308,7 +308,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 764ed5f149f551947ad3f022baa9613d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 764ed5f149f551947ad3f022baa9613d,
         type: 3}
@@ -404,14 +404,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0490f7c70ef543d080b8a711a96c57c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model:
-    warSide: 0
-    maxHealth: 500
-    currentHealth: 500
-    priceList: 0200000002000000030000000300000004000000
-    currentLevel: 1
-    addMoneyValue: 1
-  view: {fileID: 2752996952492913048}
+  _model:
+    _warSide: 0
+    _maxHealth: 200
+    _currentHealth: 200
+    _priceList: 020000000200000003000000030000000400000004000000
+    _currentLevel: 0
+    _addMoneyValue: 1
+  _view: {fileID: 2752996952492913048}
 --- !u!114 &2752996952492913048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,10 +424,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 172a6ac5a8c34c2583e5123fe58520df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objRenderer: {fileID: 8175023764034970666}
-  healthBar: {fileID: 3419078999095563644}
-  tooltip: {fileID: 3627643236564240803}
-  moneyUpText: {fileID: 7070703048352248572}
+  _objRenderer: {fileID: 8175023764034970666}
+  _healthBar: {fileID: 3419078999095563644}
+  _tooltip: {fileID: 3627643236564240803}
+  _moneyUpText: {fileID: 7070703048352248572}
 --- !u!23 &8175023764034970666 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 764ed5f149f551947ad3f022baa9613d,

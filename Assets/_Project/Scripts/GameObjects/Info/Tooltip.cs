@@ -2,17 +2,17 @@ using _Project.Scripts._GlobalLogic;
 using TMPro;
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects.UI
+namespace _Project.Scripts.GameObjects.Info
 {
     public class Tooltip : MonoBehaviour
     {
-        [SerializeField] private TextMeshPro currentLvlText;
-        [SerializeField] private TextMeshPro costNextLvlText;
+        [SerializeField] private TextMeshPro _currentLvlText;
+        [SerializeField] private TextMeshPro _costNextLvlText;
 
         public void UpdateTooltip(int currentLvl, int costUpgrade)
         {
-            currentLvlText.text = $"LVL:{currentLvl}";
-            costNextLvlText.text = $"Price:{costUpgrade}$";
+            _currentLvlText.text = $"LVL:{currentLvl}";
+            _costNextLvlText.text = $"Price:{costUpgrade}$";
             TooltipLookAtCamera();
         }
         

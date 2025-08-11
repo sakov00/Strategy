@@ -43,7 +43,7 @@ namespace _Project.Scripts.Factories
             var unitControllers = new List<UnitController>();
             foreach (var unitJson in unitJsons)
             {
-                var unit = CreateFriendUnit(unitJson.unitModel.unitType, unitJson.unitModel.wayToAim.First());
+                var unit = CreateFriendUnit(unitJson.unitModel.UnitType, unitJson.unitModel.WayToAim.First());
                 unit.SetJsonData(unitJson);
                 unitControllers.Add(unit);
             }
@@ -77,7 +77,7 @@ namespace _Project.Scripts.Factories
             var playerController = resolver.Instantiate(unitPrefabConfig.playerPrefab, position, rotation);
             healthRegistry.Register(playerController.ObjectModel);
             var cameraController = GlobalObjects.CameraController;
-            cameraController.cameraFollow.Init(cameraController.transform, playerController.transform);
+            cameraController._cameraFollow.Init(cameraController.transform, playerController.transform);
             return playerController;
         }
     }

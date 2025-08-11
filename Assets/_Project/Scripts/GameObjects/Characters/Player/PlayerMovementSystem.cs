@@ -4,16 +4,16 @@ namespace _Project.Scripts.GameObjects.Characters.Player
 {
     public class PlayerMovementSystem
     {
-        private readonly PlayerModel playerModel;
-        private readonly PlayerView playerView;
-        private readonly Transform transform;
-        private Vector3 velocity;
+        private readonly PlayerModel _playerModel;
+        private readonly PlayerView _playerView;
+        private readonly Transform _transform;
+        private Vector3 _velocity;
 
         public PlayerMovementSystem(PlayerModel playerModel, PlayerView playerView, Transform transform)
         {
-            this.playerModel = playerModel;
-            this.playerView = playerView;
-            this.transform = transform;
+            _playerModel = playerModel;
+            _playerView = playerView;
+            _transform = transform;
             
             playerView.Agent.updateRotation = false;
             playerView.Agent.acceleration = 100f;
@@ -24,21 +24,21 @@ namespace _Project.Scripts.GameObjects.Characters.Player
         {
             if (inputVector.sqrMagnitude < 0.01f)
             {
-                playerView.Agent.isStopped = true;
+                _playerView.Agent.isStopped = true;
                 return;
             }
 
             Vector3 direction = Vector3.ClampMagnitude(inputVector, 1f);
-            Vector3 destination = transform.position + direction * 2f;
+            Vector3 destination = _transform.position + direction * 2f;
 
-            playerView.Agent.isStopped = false;
-            playerView.Agent.speed = playerModel.MoveSpeed;
-            playerView.Agent.SetDestination(destination);
+            _playerView.Agent.isStopped = false;
+            _playerView.Agent.speed = _playerModel.MoveSpeed;
+            _playerView.Agent.SetDestination(destination);
 
-            if (playerView.Agent.velocity.sqrMagnitude > 0.1f)
+            if (_playerView.Agent.velocity.sqrMagnitude > 0.1f)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(playerView.Agent.velocity.normalized);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, playerModel.RotationSpeed * Time.deltaTime * 3f);
+                Quaternion targetRotation = Quaternion.LookRotation(_playerView.Agent.velocity.normalized);
+                _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRotation, _playerModel.RotationSpeed * Time.deltaTime * 3f);
             }
         }
     }

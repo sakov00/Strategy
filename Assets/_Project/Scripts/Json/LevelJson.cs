@@ -5,7 +5,6 @@ using _Project.Scripts.GameObjects.Characters.Player;
 using _Project.Scripts.GameObjects.Characters.Unit;
 using _Project.Scripts.GameObjects.FriendsBuild;
 using _Project.Scripts.GameObjects.MoneyBuild;
-using _Project.Scripts.GameObjects.SpawnPoints;
 using _Project.Scripts.GameObjects.TowerDefence;
 using UnityEngine;
 

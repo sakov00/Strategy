@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using _Project.Scripts.Enums;
+using _Project.Scripts.GameObjects.EnemyRoads;
 using _Project.Scripts.GameObjects.Environment;
-using _Project.Scripts.GameObjects.SpawnPoints;
 using UnityEngine;
 
 namespace _Project.Scripts.SO
@@ -17,7 +17,7 @@ namespace _Project.Scripts.SO
         [Serializable]
         public class LevelIndex
         {
-            public List<SpawnPoint> roads;
+            public List<EnemyRoad> roads;
         }
     }
 }

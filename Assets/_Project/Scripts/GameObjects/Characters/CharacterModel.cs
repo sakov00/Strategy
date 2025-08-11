@@ -10,75 +10,75 @@ namespace _Project.Scripts.GameObjects.Characters
     public class CharacterModel : ObjectModel, IMovementModel, IFightObjectModel
     {
         [Header("Movement")]
-        [SerializeField] private float moveSpeed = 10f;
-        [SerializeField] private float rotationSpeed = 10f; 
-        [SerializeField] private float gravity = -20f;
+        [SerializeField] private float _moveSpeed = 10f;
+        [SerializeField] private float _rotationSpeed = 10f; 
+        [SerializeField] private float _gravity = -20f;
         
         [Header("Attack")] 
-        [SerializeField] private float attackRange = 10f;
-        [SerializeField] private int damageAmount = 10;
-        [SerializeField] private float allAnimAttackTime = 1f;
-        [SerializeField] private float animAttackTime = 1f;
-        [SerializeField] private float detectionRadius = 20f;
-        [SerializeField] private TypeAttack typeAttack = TypeAttack.Distance;
-        [NonSerialized] private IHealthModel aimCharacter;
+        [SerializeField] private float _attackRange = 10f;
+        [SerializeField] private int _damageAmount = 10;
+        [SerializeField] private float _allAnimAttackTime = 1f;
+        [SerializeField] private float _animAttackTime = 1f;
+        [SerializeField] private float _detectionRadius = 20f;
+        [SerializeField] private TypeAttack _typeAttack = TypeAttack.Distance;
+        [NonSerialized] private IHealthModel _aimCharacter;
         
         public float MoveSpeed
         {
-            get => moveSpeed;
-            set => moveSpeed = value;
+            get => _moveSpeed;
+            set => _moveSpeed = value;
         }
         public float RotationSpeed
         {
-            get => rotationSpeed;
-            set => rotationSpeed = value;
+            get => _rotationSpeed;
+            set => _rotationSpeed = value;
         }
         public float Gravity
         {
-            get => gravity;
-            set => gravity = value;
+            get => _gravity;
+            set => _gravity = value;
         }
 
         public float AttackRange
         {
-            get => attackRange;
-            set => attackRange = value;
+            get => _attackRange;
+            set => _attackRange = value;
         }
 
         public int DamageAmount
         {
-            get => damageAmount;
-            set => damageAmount = value;
+            get => _damageAmount;
+            set => _damageAmount = value;
         }   
         
         public float AllAnimAttackTime
         {
-            get => allAnimAttackTime;
-            set => allAnimAttackTime = value;
+            get => _allAnimAttackTime;
+            set => _allAnimAttackTime = value;
         }
 
         public float AnimAttackTime
         {
-            get => animAttackTime;
-            set => animAttackTime = value;
+            get => _animAttackTime;
+            set => _animAttackTime = value;
         }
         
         public float DetectionRadius
         {
-            get => detectionRadius;
-            set => detectionRadius = value;
+            get => _detectionRadius;
+            set => _detectionRadius = value;
         }
 
         public TypeAttack TypeAttack
         {
-            get => typeAttack;
-            set => typeAttack = value;
+            get => _typeAttack;
+            set => _typeAttack = value;
         }
 
         public IHealthModel AimCharacter
         {
-            get => aimCharacter;
-            set => aimCharacter = value;
+            get => _aimCharacter;
+            set => _aimCharacter = value;
         }
     }
 }

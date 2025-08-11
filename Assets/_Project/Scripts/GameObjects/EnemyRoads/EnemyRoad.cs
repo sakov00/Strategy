@@ -5,6 +5,7 @@ using _Project.Scripts._GlobalLogic;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
+using _Project.Scripts.Interfaces;
 using _Project.Scripts.Registries;
 using TMPro;
 using UnityEngine;
@@ -12,19 +13,21 @@ using UnityEngine.Splines;
 using VContainer;
 using Random = UnityEngine.Random;
 
-namespace _Project.Scripts.GameObjects.SpawnPoints
+namespace _Project.Scripts.GameObjects.EnemyRoads
 {
     [Serializable]
     [RequireComponent(typeof(SplineContainer))]
-    public class SpawnPoint : MonoBehaviour
+    public class EnemyRoad : MonoBehaviour, IClearData
     {
         [Inject] private EnemyFactory _enemyFactory;
-        [Inject] private SpawnRegistry _spawnRegistry;
-        [Inject] private SaveRegistry _saveRegistry;
+        [Inject] private EnemyRoadRegistry _enemyRoadRegistry;
+        [Inject] private ClearDataRegistry _clearDataRegistry;
 
+        [SerializeField] private List<EnemyGroup> _roundEnemyList = new();
         [SerializeField] private SplineContainer _splineContainer = new();
-        [SerializeField] private List<EnemyGroup> roundEnemyList = new();
-        [SerializeField] private List<TextMeshPro> enemyIconTexts = new();
+        [SerializeField] private List<SplineAnimate> _splineAnimates;
+        [SerializeField] private List<TextMeshPro> _enemyIcons;
+        [SerializeField] private float _distanceBetweenIcons = 4;
 
         private List<Vector3> _worldPositions = new();
         private List<EnemyWithTime> _currentEnemyList;
@@ -35,17 +38,31 @@ namespace _Project.Scripts.GameObjects.SpawnPoints
         {
             _splineContainer ??= GetComponent<SplineContainer>();
         }
-
+        
         private void Start()
         {
             InjectManager.Inject(this);
-            _spawnRegistry.Register(this);
-
+            _clearDataRegistry.Register(this);
+            _enemyRoadRegistry.Register(this);
+            
             foreach (var knot in _splineContainer.Spline)
             {
                 Vector3 localPosition = knot.Position;
                 Vector3 worldPosition = _splineContainer.transform.TransformPoint(localPosition);
                 _worldPositions.Add(worldPosition);
+            }
+            for (int i = 0; i < _splineAnimates.Count; i++)
+            {
+                var splineAnimate = _splineAnimates[i];
+                splineAnimate.StartOffset = i / (float)_splineAnimates.Count;
+            }
+            
+            var wayLenght = _splineContainer.Spline.GetLength();
+            for (int i = 0; i < _enemyIcons.Count; i++)
+            {
+                var percentIcon = (wayLenght - (i + 1) * _distanceBetweenIcons) / wayLenght;
+                _enemyIcons[i].transform.position = _splineContainer.EvaluatePosition(percentIcon);
+                _enemyIcons[i].transform.position += new Vector3(0, 0.1f, 0);
             }
             RefreshView();
         }
@@ -53,13 +70,13 @@ namespace _Project.Scripts.GameObjects.SpawnPoints
         public void StartSpawn()
         {
             int currentRound = AppData.LevelData.CurrentRound;
-            if (currentRound >= roundEnemyList.Count)
+            if (currentRound >= _roundEnemyList.Count)
             {
                 Debug.LogWarning("Нет настроек для текущего раунда спавна.");
                 return;
             }
 
-            _currentEnemyList = roundEnemyList[currentRound].enemies;
+            _currentEnemyList = _roundEnemyList[currentRound].enemies;
             _currentEnemyList.Sort((a, b) => a.time.CompareTo(b.time)); // сортировка на всякий случай
             _currentIndex = 0;
             _elapsedTime = 0f;
@@ -99,14 +116,14 @@ namespace _Project.Scripts.GameObjects.SpawnPoints
         {
             for (int i = 0; i < Enum.GetValues(typeof(UnitType)).Length; i++)
             {
-                var countEnemy = roundEnemyList[AppData.LevelData.CurrentRound].enemies.Count(x => (int)x.enemyType == i);
+                var countEnemy = _roundEnemyList[AppData.LevelData.CurrentRound].enemies.Count(x => (int)x.enemyType == i);
                 if (countEnemy > 0)
                 {
-                    enemyIconTexts[i].gameObject.SetActive(true);
-                    enemyIconTexts[i].text = countEnemy.ToString();
+                    _enemyIcons[i].gameObject.SetActive(true);
+                    _enemyIcons[i].text = countEnemy.ToString();
                 }
                 else
-                    enemyIconTexts[i].gameObject.SetActive(false); 
+                    _enemyIcons[i].gameObject.SetActive(false); 
             }
         }
 

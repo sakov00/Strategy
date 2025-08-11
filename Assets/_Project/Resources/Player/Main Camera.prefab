@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e13ed7f92754800adb7dacc92162ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraFollow:
-    offset: {x: 0, y: 20, z: -15}
-    followSpeed: 5
-  currentCamera: {fileID: 3216653039456745478}
+  _cameraFollow:
+    _offset: {x: 0, y: 20, z: -12}
+    _followSpeed: 5
+  _currentCamera: {fileID: 3216653039456745478}

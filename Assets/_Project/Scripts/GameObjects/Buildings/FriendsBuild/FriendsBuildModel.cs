@@ -10,7 +10,19 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
     public class FriendsBuildModel : BuildModel
     {
         [Header("Units")] 
-        [SerializeField] public UnitType unitType;
-        [SerializeField] public List<UnitController> buildUnits = new();
+        [SerializeField] public UnitType _unitType;
+        [SerializeField] public List<UnitController> _buildUnits = new();
+        
+        public UnitType UnitType
+        {
+            get => _unitType;
+            set => _unitType = value;
+        }
+        
+        public List<UnitController> BuildUnits
+        {
+            get => _buildUnits;
+            set => _buildUnits = value;
+        }
     }
 }

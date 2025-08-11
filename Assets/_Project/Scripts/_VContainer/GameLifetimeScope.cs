@@ -13,15 +13,15 @@ namespace _Project.Scripts._VContainer
 {
     public class GameLifetimeScope : LifetimeScope
     {
-        [SerializeField] private WindowsManager windowsManager;
+        [SerializeField] private WindowsManager _windowsManager;
         
         [Header("Configs")]
         [SerializeField] private LevelsConfig _levelsConfig;
-        [SerializeField] private OthersPrefabConfig othersPrefabConfig;
-        [SerializeField] private UnitPrefabConfig unitPrefabConfig;
-        [SerializeField] private BuildingPrefabConfig buildingPrefabConfig;
-        [SerializeField] private ProjectilePrefabConfig projectilePrefabConfig;
-        [SerializeField] private WindowsConfig windowsConfig;
+        [SerializeField] private OthersPrefabConfig _othersPrefabConfig;
+        [SerializeField] private UnitPrefabConfig _unitPrefabConfig;
+        [SerializeField] private BuildingPrefabConfig _buildingPrefabConfig;
+        [SerializeField] private ProjectilePrefabConfig _projectilePrefabConfig;
+        [SerializeField] private WindowsConfig _windowsConfig;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -43,14 +43,15 @@ namespace _Project.Scripts._VContainer
         
         private void RegisterWindows(IContainerBuilder builder)
         {
-            builder.RegisterInstance(windowsManager).AsSelf().As<IInitializable>();
+            builder.RegisterInstance(_windowsManager).AsSelf().As<IInitializable>();
             //builder.RegisterComponentInNewPrefab(windowsConfig.gameWindowViewModel, Lifetime.Singleton);
         }
         
         private void RegisterRegistries(IContainerBuilder builder)
         {
             builder.Register<SaveRegistry>(Lifetime.Singleton).AsSelf();
-            builder.Register<SpawnRegistry>(Lifetime.Singleton).AsSelf();
+            builder.Register<ClearDataRegistry>(Lifetime.Singleton).AsSelf();
+            builder.Register<EnemyRoadRegistry>(Lifetime.Singleton).AsSelf();
             builder.Register<HealthRegistry>(Lifetime.Singleton).AsSelf();
             builder.Register<TooltipRegistry>(Lifetime.Singleton).AsSelf();
         }
@@ -68,11 +69,11 @@ namespace _Project.Scripts._VContainer
         private void RegisterSO(IContainerBuilder builder)
         {
             builder.RegisterInstance(_levelsConfig).AsSelf();
-            builder.RegisterInstance(othersPrefabConfig).AsSelf();
-            builder.RegisterInstance(unitPrefabConfig).AsSelf();
-            builder.RegisterInstance(buildingPrefabConfig).AsSelf();
-            builder.RegisterInstance(projectilePrefabConfig).AsSelf();
-            builder.RegisterInstance(windowsConfig).AsSelf().As<IInitializable>();
+            builder.RegisterInstance(_othersPrefabConfig).AsSelf();
+            builder.RegisterInstance(_unitPrefabConfig).AsSelf();
+            builder.RegisterInstance(_buildingPrefabConfig).AsSelf();
+            builder.RegisterInstance(_projectilePrefabConfig).AsSelf();
+            builder.RegisterInstance(_windowsConfig).AsSelf().As<IInitializable>();
         }
     }
 }

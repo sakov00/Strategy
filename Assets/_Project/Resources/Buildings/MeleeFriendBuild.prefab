@@ -122,15 +122,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d530c249e5cd4e19b6a03fa3cfea2dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model:
-    warSide: 0
-    maxHealth: 500
-    currentHealth: 500
-    priceList: 0400000006000000080000000a0000000c000000
-    currentLevel: 1
-    unitType: 0
-    buildUnits: []
-  view: {fileID: 4564933277160738802}
+  _model:
+    _warSide: 0
+    _maxHealth: 1000
+    _currentHealth: 1000
+    _priceList: 040000000400000005000000050000000600000006000000
+    _currentLevel: 0
+    _unitType: 0
+    _buildUnits: []
+  _view: {fileID: 4564933277160738802}
 --- !u!114 &4564933277160738802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,10 +143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e97158bbbc74febbc410ce76f278621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objRenderer: {fileID: 7345799183981944055}
-  healthBar: {fileID: 5143482536254737764}
-  tooltip: {fileID: 6983696979498181610}
-  buildUnitPositions:
+  _objRenderer: {fileID: 7345799183981944055}
+  _healthBar: {fileID: 5143482536254737764}
+  _tooltip: {fileID: 6983696979498181610}
+  _buildUnitPositions:
   - {fileID: 2444088782556222454}
   - {fileID: 2688157222307622312}
   - {fileID: 5156740394820285834}

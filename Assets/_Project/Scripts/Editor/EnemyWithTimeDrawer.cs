@@ -1,4 +1,4 @@
-using _Project.Scripts.GameObjects.SpawnPoints;
+using _Project.Scripts.GameObjects.EnemyRoads;
 using UnityEditor;
 using UnityEngine;
 

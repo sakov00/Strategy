@@ -1,17 +1,15 @@
-using System;
-using _Project.Scripts.GameObjects.Camera;
 using UnityEngine;
 
-namespace _Project.Scripts
+namespace _Project.Scripts.GameObjects.Camera
 {
     public class CameraController : MonoBehaviour
     {
-        public CameraFollow cameraFollow;
-        public Camera currentCamera;
+        public CameraFollow _cameraFollow;
+        public UnityEngine.Camera _currentCamera;
 
         private void LateUpdate()
         {
-            cameraFollow.UpdateCameraPosition();
+            _cameraFollow.UpdateCameraPosition();
         }
     }
 }

@@ -6,28 +6,28 @@ namespace _Project.Scripts.GameObjects.Camera
     [Serializable]
     public class CameraFollow
     {
-        private Transform cameraTransform;
-        private Transform target;
+        private Transform _cameraTransform;
+        private Transform _target;
         
-        [SerializeField] private Vector3 offset = new (0f, 10f, -10f);
-        [SerializeField] private float followSpeed = 5f;
+        [SerializeField] private Vector3 _offset = new (0f, 20f, -12f);
+        [SerializeField] private float _followSpeed = 5f;
 
         public bool IsFollowing { get; set; } = true;
 
         public void Init(Transform cameraTransformParam, Transform targetParam)
         {
-            cameraTransform = cameraTransformParam;
-            target = targetParam;
+            _cameraTransform = cameraTransformParam;
+            _target = targetParam;
         }
 
         public void UpdateCameraPosition()
         {
-            if (target == null) return;
+            if (_target == null) return;
             if (!IsFollowing) return;
 
-            Vector3 desiredPosition = target.position + offset;
-            cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredPosition, followSpeed * Time.deltaTime);
-            cameraTransform.LookAt(target);
+            Vector3 desiredPosition = _target.position + _offset;
+            _cameraTransform.position = Vector3.Lerp(_cameraTransform.position, desiredPosition, _followSpeed * Time.deltaTime);
+            _cameraTransform.LookAt(_target);
         }
     }
 }

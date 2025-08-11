@@ -14,20 +14,22 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
     public class FriendsBuildController : BuildController, ISavable<FriendsBuildJson>
     {
         [Inject] private SaveRegistry _saveRegistry;
-        [Inject] private FriendFactory friendFactory;
+        [Inject] private ClearDataRegistry _clearDataRegistry;
+        [Inject] private FriendFactory _friendFactory;
         
-        [SerializeField] private FriendsBuildModel model;
-        [SerializeField] private FriendsBuildView view;
-        public override BuildModel BuildModel => model;
-        public override BuildView BuildView => view;
+        [SerializeField] private FriendsBuildModel _model;
+        [SerializeField] private FriendsBuildView _view;
+        public override BuildModel BuildModel => _model;
+        public override BuildView BuildView => _view;
         
-        private FriendsCreatorController friendsCreatorController;
+        private FriendsCreatorController _friendsCreatorController;
         
         protected override void Initialize()
         {
-            _saveRegistry.Register(this);
-            friendsCreatorController = new FriendsCreatorController(friendFactory, model, view);
             base.Initialize();
+            _saveRegistry.Register(this);
+            _clearDataRegistry.Register(this);
+            _friendsCreatorController = new FriendsCreatorController(_friendFactory, _model, _view);
         }
         
         public FriendsBuildJson GetJsonData()
@@ -35,8 +37,8 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
             var friendsBuildJson = new FriendsBuildJson();
             friendsBuildJson.position = transform.position;
             friendsBuildJson.rotation = transform.rotation;
-            friendsBuildJson.friendsBuildModel = model;
-            friendsBuildJson.unitJsons = model.buildUnits.Select(x => x.GetJsonData()).ToList();
+            friendsBuildJson.friendsBuildModel = _model;
+            friendsBuildJson.unitJsons = _model.BuildUnits.Select(x => x.GetJsonData()).ToList();
             return friendsBuildJson;
         }
 
@@ -44,14 +46,14 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
         {
             transform.position = environmentJson.position;
             transform.rotation = environmentJson.rotation;
-            model = environmentJson.friendsBuildModel;
-            friendFactory.CreateFriendUnits(environmentJson.unitJsons);
+            _model = environmentJson.friendsBuildModel;
+            _friendFactory.CreateFriendUnits(environmentJson.unitJsons);
         }
 
         private void Start()
         {
-            if(model.buildUnits.Count == 0)
-                friendsCreatorController.CreateFriends();
+            if(_model.BuildUnits.Count == 0)
+                _friendsCreatorController.CreateFriends();
         }
         
         public void ClearData()

@@ -1,29 +1,29 @@
 using System;
 using _Project.Scripts._GlobalLogic;
-using _Project.Scripts.GameObjects.UI;
+using _Project.Scripts.GameObjects.Info;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects._General
 {
     public abstract class ObjectView : MonoBehaviour
     {
-        [SerializeField] protected Renderer objRenderer;
-        [SerializeField] protected HealthBar healthBar;
-        [SerializeField] protected Tooltip tooltip;
+        [SerializeField] protected Renderer _objRenderer;
+        [SerializeField] protected HealthBar _healthBar;
+        [SerializeField] protected Tooltip _tooltip;
         
         public virtual void Initialize() 
         {
         }
 
         public void UpdateHealthBar(float currentHealth, float maxHealth) =>
-            healthBar.UpdateHealthBar(currentHealth, maxHealth);
+            _healthBar.UpdateHealthBar(currentHealth, maxHealth);
         
         public void UpdateTooltip(int currentLvl, int costUpgrade) =>
-            tooltip.UpdateTooltip(currentLvl, costUpgrade);
+            _tooltip.UpdateTooltip(currentLvl, costUpgrade);
         
         public float GetHeightObject()
         {
-            return objRenderer.bounds.size.y;
+            return _objRenderer.bounds.size.y;
         }
     }
 }

@@ -10,18 +10,18 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
     {
         [Inject] private SaveRegistry _saveRegistry;
         
-        [SerializeField] protected MoneyBuildModel model;
-        [SerializeField] protected MoneyBuildingView view;
-        public override BuildModel BuildModel => model;
-        public override BuildView BuildView => view;
+        [SerializeField] protected MoneyBuildModel _model;
+        [SerializeField] protected MoneyBuildingView _view;
+        public override BuildModel BuildModel => _model;
+        public override BuildView BuildView => _view;
         
-        private MoneyController moneyController;
+        private MoneyController _moneyController;
 
         protected override void Initialize()
         {
-            _saveRegistry.Register(this);
-            moneyController = new MoneyController(model, view);
             base.Initialize();
+            _saveRegistry.Register(this);
+            _moneyController = new MoneyController(_model, _view);
         }
         
         public MoneyBuildJson GetJsonData()
@@ -29,7 +29,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
             var moneyBuildJson = new MoneyBuildJson();
             moneyBuildJson.position = transform.position;
             moneyBuildJson.rotation = transform.rotation;
-            moneyBuildJson.moneyBuildModel = model;
+            moneyBuildJson.moneyBuildModel = _model;
             return moneyBuildJson;
         }
 
@@ -37,12 +37,12 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
         {
             transform.position = environmentJson.position;
             transform.rotation = environmentJson.rotation;
-            model = environmentJson.moneyBuildModel;
+            _model = environmentJson.moneyBuildModel;
         }
 
         private void OnDestroy()
         {
-            moneyController.Dispose();
+            _moneyController.Dispose();
         }
         
         public void ClearData()

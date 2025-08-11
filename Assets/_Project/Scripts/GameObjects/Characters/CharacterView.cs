@@ -12,7 +12,7 @@ namespace _Project.Scripts.GameObjects.Characters
         private static readonly int IsWalking = Animator.StringToHash("IsWalking");
         private static readonly int IsAttack = Animator.StringToHash("IsAttack");
         
-        [SerializeField] private Animator animator;
+        [SerializeField] private Animator _animator;
         [field:SerializeField] public NavMeshAgent Agent { get; private set; }
         [field:SerializeField] public ProjectileType ProjectileType { get; set; }
         [field:SerializeField] public Transform FirePoint { get; set; }
@@ -22,7 +22,7 @@ namespace _Project.Scripts.GameObjects.Characters
         
         public void SetWalking(bool isWalking)
         {
-            if(animator == null)
+            if(_animator == null)
                 return;
             
             ResetAnimations();
@@ -30,11 +30,11 @@ namespace _Project.Scripts.GameObjects.Characters
         
         public void SetAttack(bool isAttacking)
         {
-            if(animator == null)
+            if(_animator == null)
                 return;
             
             ResetAnimations();
-            animator.SetBool(IsAttack, isAttacking);
+            _animator.SetBool(IsAttack, isAttacking);
         }
         
         public void OnAttackHit()
@@ -44,7 +44,7 @@ namespace _Project.Scripts.GameObjects.Characters
 
         private void ResetAnimations()
         {
-            animator.SetBool(IsAttack, false);
+            _animator.SetBool(IsAttack, false);
         }
     }
 }

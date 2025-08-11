@@ -11,11 +11,10 @@ namespace _Project.Scripts._GlobalLogic
 {
     public class GameManager : IStartable
     {
-        [Inject] private ResetService _resetService;
         [Inject] private LevelController _levelController;
         [Inject] private WindowsManager _windowsManager;
         [Inject] private FriendFactory _friendFactory;
-        [Inject] private SpawnRegistry _spawnRegistry;
+        [Inject] private EnemyRoadRegistry _enemyRoadRegistry;
         
         public void Start()
         {
@@ -27,7 +26,6 @@ namespace _Project.Scripts._GlobalLogic
 
         public void StartLevel(int levelIndex)
         {
-            _resetService.ResetLevel();
             _levelController.LoadLevel(levelIndex);
         }
         
@@ -38,7 +36,7 @@ namespace _Project.Scripts._GlobalLogic
         
         public void NextRound()
         {
-            foreach (var spawnPoint in _spawnRegistry.GetAll())
+            foreach (var spawnPoint in _enemyRoadRegistry.GetAll())
             {
                 spawnPoint.StartSpawn();
             }

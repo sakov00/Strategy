@@ -11,8 +11,9 @@ namespace _Project.Scripts.Services
 {
     public class ResetService : IInitializable
     {
+        [Inject] private ClearDataRegistry _clearDataRegistry;
         [Inject] private HealthRegistry _healthRegistry;
-        [Inject] private SpawnRegistry _spawnRegistry;
+        [Inject] private EnemyRoadRegistry _enemyRoadRegistry;
         [Inject] private SaveRegistry _saveRegistry;
         [Inject] private WindowsManager _windowsManager;
         
@@ -35,7 +36,7 @@ namespace _Project.Scripts.Services
                     healthModel.Transform.gameObject.SetActive(true);
                 }
             }
-            foreach (var spawn in _spawnRegistry.GetAll())
+            foreach (var spawn in _enemyRoadRegistry.GetAll())
                 spawn.RefreshView();
         }
         
@@ -50,10 +51,11 @@ namespace _Project.Scripts.Services
         
         public void ResetLevel()
         {
+            _clearDataRegistry.Clear();
             _saveRegistry.Clear();
-            _spawnRegistry.Clear();
+            _enemyRoadRegistry.Clear();
             _healthRegistry.Clear();
-            foreach (var spawn in _spawnRegistry.GetAll())
+            foreach (var spawn in _enemyRoadRegistry.GetAll())
                 spawn.RefreshView();
             _windowsManager.GetWindow<GameWindowView>().Reset();
         }

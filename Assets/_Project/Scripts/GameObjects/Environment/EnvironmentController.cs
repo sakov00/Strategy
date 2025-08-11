@@ -13,11 +13,13 @@ namespace _Project.Scripts.GameObjects.Environment
         [SerializeField] protected EnvironmentType environmentType;
         
         [Inject] private SaveRegistry _saveRegistry;
+        [Inject] private ClearDataRegistry _clearDataRegistry;
         
         private void Start()
         {
             InjectManager.Inject(this);
             _saveRegistry.Register(this);
+            _clearDataRegistry.Register(this);
         }
 
         public virtual EnvironmentJson GetJsonData()

@@ -11,15 +11,16 @@ namespace _Project.Scripts.Services
     public class LevelController
     {
         [Inject] private SaveRegistry _saveRegistry;
-        
         [Inject] private OthersFactory _othersFactory;
         [Inject] private BuildFactory _buildFactory;
         [Inject] private FriendFactory _friendFactory;
         [Inject] private LevelFactory _levelFactory;
         [Inject] private JsonLoader _jsonLoader;
+        [Inject] private ResetService _resetService;
 
         public void LoadLevel(int index)
         {
+            _resetService.ResetLevel();
             var levelJson = _jsonLoader.Load<LevelJson>(index);
             if (levelJson != null)
             {
@@ -28,9 +29,9 @@ namespace _Project.Scripts.Services
                 _othersFactory.CreateBuildingZones(levelJson.buildingZoneJsons);
                 _buildFactory.CreateMoneyBuildings(levelJson.moneyBuildJsons);
                 _buildFactory.CreateMeleeFriendBuildings(levelJson.friendsBuildJsons
-                    .Where(x => x.friendsBuildModel.unitType == UnitType.SimpleMelee));
+                    .Where(x => x.friendsBuildModel.UnitType == UnitType.SimpleMelee));
                 _buildFactory.CreateDistanceFriendBuildings(levelJson.friendsBuildJsons
-                    .Where(x => x.friendsBuildModel.unitType == UnitType.SimpleDistance));
+                    .Where(x => x.friendsBuildModel.UnitType == UnitType.SimpleDistance));
                 _buildFactory.CreateTowerDefenseBuildings(levelJson.towerDefenceBuildJsons);
                 _friendFactory.CreatePlayers(levelJson.playerJsons);
             }

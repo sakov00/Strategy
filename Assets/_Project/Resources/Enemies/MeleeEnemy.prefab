@@ -278,22 +278,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4cd115d4324231b941fb37c7a81614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model:
-    warSide: 1
-    maxHealth: 100
-    currentHealth: 100
-    moveSpeed: 10
-    rotationSpeed: 10
-    gravity: -20
-    attackRange: 1
-    damageAmount: 10
-    allAnimAttackTime: 1
-    animAttackTime: 1
-    detectionRadius: 20
-    typeAttack: 0
-    noAimPosition: {x: 0, y: 0, z: 0}
-    unitType: 0
-  view: {fileID: -3633122475770971463}
+  _model:
+    _warSide: 1
+    _maxHealth: 100
+    _currentHealth: 100
+    _moveSpeed: 10
+    _rotationSpeed: 10
+    _gravity: -20
+    _attackRange: 1
+    _damageAmount: 10
+    _allAnimAttackTime: 1
+    _animAttackTime: 1
+    _detectionRadius: 20
+    _typeAttack: 0
+    _currentWaypointIndex: 0
+    _wayToAim: []
+    _unitType: 0
+  _view: {fileID: -3633122475770971463}
 --- !u!114 &-3633122475770971463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,10 +307,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3859cff1c149118054c40c9538b54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objRenderer: {fileID: 3577828355485931451}
-  healthBar: {fileID: 5379700981253545673}
-  tooltip: {fileID: 0}
-  animator: {fileID: -4408281087418554947}
+  _objRenderer: {fileID: 3577828355485931451}
+  _healthBar: {fileID: 5379700981253545673}
+  _tooltip: {fileID: 0}
+  _animator: {fileID: -4408281087418554947}
   <Agent>k__BackingField: {fileID: 2801405599123745041}
   <ProjectileType>k__BackingField: 0
   <FirePoint>k__BackingField: {fileID: 0}

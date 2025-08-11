@@ -11,19 +11,19 @@ namespace _Project.Scripts.GameObjects
     public abstract class BuildModel : ObjectModel, IUpgradableModel
     {
         [Header("Upgrades")] 
-        [SerializeField] private List<int> priceList;
-        [SerializeField] private int currentLevel;
+        [SerializeField] private List<int> _priceList;
+        [SerializeField] private int _currentLevel;
 
         public int CurrentLevel
         {
-            get => currentLevel;
-            set => currentLevel = value;
+            get => _currentLevel;
+            set => _currentLevel = value;
         }
         
         public List<int> PriceList
         {
-            get => priceList;
-            set => priceList = value;
+            get => _priceList;
+            set => _priceList = value;
         }
     }
 }

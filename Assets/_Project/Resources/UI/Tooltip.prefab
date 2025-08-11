@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1300d53f36d44929ba1dcda99379310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLvlText: {fileID: 7472366080170231760}
-  costNextLvlText: {fileID: 3051673704465281501}
+  _currentLvlText: {fileID: 7472366080170231760}
+  _costNextLvlText: {fileID: 3051673704465281501}
 --- !u!1 &1366782943189941623
 GameObject:
   m_ObjectHideFlags: 0

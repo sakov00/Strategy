@@ -375,19 +375,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705c1891a90d49f6b2ca8f92240ba879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model:
-    warSide: 0
-    maxHealth: 1000
-    currentHealth: 1000
-    priceList: 0400000006000000080000000a0000000c000000
-    currentLevel: 1
-    attackRange: 20
-    damageAmount: 50
-    allAnimAttackTime: 1
-    animAttackTime: 1
-    detectionRadius: 20
-    typeAttack: 1
-  view: {fileID: 1645033017326533800}
+  _model:
+    _warSide: 0
+    _maxHealth: 500
+    _currentHealth: 500
+    _priceList: 030000000300000004000000040000000500000005000000
+    _currentLevel: 0
+    _attackRange: 20
+    _damageAmount: 50
+    _allAnimAttackTime: 1
+    _animAttackTime: 1
+    _detectionRadius: 20
+    _typeAttack: 1
+  _view: {fileID: 1645033017326533800}
 --- !u!114 &1645033017326533800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,9 +400,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a38f7c62afe4480882ce82b961de450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objRenderer: {fileID: 3846949601871662355}
-  healthBar: {fileID: 6569375006375228098}
-  tooltip: {fileID: 2048203932679248659}
+  _objRenderer: {fileID: 3846949601871662355}
+  _healthBar: {fileID: 6569375006375228098}
+  _tooltip: {fileID: 2048203932679248659}
   <ProjectileType>k__BackingField: 2
   <FirePoint>k__BackingField: {fileID: 3276773915444923101}
   <ProjectileSpeed>k__BackingField: 40

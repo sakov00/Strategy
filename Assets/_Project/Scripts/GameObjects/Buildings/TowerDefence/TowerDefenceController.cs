@@ -13,20 +13,20 @@ namespace _Project.Scripts.GameObjects.TowerDefence
     {
         [Inject] private SaveRegistry _saveRegistry;
         
-        [SerializeField] protected TowerDefenceModel model;
-        [SerializeField] protected TowerDefenceView view;
-        public override BuildModel BuildModel => model;
-        public override BuildView BuildView => view;
+        [SerializeField] protected TowerDefenceModel _model;
+        [SerializeField] protected TowerDefenceView _view;
+        public override BuildModel BuildModel => _model;
+        public override BuildView BuildView => _view;
         
-        private DetectionAim detectionAim;
-        private DamageSystem damageSystem;
+        private DetectionAim _detectionAim;
+        private DamageSystem _damageSystem;
 
         protected override void Initialize()
         {
-            _saveRegistry.Register(this);
-            detectionAim = new DetectionAim(model, transform);
-            damageSystem = new DamageSystem(model, view, transform);
             base.Initialize();
+            _saveRegistry.Register(this);
+            _detectionAim = new DetectionAim(_model, transform);
+            _damageSystem = new DamageSystem(_model, _view, transform);
         }
         
         public TowerDefenceBuildJson GetJsonData()
@@ -34,7 +34,7 @@ namespace _Project.Scripts.GameObjects.TowerDefence
             var towerDefenceBuildJson = new TowerDefenceBuildJson();
             towerDefenceBuildJson.position = transform.position;
             towerDefenceBuildJson.rotation = transform.rotation;
-            towerDefenceBuildJson.towerDefenceModel = model;
+            towerDefenceBuildJson.towerDefenceModel = _model;
             return towerDefenceBuildJson;
         }
 
@@ -42,14 +42,14 @@ namespace _Project.Scripts.GameObjects.TowerDefence
         {
             transform.position = environmentJson.position;
             transform.rotation = environmentJson.rotation;
-            model = environmentJson.towerDefenceModel;
+            _model = environmentJson.towerDefenceModel;
         }
 
         protected override void FixedUpdate()
         {            
             base.FixedUpdate();
-            detectionAim.DetectAim();
-            damageSystem.Attack();
+            _detectionAim.DetectAim();
+            _damageSystem.Attack();
         }
         
         public void ClearData()
