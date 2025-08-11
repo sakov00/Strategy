@@ -3,6 +3,7 @@ using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
 using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
+using Cysharp.Threading.Tasks;
 using VContainer;
 using VContainer.Unity;
 
@@ -18,10 +19,10 @@ namespace _Project.Scripts.Services
         [Inject] private JsonLoader _jsonLoader;
         [Inject] private ResetService _resetService;
 
-        public void LoadLevel(int index)
+        public async UniTask LoadLevel(int index)
         {
             _resetService.ResetLevel();
-            var levelJson = _jsonLoader.Load<LevelJson>(index);
+            var levelJson = await _jsonLoader.Load<LevelJson>(index);
             if (levelJson != null)
             {
                 //TODO add player and unit
