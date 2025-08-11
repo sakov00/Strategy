@@ -68,6 +68,11 @@ namespace _Project.Scripts.UI.Windows.GameWindow
                 .AddTo(this);
 
 #if EDIT_MODE
+            _fastFailButton.gameObject.SetActive(true);
+            _fastWinButton.gameObject.SetActive(true);
+            _saveLevelButton.gameObject.SetActive(true);
+            _loadLevelButton.gameObject.SetActive(true);
+            _selectLevelInputField.gameObject.SetActive(true);
             _viewModel.FastFailCommand.BindTo(_fastFailButton).AddTo(this);
             _viewModel.FastWinCommand.BindTo(_fastWinButton).AddTo(this);
             _saveLevelButton.onClick.AddListener(() => _viewModel.SaveLevelCommand.Execute(int.Parse(_selectLevelInputField.text)));

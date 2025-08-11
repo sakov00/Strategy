@@ -30,8 +30,11 @@ namespace _Project.Scripts.GameObjects.Characters
         
         public void SetAttack(bool isAttacking)
         {
-            if(_animator == null)
+            if (_animator == null)
+            {
+                AttackHitEvent?.Invoke();
                 return;
+            }
             
             ResetAnimations();
             _animator.SetBool(IsAttack, isAttacking);

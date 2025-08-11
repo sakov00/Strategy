@@ -10,7 +10,7 @@ namespace _Project.Scripts.GameObjects.Environment
 {
     public class EnvironmentController : MonoBehaviour, ISavable<EnvironmentJson>
     {
-        [SerializeField] protected EnvironmentType environmentType;
+        [SerializeField] protected EnvironmentType _environmentType;
         
         [Inject] private SaveRegistry _saveRegistry;
         [Inject] private ClearDataRegistry _clearDataRegistry;
@@ -28,7 +28,7 @@ namespace _Project.Scripts.GameObjects.Environment
             {
                 position = transform.position,
                 rotation = transform.rotation,
-                environmentType = environmentType
+                environmentType = _environmentType
             };
             return playerJson;
         }
@@ -37,7 +37,7 @@ namespace _Project.Scripts.GameObjects.Environment
         {
             transform.position = environmentJson.position;
             transform.rotation = environmentJson.rotation;
-            environmentType = environmentJson.environmentType;
+            _environmentType = environmentJson.environmentType;
         }
         
         public virtual void ClearData()

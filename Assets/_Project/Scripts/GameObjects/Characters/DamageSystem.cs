@@ -96,9 +96,10 @@ namespace _Project.Scripts.GameObjects.Characters
                 return;
 
             var projectile = _projectileFactory.CreateProjectile(_attackableView.ProjectileType, _attackableView.FirePoint.position);
-            projectile.damage = _fightObjectModel.DamageAmount;
-            projectile.ownerWarSide = _fightObjectModel.WarSide;
-            projectile.LaunchToPoint(_fightObjectModel.AimCharacter.Transform.position, _attackableView.ProjectileSpeed);
+            projectile._damage = _fightObjectModel.DamageAmount;
+            projectile._ownerWarSide = _fightObjectModel.WarSide;
+            projectile.LaunchToPoint(_fightObjectModel.AimCharacter.Transform.position + Vector3.up * (_fightObjectModel.AimCharacter.HeightObject / 2),
+                _attackableView.ProjectileSpeed);
         }
     }
 }

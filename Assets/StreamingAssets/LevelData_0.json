@@ -4,34 +4,6 @@
     "moneyBuildJsons": [
         {
             "position": {
-                "x": 47.62000274658203,
-                "y": 0.11999999731779099,
-                "z": 90.56999969482422
-            },
-            "rotation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0,
-                "w": 1.0
-            },
-            "moneyBuildModel": {
-                "_warSide": 0,
-                "_maxHealth": 200.0,
-                "_currentHealth": 200.0,
-                "_priceList": [
-                    2,
-                    2,
-                    3,
-                    3,
-                    4,
-                    4
-                ],
-                "_currentLevel": 3,
-                "_addMoneyValue": 1
-            }
-        },
-        {
-            "position": {
                 "x": 58.01000213623047,
                 "y": 0.11999999731779099,
                 "z": 94.8499984741211
@@ -54,17 +26,15 @@
                     4,
                     4
                 ],
-                "_currentLevel": 4,
+                "_currentLevel": 1,
                 "_addMoneyValue": 1
             }
-        }
-    ],
-    "friendsBuildJsons": [
+        },
         {
             "position": {
-                "x": 48.790000915527347,
+                "x": 47.62000274658203,
                 "y": 0.11999999731779099,
-                "z": 80.5
+                "z": 90.56999969482422
             },
             "rotation": {
                 "x": 0.0,
@@ -72,182 +42,24 @@
                 "z": 0.0,
                 "w": 1.0
             },
-            "friendsBuildModel": {
+            "moneyBuildModel": {
                 "_warSide": 0,
-                "_maxHealth": 1000.0,
-                "_currentHealth": 1000.0,
+                "_maxHealth": 200.0,
+                "_currentHealth": 200.0,
                 "_priceList": [
+                    2,
+                    2,
+                    3,
+                    3,
                     4,
-                    4,
-                    5,
-                    5,
-                    6,
-                    6
+                    4
                 ],
-                "_currentLevel": 2,
-                "_unitType": 0,
-                "_buildUnits": [
-                    {
-                        "instanceID": -196768
-                    },
-                    {
-                        "instanceID": -196798
-                    },
-                    {
-                        "instanceID": -196828
-                    },
-                    {
-                        "instanceID": -196858
-                    }
-                ]
-            },
-            "unitJsons": [
-                {
-                    "position": {
-                        "x": 51.790000915527347,
-                        "y": 0.949999988079071,
-                        "z": 74.5
-                    },
-                    "rotation": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0,
-                        "w": 1.0
-                    },
-                    "unitModel": {
-                        "_warSide": 0,
-                        "_maxHealth": 100.0,
-                        "_currentHealth": 100.0,
-                        "_moveSpeed": 10.0,
-                        "_rotationSpeed": 10.0,
-                        "_gravity": -20.0,
-                        "_attackRange": 10.0,
-                        "_damageAmount": 10,
-                        "_allAnimAttackTime": 1.0,
-                        "_animAttackTime": 1.0,
-                        "_detectionRadius": 20.0,
-                        "_typeAttack": 0,
-                        "_currentWaypointIndex": 0,
-                        "_wayToAim": [
-                            {
-                                "x": 51.790000915527347,
-                                "y": 0.11999999731779099,
-                                "z": 74.5
-                            }
-                        ],
-                        "_unitType": 0
-                    }
-                },
-                {
-                    "position": {
-                        "x": 49.790000915527347,
-                        "y": 0.949999988079071,
-                        "z": 74.5
-                    },
-                    "rotation": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0,
-                        "w": 1.0
-                    },
-                    "unitModel": {
-                        "_warSide": 0,
-                        "_maxHealth": 100.0,
-                        "_currentHealth": 100.0,
-                        "_moveSpeed": 10.0,
-                        "_rotationSpeed": 10.0,
-                        "_gravity": -20.0,
-                        "_attackRange": 10.0,
-                        "_damageAmount": 10,
-                        "_allAnimAttackTime": 1.0,
-                        "_animAttackTime": 1.0,
-                        "_detectionRadius": 20.0,
-                        "_typeAttack": 0,
-                        "_currentWaypointIndex": 0,
-                        "_wayToAim": [
-                            {
-                                "x": 49.790000915527347,
-                                "y": 0.11999999731779099,
-                                "z": 74.5
-                            }
-                        ],
-                        "_unitType": 0
-                    }
-                },
-                {
-                    "position": {
-                        "x": 47.790000915527347,
-                        "y": 0.949999988079071,
-                        "z": 74.5
-                    },
-                    "rotation": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0,
-                        "w": 1.0
-                    },
-                    "unitModel": {
-                        "_warSide": 0,
-                        "_maxHealth": 100.0,
-                        "_currentHealth": 100.0,
-                        "_moveSpeed": 10.0,
-                        "_rotationSpeed": 10.0,
-                        "_gravity": -20.0,
-                        "_attackRange": 10.0,
-                        "_damageAmount": 10,
-                        "_allAnimAttackTime": 1.0,
-                        "_animAttackTime": 1.0,
-                        "_detectionRadius": 20.0,
-                        "_typeAttack": 0,
-                        "_currentWaypointIndex": 0,
-                        "_wayToAim": [
-                            {
-                                "x": 47.790000915527347,
-                                "y": 0.11999999731779099,
-                                "z": 74.5
-                            }
-                        ],
-                        "_unitType": 0
-                    }
-                },
-                {
-                    "position": {
-                        "x": 45.790000915527347,
-                        "y": 0.949999988079071,
-                        "z": 74.5
-                    },
-                    "rotation": {
-                        "x": 0.0,
-                        "y": 0.0,
-                        "z": 0.0,
-                        "w": 1.0
-                    },
-                    "unitModel": {
-                        "_warSide": 0,
-                        "_maxHealth": 100.0,
-                        "_currentHealth": 100.0,
-                        "_moveSpeed": 10.0,
-                        "_rotationSpeed": 10.0,
-                        "_gravity": -20.0,
-                        "_attackRange": 10.0,
-                        "_damageAmount": 10,
-                        "_allAnimAttackTime": 1.0,
-                        "_animAttackTime": 1.0,
-                        "_detectionRadius": 20.0,
-                        "_typeAttack": 0,
-                        "_currentWaypointIndex": 0,
-                        "_wayToAim": [
-                            {
-                                "x": 45.790000915527347,
-                                "y": 0.11999999731779099,
-                                "z": 74.5
-                            }
-                        ],
-                        "_unitType": 0
-                    }
-                }
-            ]
-        },
+                "_currentLevel": 1,
+                "_addMoneyValue": 1
+            }
+        }
+    ],
+    "friendsBuildJsons": [
         {
             "position": {
                 "x": 67.97000122070313,
@@ -272,20 +84,20 @@
                     6,
                     6
                 ],
-                "_currentLevel": 2,
+                "_currentLevel": 1,
                 "_unitType": 1,
                 "_buildUnits": [
                     {
-                        "instanceID": -197364
+                        "instanceID": -590688
                     },
                     {
-                        "instanceID": -197402
+                        "instanceID": -590726
                     },
                     {
-                        "instanceID": -197440
+                        "instanceID": -590764
                     },
                     {
-                        "instanceID": -197478
+                        "instanceID": -590802
                     }
                 ]
             },
@@ -435,9 +247,230 @@
                     }
                 }
             ]
+        },
+        {
+            "position": {
+                "x": 48.790000915527347,
+                "y": 0.11999999731779099,
+                "z": 80.5
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "friendsBuildModel": {
+                "_warSide": 0,
+                "_maxHealth": 1000.0,
+                "_currentHealth": 1000.0,
+                "_priceList": [
+                    4,
+                    4,
+                    5,
+                    5,
+                    6,
+                    6
+                ],
+                "_currentLevel": 1,
+                "_unitType": 0,
+                "_buildUnits": [
+                    {
+                        "instanceID": -591318
+                    },
+                    {
+                        "instanceID": -591348
+                    },
+                    {
+                        "instanceID": -591378
+                    },
+                    {
+                        "instanceID": -591408
+                    }
+                ]
+            },
+            "unitJsons": [
+                {
+                    "position": {
+                        "x": 51.790000915527347,
+                        "y": 0.949999988079071,
+                        "z": 74.5
+                    },
+                    "rotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 1.0
+                    },
+                    "unitModel": {
+                        "_warSide": 0,
+                        "_maxHealth": 100.0,
+                        "_currentHealth": 100.0,
+                        "_moveSpeed": 10.0,
+                        "_rotationSpeed": 10.0,
+                        "_gravity": -20.0,
+                        "_attackRange": 1.0,
+                        "_damageAmount": 10,
+                        "_allAnimAttackTime": 1.0,
+                        "_animAttackTime": 1.0,
+                        "_detectionRadius": 20.0,
+                        "_typeAttack": 0,
+                        "_currentWaypointIndex": 0,
+                        "_wayToAim": [
+                            {
+                                "x": 51.790000915527347,
+                                "y": 0.11999999731779099,
+                                "z": 74.5
+                            }
+                        ],
+                        "_unitType": 0
+                    }
+                },
+                {
+                    "position": {
+                        "x": 49.790000915527347,
+                        "y": 0.949999988079071,
+                        "z": 74.5
+                    },
+                    "rotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 1.0
+                    },
+                    "unitModel": {
+                        "_warSide": 0,
+                        "_maxHealth": 100.0,
+                        "_currentHealth": 100.0,
+                        "_moveSpeed": 10.0,
+                        "_rotationSpeed": 10.0,
+                        "_gravity": -20.0,
+                        "_attackRange": 1.0,
+                        "_damageAmount": 10,
+                        "_allAnimAttackTime": 1.0,
+                        "_animAttackTime": 1.0,
+                        "_detectionRadius": 20.0,
+                        "_typeAttack": 0,
+                        "_currentWaypointIndex": 0,
+                        "_wayToAim": [
+                            {
+                                "x": 49.790000915527347,
+                                "y": 0.11999999731779099,
+                                "z": 74.5
+                            }
+                        ],
+                        "_unitType": 0
+                    }
+                },
+                {
+                    "position": {
+                        "x": 47.790000915527347,
+                        "y": 0.949999988079071,
+                        "z": 74.5
+                    },
+                    "rotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 1.0
+                    },
+                    "unitModel": {
+                        "_warSide": 0,
+                        "_maxHealth": 100.0,
+                        "_currentHealth": 100.0,
+                        "_moveSpeed": 10.0,
+                        "_rotationSpeed": 10.0,
+                        "_gravity": -20.0,
+                        "_attackRange": 1.0,
+                        "_damageAmount": 10,
+                        "_allAnimAttackTime": 1.0,
+                        "_animAttackTime": 1.0,
+                        "_detectionRadius": 20.0,
+                        "_typeAttack": 0,
+                        "_currentWaypointIndex": 0,
+                        "_wayToAim": [
+                            {
+                                "x": 47.790000915527347,
+                                "y": 0.11999999731779099,
+                                "z": 74.5
+                            }
+                        ],
+                        "_unitType": 0
+                    }
+                },
+                {
+                    "position": {
+                        "x": 45.790000915527347,
+                        "y": 0.949999988079071,
+                        "z": 74.5
+                    },
+                    "rotation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 1.0
+                    },
+                    "unitModel": {
+                        "_warSide": 0,
+                        "_maxHealth": 100.0,
+                        "_currentHealth": 100.0,
+                        "_moveSpeed": 10.0,
+                        "_rotationSpeed": 10.0,
+                        "_gravity": -20.0,
+                        "_attackRange": 1.0,
+                        "_damageAmount": 10,
+                        "_allAnimAttackTime": 1.0,
+                        "_animAttackTime": 1.0,
+                        "_detectionRadius": 20.0,
+                        "_typeAttack": 0,
+                        "_currentWaypointIndex": 0,
+                        "_wayToAim": [
+                            {
+                                "x": 45.790000915527347,
+                                "y": 0.11999999731779099,
+                                "z": 74.5
+                            }
+                        ],
+                        "_unitType": 0
+                    }
+                }
+            ]
         }
     ],
     "towerDefenceBuildJsons": [
+        {
+            "position": {
+                "x": 42.970001220703128,
+                "y": 3.0399999618530275,
+                "z": 50.279998779296878
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "towerDefenceModel": {
+                "_warSide": 0,
+                "_maxHealth": 500.0,
+                "_currentHealth": 500.0,
+                "_priceList": [
+                    3,
+                    3,
+                    4,
+                    4,
+                    5,
+                    5
+                ],
+                "_currentLevel": 1,
+                "_attackRange": 20.0,
+                "_damageAmount": 25,
+                "_allAnimAttackTime": 1.0,
+                "_animAttackTime": 1.0,
+                "_detectionRadius": 20.0,
+                "_typeAttack": 1
+            }
+        },
         {
             "position": {
                 "x": 68.58000183105469,
@@ -464,40 +497,7 @@
                 ],
                 "_currentLevel": 1,
                 "_attackRange": 20.0,
-                "_damageAmount": 50,
-                "_allAnimAttackTime": 1.0,
-                "_animAttackTime": 1.0,
-                "_detectionRadius": 20.0,
-                "_typeAttack": 1
-            }
-        },
-        {
-            "position": {
-                "x": 42.970001220703128,
-                "y": 3.0399999618530275,
-                "z": 50.279998779296878
-            },
-            "rotation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0,
-                "w": 1.0
-            },
-            "towerDefenceModel": {
-                "_warSide": 0,
-                "_maxHealth": 500.0,
-                "_currentHealth": 500.0,
-                "_priceList": [
-                    3,
-                    3,
-                    4,
-                    4,
-                    5,
-                    5
-                ],
-                "_currentLevel": 2,
-                "_attackRange": 20.0,
-                "_damageAmount": 50,
+                "_damageAmount": 25,
                 "_allAnimAttackTime": 1.0,
                 "_animAttackTime": 1.0,
                 "_detectionRadius": 20.0,
@@ -508,15 +508,15 @@
     "playerJsons": [
         {
             "position": {
-                "x": 60.0,
-                "y": 1.0,
-                "z": 70.0
+                "x": 60.03614807128906,
+                "y": 1.0016719102859498,
+                "z": 64.8174057006836
             },
             "rotation": {
                 "x": 0.0,
-                "y": 0.0,
+                "y": -0.9985812306404114,
                 "z": 0.0,
-                "w": 1.0
+                "w": 0.053250644356012347
             },
             "playerModel": {
                 "_warSide": 0,

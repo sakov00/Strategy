@@ -1,5 +1,3 @@
-using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.GameObjects.Characters;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Json;
@@ -12,6 +10,7 @@ namespace _Project.Scripts.GameObjects.TowerDefence
     public class TowerDefenceController : BuildController, ISavable<TowerDefenceBuildJson>
     {
         [Inject] private SaveRegistry _saveRegistry;
+        [Inject] private ClearDataRegistry _clearDataRegistry;
         
         [SerializeField] protected TowerDefenceModel _model;
         [SerializeField] protected TowerDefenceView _view;
@@ -25,6 +24,7 @@ namespace _Project.Scripts.GameObjects.TowerDefence
         {
             base.Initialize();
             _saveRegistry.Register(this);
+            _clearDataRegistry.Register(this);
             _detectionAim = new DetectionAim(_model, transform);
             _damageSystem = new DamageSystem(_model, _view, transform);
         }

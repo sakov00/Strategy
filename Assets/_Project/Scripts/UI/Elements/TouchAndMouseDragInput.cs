@@ -8,16 +8,16 @@ namespace _Project.Scripts.UI.Elements
 {
     public class TouchAndMouseDragInput : MonoBehaviour
     {
-        [SerializeField] private float dragSpeed = 0.5f;
-        [SerializeField] private Vector3 lastMousePosition;
-        [SerializeField] private bool isDragging = false;
+        [SerializeField] private float _dragSpeed = 2f;
+        [SerializeField] private Vector3 _lastMousePosition;
+        [SerializeField] private bool _isDragging = false;
 
         private void Update()
         {
-#if EDIT_MODE
-            HandleMouseDrag();
-#else
+#if ANDROID_MODE
             HandleTouchDrag();
+#else
+            HandleMouseDrag();
 #endif
         }
 
@@ -26,25 +26,25 @@ namespace _Project.Scripts.UI.Elements
             if (Input.GetMouseButtonDown(0))
             {
                 
-                lastMousePosition = Input.mousePosition;
-                isDragging = true;
+                _lastMousePosition = Input.mousePosition;
+                _isDragging = true;
             }
 
-            if (isDragging)
+            if (_isDragging)
             {
-                Vector3 delta = Input.mousePosition - lastMousePosition;
-                lastMousePosition = Input.mousePosition;
+                Vector3 delta = Input.mousePosition - _lastMousePosition;
+                _lastMousePosition = Input.mousePosition;
 
                 Vector3 right = GlobalObjects.CameraController.transform.right;
                 Vector3 forward = Vector3.Cross(right, Vector3.up);
 
-                Vector3 move = (-right * delta.x - forward * delta.y) * dragSpeed * Time.deltaTime;
+                Vector3 move = (-right * delta.x - forward * delta.y) * _dragSpeed * Time.deltaTime;
                 GlobalObjects.CameraController.transform.position += move;
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                isDragging = false;
+                _isDragging = false;
                 
                 var ray = GlobalObjects.CameraController._currentCamera.ScreenPointToRay(Input.mousePosition);
                 if (!Physics.Raycast(ray, out RaycastHit hit)) return;
@@ -60,7 +60,7 @@ namespace _Project.Scripts.UI.Elements
         {
             if (Input.touchCount != 1)
             {
-                isDragging = false;
+                _isDragging = false;
                 return;
             }
 
@@ -68,23 +68,23 @@ namespace _Project.Scripts.UI.Elements
 
             if (touch.phase == TouchPhase.Began)
             {
-                lastMousePosition = touch.position;
-                isDragging = true;
+                _lastMousePosition = touch.position;
+                _isDragging = true;
             }
-            else if (touch.phase == TouchPhase.Moved && isDragging)
+            else if (touch.phase == TouchPhase.Moved && _isDragging)
             {
-                Vector2 delta = touch.position - (Vector2)lastMousePosition;
-                lastMousePosition = touch.position;
+                Vector2 delta = touch.position - (Vector2)_lastMousePosition;
+                _lastMousePosition = touch.position;
 
                 Vector3 right = GlobalObjects.CameraController.transform.right;
                 Vector3 forward = Vector3.Cross(right, Vector3.up);
 
-                Vector3 move = (-right * delta.x - forward * delta.y) * dragSpeed * Time.deltaTime;
+                Vector3 move = (-right * delta.x - forward * delta.y) * _dragSpeed * Time.deltaTime;
                 GlobalObjects.CameraController.transform.position += move;
             }
             else if (touch.phase == TouchPhase.Ended)
             {
-                isDragging = false;
+                _isDragging = false;
 
                 var ray = GlobalObjects.CameraController._currentCamera.ScreenPointToRay(touch.position);
                 if (!Physics.Raycast(ray, out RaycastHit hit)) return;

@@ -10,10 +10,10 @@ namespace _Project.Scripts.GameObjects.Projectiles
 {
     public abstract class Projectile : MonoBehaviour
     {
-        [Inject] protected HealthRegistry healthRegistry;
+        [Inject] protected HealthRegistry HealthRegistry;
         
-        public int damage;
-        public WarSide ownerWarSide;
+        public int _damage;
+        public WarSide _ownerWarSide;
         public abstract void LaunchToPoint(Vector3 targetPosition, float initialSpeed);
 
         private void Start()
@@ -25,16 +25,16 @@ namespace _Project.Scripts.GameObjects.Projectiles
         {
             var target = other.GetComponent<ObjectController>();
 
-            if (target == null || target.ObjectModel.WarSide == ownerWarSide)
+            if (target == null || target.ObjectModel.WarSide == _ownerWarSide)
                 return;
 
-            target.ObjectModel.CurrentHealth -= damage;
+            target.ObjectModel.CurrentHealth -= _damage;
 
             if (target.ObjectModel.CurrentHealth <= 0)
             {
                 if (target.ObjectModel.WarSide == WarSide.Enemy)
                 {
-                    healthRegistry.Unregister(target.ObjectModel);
+                    HealthRegistry.Unregister(target.ObjectModel);
                     Destroy(target.ObjectModel.Transform.gameObject);
                 }
                 else
@@ -42,7 +42,8 @@ namespace _Project.Scripts.GameObjects.Projectiles
                     target.gameObject.SetActive(false);
                 }
             }
-            Destroy(gameObject); 
+
+            Destroy(gameObject);
         }
     }
 }

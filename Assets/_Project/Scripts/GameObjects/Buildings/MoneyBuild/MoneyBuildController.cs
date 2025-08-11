@@ -9,6 +9,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
     public class MoneyBuildController : BuildController, ISavable<MoneyBuildJson>
     {
         [Inject] private SaveRegistry _saveRegistry;
+        [Inject] private ClearDataRegistry _clearDataRegistry;
         
         [SerializeField] protected MoneyBuildModel _model;
         [SerializeField] protected MoneyBuildingView _view;
@@ -21,6 +22,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
         {
             base.Initialize();
             _saveRegistry.Register(this);
+            _clearDataRegistry.Register(this);
             _moneyController = new MoneyController(_model, _view);
         }
         

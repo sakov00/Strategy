@@ -316,7 +316,7 @@ MonoBehaviour:
   <Agent>k__BackingField: {fileID: 8192558378893770235}
   <ProjectileType>k__BackingField: 1
   <FirePoint>k__BackingField: {fileID: 3287887312038049354}
-  <ProjectileSpeed>k__BackingField: 10
+  <ProjectileSpeed>k__BackingField: 30
 --- !u!1001 &6427857212625835950
 PrefabInstance:
   m_ObjectHideFlags: 0

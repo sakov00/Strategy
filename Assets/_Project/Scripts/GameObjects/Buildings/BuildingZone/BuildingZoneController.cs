@@ -64,6 +64,7 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             AppData.User.Money -= buildModel.PriceList[0];
             var build = _buildFactory.CreateBuild(_buildingZoneModel.TypeBuilding, transform.position, transform.rotation);
             build.BuildModel.CurrentLevel++;
+            _clearDataRegistry.Unregister(this);
             _saveRegistry.Unregister(this);
             Destroy(gameObject);
         }

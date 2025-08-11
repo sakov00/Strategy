@@ -382,7 +382,7 @@ MonoBehaviour:
     _priceList: 030000000300000004000000040000000500000005000000
     _currentLevel: 0
     _attackRange: 20
-    _damageAmount: 50
+    _damageAmount: 25
     _allAnimAttackTime: 1
     _animAttackTime: 1
     _detectionRadius: 20
@@ -405,7 +405,7 @@ MonoBehaviour:
   _tooltip: {fileID: 2048203932679248659}
   <ProjectileType>k__BackingField: 2
   <FirePoint>k__BackingField: {fileID: 3276773915444923101}
-  <ProjectileSpeed>k__BackingField: 40
+  <ProjectileSpeed>k__BackingField: 50
 --- !u!23 &3846949601871662355 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: cca984cd424bf894885bfe0366683315,
