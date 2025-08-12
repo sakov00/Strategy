@@ -1,3 +1,4 @@
+using _Project.Scripts._GlobalData;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Registries;

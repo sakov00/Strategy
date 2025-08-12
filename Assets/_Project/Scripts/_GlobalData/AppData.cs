@@ -1,7 +1,7 @@
 using _Project.Scripts._GlobalData.AppDataProvider;
 using VContainer.Unity;
 
-namespace _Project.Scripts._GlobalLogic
+namespace _Project.Scripts._GlobalData
 {
     public class AppData : IInitializable
     {

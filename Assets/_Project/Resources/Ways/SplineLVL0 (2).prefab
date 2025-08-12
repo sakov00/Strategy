@@ -2091,23 +2091,23 @@ MonoBehaviour:
   - enemies:
     - time: 0
       enemyType: 0
-    - time: 0
+    - time: 1
       enemyType: 0
-    - time: 0
+    - time: 2
       enemyType: 1
-    - time: 0
+    - time: 3
       enemyType: 1
   - enemies:
     - time: 0
       enemyType: 0
-    - time: 0
+    - time: 2
       enemyType: 0
-    - time: 0
+    - time: 1
       enemyType: 0
   - enemies:
     - time: 0
       enemyType: 0
-    - time: 0
+    - time: 1
       enemyType: 0
   _splineContainer: {fileID: 3804626938007919390}
   _splineAnimates:

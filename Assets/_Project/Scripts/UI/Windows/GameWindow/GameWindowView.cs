@@ -1,4 +1,5 @@
 using System;
+using _Project.Scripts._GlobalData;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.UI.Elements;
 using _Project.Scripts.Windows;
