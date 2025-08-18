@@ -2832,12 +2832,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _roundEnemyList:
   - enemies:
-    - time: 0
-      enemyType: 0
-    - time: 0
-      enemyType: 0
     - time: 1
-      enemyType: 1
+      enemyType: 0
     - time: 1
       enemyType: 1
   - enemies:
@@ -2850,6 +2846,17 @@ MonoBehaviour:
     - time: 1
       enemyType: 0
     - time: 0
+      enemyType: 0
+  - enemies:
+    - time: 0
+      enemyType: 0
+    - time: 0
+      enemyType: 0
+    - time: 2
+      enemyType: 0
+    - time: 2
+      enemyType: 0
+    - time: 2
       enemyType: 0
   - enemies:
     - time: 0

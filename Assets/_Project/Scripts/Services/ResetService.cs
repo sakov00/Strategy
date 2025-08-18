@@ -38,7 +38,7 @@ namespace _Project.Scripts.Services
                 }
             }
             foreach (var spawn in _enemyRoadRegistry.GetAll())
-                spawn.RefreshView();
+                spawn.RefreshInfoRound();
         }
         
         private void AllEnemiesDestroyed()
@@ -57,7 +57,7 @@ namespace _Project.Scripts.Services
             _enemyRoadRegistry.Clear();
             _healthRegistry.Clear();
             foreach (var spawn in _enemyRoadRegistry.GetAll())
-                spawn.RefreshView();
+                spawn.RefreshInfoRound();
             _windowsManager.GetWindow<GameWindowView>().Reset();
         }
     }

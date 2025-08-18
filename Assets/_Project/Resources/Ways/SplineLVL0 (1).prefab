@@ -2621,6 +2621,13 @@ MonoBehaviour:
       enemyType: 0
     - time: 1
       enemyType: 0
+  - enemies:
+    - time: 0
+      enemyType: 0
+    - time: 1
+      enemyType: 0
+    - time: 1
+      enemyType: 0
   _splineContainer: {fileID: 7772257007095172480}
   _splineAnimates:
   - {fileID: 7599730462128760206}

@@ -57,15 +57,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
                 var splineAnimate = _splineAnimates[i];
                 splineAnimate.StartOffset = i / (float)_splineAnimates.Count;
             }
-            
-            var wayLenght = _splineContainer.Spline.GetLength();
-            for (int i = 0; i < _enemyIcons.Count; i++)
-            {
-                var percentIcon = (wayLenght - (i + 1) * _distanceBetweenIcons) / wayLenght;
-                _enemyIcons[i].transform.position = _splineContainer.EvaluatePosition(percentIcon);
-                _enemyIcons[i].transform.position += new Vector3(0, 0.1f, 0);
-            }
-            RefreshView();
+            RefreshInfoRound();
         }
 
         public void StartSpawn()
@@ -113,7 +105,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
             _enemyFactory.CreateEnemyUnit(enemyData.enemyType, wayPoints[0], wayPoints);
         }
 
-        public void RefreshView()
+        public void RefreshInfoRound()
         {
             for (int i = 0; i < Enum.GetValues(typeof(UnitType)).Length; i++)
             {
@@ -125,6 +117,15 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
                 }
                 else
                     _enemyIcons[i].gameObject.SetActive(false); 
+            }
+            
+            var wayLenght = _splineContainer.Spline.GetLength();
+            var activeIcons = _enemyIcons.Where(x => x.gameObject.activeInHierarchy).ToList();
+            for (int i = 0; i < activeIcons.Count; i++)
+            {
+                var percentIcon = (wayLenght - (i + 1) * _distanceBetweenIcons) / wayLenght;
+                activeIcons[i].transform.position = _splineContainer.EvaluatePosition(percentIcon);
+                activeIcons[i].transform.position += new Vector3(0, 0.1f, 0);
             }
         }
 
