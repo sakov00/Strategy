@@ -10,6 +10,8 @@ namespace _Project.Scripts.GameObjects._General
     {
         [Header("Health")] 
         [SerializeField] private WarSide _warSide;
+        [SerializeField] private float _delayRegeneration = 3f;
+        [SerializeField] private float _regenerateHealthInSecond = 5f;
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private float _currentHealth = 100f;
         
@@ -17,12 +19,19 @@ namespace _Project.Scripts.GameObjects._General
         public float HeightObject { get; set; }
         public Vector3 NoAimPos { get; set; }
         public WarSide WarSide => _warSide;
+        public float DelayRegeneration => _delayRegeneration;
+        public int SecondsWithoutDamage { get; set; }
+        public float RegenerateHealthInSecond => _regenerateHealthInSecond;
         public float MaxHealth => _maxHealth;
-
         public float CurrentHealth
         {
             get => _currentHealth;
-            set => _currentHealth = Mathf.Clamp(value, 0, _maxHealth);
+            set
+            {
+                if (value < _currentHealth)
+                    SecondsWithoutDamage = 0;
+                _currentHealth = Mathf.Clamp(value, 0, _maxHealth);
+            }
         }
     }
 }

@@ -6,7 +6,7 @@ namespace _Project.Scripts._GlobalLogic
 {
     public class GameTimer : IInitializable, ITickable
     {
-        public static GameTimer Instance { get; private set; }
+        public static GameTimer I { get; private set; }
         
         public event Action OnEverySecond;
 
@@ -14,12 +14,12 @@ namespace _Project.Scripts._GlobalLogic
 
         public void Initialize()
         {
-            if (Instance != null)
+            if (I != null)
             {
                 return;
             }
 
-            Instance = this;
+            I = this;
         }
 
         public void Tick()

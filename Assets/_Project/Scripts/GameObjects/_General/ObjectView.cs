@@ -1,11 +1,13 @@
 using System;
 using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.GameObjects.Info;
+using _Project.Scripts.Interfaces;
+using _Project.Scripts.Interfaces.View;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects._General
 {
-    public abstract class ObjectView : MonoBehaviour
+    public abstract class ObjectView : MonoBehaviour, IHealthView
     {
         [SerializeField] protected Renderer _objRenderer;
         [SerializeField] protected HealthBar _healthBar;

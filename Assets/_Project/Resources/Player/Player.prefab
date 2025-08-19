@@ -285,6 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _model:
     _warSide: 0
+    _regenerateHealthInSecond: 10
     _maxHealth: 100
     _currentHealth: 100
     _moveSpeed: 10

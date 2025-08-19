@@ -74,8 +74,8 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
             _currentIndex = 0;
             _elapsedTime = 0f;
 
-            GameTimer.Instance.OnEverySecond -= Tick;
-            GameTimer.Instance.OnEverySecond += Tick;
+            GameTimer.I.OnEverySecond -= Tick;
+            GameTimer.I.OnEverySecond += Tick;
         }
 
         private void Tick()
@@ -90,7 +90,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
 
             if (_currentIndex >= _currentEnemyList.Count)
             {
-                GameTimer.Instance.OnEverySecond -= Tick;
+                GameTimer.I.OnEverySecond -= Tick;
             }
         }
 
@@ -131,7 +131,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
 
         private void OnDestroy()
         {
-            GameTimer.Instance.OnEverySecond -= Tick;
+            GameTimer.I.OnEverySecond -= Tick;
         }
         
         public void ClearData()

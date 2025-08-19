@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using _Project.Scripts.Enums;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
@@ -20,6 +21,7 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
         private UnitMovementSystem _unitMovementSystem;
         private DetectionAim _detectionAim;
         private DamageSystem _damageSystem;
+        private RegenerationHPSystem _regenerationHpSystem;
 
         protected override void Initialize()
         {
@@ -30,6 +32,9 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
             _unitMovementSystem = new UnitMovementSystem(_model, _view, transform);
             _detectionAim = new DetectionAim(_model, transform);
             _damageSystem = new DamageSystem(_model, _view, transform);
+            
+            if(_model.WarSide == WarSide.Friend)
+                _regenerationHpSystem = new RegenerationHPSystem(_model, _view);
         }
         
         public UnitJson GetJsonData()
@@ -65,6 +70,7 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
         
         public void ClearData()
         {
+            _regenerationHpSystem.Dispose();
             Destroy(gameObject);
         }
     }

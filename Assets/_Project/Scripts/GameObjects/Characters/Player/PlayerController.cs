@@ -1,5 +1,6 @@
 using _Project.Scripts._GlobalData;
 using _Project.Scripts._GlobalLogic;
+using _Project.Scripts.Enums;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Json;
 using _Project.Scripts.Registries;
@@ -21,6 +22,7 @@ namespace _Project.Scripts.GameObjects.Characters.Player
         private PlayerMovementSystem _playerMovementSystem;
         private DetectionAim _detectionAim;
         private DamageSystem _damageSystem;
+        private RegenerationHPSystem _regenerationHpSystem;
         
         protected override void Initialize()
         {
@@ -28,6 +30,8 @@ namespace _Project.Scripts.GameObjects.Characters.Player
             _playerMovementSystem = new PlayerMovementSystem(_model, _view, transform);
             _detectionAim = new DetectionAim(_model, transform);
             _damageSystem = new DamageSystem(_model, _view, transform);
+            _regenerationHpSystem = new RegenerationHPSystem(_model, _view);
+            
             _saveRegistry.Register(this);
             _clearDataRegistry.Register(this);
         }
@@ -64,6 +68,7 @@ namespace _Project.Scripts.GameObjects.Characters.Player
         
         public void ClearData()
         {
+            _regenerationHpSystem.Dispose();
             Destroy(gameObject);
         }
     }
