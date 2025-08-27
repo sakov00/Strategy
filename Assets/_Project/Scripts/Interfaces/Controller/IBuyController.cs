@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
-using UnityEditor.Rendering;
 
-namespace _Project.Scripts.Interfaces
+namespace _Project.Scripts.Interfaces.Controller
 {
     public interface IBuyController
     {

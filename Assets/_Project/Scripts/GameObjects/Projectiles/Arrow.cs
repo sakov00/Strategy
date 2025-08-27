@@ -16,7 +16,7 @@ namespace _Project.Scripts.GameObjects.Projectiles
         public override void LaunchToPoint(Vector3 targetPosition, float initialSpeed)
         {
             Vector3 dir = (targetPosition - transform.position).normalized;
-            _rb.velocity = dir * initialSpeed;
+            _rb.linearVelocity = dir * initialSpeed;
         }
     }
 }
