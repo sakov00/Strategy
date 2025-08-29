@@ -7,7 +7,7 @@ using UnityEngine;
 namespace _Project.Scripts.GameObjects._General
 {
     [Serializable]
-    public class ObjectModel : IHealthModel
+    public abstract class ObjectModel : IHealthModel
     {
         [Header("Health")] 
         [SerializeField] private WarSide _warSide;

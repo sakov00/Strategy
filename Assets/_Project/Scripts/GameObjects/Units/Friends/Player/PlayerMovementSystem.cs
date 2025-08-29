@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects.Characters.Player
+namespace _Project.Scripts.GameObjects.Units.Friends.Player
 {
     public class PlayerMovementSystem
     {

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using _Project.Scripts.GameObjects.Camera;
 using _Project.Scripts.GameObjects.Characters;
+using _Project.Scripts.GameObjects.Units.Character;
 using UnityEngine;
 
 namespace _Project.Scripts.SO

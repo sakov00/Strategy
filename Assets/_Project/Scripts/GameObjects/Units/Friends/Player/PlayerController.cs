@@ -1,20 +1,22 @@
 using _General.Scripts.AllAppData;
 using _General.Scripts.Json;
 using _General.Scripts.Registries;
+using _Project.Scripts.GameObjects.Characters;
+using _Project.Scripts.GameObjects.Units.Character;
 using _Project.Scripts.Interfaces;
 using UnityEngine;
 using VContainer;
 
-namespace _Project.Scripts.GameObjects.Characters.Player
+namespace _Project.Scripts.GameObjects.Units.Friends.Player
 {
-    public class PlayerController : MyCharacterController, ISavable<PlayerJson>
+    public class PlayerController : MyCharacterController, IJsonSerializable
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
 
-        [SerializeField] private PlayerModel _model;
-        [SerializeField] private PlayerView _view;
-        protected override CharacterModel CharacterModel => _model;
-        protected override CharacterView CharacterView => _view;
+        [field:SerializeField] private PlayerModel Model { get; set; }
+        [field:SerializeField] private PlayerView View { get; set; }
+        public override CharacterModel CharacterModel => Model;
+        public override CharacterView CharacterView => View;
         
         private PlayerMovementSystem _playerMovementSystem;
         private DetectionAim _detectionAim;
@@ -24,35 +26,34 @@ namespace _Project.Scripts.GameObjects.Characters.Player
         protected override void Initialize()
         {
             base.Initialize();
-            _playerMovementSystem = new PlayerMovementSystem(_model, _view, transform);
-            _detectionAim = new DetectionAim(_model, transform);
-            _damageSystem = new DamageSystem(_model, _view, transform);
-            _regenerationHpSystem = new RegenerationHPSystem(_model, _view);
+            _playerMovementSystem = new PlayerMovementSystem(Model, View, transform);
+            _detectionAim = new DetectionAim(Model, transform);
+            _damageSystem = new DamageSystem(Model, View, transform);
+            _regenerationHpSystem = new RegenerationHPSystem(Model, View);
             
             _objectsRegistry.Register(this);
-        }
-        
-        public PlayerJson GetJsonData()
-        {
-            var playerJson = new PlayerJson
-            {
-                position = transform.position,
-                rotation = transform.rotation,
-                playerModel = _model
-            };
-            return playerJson;
-        }
-
-        public void SetJsonData(PlayerJson environmentJson)
-        {
-            transform.position = environmentJson.position;
-            transform.rotation = environmentJson.rotation;
-            _model = environmentJson.playerModel;
         }
 
         private void Update()
         {
             _playerMovementSystem.MoveTo(AppData.LevelData.MoveDirection);
+        }
+        
+        public override ObjectJson GetJsonData()
+        {
+            var objectJson = new ObjectJson
+            {
+                objectType = nameof(PlayerController),
+                position = transform.position,
+                rotation = transform.rotation
+            };
+            return objectJson;
+        }
+
+        public override void SetJsonData(ObjectJson objectJson)
+        {
+            transform.position = objectJson.position;
+            transform.rotation = objectJson.rotation;
         }
         
         protected override void FixedUpdate()
@@ -62,7 +63,7 @@ namespace _Project.Scripts.GameObjects.Characters.Player
             _damageSystem.Attack();
         }
         
-        public void ClearData()
+        public override void ClearData()
         {
             _regenerationHpSystem.Dispose();
             Destroy(gameObject);

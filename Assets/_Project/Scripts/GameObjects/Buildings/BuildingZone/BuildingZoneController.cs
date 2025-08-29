@@ -12,7 +12,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.BuildingZone
 {
-    public class BuildingZoneController : MonoBehaviour, IBuyController, ISavable<BuildingZoneJson>
+    public class BuildingZoneController : MonoBehaviour, IBuyController, IJsonSerializable
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
         [Inject] private BuildFactory _buildFactory;
@@ -27,18 +27,21 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             _objectsRegistry.Register(this);
         }
         
-        public BuildingZoneJson GetJsonData()
+        public ObjectJson GetJsonData()
         {
-            var buildingZoneJson = new BuildingZoneJson();
-            buildingZoneJson.position = transform.position;
-            buildingZoneJson.typeBuilding = _buildingZoneModel.TypeBuilding;
-            return buildingZoneJson;
+            var objectJson = new ObjectJson
+            {
+                objectType = nameof(BuildingZoneController),
+                position = transform.position,
+                rotation = transform.rotation
+            };
+            return objectJson;
         }
 
-        public void SetJsonData(BuildingZoneJson environmentJson)
+        public void SetJsonData(ObjectJson objectJson)
         {
-            transform.position = environmentJson.position;
-            _buildingZoneModel.TypeBuilding = environmentJson.typeBuilding;
+            transform.position = objectJson.position;
+            transform.rotation = objectJson.rotation;
         }
 
         public async UniTask TryBuy()
@@ -53,7 +56,7 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             sequence.Append(transform.DOScale(_originalScale, 0.25f));
             await sequence.Play();
             
-            var buildModel = _buildFactory.GetBuildModel(_buildingZoneModel.TypeBuilding);
+            var buildModel = _buildFactory.GetBuildModel(_buildingZoneModel.BuildType);
             if (buildModel.PriceList[0] > AppData.User.Money)
             {
                 Debug.Log("Not enough money");
@@ -61,7 +64,7 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             }
             
             AppData.User.Money -= buildModel.PriceList[0];
-            var build = _buildFactory.CreateBuild(_buildingZoneModel.TypeBuilding, transform.position, transform.rotation);
+            var build = _buildFactory.CreateBuild(_buildingZoneModel.BuildType, transform.position, transform.rotation);
             build.BuildModel.CurrentLevel++;
             _objectsRegistry.Unregister(this);
             Destroy(gameObject);

@@ -2,20 +2,23 @@ using System.Collections.Generic;
 using _General.Scripts.Json;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
+using _Project.Scripts.GameObjects.Characters;
+using _Project.Scripts.GameObjects.Characters.Unit;
+using _Project.Scripts.GameObjects.Units.Character;
 using _Project.Scripts.Interfaces;
 using UnityEngine;
 using VContainer;
 
-namespace _Project.Scripts.GameObjects.Characters.Unit
+namespace _Project.Scripts.GameObjects.Units.Unit
 {
-    public class UnitController : MyCharacterController, ISavable<UnitJson>
+    public abstract class UnitController : MyCharacterController
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
         
-        [SerializeField] private UnitModel _model;
-        [SerializeField] private UnitView _view;
-        protected override CharacterModel CharacterModel => _model;
-        protected override CharacterView CharacterView => _view;
+        [field:SerializeField] public UnitModel Model { get; set; }
+        [field:SerializeField] public UnitView View { get; set; }
+        public override CharacterModel CharacterModel => Model;
+        public override CharacterView CharacterView => View;
 
         private UnitMovementSystem _unitMovementSystem;
         private DetectionAim _detectionAim;
@@ -27,30 +30,12 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
             base.Initialize();
             _objectsRegistry.Register(this);
             
-            _unitMovementSystem = new UnitMovementSystem(_model, _view, transform);
-            _detectionAim = new DetectionAim(_model, transform);
-            _damageSystem = new DamageSystem(_model, _view, transform);
+            _unitMovementSystem = new UnitMovementSystem(Model, View, transform);
+            _detectionAim = new DetectionAim(Model, transform);
+            _damageSystem = new DamageSystem(Model, View, transform);
             
-            if(_model.WarSide == WarSide.Friend)
-                _regenerationHpSystem = new RegenerationHPSystem(_model, _view);
-        }
-        
-        public UnitJson GetJsonData()
-        {
-            var unitJson = new UnitJson
-            {
-                position = transform.position,
-                rotation = transform.rotation,
-                unitModel = _model
-            };
-            return unitJson;
-        }
-
-        public void SetJsonData(UnitJson environmentJson)
-        {
-            transform.position = environmentJson.position;
-            transform.rotation = environmentJson.rotation;
-            _model = environmentJson.unitModel;
+            if(Model.WarSide == WarSide.Friend)
+                _regenerationHpSystem = new RegenerationHPSystem(Model, View);
         }
 
         protected override void FixedUpdate()
@@ -63,10 +48,10 @@ namespace _Project.Scripts.GameObjects.Characters.Unit
 
         public void SetNoAimPosition(List<Vector3> positions)
         {
-            _model.WayToAim = positions;
+            Model.WayToAim = positions;
         }
         
-        public void ClearData()
+        public override void ClearData()
         {
             _regenerationHpSystem.Dispose();
             Destroy(gameObject);

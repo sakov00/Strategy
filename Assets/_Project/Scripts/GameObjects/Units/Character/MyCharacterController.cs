@@ -1,12 +1,13 @@
+using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
-using UnityEngine;
 
-namespace _Project.Scripts.GameObjects.Characters
+namespace _Project.Scripts.GameObjects.Units.Character
 {
     public abstract class MyCharacterController : ObjectController
     {
-        protected abstract CharacterModel CharacterModel { get; }
-        protected abstract CharacterView CharacterView  { get; }
+        public CharacterType CharacterType { get; set; }
+        public abstract CharacterModel CharacterModel { get; }
+        public abstract CharacterView CharacterView  { get; }
         public override ObjectModel ObjectModel => CharacterModel;
         public override ObjectView ObjectView => CharacterView;
         

@@ -1,6 +1,5 @@
-using _General.Scripts.Registries;
+using System.Linq;
 using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects.Characters.Unit;
 using _Project.Scripts.GameObjects.Projectiles;
 using _Project.Scripts.SO;
 using UnityEngine;
@@ -11,33 +10,46 @@ namespace _Project.Scripts.Factories
 {
     public class ProjectileFactory
     {
-        [Inject] private IObjectResolver resolver;
-        [Inject] private ProjectilePrefabConfig unitPrefabConfig;
+        [Inject] private IObjectResolver _resolver;
+        [Inject] private ProjectilePrefabConfig _prefabConfig;
         
-        public Projectile CreateProjectile(ProjectileType projectileType, Vector3 position, Quaternion rotation = default)
+        public Projectile CreateProjectile(ProjectileType type, Vector3 position, Quaternion rotation = default)
         {
-            Projectile projectile = null;
-            switch (projectileType)
+            var prefab = _prefabConfig.allProjectiles.FirstOrDefault(p => p.ProjectileType == type);
+
+            if (prefab == null)
             {
-                case ProjectileType.Arrow:
-                    projectile = CreateArrow(position, rotation);
-                    break;
-                case ProjectileType.BigArrow:
-                    projectile = CreateBigArrow(position, rotation);
-                    break;
+                Debug.LogError($"ProjectileFactory: Prefab with ProjectileType {type} not found in config");
+                return null;
             }
-            
-            return projectile;
+
+            return _resolver.Instantiate(prefab, position, rotation);
         }
 
-        private Projectile CreateArrow(Vector3 position, Quaternion rotation)
+        public T CreateProjectile<T>(Vector3 position, Quaternion rotation = default) where T : Projectile
         {
-            return resolver.Instantiate(unitPrefabConfig.arrowPrefab, position, rotation);
+            var prefab = _prefabConfig.allProjectiles.Find(p => p is T);
+
+            if (prefab == null)
+            {
+                Debug.LogError($"ProjectileFactory: Prefab for type {typeof(T)} not found in config");
+                return null;
+            }
+
+            return _resolver.Instantiate(prefab, position, rotation) as T;
         }
-            
-        private Projectile CreateBigArrow(Vector3 position, Quaternion rotation)
+
+        public T CreateProjectile<T>(ProjectileType type, Vector3 position, Quaternion rotation = default) where T : Projectile
         {
-            return resolver.Instantiate(unitPrefabConfig.bigArrowPrefab, position, rotation);
+            var prefab = _prefabConfig.allProjectiles.Find(p => p is T && p.ProjectileType == type);
+
+            if (prefab == null)
+            {
+                Debug.LogError($"ProjectileFactory: Prefab of type {typeof(T)} with ProjectileType {type} not found in config");
+                return null;
+            }
+
+            return _resolver.Instantiate(prefab, position, rotation) as T;
         }
     }
 }

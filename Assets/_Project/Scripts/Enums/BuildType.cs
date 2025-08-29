@@ -1,6 +1,6 @@
 namespace _Project.Scripts.Enums
 {
-    public enum TypeBuilding
+    public enum BuildType
     {
         MoneyBuilding,
         TowerDefenseBuilding,

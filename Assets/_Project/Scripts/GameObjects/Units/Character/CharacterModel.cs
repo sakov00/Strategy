@@ -1,14 +1,13 @@
 using System;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
-using _Project.Scripts.Interfaces;
 using _Project.Scripts.Interfaces.Model;
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects.Characters
+namespace _Project.Scripts.GameObjects.Units.Character
 {
     [Serializable]
-    public class CharacterModel : ObjectModel, IMovementModel, IFightObjectModel
+    public abstract class CharacterModel : ObjectModel, IMovementModel, IFightObjectModel
     {
         [Header("Movement")]
         [SerializeField] private float _moveSpeed = 10f;

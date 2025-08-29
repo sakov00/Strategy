@@ -1,4 +1,4 @@
-using _Project.Scripts.GameObjects.Characters.Player;
+using System.Collections.Generic;
 using _Project.Scripts.GameObjects.Characters.Unit;
 using _Project.Scripts.GameObjects.Projectiles;
 using UnityEngine;
@@ -9,7 +9,6 @@ namespace _Project.Scripts.SO
     public class ProjectilePrefabConfig : ScriptableObject
     {
         [Header("Projectile Prefabs")]
-        public Projectile arrowPrefab;
-        public Projectile bigArrowPrefab;
+        public List<Projectile> allProjectiles;
     }
 }

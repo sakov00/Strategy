@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects.Characters.Unit;
+using _Project.Scripts.GameObjects.Units.Unit;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.FriendsBuild
@@ -10,13 +10,13 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
     public class FriendsBuildModel : BuildModel
     {
         [Header("Units")] 
-        [SerializeField] public UnitType _unitType;
+        [SerializeField] public CharacterType _characterType;
         [SerializeField] public List<UnitController> _buildUnits = new();
         
-        public UnitType UnitType
+        public CharacterType CharacterType
         {
-            get => _unitType;
-            set => _unitType = value;
+            get => _characterType;
+            set => _characterType = value;
         }
         
         public List<UnitController> BuildUnits

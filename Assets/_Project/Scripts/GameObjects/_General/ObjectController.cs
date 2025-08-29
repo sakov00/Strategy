@@ -1,9 +1,11 @@
 using _General.Scripts._VContainer;
+using _General.Scripts.Json;
+using _Project.Scripts.Interfaces;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects._General
 {
-    public abstract class ObjectController: MonoBehaviour
+    public abstract class ObjectController: MonoBehaviour, IJsonSerializable
     {
         public abstract ObjectModel ObjectModel { get; }
         public abstract ObjectView ObjectView { get; }
@@ -26,5 +28,10 @@ namespace _Project.Scripts.GameObjects._General
         {
             ObjectView.UpdateHealthBar(ObjectModel.CurrentHealth, ObjectModel.MaxHealth);
         }
+        
+        public abstract ObjectJson GetJsonData();
+        public abstract void SetJsonData(ObjectJson json);
+
+        public abstract void ClearData();
     }
 }

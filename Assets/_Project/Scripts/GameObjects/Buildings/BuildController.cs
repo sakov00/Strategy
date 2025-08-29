@@ -1,4 +1,5 @@
 using _General.Scripts.AllAppData;
+using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.Interfaces.Controller;
 using Cysharp.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace _Project.Scripts.GameObjects
 {
     public abstract class BuildController : ObjectController, IBuyController
     {
+        public BuildType BuildType { get; set; }
         public abstract BuildModel BuildModel { get; }
         public abstract BuildView BuildView  { get; }
         public override ObjectModel ObjectModel => BuildModel;

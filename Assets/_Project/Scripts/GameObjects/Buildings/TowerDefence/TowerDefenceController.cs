@@ -7,7 +7,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.TowerDefence
 {
-    public class TowerDefenceController : BuildController, ISavable<TowerDefenceBuildJson>
+    public class TowerDefenceController : BuildController, IJsonSerializable
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
         
@@ -27,20 +27,21 @@ namespace _Project.Scripts.GameObjects.TowerDefence
             _damageSystem = new DamageSystem(_model, _view, transform);
         }
         
-        public TowerDefenceBuildJson GetJsonData()
+        public override ObjectJson GetJsonData()
         {
-            var towerDefenceBuildJson = new TowerDefenceBuildJson();
-            towerDefenceBuildJson.position = transform.position;
-            towerDefenceBuildJson.rotation = transform.rotation;
-            towerDefenceBuildJson.towerDefenceModel = _model;
-            return towerDefenceBuildJson;
+            var objectJson = new ObjectJson
+            {
+                objectType = nameof(TowerDefenceController),
+                position = transform.position,
+                rotation = transform.rotation
+            };
+            return objectJson;
         }
 
-        public void SetJsonData(TowerDefenceBuildJson environmentJson)
+        public override void SetJsonData(ObjectJson objectJson)
         {
-            transform.position = environmentJson.position;
-            transform.rotation = environmentJson.rotation;
-            _model = environmentJson.towerDefenceModel;
+            transform.position = objectJson.position;
+            transform.rotation = objectJson.rotation;
         }
 
         protected override void FixedUpdate()
@@ -50,7 +51,7 @@ namespace _Project.Scripts.GameObjects.TowerDefence
             _damageSystem.Attack();
         }
         
-        public void ClearData()
+        public override void ClearData()
         {
             Destroy(gameObject);
         }

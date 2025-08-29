@@ -1,4 +1,5 @@
 using _General.Scripts._VContainer;
+using _General.Scripts.Json;
 using _General.Scripts.Registries;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Enums;
@@ -8,7 +9,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Environment
 {
-    public class TerrainController : MonoBehaviour, IClearData
+    public class TerrainController : MonoBehaviour, IJsonSerializable
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
         
@@ -18,7 +19,24 @@ namespace _Project.Scripts.GameObjects.Environment
             _objectsRegistry.Register(this);
         }
         
-        public virtual void ClearData()
+        public ObjectJson GetJsonData()
+        {
+            var objectJson = new ObjectJson
+            {
+                objectType = nameof(TerrainController),
+                position = transform.position,
+                rotation = transform.rotation
+            };
+            return objectJson;
+        }
+
+        public void SetJsonData(ObjectJson objectJson)
+        {
+            transform.position = objectJson.position;
+            transform.rotation = objectJson.rotation;
+        }
+        
+        public void ClearData()
         {
             Destroy(gameObject);
         }

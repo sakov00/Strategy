@@ -5,6 +5,7 @@ using _General.Scripts.AllAppData;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Characters.Unit;
+using _Project.Scripts.GameObjects.Units.Unit;
 using UniRx;
 using VContainer;
 
@@ -26,7 +27,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
             
             InjectManager.Inject(this);
             _objectsRegistry
-                .GetAll<UnitController>()
+                .GetTypedList<UnitController>()
                 .ObserveRemove()
                 .Skip(1)
                 .Subscribe(_ => AllEnemiesDestroyed())
@@ -35,7 +36,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
         
         private void AllEnemiesDestroyed()
         {
-            if (_objectsRegistry.GetAll<UnitController>().Any(x => x.ObjectModel.WarSide == WarSide.Enemy)) 
+            if (_objectsRegistry.GetTypedList<UnitController>().Any(x => x.ObjectModel.WarSide == WarSide.Enemy)) 
                 return;
 
             AddMoneyToPlayer();

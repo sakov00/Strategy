@@ -8,12 +8,12 @@ namespace _Project.Scripts.GameObjects.BuildingZone
     [Serializable]
     public class BuildingZoneModel
     {
-        [SerializeField] public TypeBuilding _typeBuilding;
+        [SerializeField] public BuildType _buildType;
         
-        public TypeBuilding TypeBuilding
+        public BuildType BuildType
         {
-            get => _typeBuilding;
-            set => _typeBuilding = value;
+            get => _buildType;
+            set => _buildType = value;
         }
     }
 }

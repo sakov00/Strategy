@@ -1,61 +1,64 @@
-using System;
 using System.Linq;
 using _General.Scripts.Json;
-using _General.Scripts.Pools;
 using _General.Scripts.Registries;
-using _Project.Scripts._VContainer;
-using _Project.Scripts.Factories;
-using _Project.Scripts.GameObjects._General;
+using _Project.Scripts.GameObjects.Units.Unit;
 using _Project.Scripts.Interfaces;
+using _Project.Scripts.Pools;
 using UnityEngine;
 using VContainer;
 
 namespace _Project.Scripts.GameObjects.FriendsBuild
 {
-    public class FriendsBuildController : BuildController, ISavable<FriendsBuildJson>
+    public class FriendsBuildController : BuildController, IJsonSerializable
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
-        [Inject] private ObjectPool _objectPool;
+        [Inject] private CharacterPool _characterPool;
         
         [SerializeField] private FriendsBuildModel _model;
         [SerializeField] private FriendsBuildView _view;
         public override BuildModel BuildModel => _model;
         public override BuildView BuildView => _view;
         
-        private FriendsCreatorController _friendsCreatorController;
         
         protected override void Initialize()
         {
             base.Initialize();
             _objectsRegistry.Register(this);
-            _friendsCreatorController = new FriendsCreatorController(_friendFactory, _model, _view);
-        }
-        
-        public FriendsBuildJson GetJsonData()
-        {
-            var friendsBuildJson = new FriendsBuildJson();
-            friendsBuildJson.position = transform.position;
-            friendsBuildJson.rotation = transform.rotation;
-            friendsBuildJson.friendsBuildModel = _model;
-            friendsBuildJson.unitJsons = _model.BuildUnits.Select(x => x.GetJsonData()).ToList();
-            return friendsBuildJson;
-        }
-
-        public void SetJsonData(FriendsBuildJson environmentJson)
-        {
-            transform.position = environmentJson.position;
-            transform.rotation = environmentJson.rotation;
-            _model = environmentJson.friendsBuildModel;
-            _friendFactory.CreateFriendUnits(environmentJson.unitJsons);
         }
 
         private void Start()
         {
             if(_model.BuildUnits.Count == 0)
-                _friendsCreatorController.CreateFriends();
+                CreateFriends();
         }
         
-        public void ClearData()
+        public void CreateFriends()
+        {
+            foreach (var friendUnit in _view._buildUnitPositions)
+            {
+                var unitController = _characterPool.Get<UnitController>(_model.CharacterType, friendUnit.position);
+                _model.BuildUnits.Add(unitController);
+            }
+        }
+        
+        public override ObjectJson GetJsonData()
+        {
+            var objectJson = new ObjectJson
+            {
+                objectType = nameof(FriendsBuildController),
+                position = transform.position,
+                rotation = transform.rotation
+            };
+            return objectJson;
+        }
+
+        public override void SetJsonData(ObjectJson objectJson)
+        {
+            transform.position = objectJson.position;
+            transform.rotation = objectJson.rotation;
+        }
+
+        public override void ClearData()
         {
             Destroy(gameObject);
         }

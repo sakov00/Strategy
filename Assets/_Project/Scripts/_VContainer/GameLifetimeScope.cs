@@ -2,12 +2,13 @@ using _General.Scripts._GlobalLogic;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
 using _General.Scripts.Json;
-using _General.Scripts.Pools;
 using _General.Scripts.Registries;
 using _General.Scripts.Services;
 using _General.Scripts.SO;
 using _General.Scripts.UI.Windows;
 using _Project.Scripts.Factories;
+using _Project.Scripts.Pools;
+using _Project.Scripts.Services;
 using _Project.Scripts.SO;
 using UnityEngine;
 using VContainer;
@@ -59,7 +60,9 @@ namespace _Project.Scripts._VContainer
         
         private void RegisterPools(IContainerBuilder builder)
         {
-            builder.Register<ObjectPool>(Lifetime.Singleton).AsSelf().As<IInitializable>();
+            builder.Register<BuildPool>(Lifetime.Singleton).AsSelf();
+            builder.Register<CharacterPool>(Lifetime.Singleton).AsSelf();
+            builder.Register<ProjectilePool>(Lifetime.Singleton).AsSelf();
         }
         
         private void RegisterFactories(IContainerBuilder builder)

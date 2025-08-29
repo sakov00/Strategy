@@ -9,6 +9,8 @@ namespace _Project.Scripts.GameObjects.Projectiles
 {
     public abstract class Projectile : MonoBehaviour
     {
+        [field:SerializeField] public ProjectileType ProjectileType { get; set; }
+        
         [Inject] protected ObjectsRegistry _objectsRegistry;
         
         public int _damage;

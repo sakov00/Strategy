@@ -1,8 +1,7 @@
 using System;
-using UnityEngine;
-using UnityEngine.AI;
+using _Project.Scripts.GameObjects.Units.Character;
 
-namespace _Project.Scripts.GameObjects.Characters.Player
+namespace _Project.Scripts.GameObjects.Units.Friends.Player
 {
     [Serializable]
     public class PlayerView : CharacterView

@@ -4,9 +4,11 @@ using _General.Scripts.Registries;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
+using _Project.Scripts.GameObjects.Projectiles;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Interfaces.Model;
 using _Project.Scripts.Interfaces.View;
+using _Project.Scripts.Pools;
 using UnityEditor;
 using UnityEngine;
 using VContainer;
@@ -16,7 +18,7 @@ namespace _Project.Scripts.GameObjects.Characters
 {
     public class DamageSystem
     {
-        [Inject] private ProjectileFactory _projectileFactory;
+        [Inject] private ProjectilePool _projectilePool;
         [Inject] private ObjectsRegistry _objectsRegistry;
         
         private readonly IFightObjectModel _fightObjectModel;
@@ -92,7 +94,7 @@ namespace _Project.Scripts.GameObjects.Characters
             if (_attackableView.FirePoint == null || _fightObjectModel.AimObject == null)
                 return;
 
-            var projectile = _projectileFactory.CreateProjectile(_attackableView.ProjectileType, _attackableView.FirePoint.position);
+            var projectile = _projectilePool.Get(_attackableView.ProjectileType, _attackableView.FirePoint.position);
             projectile._damage = _fightObjectModel.DamageAmount;
             projectile._ownerWarSide = _fightObjectModel.WarSide;
             projectile.LaunchToPoint(_fightObjectModel.AimObject.ObjectModel.Transform.position + 

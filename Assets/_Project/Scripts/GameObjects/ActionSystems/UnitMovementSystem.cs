@@ -1,5 +1,5 @@
 using _General.Scripts.Extentions;
-using _Project.Scripts.GameObjects.Characters.Player;
+using _Project.Scripts.GameObjects.Units.Unit;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Characters.Unit

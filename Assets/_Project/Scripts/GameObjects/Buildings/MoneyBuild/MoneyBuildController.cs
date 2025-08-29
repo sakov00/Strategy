@@ -6,7 +6,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.MoneyBuild
 {
-    public class MoneyBuildController : BuildController, ISavable<MoneyBuildJson>
+    public class MoneyBuildController : BuildController, IJsonSerializable
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
         
@@ -24,20 +24,21 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
             _moneyController = new MoneyController(_model, _view);
         }
         
-        public MoneyBuildJson GetJsonData()
+        public override ObjectJson GetJsonData()
         {
-            var moneyBuildJson = new MoneyBuildJson();
-            moneyBuildJson.position = transform.position;
-            moneyBuildJson.rotation = transform.rotation;
-            moneyBuildJson.moneyBuildModel = _model;
-            return moneyBuildJson;
+            var objectJson = new ObjectJson
+            {
+                objectType = nameof(MoneyBuildController),
+                position = transform.position,
+                rotation = transform.rotation
+            };
+            return objectJson;
         }
 
-        public void SetJsonData(MoneyBuildJson environmentJson)
+        public override void SetJsonData(ObjectJson objectJson)
         {
-            transform.position = environmentJson.position;
-            transform.rotation = environmentJson.rotation;
-            _model = environmentJson.moneyBuildModel;
+            transform.position = objectJson.position;
+            transform.rotation = objectJson.rotation;
         }
 
         private void OnDestroy()

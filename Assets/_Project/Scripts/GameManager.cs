@@ -1,11 +1,11 @@
-using _General.Scripts.Pools;
 using _General.Scripts.Registries;
 using _General.Scripts.Services;
 using _General.Scripts.UI.Windows;
 using _General.Scripts.UI.Windows.GameWindow;
 using _Project.Scripts.Factories;
-using _Project.Scripts.GameObjects.Characters.Player;
 using _Project.Scripts.GameObjects.EnemyRoads;
+using _Project.Scripts.GameObjects.Units.Friends.Player;
+using _Project.Scripts.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
@@ -17,14 +17,15 @@ namespace _Project.Scripts
     {
         [Inject] private LevelSaveLoadService _levelSaveLoadService;
         [Inject] private WindowsManager _windowsManager;
-        [Inject] private ObjectPool _objectPool;
         [Inject] private ObjectsRegistry _objectsRegistry;
+        
         
         public void Start()
         {
             Application.targetFrameRate = 120;
             _windowsManager.ShowWindow<GameWindowView>();
-            _objectPool.Get<PlayerController>(new Vector3(60, 1, 70));
+            _buildPool.SetContainer(_objectPoolContainer);
+            _buildPool.Get<PlayerController>(new Vector3(60, 1, 70));
             //StartLevel(0).Forget();
         }
 
@@ -40,7 +41,7 @@ namespace _Project.Scripts
         
         public void NextRound()
         {
-            foreach (var spawnPoint in _objectsRegistry.GetAll<EnemyRoad>())
+            foreach (var spawnPoint in _objectsRegistry.GetTypedList<EnemyRoad>())
             {
                 spawnPoint.StartSpawn();
             }

@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using _General.Scripts.Json;
+using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Characters;
-using _Project.Scripts.GameObjects.Characters.Unit;
+using _Project.Scripts.GameObjects.Units.Character;
 using _Project.Scripts.SO;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
-using Quaternion = System.Numerics.Quaternion;
-using Vector3 = System.Numerics.Vector3;
 
 namespace _Project.Scripts.Factories
 {
@@ -16,34 +15,35 @@ namespace _Project.Scripts.Factories
     {
         [Inject] private IObjectResolver _resolver;
         [Inject] private CharacterPrefabConfig _characterPrefabConfig;
-
-        // Универсальный метод для создания юнитов
-        public T CreateCharacter<T>(Vector3 position = default, Quaternion rotation = default) where T : MyCharacterController
+        
+        public MyCharacterController CreateCharacter(CharacterType type, Vector3 position = default, Quaternion rotation = default)
         {
-            MyCharacterController unit = null;
-            foreach (var prefab in _characterPrefabConfig.allCharacterPrefabs)
-            {
-                if (prefab is T tPrefab)
-                {
-                    unit = _resolver.Instantiate(tPrefab, position, rotation);
-                    break;
-                }
-            }
+            var prefab = _characterPrefabConfig.allCharacterPrefabs
+                .FirstOrDefault(p => p.CharacterType == type);
 
-            return (T)unit;
+            return prefab != null ? _resolver.Instantiate(prefab, position, rotation) : null;
         }
 
-        // Создание списка юнитов из Json
-        public List<MyCharacterController> CreateCharacters(List<UnitJson> unitJsons)
+        public T CreateCharacter<T>(Vector3 position = default, Quaternion rotation = default) where T : MyCharacterController
         {
-            var units = new List<MyCharacterController>();
-            foreach (var json in unitJsons)
+            var prefab = _characterPrefabConfig.allCharacterPrefabs
+                .FirstOrDefault(p => p is T);
+
+            return prefab != null ? _resolver.Instantiate(prefab as T, position, rotation) : null;
+        }
+
+        public T CreateCharacter<T>(CharacterType type, Vector3 position = default, Quaternion rotation = default) where T : MyCharacterController
+        {
+            var prefab = _characterPrefabConfig.allCharacterPrefabs
+                .FirstOrDefault(p => p.CharacterType == type && p is T);
+
+            if (prefab == null)
             {
-                var unit = CreateCharacter<MyCharacterController>(json.unitModel.WayToAim.First(), isFriend: isFriend);
-                unit.SetJsonData(json);
-                units.Add(unit);
+                Debug.LogError($"CharacterFactory: Prefab of type {typeof(T)} with CharacterType {type} not found");
+                return null;
             }
-            return units;
+
+            return _resolver.Instantiate(prefab as T, position, rotation);
         }
     }
 }

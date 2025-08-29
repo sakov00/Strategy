@@ -10,7 +10,7 @@ namespace _General.Scripts.Registries
     {
         private readonly Dictionary<Type, IList> _typedCollections = new();
 
-        public void Register<T>(T draggable) where T : Component
+        public void Register<T>(T obj) where T : Component
         {
             var type = typeof(T);
 
@@ -21,26 +21,26 @@ namespace _General.Scripts.Registries
             }
 
             var typedList = (ReactiveCollection<T>)list;
-            if (!typedList.Contains(draggable))
+            if (!typedList.Contains(obj))
             {
-                typedList.Add(draggable);
+                typedList.Add(obj);
             }
         }
 
-        public void Unregister<T>(T draggable) where T : Component
+        public void Unregister<T>(T obj) where T : Component
         {
             var type = typeof(T);
             if (_typedCollections.TryGetValue(type, out var list))
             {
                 var typedList = (ReactiveCollection<T>)list;
-                if (typedList.Contains(draggable))
+                if (typedList.Contains(obj))
                 {
-                    typedList.Remove(draggable);
+                    typedList.Remove(obj);
                 }
             }
         }
 
-        public ReactiveCollection<T> GetAll<T>()
+        public ReactiveCollection<T> GetTypedList<T>()
         {
             var type = typeof(T);
 
@@ -60,11 +60,11 @@ namespace _General.Scripts.Registries
 
             foreach (var list in _typedCollections.Values)
             {
-                foreach (var item in list)
+                foreach (var obj in list)
                 {
-                    if (item is T tItem)
+                    if (obj is T tObj)
                     {
-                        result.Add(tItem);
+                        result.Add(tObj);
                     }
                 }
             }

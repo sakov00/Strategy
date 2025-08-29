@@ -5,7 +5,7 @@ using _Project.Scripts.Interfaces.View;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace _Project.Scripts.GameObjects.Characters
+namespace _Project.Scripts.GameObjects.Units.Character
 {
     public class CharacterView : ObjectView, IAttackableView
     {

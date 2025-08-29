@@ -4,11 +4,10 @@ using System.Linq;
 using _General.Scripts._GlobalLogic;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
-using _General.Scripts.Pools;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
-using _Project.Scripts.Factories;
-using _Project.Scripts.Interfaces;
+using _Project.Scripts.GameObjects.Units.Unit;
+using _Project.Scripts.Pools;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -19,9 +18,9 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
 {
     [Serializable]
     [RequireComponent(typeof(SplineContainer))]
-    public class EnemyRoad : MonoBehaviour, IClearData
+    public class EnemyRoad : MonoBehaviour
     {
-        [Inject] private ObjectPool _pool;
+        [Inject] private CharacterPool _characterPool;
         [Inject] private ObjectsRegistry _objectsRegistry;
 
         [SerializeField] private List<EnemyGroup> _roundEnemyList = new();
@@ -101,12 +100,13 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
             {
                 wayPoints.Add(position + new Vector3(offsetX, 0f, 0f));
             }
-            _pool.Get<>(enemyData.enemyType, wayPoints[0], wayPoints);
+            var enemyController = _characterPool.Get<UnitController>(enemyData.enemyType, wayPoints[0]);
+            enemyController.Model.WayToAim = wayPoints;
         }
 
         public void RefreshInfoRound()
         {
-            for (int i = 0; i < Enum.GetValues(typeof(UnitType)).Length; i++)
+            for (int i = 0; i < Enum.GetValues(typeof(CharacterType)).Length; i++)
             {
                 var countEnemy = _roundEnemyList[AppData.LevelData.CurrentRound].enemies.Count(x => (int)x.enemyType == i);
                 if (countEnemy > 0)
@@ -150,6 +150,6 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
     {
         [Min(0f)]
         public float time;
-        public UnitType enemyType;
+        public CharacterType enemyType;
     }
 }

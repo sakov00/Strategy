@@ -9,7 +9,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Environment
 {
-    public class EnvironmentController : MonoBehaviour, ISavable<EnvironmentJson>
+    public class EnvironmentController : MonoBehaviour, IJsonSerializable
     {
         [SerializeField] protected EnvironmentType _environmentType;
         
@@ -21,25 +21,24 @@ namespace _Project.Scripts.GameObjects.Environment
             _objectsRegistry.Register(this);
         }
 
-        public virtual EnvironmentJson GetJsonData()
+        public ObjectJson GetJsonData()
         {
-            var playerJson = new EnvironmentJson
+            var objectJson = new ObjectJson
             {
+                objectType = nameof(EnvironmentController),
                 position = transform.position,
-                rotation = transform.rotation,
-                environmentType = _environmentType
+                rotation = transform.rotation
             };
-            return playerJson;
+            return objectJson;
         }
 
-        public virtual void SetJsonData(EnvironmentJson environmentJson)
+        public void SetJsonData(ObjectJson objectJson)
         {
-            transform.position = environmentJson.position;
-            transform.rotation = environmentJson.rotation;
-            _environmentType = environmentJson.environmentType;
+            transform.position = objectJson.position;
+            transform.rotation = objectJson.rotation;
         }
         
-        public virtual void ClearData()
+        public void ClearData()
         {
             Destroy(gameObject);
         }

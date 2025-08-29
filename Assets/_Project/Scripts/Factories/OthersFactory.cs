@@ -15,16 +15,6 @@ namespace _Project.Scripts.Factories
         
         [Inject] private ObjectsRegistry _objectsRegistry;
         
-        public List<BuildingZoneController> CreateBuildingZones(List<BuildingZoneJson> buildingZoneJsons)
-        {
-            var buildingZones = new List<BuildingZoneController>();
-            foreach (var buildingZoneJson in buildingZoneJsons)
-            {
-                buildingZones.Add(CreateBuildingZone(buildingZoneJson));
-            }
-            return buildingZones;
-        }
-        
         public BuildingZoneController CreateBuildingZone(BuildingZoneJson buildingZoneJson)
         {
             var buildingZoneController = _resolver.Instantiate(_othersPrefabConfig.buildingZonePrefab);

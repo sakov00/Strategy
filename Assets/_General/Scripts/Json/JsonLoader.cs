@@ -1,33 +1,43 @@
 using System.IO;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Newtonsoft.Json;
+#if UNITY_ANDROID && !UNITY_EDITOR
+using UnityEngine.Networking;
+#endif
 
 namespace _General.Scripts.Json
 {
     public class JsonLoader
     {
-        public void Save<T>(T data, int levelIndex)
+        // Сохраняем данные в persistentDataPath
+        public async UniTask Save<T>(T data, int levelIndex)
         {
-            // Сохраняем всегда в persistentDataPath (доступно для записи на всех платформах)
-            var fileName = Path.Combine(Application.streamingAssetsPath, $"LevelData_{levelIndex}.json");
-            var json = JsonUtility.ToJson(data, prettyPrint: true);
-            File.WriteAllText(fileName, json);
-            Debug.Log($"Данные сохранены в {fileName}");
+            string filePath = Path.Combine(Application.persistentDataPath, $"LevelData_{levelIndex}.json");
+
+            // Сериализация через Newtonsoft с красивым форматированием
+            string json = JsonConvert.SerializeObject(data, Formatting.Indented, 
+                new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
+
+            await File.WriteAllTextAsync(filePath, json);
+            Debug.Log($"Данные сохранены в {filePath}");
         }
 
+        // Загружаем данные
         public async UniTask<T> Load<T>(int levelIndex)
         {
-            string fileName = Path.Combine(Application.streamingAssetsPath, $"LevelData_{levelIndex}.json");
+            string filePath = Path.Combine(Application.persistentDataPath, $"LevelData_{levelIndex}.json");
 
-            // Если файл уже есть в persistentDataPath — читаем оттуда
-            if (File.Exists(fileName))
+            // Читаем из persistentDataPath, если файл существует
+            if (File.Exists(filePath))
             {
-                var json = File.ReadAllText(fileName);
+                string json = await File.ReadAllTextAsync(filePath);
                 Debug.Log("Данные загружены из persistentDataPath");
-                return JsonUtility.FromJson<T>(json);
+                return JsonConvert.DeserializeObject<T>(json, 
+                    new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
             }
 
-            // Если нет — пробуем загрузить из StreamingAssets (Android требует UnityWebRequest)
+            // Если нет — читаем из StreamingAssets
             string streamingPath = Path.Combine(Application.streamingAssetsPath, $"LevelData_{levelIndex}.json");
 
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -39,9 +49,10 @@ namespace _General.Scripts.Json
                 return default;
             }
 
-            var jsonFromStream = request.downloadHandler.text;
+            string jsonFromStream = request.downloadHandler.text;
             Debug.Log("Данные загружены из StreamingAssets");
-            return JsonUtility.FromJson<T>(jsonFromStream);
+            return JsonConvert.DeserializeObject<T>(jsonFromStream, 
+                new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
 #else
             if (!File.Exists(streamingPath))
             {
@@ -49,9 +60,10 @@ namespace _General.Scripts.Json
                 return default;
             }
 
-            var jsonFromStream = File.ReadAllText(streamingPath);
+            string jsonFromStream = await File.ReadAllTextAsync(streamingPath);
             Debug.Log("Данные загружены из StreamingAssets");
-            return JsonUtility.FromJson<T>(jsonFromStream);
+            return JsonConvert.DeserializeObject<T>(jsonFromStream,
+                new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
 #endif
         }
     }
