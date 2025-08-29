@@ -1,11 +1,14 @@
-using _Project.Scripts._GlobalData;
-using _Project.Scripts._GlobalLogic;
+using _General.Scripts._GlobalLogic;
+using _General.Scripts._VContainer;
+using _General.Scripts.AllAppData;
+using _General.Scripts.Json;
+using _General.Scripts.Pools;
+using _General.Scripts.Registries;
+using _General.Scripts.Services;
+using _General.Scripts.SO;
+using _General.Scripts.UI.Windows;
 using _Project.Scripts.Factories;
-using _Project.Scripts.Json;
-using _Project.Scripts.Registries;
-using _Project.Scripts.Services;
 using _Project.Scripts.SO;
-using _Project.Scripts.UI.Windows;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -19,7 +22,7 @@ namespace _Project.Scripts._VContainer
         [Header("Configs")]
         [SerializeField] private LevelsConfig _levelsConfig;
         [SerializeField] private OthersPrefabConfig _othersPrefabConfig;
-        [SerializeField] private UnitPrefabConfig _unitPrefabConfig;
+        [SerializeField] private CharacterPrefabConfig _characterPrefabConfig;
         [SerializeField] private BuildingPrefabConfig _buildingPrefabConfig;
         [SerializeField] private ProjectilePrefabConfig _projectilePrefabConfig;
         [SerializeField] private WindowsConfig _windowsConfig;
@@ -32,12 +35,13 @@ namespace _Project.Scripts._VContainer
             builder.Register<AppData>(Lifetime.Singleton).AsSelf().As<IInitializable>();
             
             builder.Register<GameManager>(Lifetime.Singleton).As<GameManager, IStartable>();
-            builder.Register<ResetService>(Lifetime.Singleton).AsSelf().As<IInitializable>();
-            builder.Register<LevelController>(Lifetime.Singleton).AsSelf();
+            builder.Register<ResetLevelService>(Lifetime.Singleton).AsSelf().As<IInitializable>();
+            builder.Register<LevelSaveLoadService>(Lifetime.Singleton).AsSelf();
             builder.Register<JsonLoader>(Lifetime.Singleton).AsSelf();
             
             RegisterWindows(builder);
             RegisterRegistries(builder);
+            RegisterPools(builder);
             RegisterFactories(builder);
             RegisterSO(builder);
         }
@@ -50,11 +54,12 @@ namespace _Project.Scripts._VContainer
         
         private void RegisterRegistries(IContainerBuilder builder)
         {
-            builder.Register<SaveRegistry>(Lifetime.Singleton).AsSelf();
-            builder.Register<ClearDataRegistry>(Lifetime.Singleton).AsSelf();
-            builder.Register<EnemyRoadRegistry>(Lifetime.Singleton).AsSelf();
-            builder.Register<HealthRegistry>(Lifetime.Singleton).AsSelf();
-            builder.Register<TooltipRegistry>(Lifetime.Singleton).AsSelf();
+            builder.Register<ObjectsRegistry>(Lifetime.Singleton).AsSelf();
+        }
+        
+        private void RegisterPools(IContainerBuilder builder)
+        {
+            builder.Register<ObjectPool>(Lifetime.Singleton).AsSelf().As<IInitializable>();
         }
         
         private void RegisterFactories(IContainerBuilder builder)
@@ -62,8 +67,7 @@ namespace _Project.Scripts._VContainer
             builder.Register<OthersFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<BuildFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<ProjectileFactory>(Lifetime.Singleton).AsSelf();
-            builder.Register<FriendFactory>(Lifetime.Singleton).AsSelf();
-            builder.Register<EnemyFactory>(Lifetime.Singleton).AsSelf();
+            builder.Register<CharacterFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<LevelFactory>(Lifetime.Singleton).AsSelf();
         }
         
@@ -71,7 +75,7 @@ namespace _Project.Scripts._VContainer
         {
             builder.RegisterInstance(_levelsConfig).AsSelf();
             builder.RegisterInstance(_othersPrefabConfig).AsSelf();
-            builder.RegisterInstance(_unitPrefabConfig).AsSelf();
+            builder.RegisterInstance(_characterPrefabConfig).AsSelf();
             builder.RegisterInstance(_buildingPrefabConfig).AsSelf();
             builder.RegisterInstance(_projectilePrefabConfig).AsSelf();
             builder.RegisterInstance(_windowsConfig).AsSelf().As<IInitializable>();

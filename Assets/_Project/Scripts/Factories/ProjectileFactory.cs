@@ -1,8 +1,7 @@
+using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Characters.Unit;
 using _Project.Scripts.GameObjects.Projectiles;
-using _Project.Scripts.Registries;
-using _Project.Scripts.Services;
 using _Project.Scripts.SO;
 using UnityEngine;
 using VContainer;
@@ -14,7 +13,6 @@ namespace _Project.Scripts.Factories
     {
         [Inject] private IObjectResolver resolver;
         [Inject] private ProjectilePrefabConfig unitPrefabConfig;
-        [Inject] private HealthRegistry healthRegistry;
         
         public Projectile CreateProjectile(ProjectileType projectileType, Vector3 position, Quaternion rotation = default)
         {

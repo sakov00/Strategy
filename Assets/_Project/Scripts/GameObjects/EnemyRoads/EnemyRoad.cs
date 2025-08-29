@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using _Project.Scripts._GlobalData;
-using _Project.Scripts._GlobalLogic;
-using _Project.Scripts._VContainer;
+using _General.Scripts._GlobalLogic;
+using _General.Scripts._VContainer;
+using _General.Scripts.AllAppData;
+using _General.Scripts.Pools;
+using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
 using _Project.Scripts.Interfaces;
-using _Project.Scripts.Registries;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -20,9 +21,8 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
     [RequireComponent(typeof(SplineContainer))]
     public class EnemyRoad : MonoBehaviour, IClearData
     {
-        [Inject] private EnemyFactory _enemyFactory;
-        [Inject] private EnemyRoadRegistry _enemyRoadRegistry;
-        [Inject] private ClearDataRegistry _clearDataRegistry;
+        [Inject] private ObjectPool _pool;
+        [Inject] private ObjectsRegistry _objectsRegistry;
 
         [SerializeField] private List<EnemyGroup> _roundEnemyList = new();
         [SerializeField] private SplineContainer _splineContainer = new();
@@ -43,8 +43,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
         private void Start()
         {
             InjectManager.Inject(this);
-            _clearDataRegistry.Register(this);
-            _enemyRoadRegistry.Register(this);
+            _objectsRegistry.Register(this);
             
             foreach (var knot in _splineContainer.Spline)
             {
@@ -102,7 +101,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
             {
                 wayPoints.Add(position + new Vector3(offsetX, 0f, 0f));
             }
-            _enemyFactory.CreateEnemyUnit(enemyData.enemyType, wayPoints[0], wayPoints);
+            _pool.Get<>(enemyData.enemyType, wayPoints[0], wayPoints);
         }
 
         public void RefreshInfoRound()

@@ -1,7 +1,5 @@
-using _Project.Scripts._GlobalData;
-using _Project.Scripts._GlobalLogic;
+using _General.Scripts.AllAppData;
 using _Project.Scripts.GameObjects._General;
-using _Project.Scripts.Interfaces;
 using _Project.Scripts.Interfaces.Controller;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;

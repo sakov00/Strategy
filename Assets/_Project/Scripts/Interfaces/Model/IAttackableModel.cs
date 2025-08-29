@@ -1,6 +1,7 @@
 using _Project.Scripts.Enums;
+using _Project.Scripts.GameObjects._General;
 
-namespace _Project.Scripts.Interfaces
+namespace _Project.Scripts.Interfaces.Model
 {
     public interface IAttackableModel
     {
@@ -10,6 +11,6 @@ namespace _Project.Scripts.Interfaces
         public float AnimAttackTime { get; set; }
         public float DetectionRadius { get; set; }
         public TypeAttack TypeAttack { get; set; }
-        public IHealthModel AimCharacter { get; set; }
+        public ObjectController AimObject { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 using System;
 using _Project.Scripts.Enums;
+using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.Interfaces;
+using _Project.Scripts.Interfaces.Model;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.TowerDefence
@@ -15,7 +17,7 @@ namespace _Project.Scripts.GameObjects.TowerDefence
         [SerializeField] private float _animAttackTime = 1f;
         [SerializeField] private float _detectionRadius = 20f;
         [SerializeField] private TypeAttack _typeAttack = TypeAttack.Distance;
-        [SerializeField] private IHealthModel _aimCharacter;
+        [SerializeField] private ObjectController _aimObject;
 
         public float AttackRange
         {
@@ -53,10 +55,10 @@ namespace _Project.Scripts.GameObjects.TowerDefence
             set => _typeAttack = value;
         }
 
-        public IHealthModel AimCharacter
+        public ObjectController AimObject
         {
-            get => _aimCharacter;
-            set => _aimCharacter = value;
+            get => _aimObject;
+            set => _aimObject = value;
         }
     }
 }

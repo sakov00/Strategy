@@ -1,4 +1,4 @@
-using _Project.Scripts._VContainer;
+using _General.Scripts._VContainer;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects._General

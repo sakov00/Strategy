@@ -1,5 +1,4 @@
 using System;
-using _Project.Scripts._GlobalLogic;
 using _Project.Scripts.GameObjects.Info;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Interfaces.View;

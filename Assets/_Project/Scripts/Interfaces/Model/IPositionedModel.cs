@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Scripts.Interfaces
+namespace _Project.Scripts.Interfaces.Model
 {
     public interface IPositionedModel
     {

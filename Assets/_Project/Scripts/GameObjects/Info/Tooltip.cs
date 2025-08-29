@@ -1,4 +1,4 @@
-using _Project.Scripts._GlobalLogic;
+using _General.Scripts._GlobalLogic;
 using TMPro;
 using UnityEngine;
 

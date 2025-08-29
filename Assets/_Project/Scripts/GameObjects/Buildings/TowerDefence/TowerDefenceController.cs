@@ -1,7 +1,7 @@
+using _General.Scripts.Json;
+using _General.Scripts.Registries;
 using _Project.Scripts.GameObjects.Characters;
 using _Project.Scripts.Interfaces;
-using _Project.Scripts.Json;
-using _Project.Scripts.Registries;
 using UnityEngine;
 using VContainer;
 
@@ -9,8 +9,7 @@ namespace _Project.Scripts.GameObjects.TowerDefence
 {
     public class TowerDefenceController : BuildController, ISavable<TowerDefenceBuildJson>
     {
-        [Inject] private SaveRegistry _saveRegistry;
-        [Inject] private ClearDataRegistry _clearDataRegistry;
+        [Inject] private ObjectsRegistry _objectsRegistry;
         
         [SerializeField] protected TowerDefenceModel _model;
         [SerializeField] protected TowerDefenceView _view;
@@ -23,8 +22,7 @@ namespace _Project.Scripts.GameObjects.TowerDefence
         protected override void Initialize()
         {
             base.Initialize();
-            _saveRegistry.Register(this);
-            _clearDataRegistry.Register(this);
+            _objectsRegistry.Register(this);
             _detectionAim = new DetectionAim(_model, transform);
             _damageSystem = new DamageSystem(_model, _view, transform);
         }

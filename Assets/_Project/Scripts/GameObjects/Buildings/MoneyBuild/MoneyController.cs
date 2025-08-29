@@ -1,9 +1,10 @@
 using System;
 using System.Linq;
-using _Project.Scripts._GlobalData;
-using _Project.Scripts._GlobalLogic;
-using _Project.Scripts._VContainer;
-using _Project.Scripts.Registries;
+using _General.Scripts._VContainer;
+using _General.Scripts.AllAppData;
+using _General.Scripts.Registries;
+using _Project.Scripts.Enums;
+using _Project.Scripts.GameObjects.Characters.Unit;
 using UniRx;
 using VContainer;
 
@@ -11,7 +12,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
 {
     public class MoneyController
     {
-        [Inject] private HealthRegistry _healthRegistry;
+        [Inject] private ObjectsRegistry _objectsRegistry;
         
         private readonly MoneyBuildModel _moneyBuildModel;
         private readonly MoneyBuildingView _moneyBuildingView;
@@ -24,8 +25,8 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
             _moneyBuildingView = moneyBuildingView;
             
             InjectManager.Inject(this);
-            _healthRegistry
-                .GetAll()
+            _objectsRegistry
+                .GetAll<UnitController>()
                 .ObserveRemove()
                 .Skip(1)
                 .Subscribe(_ => AllEnemiesDestroyed())
@@ -34,7 +35,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
         
         private void AllEnemiesDestroyed()
         {
-            if (_healthRegistry.HasEnemies()) 
+            if (_objectsRegistry.GetAll<UnitController>().Any(x => x.ObjectModel.WarSide == WarSide.Enemy)) 
                 return;
 
             AddMoneyToPlayer();

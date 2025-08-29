@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using _General.Scripts.Json;
+using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects;
 using _Project.Scripts.GameObjects.FriendsBuild;
 using _Project.Scripts.GameObjects.MoneyBuild;
 using _Project.Scripts.GameObjects.TowerDefence;
-using _Project.Scripts.Json;
-using _Project.Scripts.Registries;
 using _Project.Scripts.SO;
 using UnityEngine;
 using VContainer;
@@ -18,8 +18,7 @@ namespace _Project.Scripts.Factories
     {
         [Inject] private IObjectResolver _resolver;
         [Inject] private BuildingPrefabConfig _buildingPrefabConfig;
-        [Inject] private HealthRegistry _healthRegistry;
-        [Inject] private SaveRegistry _saveRegistry;
+        [Inject] private ObjectsRegistry _objectsRegistry;
 
         public BuildModel GetBuildModel(TypeBuilding building)
         {
@@ -63,7 +62,6 @@ namespace _Project.Scripts.Factories
                 default: return null;
             }
             
-            _healthRegistry.Register(buildController.ObjectModel);
             return buildController;
         }
         

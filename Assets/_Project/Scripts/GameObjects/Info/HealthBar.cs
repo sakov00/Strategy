@@ -1,4 +1,4 @@
-using _Project.Scripts._GlobalLogic;
+using _General.Scripts._GlobalLogic;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Info

@@ -1,6 +1,6 @@
 using _Project.Scripts.Enums;
 
-namespace _Project.Scripts.Interfaces
+namespace _Project.Scripts.Interfaces.Controller
 {
     public interface IAttackableController
     {

@@ -1,6 +1,6 @@
+using _General.Scripts.Json;
+using _General.Scripts.Registries;
 using _Project.Scripts.Interfaces;
-using _Project.Scripts.Json;
-using _Project.Scripts.Registries;
 using UnityEngine;
 using VContainer;
 
@@ -8,8 +8,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
 {
     public class MoneyBuildController : BuildController, ISavable<MoneyBuildJson>
     {
-        [Inject] private SaveRegistry _saveRegistry;
-        [Inject] private ClearDataRegistry _clearDataRegistry;
+        [Inject] private ObjectsRegistry _objectsRegistry;
         
         [SerializeField] protected MoneyBuildModel _model;
         [SerializeField] protected MoneyBuildingView _view;
@@ -21,8 +20,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
         protected override void Initialize()
         {
             base.Initialize();
-            _saveRegistry.Register(this);
-            _clearDataRegistry.Register(this);
+            _objectsRegistry.Register(this);
             _moneyController = new MoneyController(_model, _view);
         }
         

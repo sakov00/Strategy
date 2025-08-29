@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace _Project.Scripts.Interfaces
+namespace _Project.Scripts.Interfaces.Model
 {
     public interface IUpgradableModel
     {

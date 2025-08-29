@@ -1,11 +1,10 @@
-using _Project.Scripts._GlobalData;
-using _Project.Scripts._GlobalLogic;
-using _Project.Scripts._VContainer;
+using _General.Scripts._VContainer;
+using _General.Scripts.AllAppData;
+using _General.Scripts.Json;
+using _General.Scripts.Registries;
 using _Project.Scripts.Factories;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Interfaces.Controller;
-using _Project.Scripts.Json;
-using _Project.Scripts.Registries;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -15,8 +14,7 @@ namespace _Project.Scripts.GameObjects.BuildingZone
 {
     public class BuildingZoneController : MonoBehaviour, IBuyController, ISavable<BuildingZoneJson>
     {
-        [Inject] private SaveRegistry _saveRegistry;
-        [Inject] private ClearDataRegistry _clearDataRegistry;
+        [Inject] private ObjectsRegistry _objectsRegistry;
         [Inject] private BuildFactory _buildFactory;
         
         [SerializeField] private BuildingZoneModel _buildingZoneModel;
@@ -26,8 +24,7 @@ namespace _Project.Scripts.GameObjects.BuildingZone
         private void Start()
         {
             InjectManager.Inject(this);
-            _saveRegistry.Register(this);
-            _clearDataRegistry.Register(this);
+            _objectsRegistry.Register(this);
         }
         
         public BuildingZoneJson GetJsonData()
@@ -66,8 +63,7 @@ namespace _Project.Scripts.GameObjects.BuildingZone
             AppData.User.Money -= buildModel.PriceList[0];
             var build = _buildFactory.CreateBuild(_buildingZoneModel.TypeBuilding, transform.position, transform.rotation);
             build.BuildModel.CurrentLevel++;
-            _clearDataRegistry.Unregister(this);
-            _saveRegistry.Unregister(this);
+            _objectsRegistry.Unregister(this);
             Destroy(gameObject);
         }
 

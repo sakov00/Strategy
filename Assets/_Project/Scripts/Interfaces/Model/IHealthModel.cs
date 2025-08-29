@@ -1,8 +1,6 @@
-using System;
 using _Project.Scripts.Enums;
-using UnityEngine;
 
-namespace _Project.Scripts.Interfaces
+namespace _Project.Scripts.Interfaces.Model
 {
     public interface IHealthModel : IPositionedModel
     {

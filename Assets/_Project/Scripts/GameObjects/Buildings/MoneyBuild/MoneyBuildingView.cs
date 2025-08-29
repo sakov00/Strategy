@@ -1,5 +1,4 @@
 using System;
-using _Project.Scripts._GlobalLogic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;

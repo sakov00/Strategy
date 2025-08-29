@@ -1,11 +1,12 @@
 using System;
 using System.Linq;
+using _General.Scripts.Json;
+using _General.Scripts.Pools;
+using _General.Scripts.Registries;
 using _Project.Scripts._VContainer;
 using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.Interfaces;
-using _Project.Scripts.Json;
-using _Project.Scripts.Registries;
 using UnityEngine;
 using VContainer;
 
@@ -13,9 +14,8 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
 {
     public class FriendsBuildController : BuildController, ISavable<FriendsBuildJson>
     {
-        [Inject] private SaveRegistry _saveRegistry;
-        [Inject] private ClearDataRegistry _clearDataRegistry;
-        [Inject] private FriendFactory _friendFactory;
+        [Inject] private ObjectsRegistry _objectsRegistry;
+        [Inject] private ObjectPool _objectPool;
         
         [SerializeField] private FriendsBuildModel _model;
         [SerializeField] private FriendsBuildView _view;
@@ -27,8 +27,7 @@ namespace _Project.Scripts.GameObjects.FriendsBuild
         protected override void Initialize()
         {
             base.Initialize();
-            _saveRegistry.Register(this);
-            _clearDataRegistry.Register(this);
+            _objectsRegistry.Register(this);
             _friendsCreatorController = new FriendsCreatorController(_friendFactory, _model, _view);
         }
         

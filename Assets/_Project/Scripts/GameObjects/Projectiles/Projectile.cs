@@ -1,8 +1,7 @@
 using System;
+using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
-using _Project.Scripts.Registries;
-using _Project.Scripts.Services;
 using UnityEngine;
 using VContainer;
 
@@ -10,7 +9,7 @@ namespace _Project.Scripts.GameObjects.Projectiles
 {
     public abstract class Projectile : MonoBehaviour
     {
-        [Inject] protected HealthRegistry HealthRegistry;
+        [Inject] protected ObjectsRegistry _objectsRegistry;
         
         public int _damage;
         public WarSide _ownerWarSide;
@@ -32,15 +31,9 @@ namespace _Project.Scripts.GameObjects.Projectiles
 
             if (target.ObjectModel.CurrentHealth <= 0)
             {
-                if (target.ObjectModel.WarSide == WarSide.Enemy)
-                {
-                    HealthRegistry.Unregister(target.ObjectModel);
+                    _objectsRegistry.Unregister(target);
                     Destroy(target.ObjectModel.Transform.gameObject);
-                }
-                else
-                {
-                    target.gameObject.SetActive(false);
-                }
+                    //target.gameObject.SetActive(false);
             }
 
             Destroy(gameObject);
