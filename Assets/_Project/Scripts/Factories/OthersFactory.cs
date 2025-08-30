@@ -1,8 +1,7 @@
-using System.Collections.Generic;
-using _General.Scripts.Json;
 using _General.Scripts.Registries;
 using _Project.Scripts.GameObjects.BuildingZone;
 using _Project.Scripts.SO;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -15,10 +14,9 @@ namespace _Project.Scripts.Factories
         
         [Inject] private ObjectsRegistry _objectsRegistry;
         
-        public BuildingZoneController CreateBuildingZone(BuildingZoneJson buildingZoneJson)
+        public BuildingZoneController CreateBuildingZone(Vector3 position = default, Quaternion rotation = default)
         {
-            var buildingZoneController = _resolver.Instantiate(_othersPrefabConfig.buildingZonePrefab);
-            buildingZoneController.SetJsonData(buildingZoneJson);
+            var buildingZoneController = _resolver.Instantiate(_othersPrefabConfig.buildingZonePrefab, position, rotation);
             return buildingZoneController;
         }
     }

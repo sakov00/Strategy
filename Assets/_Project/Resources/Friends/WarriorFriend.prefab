@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 6017041743760912742}
   - component: {fileID: 5435124656432188814}
   - component: {fileID: 3052630911340187564}
-  - component: {fileID: 1300454423953340342}
+  - component: {fileID: 257078088719806101}
   - component: {fileID: 8661139373732419288}
   m_Layer: 0
-  m_Name: MeleeFriend
+  m_Name: WarriorFriend
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,7 +82,7 @@ CapsuleCollider:
   m_Height: 2.0405903
   m_Direction: 1
   m_Center: {x: 0.018249512, y: 0.055278778, z: -0.07299614}
---- !u!114 &1300454423953340342
+--- !u!114 &257078088719806101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,11 +91,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2804439903886800851}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a4cd115d4324231b941fb37c7a81614, type: 3}
+  m_Script: {fileID: 11500000, guid: 75546f0119304b0ca108abc2dd09acc9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  _model:
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.Units.Friends.WarriorFriend.WarriorFriendController
+  <CharacterType>k__BackingField: 1
+  <Model>k__BackingField:
     _warSide: 0
+    _delayRegeneration: 3
+    _regenerateHealthInSecond: 5
     _maxHealth: 100
     _currentHealth: 100
     _moveSpeed: 10
@@ -107,10 +110,10 @@ MonoBehaviour:
     _animAttackTime: 1
     _detectionRadius: 20
     _typeAttack: 0
+    _aimObject: {fileID: 0}
     _currentWaypointIndex: 0
     _wayToAim: []
-    _unitType: 0
-  _view: {fileID: 8661139373732419288}
+  <View>k__BackingField: {fileID: 8661139373732419288}
 --- !u!114 &8661139373732419288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 7e4e45b3b44d8d8488d0858b48023e3f,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: b1ec1a9014f3f3c468d8dddbcda1dd46, type: 2}
     - target: {fileID: 919132149155446097, guid: 7e4e45b3b44d8d8488d0858b48023e3f,

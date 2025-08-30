@@ -9,7 +9,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.FriendsBuild
 {
-    public class FriendsBuildController : BuildController, IJsonSerializable
+    public class FriendsBuildController : BuildController
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
         [Inject] private CharacterPool _characterPool;

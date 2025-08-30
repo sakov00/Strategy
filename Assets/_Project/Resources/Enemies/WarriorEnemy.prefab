@@ -151,13 +151,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2865682662467020708, guid: 944e80848bccbd64aba410d635ebf7c8,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: aed570118c613e04abc4c290e4a402c8, type: 2}
     - target: {fileID: 919132149155446097, guid: 944e80848bccbd64aba410d635ebf7c8,
         type: 3}
       propertyPath: m_Name
-      value: MeleeEnemy
+      value: WarriorEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -182,7 +182,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 944e80848bccbd64aba410d635ebf7c8,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6794352509851856110}
+      addedObject: {fileID: 1717123951199246250}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 944e80848bccbd64aba410d635ebf7c8,
         type: 3}
       insertIndex: -1
@@ -247,7 +247,7 @@ CapsuleCollider:
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!95 &-4408281087418554947
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -261,12 +261,13 @@ Animator:
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-6794352509851856110
+--- !u!114 &1717123951199246250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -275,11 +276,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7303883060677341878}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a4cd115d4324231b941fb37c7a81614, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c457b04820f46bdb85b01a06822a0c8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  _model:
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.Units.Enemies.WarriorEnemy.WarriorEnemyController
+  <CharacterType>k__BackingField: 2
+  <Model>k__BackingField:
     _warSide: 1
+    _delayRegeneration: 3
+    _regenerateHealthInSecond: 5
     _maxHealth: 100
     _currentHealth: 100
     _moveSpeed: 10
@@ -290,11 +294,11 @@ MonoBehaviour:
     _allAnimAttackTime: 1
     _animAttackTime: 1
     _detectionRadius: 20
-    _typeAttack: 0
+    _typeAttack: 1
+    _aimObject: {fileID: 0}
     _currentWaypointIndex: 0
     _wayToAim: []
-    _unitType: 0
-  _view: {fileID: -3633122475770971463}
+  <View>k__BackingField: {fileID: -3633122475770971463}
 --- !u!114 &-3633122475770971463
 MonoBehaviour:
   m_ObjectHideFlags: 0

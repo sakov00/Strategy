@@ -6,7 +6,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.MoneyBuild
 {
-    public class MoneyBuildController : BuildController, IJsonSerializable
+    public class MoneyBuildController : BuildController
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
         
@@ -46,7 +46,7 @@ namespace _Project.Scripts.GameObjects.MoneyBuild
             _moneyController.Dispose();
         }
         
-        public void ClearData()
+        public override void ClearData()
         {
             Destroy(gameObject);
         }

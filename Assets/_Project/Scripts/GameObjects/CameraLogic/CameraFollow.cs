@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects.Camera
+namespace _Project.Scripts.GameObjects.CameraLogic
 {
     [Serializable]
     public class CameraFollow

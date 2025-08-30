@@ -13,7 +13,6 @@ namespace _Project.Scripts.GameObjects.Units.Unit
         [Header("Unit Info")]
         public int _currentWaypointIndex;
         public List<Vector3> _wayToAim;
-        public CharacterType _characterType;
         
         public int CurrentWaypointIndex
         {
@@ -24,11 +23,6 @@ namespace _Project.Scripts.GameObjects.Units.Unit
         {
             get => _wayToAim;
             set => _wayToAim = value;
-        }
-        public CharacterType CharacterType
-        {
-            get => _characterType;
-            set => _characterType = value;
         }
     }
 }

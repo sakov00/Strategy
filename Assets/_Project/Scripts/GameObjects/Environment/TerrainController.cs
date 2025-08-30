@@ -9,7 +9,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Environment
 {
-    public class TerrainController : MonoBehaviour, IJsonSerializable
+    public class TerrainController : MonoBehaviour, IJsonSerializable, IClearData
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
         

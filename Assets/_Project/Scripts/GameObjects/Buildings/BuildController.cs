@@ -2,15 +2,20 @@ using _General.Scripts.AllAppData;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.Interfaces.Controller;
+using _Project.Scripts.Pools;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
+using VContainer;
 
 namespace _Project.Scripts.GameObjects
 {
     public abstract class BuildController : ObjectController, IBuyController
     {
-        public BuildType BuildType { get; set; }
+        [field: SerializeField] public BuildType BuildType { get; set; }
+        
+        [Inject] private BuildPool _buildPool;
+        
         public abstract BuildModel BuildModel { get; }
         public abstract BuildView BuildView  { get; }
         public override ObjectModel ObjectModel => BuildModel;
@@ -43,6 +48,11 @@ namespace _Project.Scripts.GameObjects
             }
             AppData.User.Money -= BuildModel.PriceList[0];
             BuildModel.CurrentLevel++;
+        }
+
+        public override void ReturnToPool()
+        {
+            _buildPool.Return(this);
         }
     }
 }

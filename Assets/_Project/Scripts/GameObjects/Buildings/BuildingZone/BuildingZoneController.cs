@@ -12,7 +12,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.BuildingZone
 {
-    public class BuildingZoneController : MonoBehaviour, IBuyController, IJsonSerializable
+    public class BuildingZoneController : MonoBehaviour, IBuyController, IJsonSerializable, IClearData
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
         [Inject] private BuildFactory _buildFactory;

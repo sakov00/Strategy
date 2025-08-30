@@ -64,6 +64,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -85,6 +90,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -122,13 +128,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d530c249e5cd4e19b6a03fa3cfea2dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <BuildType>k__BackingField: 2
   _model:
     _warSide: 0
+    _delayRegeneration: 3
+    _regenerateHealthInSecond: 5
     _maxHealth: 1000
     _currentHealth: 1000
     _priceList: 040000000400000005000000050000000600000006000000
     _currentLevel: 0
-    _unitType: 0
+    _characterType: 1
     _buildUnits: []
   _view: {fileID: 4564933277160738802}
 --- !u!114 &4564933277160738802
@@ -503,6 +512,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3051673704465281501, guid: da2995be65c8587409412355901303e9,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472366080170231760, guid: da2995be65c8587409412355901303e9,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

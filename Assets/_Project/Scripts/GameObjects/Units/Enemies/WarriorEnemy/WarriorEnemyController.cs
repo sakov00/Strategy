@@ -5,7 +5,7 @@ using _Project.Scripts.Interfaces;
 
 namespace _Project.Scripts.GameObjects.Units.Enemies.WarriorEnemy
 {
-    public class WarriorEnemyController : UnitController, IJsonSerializable
+    public class WarriorEnemyController : UnitController
     {
         public override ObjectJson GetJsonData()
         {

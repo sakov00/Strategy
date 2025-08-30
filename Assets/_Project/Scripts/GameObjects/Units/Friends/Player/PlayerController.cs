@@ -9,7 +9,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Units.Friends.Player
 {
-    public class PlayerController : MyCharacterController, IJsonSerializable
+    public class PlayerController : MyCharacterController
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
 

@@ -352,7 +352,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 49b7b0a46cf50c941b682697fc5cfa5f,
         type: 3}
       propertyPath: m_Name
-      value: EnemyArcher
+      value: ArcherEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 1050724564283313566, guid: 49b7b0a46cf50c941b682697fc5cfa5f,
         type: 3}
@@ -376,7 +376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2254571757905333846, guid: 49b7b0a46cf50c941b682697fc5cfa5f,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 2a52e03c11e712641a1b8cfd440d19a5, type: 2}
     - target: {fileID: 2407642848795871769, guid: 49b7b0a46cf50c941b682697fc5cfa5f,
@@ -546,7 +546,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 49b7b0a46cf50c941b682697fc5cfa5f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4494823080349588702}
+      addedObject: {fileID: 7231524114703381670}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 49b7b0a46cf50c941b682697fc5cfa5f,
         type: 3}
       insertIndex: -1
@@ -605,7 +605,7 @@ CapsuleCollider:
   m_Center: {x: 0, y: 1, z: -0.1270523}
 --- !u!95 &7389295262489941797
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -619,12 +619,13 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4494823080349588702
+--- !u!114 &7231524114703381670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -633,11 +634,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6975946869574012185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a4cd115d4324231b941fb37c7a81614, type: 3}
+  m_Script: {fileID: 11500000, guid: e4780709950543018e82687eb8558690, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  _model:
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.Units.Enemies.ArcherEnemy.ArcherEnemyController
+  <CharacterType>k__BackingField: 4
+  <Model>k__BackingField:
     _warSide: 1
+    _delayRegeneration: 3
+    _regenerateHealthInSecond: 5
     _maxHealth: 100
     _currentHealth: 100
     _moveSpeed: 10
@@ -649,10 +653,10 @@ MonoBehaviour:
     _animAttackTime: 1
     _detectionRadius: 20
     _typeAttack: 1
+    _aimObject: {fileID: 0}
     _currentWaypointIndex: 0
     _wayToAim: []
-    _unitType: 1
-  _view: {fileID: 7933941872836951361}
+  <View>k__BackingField: {fileID: 7933941872836951361}
 --- !u!114 &7933941872836951361
 MonoBehaviour:
   m_ObjectHideFlags: 0

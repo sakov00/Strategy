@@ -83,8 +83,7 @@ namespace _Project.Scripts.GameObjects.Characters
             _fightObjectModel.AimObject.ObjectModel.CurrentHealth -= _fightObjectModel.DamageAmount;
             if (_fightObjectModel.AimObject.ObjectModel.CurrentHealth <= 0)
             {
-                _objectsRegistry.Unregister(_fightObjectModel.AimObject);
-                Object.Destroy(_fightObjectModel.AimObject.ObjectModel.Transform.gameObject);
+                _fightObjectModel.AimObject.ReturnToPool();
                 //_fightObjectModel.AimObject.ObjectModel.Transform.gameObject.SetActive(false);
             }
         }

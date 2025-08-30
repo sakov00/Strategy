@@ -9,6 +9,7 @@ using _Project.Scripts.GameObjects.BuildingZone;
 using _Project.Scripts.GameObjects.EnemyRoads;
 using _Project.Scripts.GameObjects.Environment;
 using _Project.Scripts.GameObjects.Units.Unit;
+using _Project.Scripts.Interfaces;
 using _Project.Scripts.Interfaces.Model;
 using UniRx;
 using VContainer;
@@ -55,15 +56,7 @@ namespace _General.Scripts.Services
         
         public void ResetLevel()
         {
-            foreach (var obj in _objectsRegistry.GetTypedList<ObjectController>())
-                obj.ClearData();
-            foreach (var obj in _objectsRegistry.GetTypedList<EnvironmentController>())
-                obj.ClearData();
-            foreach (var obj in _objectsRegistry.GetTypedList<TerrainController>())
-                obj.ClearData();
-            foreach (var obj in _objectsRegistry.GetTypedList<EnemyRoad>())
-                obj.ClearData();
-            foreach (var obj in _objectsRegistry.GetTypedList<BuildingZoneController>())
+            foreach (var obj in _objectsRegistry.GetTypedList<IClearData>())
                 obj.ClearData();
             
             foreach (var spawn in _objectsRegistry.GetTypedList<EnemyRoad>())

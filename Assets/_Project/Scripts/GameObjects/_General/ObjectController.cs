@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.GameObjects._General
 {
-    public abstract class ObjectController: MonoBehaviour, IJsonSerializable
+    public abstract class ObjectController: MonoBehaviour, IJsonSerializable, IClearData
     {
         public abstract ObjectModel ObjectModel { get; }
         public abstract ObjectView ObjectView { get; }
@@ -31,7 +31,7 @@ namespace _Project.Scripts.GameObjects._General
         
         public abstract ObjectJson GetJsonData();
         public abstract void SetJsonData(ObjectJson json);
-
         public abstract void ClearData();
+        public abstract void ReturnToPool();
     }
 }

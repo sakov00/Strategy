@@ -7,7 +7,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.TowerDefence
 {
-    public class TowerDefenceController : BuildController, IJsonSerializable
+    public class TowerDefenceController : BuildController
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
         

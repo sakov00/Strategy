@@ -7,6 +7,7 @@ using _General.Scripts.AllAppData;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Units.Unit;
+using _Project.Scripts.Interfaces;
 using _Project.Scripts.Pools;
 using TMPro;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
 {
     [Serializable]
     [RequireComponent(typeof(SplineContainer))]
-    public class EnemyRoad : MonoBehaviour
+    public class EnemyRoad : MonoBehaviour, IClearData
     {
         [Inject] private CharacterPool _characterPool;
         [Inject] private ObjectsRegistry _objectsRegistry;
@@ -106,7 +107,11 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
 
         public void RefreshInfoRound()
         {
-            for (int i = 0; i < Enum.GetValues(typeof(CharacterType)).Length; i++)
+            var enemyValues = Enum.GetValues(typeof(CharacterType))
+                .Cast<CharacterType>()
+                .Where(e => e.ToString().Contains("Enemy"))
+                .ToArray();
+            for (int i = 0; i < enemyValues.Length; i++)
             {
                 var countEnemy = _roundEnemyList[AppData.LevelData.CurrentRound].enemies.Count(x => (int)x.enemyType == i);
                 if (countEnemy > 0)

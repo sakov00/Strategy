@@ -9,7 +9,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Environment
 {
-    public class EnvironmentController : MonoBehaviour, IJsonSerializable
+    public class EnvironmentController : MonoBehaviour, IJsonSerializable, IClearData
     {
         [SerializeField] protected EnvironmentType _environmentType;
         

@@ -1,4 +1,4 @@
-using _Project.Scripts.GameObjects.Camera;
+using _Project.Scripts.GameObjects.CameraLogic;
 using LunarConsolePlugin;
 using UnityEngine;
 

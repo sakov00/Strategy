@@ -5,7 +5,7 @@ using _Project.Scripts.Interfaces;
 
 namespace _Project.Scripts.GameObjects.Units.Friends.ArcherFriend
 {
-    public class ArcherFriendController : UnitController, IJsonSerializable
+    public class ArcherFriendController : UnitController
     {
         public override ObjectJson GetJsonData()
         {

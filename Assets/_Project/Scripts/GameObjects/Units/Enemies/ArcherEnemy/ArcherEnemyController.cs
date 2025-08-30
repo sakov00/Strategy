@@ -4,7 +4,7 @@ using _Project.Scripts.Interfaces;
 
 namespace _Project.Scripts.GameObjects.Units.Enemies.ArcherEnemy
 {
-    public class ArcherEnemyController : UnitController, IJsonSerializable
+    public class ArcherEnemyController : UnitController
     {
         public override ObjectJson GetJsonData()
         {

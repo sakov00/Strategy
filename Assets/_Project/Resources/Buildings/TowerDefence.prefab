@@ -205,6 +205,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3051673704465281501, guid: da2995be65c8587409412355901303e9,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472366080170231760, guid: da2995be65c8587409412355901303e9,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -293,7 +303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: cca984cd424bf894885bfe0366683315,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f91b323622c1f224d9b3fc0b19b1f9c9, type: 2}
     - target: {fileID: 919132149155446097, guid: cca984cd424bf894885bfe0366683315,
@@ -375,8 +385,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705c1891a90d49f6b2ca8f92240ba879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <BuildType>k__BackingField: 1
   _model:
     _warSide: 0
+    _delayRegeneration: 3
+    _regenerateHealthInSecond: 5
     _maxHealth: 500
     _currentHealth: 500
     _priceList: 030000000300000004000000040000000500000005000000
@@ -387,6 +400,7 @@ MonoBehaviour:
     _animAttackTime: 1
     _detectionRadius: 20
     _typeAttack: 1
+    _aimObject: {fileID: 0}
   _view: {fileID: 1645033017326533800}
 --- !u!114 &1645033017326533800
 MonoBehaviour:

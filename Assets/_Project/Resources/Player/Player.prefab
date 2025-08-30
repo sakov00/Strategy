@@ -90,6 +90,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -111,6 +116,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -201,6 +207,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -222,6 +233,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -283,9 +295,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c37846a98243adba2b7631d8bc2944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _model:
+  <Model>k__BackingField:
     _warSide: 0
-    _regenerateHealthInSecond: 10
+    _delayRegeneration: 3
+    _regenerateHealthInSecond: 5
     _maxHealth: 100
     _currentHealth: 100
     _moveSpeed: 10
@@ -297,7 +310,8 @@ MonoBehaviour:
     _animAttackTime: 1
     _detectionRadius: 20
     _typeAttack: 1
-  _view: {fileID: 4816044730722103744}
+    _aimObject: {fileID: 0}
+  <View>k__BackingField: {fileID: 4816044730722103744}
 --- !u!114 &4816044730722103744
 MonoBehaviour:
   m_ObjectHideFlags: 0

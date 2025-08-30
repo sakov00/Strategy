@@ -33,9 +33,12 @@ namespace _Project.Scripts.GameObjects.Units.Unit
             _unitMovementSystem = new UnitMovementSystem(Model, View, transform);
             _detectionAim = new DetectionAim(Model, transform);
             _damageSystem = new DamageSystem(Model, View, transform);
-            
-            if(Model.WarSide == WarSide.Friend)
+
+            if (Model.WarSide == WarSide.Friend)
+            {
+                Model.WayToAim = new List<Vector3> {transform.position};
                 _regenerationHpSystem = new RegenerationHPSystem(Model, View);
+            }
         }
 
         protected override void FixedUpdate()
