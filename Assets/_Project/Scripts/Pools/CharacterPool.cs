@@ -29,6 +29,8 @@ namespace _Project.Scripts.Pools
             if (character != null)
             {
                 _availableCharacters.Remove(character);
+                character.transform.position = position;
+                character.transform.rotation = rotation;
                 character.gameObject.SetActive(true);
             }
             else
@@ -36,6 +38,7 @@ namespace _Project.Scripts.Pools
                 character = _characterFactory.CreateCharacter(characterType, position, rotation);
             }
 
+            character.transform.SetParent(null);
             _objectsRegistry.Register(character);
             return character;
         }
@@ -46,6 +49,8 @@ namespace _Project.Scripts.Pools
             if (character != null)
             {
                 _availableCharacters.Remove(character);
+                character.transform.position = position;
+                character.transform.rotation = rotation;
                 character.gameObject.SetActive(true);
             }
             else
@@ -53,6 +58,7 @@ namespace _Project.Scripts.Pools
                 character = _characterFactory.CreateCharacter<T>(position, rotation);
             }
 
+            character.transform.SetParent(null);
             _objectsRegistry.Register(character);
             return character;
         }
@@ -64,6 +70,8 @@ namespace _Project.Scripts.Pools
             if (character != null)
             {
                 _availableCharacters.Remove(character);
+                character.transform.position = position;
+                character.transform.rotation = rotation;
                 character.gameObject.SetActive(true);
             }
             else
@@ -71,6 +79,7 @@ namespace _Project.Scripts.Pools
                 character = _characterFactory.CreateCharacter<T>(characterType, position, rotation);
             }
 
+            character.transform.SetParent(null);
             _objectsRegistry.Register(character);
             return character;
         }

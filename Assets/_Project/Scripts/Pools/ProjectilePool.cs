@@ -24,19 +24,22 @@ namespace _Project.Scripts.Pools
         
         public Projectile Get(ProjectileType projectileType, Vector3 position = default, Quaternion rotation = default) 
         {
-            var character = _availableProjectiles.FirstOrDefault(c => c.ProjectileType == projectileType);
-            if (character != null)
+            var projectile = _availableProjectiles.FirstOrDefault(c => c.ProjectileType == projectileType);
+            if (projectile != null)
             {
-                _availableProjectiles.Remove(character);
-                character.gameObject.SetActive(true);
+                _availableProjectiles.Remove(projectile);
+                projectile.transform.position = position;
+                projectile.transform.rotation = rotation;
+                projectile.gameObject.SetActive(true);
             }
             else
             {
-                character = _projectileFactory.CreateProjectile(projectileType, position, rotation);
+                projectile = _projectileFactory.CreateProjectile(projectileType, position, rotation);
             }
 
-            _objectsRegistry.Register(character);
-            return character;
+            projectile.transform.SetParent(null);
+            _objectsRegistry.Register(projectile);
+            return projectile;
         }
         
         public T Get<T>(Vector3 position = default, Quaternion rotation = default) where T : Projectile
@@ -46,6 +49,8 @@ namespace _Project.Scripts.Pools
             if (projectile != null)
             {
                 _availableProjectiles.Remove(projectile);
+                projectile.transform.position = position;
+                projectile.transform.rotation = rotation;
                 projectile.gameObject.SetActive(true);
             }
             else
@@ -53,6 +58,7 @@ namespace _Project.Scripts.Pools
                 projectile = _projectileFactory.CreateProjectile<T>(position, rotation);
             }
             
+            projectile.transform.SetParent(null);
             _objectsRegistry.Register(projectile);
             return projectile;
         }

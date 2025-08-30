@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using _General.Scripts.Json;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Characters;
 using _Project.Scripts.GameObjects.Characters.Unit;
 using _Project.Scripts.GameObjects.Units.Character;
-using _Project.Scripts.Interfaces;
 using UnityEngine;
 using VContainer;
 

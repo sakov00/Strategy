@@ -28,6 +28,8 @@ namespace _Project.Scripts.Pools
             if (build != null)
             {
                 _availableBuilds.Remove(build);
+                build.transform.position = position;
+                build.transform.rotation = rotation;
                 build.gameObject.SetActive(true);
             }
             else
@@ -35,6 +37,7 @@ namespace _Project.Scripts.Pools
                 build = _buildFactory.CreateBuild<T>(position, rotation);
             }
             
+            build.transform.SetParent(null);
             _objectsRegistry.Register(build);
             return build;
         }

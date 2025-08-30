@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using _General.Scripts._VContainer;
-using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._General;
 using _Project.Scripts.Pools;
@@ -23,28 +20,38 @@ namespace _Project.Scripts.GameObjects.Projectiles
         private void Start()
         {
             InjectManager.Inject(this);
-            Invoke(nameof(ReturnToPool), 5f);
         }
 
-        private void ReturnToPool()
+        private void OnEnable()
         {
-            _projectilePool.Return(this);
+            CancelInvoke(nameof(ReturnToPool));
+            Invoke(nameof(ReturnToPool), 5f);
         }
 
         private void OnTriggerEnter(Collider other)
         {
             var target = other.GetComponent<ObjectController>();
 
-            if (target == null || target.ObjectModel.WarSide == _ownerWarSide)
-                return;
-
-            target.ObjectModel.CurrentHealth -= _damage;
-
-            if (target.ObjectModel.CurrentHealth <= 0)
+            if (target != null && target.ObjectModel.WarSide != _ownerWarSide)
             {
-                target.ReturnToPool();
+                target.ObjectModel.CurrentHealth -= _damage;
+                ReturnToPool();
+                if (target.ObjectModel.CurrentHealth <= 0)
+                {
+                    target.ReturnToPool();
+                }
+            }
+            else if (target != null)
+            {
+                return;
             }
 
+            ReturnToPool();
+        }
+
+        private void ReturnToPool()
+        {
+            CancelInvoke(nameof(ReturnToPool));
             _projectilePool.Return(this);
         }
     }
