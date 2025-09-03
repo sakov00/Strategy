@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using _Project.Scripts.GameObjects.Characters.Unit;
 using _Project.Scripts.GameObjects.Projectiles;
 using UnityEngine;
 

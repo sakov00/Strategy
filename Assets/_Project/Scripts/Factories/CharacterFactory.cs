@@ -2,8 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _General.Scripts.Json;
 using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects.Characters;
-using _Project.Scripts.GameObjects.Units.Character;
+using _Project.Scripts.GameObjects._Object.Characters.Character;
 using _Project.Scripts.SO;
 using UnityEngine;
 using VContainer;
@@ -19,7 +18,7 @@ namespace _Project.Scripts.Factories
         public MyCharacterController CreateCharacter(CharacterType type, Vector3 position = default, Quaternion rotation = default)
         {
             var prefab = _characterPrefabConfig.allCharacterPrefabs
-                .FirstOrDefault(p => p.CharacterType == type);
+                .FirstOrDefault(p => p.CharacterModel.CharacterType == type);
 
             return prefab != null ? _resolver.Instantiate(prefab, position, rotation) : null;
         }
@@ -35,7 +34,7 @@ namespace _Project.Scripts.Factories
         public T CreateCharacter<T>(CharacterType type, Vector3 position = default, Quaternion rotation = default) where T : MyCharacterController
         {
             var prefab = _characterPrefabConfig.allCharacterPrefabs
-                .FirstOrDefault(p => p.CharacterType == type && p is T);
+                .FirstOrDefault(p => p.CharacterModel.CharacterType == type && p is T);
 
             if (prefab == null)
             {

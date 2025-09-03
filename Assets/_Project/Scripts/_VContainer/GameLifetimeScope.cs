@@ -38,7 +38,7 @@ namespace _Project.Scripts._VContainer
             
             builder.RegisterInstance(_gameManager).AsSelf();
             builder.Register<ResetLevelService>(Lifetime.Singleton).AsSelf().As<IInitializable>();
-            builder.Register<LevelSaveLoadService>(Lifetime.Singleton).AsSelf();
+            builder.Register<SaveLoadProgressService>(Lifetime.Singleton).AsSelf();
             builder.Register<JsonLoader>(Lifetime.Singleton).AsSelf();
             
             RegisterWindows(builder);
@@ -72,7 +72,7 @@ namespace _Project.Scripts._VContainer
             builder.Register<BuildFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<ProjectileFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<CharacterFactory>(Lifetime.Singleton).AsSelf();
-            builder.Register<LevelFactory>(Lifetime.Singleton).AsSelf();
+            builder.Register<EnvironmentFactory>(Lifetime.Singleton).AsSelf();
         }
         
         private void RegisterSO(IContainerBuilder builder)

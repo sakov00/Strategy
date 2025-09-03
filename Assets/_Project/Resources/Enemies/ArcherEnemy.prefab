@@ -637,13 +637,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4780709950543018e82687eb8558690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.Units.Enemies.ArcherEnemy.ArcherEnemyController
-  <CharacterType>k__BackingField: 4
   <Model>k__BackingField:
     _warSide: 1
     _delayRegeneration: 3
     _regenerateHealthInSecond: 5
     _maxHealth: 100
     _currentHealth: 100
+    <CharacterType>k__BackingField: 4
     _moveSpeed: 10
     _rotationSpeed: 10
     _gravity: -20

@@ -5,8 +5,8 @@ using _General.Scripts.Services;
 using _General.Scripts.UI.Windows;
 using _General.Scripts.UI.Windows.GameWindow;
 using _Project.Scripts.Factories;
+using _Project.Scripts.GameObjects._Object.Characters.Friends.Player;
 using _Project.Scripts.GameObjects.EnemyRoads;
-using _Project.Scripts.GameObjects.Units.Friends.Player;
 using _Project.Scripts.Pools;
 using _Project.Scripts.Services;
 using Cysharp.Threading.Tasks;
@@ -22,13 +22,12 @@ namespace _Project.Scripts
         [SerializeField] private Transform _characterPoolContainer;
         [SerializeField] private Transform _projectilePoolContainer;
         
-        [Inject] private LevelSaveLoadService _levelSaveLoadService;
+        [Inject] private SaveLoadProgressService _saveLoadProgressService;
         [Inject] private WindowsManager _windowsManager;
         [Inject] private ObjectsRegistry _objectsRegistry;
         [Inject] private BuildPool _buildPool;
         [Inject] private CharacterPool _characterPool;
         [Inject] private ProjectilePool _projectilePool;
-        
         
         public void Start()
         {
@@ -45,17 +44,17 @@ namespace _Project.Scripts
 
         public async UniTask StartLevel(int levelIndex)
         {
-            await _levelSaveLoadService.LoadLevel(levelIndex);
+            await _saveLoadProgressService.LoadLevel(levelIndex);
         }
         
         public void SaveLevel(int levelIndex)
         {
-            _levelSaveLoadService.SaveLevel(levelIndex);
+            _saveLoadProgressService.SaveLevel(levelIndex);
         }
         
         public void NextRound()
         {
-            foreach (var spawnPoint in _objectsRegistry.GetTypedList<EnemyRoad>())
+            foreach (var spawnPoint in _objectsRegistry.GetTypedList<EnemyRoadController>())
             {
                 spawnPoint.StartSpawn();
             }

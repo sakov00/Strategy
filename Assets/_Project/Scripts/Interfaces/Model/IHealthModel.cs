@@ -2,7 +2,7 @@ using _Project.Scripts.Enums;
 
 namespace _Project.Scripts.Interfaces.Model
 {
-    public interface IHealthModel : IPositionedModel
+    public interface IHealthModel
     {
         public WarSide WarSide { get; }
         public float DelayRegeneration { get; }

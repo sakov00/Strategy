@@ -5,8 +5,8 @@ using _General.Scripts.UI.Windows.PauseWindow;
 using _General.Scripts.UI.Windows.WinWindow;
 using _Project.Scripts;
 using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects.Characters.Unit;
-using _Project.Scripts.GameObjects.Units.Unit;
+using _Project.Scripts.GameObjects._Object.Characters.Character;
+using _Project.Scripts.GameObjects._Object.Characters.Unit;
 using UniRx;
 using UnityEngine;
 using VContainer;
@@ -80,7 +80,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
 
         private void AllEnemiesDestroyed()
         {
-            if (_objectsRegistry.GetTypedList<UnitController>().Any(x => x.ObjectModel.WarSide == WarSide.Enemy)) 
+            if (_objectsRegistry.GetTypedList<UnitController>().Any(x => x.Model.WarSide == WarSide.Enemy)) 
                 return;
 
             _model.IsNextRoundAvailable = true;

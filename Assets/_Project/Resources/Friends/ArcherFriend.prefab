@@ -242,13 +242,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb99891082984701b85236acf62e1004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.Units.Friends.ArcherFriend.ArcherFriendController
-  <CharacterType>k__BackingField: 3
   <Model>k__BackingField:
     _warSide: 0
     _delayRegeneration: 3
     _regenerateHealthInSecond: 5
     _maxHealth: 100
     _currentHealth: 100
+    <CharacterType>k__BackingField: 3
     _moveSpeed: 10
     _rotationSpeed: 10
     _gravity: -20

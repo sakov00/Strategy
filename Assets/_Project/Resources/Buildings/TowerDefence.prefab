@@ -385,23 +385,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705c1891a90d49f6b2ca8f92240ba879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <BuildType>k__BackingField: 1
-  _model:
+  <Model>k__BackingField:
     _warSide: 0
     _delayRegeneration: 3
     _regenerateHealthInSecond: 5
-    _maxHealth: 500
-    _currentHealth: 500
-    _priceList: 030000000300000004000000040000000500000005000000
+    _maxHealth: 100
+    _currentHealth: 100
+    <BuildType>k__BackingField: 1
+    _priceList: 00000000
     _currentLevel: 0
     _attackRange: 20
-    _damageAmount: 25
+    _damageAmount: 10
     _allAnimAttackTime: 1
     _animAttackTime: 1
     _detectionRadius: 20
     _typeAttack: 1
     _aimObject: {fileID: 0}
-  _view: {fileID: 1645033017326533800}
+  <View>k__BackingField: {fileID: 1645033017326533800}
 --- !u!114 &1645033017326533800
 MonoBehaviour:
   m_ObjectHideFlags: 0

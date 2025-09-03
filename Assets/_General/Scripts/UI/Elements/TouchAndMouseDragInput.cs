@@ -1,5 +1,5 @@
 using _General.Scripts._GlobalLogic;
-using _Project.Scripts.Interfaces.Controller;
+using _Project.Scripts.Interfaces;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -48,7 +48,7 @@ namespace _General.Scripts.UI.Elements
                 var ray = GlobalObjects.CameraController.CurrentCamera.ScreenPointToRay(Input.mousePosition);
                 if (!Physics.Raycast(ray, out RaycastHit hit)) return;
                 
-                if (hit.collider.TryGetComponent<IBuyController>(out var upgradeable))
+                if (hit.collider.TryGetComponent<IBuy>(out var upgradeable))
                 {
                     upgradeable.TryBuy().Forget();
                 }
@@ -88,7 +88,7 @@ namespace _General.Scripts.UI.Elements
                 var ray = GlobalObjects.CameraController.CurrentCamera.ScreenPointToRay(touch.position);
                 if (!Physics.Raycast(ray, out RaycastHit hit)) return;
 
-                if (hit.collider.TryGetComponent<IBuyController>(out var upgradeable))
+                if (hit.collider.TryGetComponent<IBuy>(out var upgradeable))
                 {
                     upgradeable.TryBuy().Forget();
                 }

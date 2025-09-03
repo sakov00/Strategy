@@ -128,18 +128,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d530c249e5cd4e19b6a03fa3cfea2dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <BuildType>k__BackingField: 2
-  _model:
+  <Model>k__BackingField:
     _warSide: 0
     _delayRegeneration: 3
     _regenerateHealthInSecond: 5
-    _maxHealth: 1000
-    _currentHealth: 1000
-    _priceList: 040000000400000005000000050000000600000006000000
+    _maxHealth: 100
+    _currentHealth: 100
+    <BuildType>k__BackingField: 2
+    _priceList: 00000000
     _currentLevel: 0
     _characterType: 1
     _buildUnits: []
-  _view: {fileID: 4564933277160738802}
+  <View>k__BackingField: {fileID: 4564933277160738802}
 --- !u!114 &4564933277160738802
 MonoBehaviour:
   m_ObjectHideFlags: 0

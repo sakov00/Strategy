@@ -1,0 +1,134 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using _General.Scripts._GlobalLogic;
+using _General.Scripts._VContainer;
+using _General.Scripts.AllAppData;
+using _General.Scripts.Interfaces;
+using _General.Scripts.Registries;
+using _Project.Scripts.Enums;
+using _Project.Scripts.GameObjects._Object.Characters.Unit;
+using _Project.Scripts.Interfaces;
+using _Project.Scripts.Pools;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Splines;
+using VContainer;
+using Random = UnityEngine.Random;
+
+namespace _Project.Scripts.GameObjects.EnemyRoads
+{
+    [Serializable]
+    [RequireComponent(typeof(SplineContainer))]
+    public class EnemyRoadController : MonoBehaviour, ISavableController, IClearData
+    {
+        [Inject] private CharacterPool _characterPool;
+        [Inject] private ObjectsRegistry _objectsRegistry;
+
+        [SerializeField] private SplineContainer _splineContainer = new();
+        [field:SerializeField] public EnemyRoadModel Model {get; private set;}
+        [field:SerializeField] public EnemyRoadView View {get; private set;}
+
+        private List<EnemyWithTime> _currentEnemyList;
+        
+        private void OnValidate()
+        {
+            _splineContainer ??= GetComponent<SplineContainer>();
+        }
+        
+        private void Start()
+        {
+            InjectManager.Inject(this);
+            _objectsRegistry.Register(this);
+
+            foreach (var knot in _splineContainer.Spline)
+            {
+                var localPosition = knot.Position;
+                var worldPosition = _splineContainer.transform.TransformPoint(localPosition);
+                Model.WorldPositions.Add(worldPosition);
+            }
+            
+            View.Initialize();
+            View.RefreshInfoRound(_splineContainer, Model.RoundEnemyList);
+        }
+        
+        public ISavableModel GetSavableModel()
+        {
+            Model.Position = transform.position;
+            Model.Rotation = transform.rotation;
+            return Model;
+        }
+        
+        public void SetSavableModel(ISavableModel savableModel)
+        {
+            if (savableModel is EnemyRoadModel buildingZoneModel)
+            {
+                Model = buildingZoneModel;
+            }
+        }
+
+        public void StartSpawn()
+        {
+            int currentRound = AppData.LevelData.CurrentRound;
+            if (currentRound >= Model.RoundEnemyList.Count)
+            {
+                Debug.LogWarning("Нет настроек для текущего раунда спавна.");
+                return;
+            }
+
+            _currentEnemyList = Model.RoundEnemyList[currentRound].enemies;
+            _currentEnemyList.Sort((a, b) => a.time.CompareTo(b.time));
+            Model.CurrentIndex = 0;
+            Model.ElapsedTime = 0f;
+
+            GameTimer.I.OnEverySecond -= Tick;
+            GameTimer.I.OnEverySecond += Tick;
+        }
+
+        private void Tick()
+        {
+            Model.ElapsedTime += 1f;
+
+            while (Model.CurrentIndex < _currentEnemyList.Count && Model.ElapsedTime >= _currentEnemyList[Model.CurrentIndex].time)
+            {
+                Spawn(_currentEnemyList[Model.CurrentIndex]);
+                Model.CurrentIndex++;
+            }
+
+            if (Model.CurrentIndex >= _currentEnemyList.Count)
+            {
+                GameTimer.I.OnEverySecond -= Tick;
+            }
+        }
+
+        private void Spawn(EnemyWithTime enemyData)
+        {
+            var offsetX = Random.Range(-5f, 5f);
+            var wayPoints = new List<Vector3>();
+            foreach (var position in Model.WorldPositions)
+            {
+                wayPoints.Add(position + new Vector3(offsetX, 0f, 0f));
+            }
+            var enemyController = _characterPool.Get<UnitController>(enemyData.enemyType, wayPoints[0]);
+            enemyController.Model.WayToAim = wayPoints;
+        }
+        
+        public void RefreshInfoRound() => View.RefreshInfoRound(_splineContainer, Model.RoundEnemyList);
+
+        private void OnDestroy()
+        {
+            GameTimer.I.OnEverySecond -= Tick;
+            ClearData();
+        }
+        
+        public void ClearData()
+        {
+            _objectsRegistry.Unregister(this);
+        }
+
+        public void DestroyObject()
+        {
+            Destroy(gameObject);
+        }
+    }
+}

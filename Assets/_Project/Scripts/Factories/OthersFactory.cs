@@ -1,5 +1,5 @@
 using _General.Scripts.Registries;
-using _Project.Scripts.GameObjects.BuildingZone;
+using _Project.Scripts.GameObjects._Object.BuildingZone;
 using _Project.Scripts.SO;
 using UnityEngine;
 using VContainer;
@@ -14,7 +14,7 @@ namespace _Project.Scripts.Factories
         
         [Inject] private ObjectsRegistry _objectsRegistry;
         
-        public BuildingZoneController CreateBuildingZone(Vector3 position = default, Quaternion rotation = default)
+        public BuildingZone CreateBuildingZone(Vector3 position = default, Quaternion rotation = default)
         {
             var buildingZoneController = _resolver.Instantiate(_othersPrefabConfig.buildingZonePrefab, position, rotation);
             return buildingZoneController;

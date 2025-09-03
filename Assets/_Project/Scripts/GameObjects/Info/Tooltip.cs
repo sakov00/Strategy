@@ -9,10 +9,10 @@ namespace _Project.Scripts.GameObjects.Info
         [SerializeField] private TextMeshPro _currentLvlText;
         [SerializeField] private TextMeshPro _costNextLvlText;
 
-        public void UpdateTooltip(int currentLvl, int costUpgrade)
+        public void UpdateTooltip(int? currentLvl, int? costUpgrade)
         {
-            _currentLvlText.text = $"LVL:{currentLvl}";
-            _costNextLvlText.text = $"Price:{costUpgrade}$";
+            _currentLvlText.text = currentLvl != null ? $"LVL:{currentLvl}" : "LVL:MAX$";
+            _costNextLvlText.text = costUpgrade != null ? $"Price:{costUpgrade}$" : "Price:MAX$";
             TooltipLookAtCamera();
         }
         

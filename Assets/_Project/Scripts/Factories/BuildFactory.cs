@@ -3,6 +3,7 @@ using System.Linq;
 using _General.Scripts.Json;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects;
+using _Project.Scripts.GameObjects._Object;
 using _Project.Scripts.SO;
 using UnityEngine;
 using VContainer;
@@ -30,7 +31,7 @@ namespace _Project.Scripts.Factories
         public BuildController CreateBuild(BuildType buildType, Vector3 position = default, Quaternion rotation = default)
         {
             var prefab = _buildingPrefabConfig.allBuildPrefabs
-                .FirstOrDefault(p => p.BuildType == buildType);
+                .FirstOrDefault(p => p.BuildModel.BuildType == buildType);
 
             return prefab != null ? _resolver.Instantiate(prefab, position, rotation) : null;
         }
@@ -38,7 +39,7 @@ namespace _Project.Scripts.Factories
         public BuildModel GetBuildModel(BuildType buildType)
         {
             var prefab = _buildingPrefabConfig.allBuildPrefabs
-                .FirstOrDefault(p => p.BuildType == buildType);
+                .FirstOrDefault(p => p.BuildModel.BuildType == buildType);
 
             return prefab != null ? prefab.BuildModel : null;
         }

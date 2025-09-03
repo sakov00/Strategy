@@ -4,7 +4,7 @@ using System.Linq;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
-using _Project.Scripts.GameObjects.Units.Character;
+using _Project.Scripts.GameObjects._Object.Characters.Character;
 using UnityEngine;
 using VContainer;
 
@@ -25,13 +25,14 @@ namespace _Project.Scripts.Pools
 
         public MyCharacterController Get(CharacterType characterType, Vector3 position = default, Quaternion rotation = default) 
         {
-            var character = _availableCharacters.FirstOrDefault(c => c.CharacterType == characterType);
+            var character = _availableCharacters.FirstOrDefault(c => c.CharacterModel.CharacterType == characterType);
             if (character != null)
             {
                 _availableCharacters.Remove(character);
                 character.transform.position = position;
                 character.transform.rotation = rotation;
                 character.gameObject.SetActive(true);
+                character.Initialize();
             }
             else
             {
@@ -66,7 +67,7 @@ namespace _Project.Scripts.Pools
         public T Get<T>(CharacterType characterType, Vector3 position = default, Quaternion rotation = default) 
             where T : MyCharacterController
         {
-            var character = _availableCharacters.OfType<T>().FirstOrDefault(c => c.CharacterType == characterType);
+            var character = _availableCharacters.OfType<T>().FirstOrDefault(c => c.CharacterModel.CharacterType == characterType);
             if (character != null)
             {
                 _availableCharacters.Remove(character);

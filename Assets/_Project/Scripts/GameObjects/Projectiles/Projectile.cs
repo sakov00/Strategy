@@ -1,7 +1,7 @@
 using System;
 using _General.Scripts._VContainer;
 using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects._General;
+using _Project.Scripts.GameObjects._Object;
 using _Project.Scripts.Pools;
 using UnityEngine;
 using VContainer;
