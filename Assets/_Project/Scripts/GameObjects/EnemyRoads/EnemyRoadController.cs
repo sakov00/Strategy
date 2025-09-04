@@ -4,6 +4,8 @@ using System.Linq;
 using _General.Scripts._GlobalLogic;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
+using _General.Scripts.DTO;
+using _General.Scripts.Extentions;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
@@ -26,8 +28,9 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
         [Inject] private ObjectsRegistry _objectsRegistry;
 
         [SerializeField] private SplineContainer _splineContainer = new();
-        [field:SerializeField] public EnemyRoadModel Model {get; private set;}
-        [field:SerializeField] public EnemyRoadView View {get; private set;}
+        
+        [field:SerializeField] public EnemyRoadModel Model { get; private set; }
+        [field:SerializeField] public EnemyRoadView View { get; private set; }
 
         private List<EnemyWithTime> _currentEnemyList;
         
@@ -40,15 +43,17 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
         {
             InjectManager.Inject(this);
             _objectsRegistry.Register(this);
+            
+            Model.SplineContainerData = _splineContainer.ToData();
 
+            Model.WorldPositions.Clear();
             foreach (var knot in _splineContainer.Spline)
             {
-                var localPosition = knot.Position;
-                var worldPosition = _splineContainer.transform.TransformPoint(localPosition);
+                var worldPosition = _splineContainer.transform.TransformPoint(knot.Position);
                 Model.WorldPositions.Add(worldPosition);
             }
             
-            View.Initialize();
+            View.Initialize(_splineContainer);
             View.RefreshInfoRound(_splineContainer, Model.RoundEnemyList);
         }
         
@@ -64,6 +69,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
             if (savableModel is EnemyRoadModel buildingZoneModel)
             {
                 Model = buildingZoneModel;
+                _splineContainer.ApplyData(Model.SplineContainerData);
             }
         }
 

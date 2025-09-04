@@ -11,15 +11,11 @@ using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects._Object;
 using _Project.Scripts.GameObjects._Object.BuildingZone;
 using _Project.Scripts.GameObjects._Object.Characters.Character;
-using _Project.Scripts.GameObjects._Object.FriendsBuild;
-using _Project.Scripts.GameObjects._Object.MoneyBuild;
-using _Project.Scripts.GameObjects._Object.TowerDefence;
 using _Project.Scripts.GameObjects.EnemyRoads;
 using _Project.Scripts.GameObjects.LevelEnvironment.Terrain;
 using _Project.Scripts.Pools;
 using Cysharp.Threading.Tasks;
 using MemoryPack;
-using Unity.VisualScripting;
 using UnityEngine;
 using VContainer;
 
@@ -90,7 +86,7 @@ namespace _Redactor.Scripts.Services
                 // }
                 if (model is EnemyRoadModel enemyRoadModel)
                 {
-                    _environmentFactory.CreateRoads(levelIndex);
+                    savableController = _environmentFactory.CreateRoads(enemyRoadModel.Position, enemyRoadModel.Rotation);
                 }
                 if (model is BuildingZoneModel bindingZoneModel)
                 {

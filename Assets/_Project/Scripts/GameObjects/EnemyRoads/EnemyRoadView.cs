@@ -6,21 +6,26 @@ using _Project.Scripts.Enums;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Splines;
+using Object = UnityEngine.Object;
 
 namespace _Project.Scripts.GameObjects.EnemyRoads
 {
     public class EnemyRoadView : MonoBehaviour
     {
-        [SerializeField] private List<SplineAnimate> _splineAnimates;
+        [SerializeField] private SplineAnimate _animatePrefab = new();
         [SerializeField] private List<TextMeshPro> _enemyIcons;
         [SerializeField] private float _distanceBetweenIcons = 4;
         
-        public void Initialize()
+        public void Initialize(SplineContainer splineContainer)
         {
-            for (var i = 0; i < _splineAnimates.Count; i++)
+            var roadLength = splineContainer.Spline.GetLength();
+            var countAnimateObjects = roadLength / _distanceBetweenIcons;
+            for (int i = 0; i < countAnimateObjects; i++)
             {
-                var splineAnimate = _splineAnimates[i];
-                splineAnimate.StartOffset = i / (float)_splineAnimates.Count;
+                var splineAnimate = Instantiate(_animatePrefab, transform);
+                splineAnimate.Container = splineContainer;
+                splineAnimate.StartOffset = i / countAnimateObjects;
+                splineAnimate.Play();
             }
         }
         

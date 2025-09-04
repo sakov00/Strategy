@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _General.Scripts.DTO;
 using _General.Scripts.Interfaces;
 using _Project.Scripts.Enums;
 using MemoryPack;
@@ -16,6 +17,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
         public Vector3 Position { get; set; }
         public Quaternion Rotation { get; set; }
         
+        public SplineContainerData SplineContainerData { get; set; } = new();
         public List<Vector3> WorldPositions { get; set; } = new();
         public int CurrentIndex { get; set; }
         public float ElapsedTime { get; set; }

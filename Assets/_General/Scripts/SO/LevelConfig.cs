@@ -12,12 +12,6 @@ namespace _General.Scripts.SO
     {
         [SerializeField] public List<TerrainController> terrainControllers = new();
         [SerializeField] public List<EnvironmentController> environmentPrefabs = new();
-        [SerializeField] public List<LevelIndex> roadPrefabs = new();
-        
-        [Serializable]
-        public class LevelIndex
-        {
-            public List<EnemyRoadController> roads;
-        }
+        [SerializeField] public EnemyRoadController roadPrefab = new();
     }
 }

@@ -15,8 +15,5 @@ MonoBehaviour:
   terrainControllers:
   - {fileID: 8150207810336336586, guid: cf7d0713a791ec34c85886295f2bfd66, type: 3}
   environmentPrefabs: []
-  roadPrefabs:
-  - roads:
-    - {fileID: 8736972053758411058, guid: 4b84ea31d8d824e439a7508f62f16681, type: 3}
-    - {fileID: 4950854334057394265, guid: 078b9826d3289684eb3c442867c9f337, type: 3}
-    - {fileID: 6779291198023534625, guid: 45e0597555754e04bab6b77bfb9c8069, type: 3}
+  roadPrefab: {fileID: 1685506476759625920, guid: df8d665daa488034f889c1b9a52f7bfc,
+    type: 3}

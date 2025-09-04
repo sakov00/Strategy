@@ -33,12 +33,9 @@ namespace _Project.Scripts.Factories
             return _resolver.Instantiate(_levelsConfig.terrainControllers[levelIndex]);
         }
         
-        public void CreateRoads(int levelIndex)
+        public EnemyRoadController CreateRoads(Vector3 position = default, Quaternion rotation = default)
         {
-            foreach (var roadPrefab in _levelsConfig.roadPrefabs[levelIndex].roads)
-            {
-                _resolver.Instantiate(roadPrefab);
-            }
+            return _resolver.Instantiate(_levelsConfig.roadPrefab, position, rotation);
         }
     }
 }

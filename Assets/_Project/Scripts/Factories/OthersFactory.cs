@@ -16,8 +16,7 @@ namespace _Project.Scripts.Factories
         
         public BuildingZone CreateBuildingZone(Vector3 position = default, Quaternion rotation = default)
         {
-            var buildingZoneController = _resolver.Instantiate(_othersPrefabConfig.buildingZonePrefab, position, rotation);
-            return buildingZoneController;
+            return _resolver.Instantiate(_othersPrefabConfig.buildingZonePrefab, position, rotation);
         }
     }
 }
