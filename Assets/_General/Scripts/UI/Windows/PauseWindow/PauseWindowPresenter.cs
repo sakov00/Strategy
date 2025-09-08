@@ -3,23 +3,24 @@ using UniRx;
 using UnityEngine;
 using VContainer;
 
-namespace _General.Scripts.UI.Windows.WinWindow
+namespace _General.Scripts.UI.Windows.PauseWindow
 {
-    public class WinWindowViewModel : BaseWindowViewModel
+    public class PauseWindowPresenter : BaseWindowPresenter
     {
-        [SerializeField] private WinWindowModel _model;
-        
+        [SerializeField] private PauseWindowModel _model;
+        [SerializeField] private PauseWindowView _view;
         [Inject] private GameManager _gameManager;
         
         protected override BaseWindowModel BaseModel => _model;
-        
+        protected override BaseWindowView BaseView => _view;
+
         public ReactiveCommand HomeCommand { get; } = new();
         public ReactiveCommand RestartCommand { get; } = new();
         public ReactiveCommand ContinueCommand { get; } = new();
 
-        private void Awake()
+        protected override void Awake()
         {
-            IsPaused.Subscribe(PauseGame).AddTo(this);
+            base.Awake();
             HomeCommand.Subscribe(_ => HomeOnClick()).AddTo(this);
             RestartCommand.Subscribe(_ => RestartOnClick()).AddTo(this);
             ContinueCommand.Subscribe(_ => ContinueOnClick()).AddTo(this);
@@ -32,18 +33,12 @@ namespace _General.Scripts.UI.Windows.WinWindow
         private void RestartOnClick()
         {
             _gameManager.StartLevel(0);
-            WindowsManager.HideWindow<WinWindowView>();
+            WindowsManager.HideWindow<PauseWindowPresenter>();
         }
         
         private void ContinueOnClick()
         {
-            _gameManager.StartLevel(1);
-            WindowsManager.HideWindow<WinWindowView>();
-        }
-
-        private void PauseGame(bool isPaused)
-        {
-            Time.timeScale = isPaused ? 0 : 1;
+            WindowsManager.HideWindow<PauseWindowPresenter>();
         }
     }
 }

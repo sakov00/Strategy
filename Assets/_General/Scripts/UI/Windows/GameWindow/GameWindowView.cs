@@ -16,7 +16,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
         [Inject] private AppData _appData;
         
         [Header("Presenter")]
-        [SerializeField] private GameWindowViewModel _viewModel;
+        [SerializeField] private GameWindowPresenter _presenter;
 
         [Header("Buttons")]
         [SerializeField] private Button _openPauseMenuButton;
@@ -31,21 +31,21 @@ namespace _General.Scripts.UI.Windows.GameWindow
         [SerializeField] private Joystick _joystick;
         [SerializeField] private TouchAndMouseDragInput _touchAndMouseDragInput;
         
-        protected override BaseWindowViewModel BaseViewModel => _viewModel;
+        protected override BaseWindowPresenter BasePresenter => _presenter;
         
         private const string MoneyFormat = "Money: {0}";
         private const string RoundFormat = "Round: {0}";
 
         private void Start()
         {
-            _viewModel.OpenPauseWindowCommand.BindTo(_openPauseMenuButton).AddTo(this);
-            _viewModel.NextRoundCommand.BindTo(_nextRoundButton).AddTo(this);
-            _viewModel.IsNextRoundAvailable
+            _presenter.OpenPauseWindowCommand.BindTo(_openPauseMenuButton).AddTo(this);
+            _presenter.NextRoundCommand.BindTo(_nextRoundButton).AddTo(this);
+            _presenter.IsNextRoundAvailable
                 .Subscribe(isVisible => _nextRoundButton.gameObject.SetActive(isVisible))
                 .AddTo(this);
             
-            _viewModel.SetStrategyModeCommand.BindTo(_strategyModeButton).AddTo(this);
-            _viewModel.IsStrategyMode
+            _presenter.SetStrategyModeCommand.BindTo(_strategyModeButton).AddTo(this);
+            _presenter.IsStrategyMode
                 .Subscribe(isStrategy =>
                 {
                     _joystick.gameObject.SetActive(!isStrategy);
@@ -89,7 +89,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
 
         public void Reset()
         {
-            _viewModel.Reset();
+            _presenter.Reset();
         }
     }
 }

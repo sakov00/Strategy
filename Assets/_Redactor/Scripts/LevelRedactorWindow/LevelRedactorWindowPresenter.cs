@@ -7,14 +7,16 @@ using VContainer;
 
 namespace _Redactor.Scripts.LevelRedactorWindow
 {
-    public class LevelRedactorWindowViewModel : BaseWindowViewModel
+    public class LevelRedactorWindowPresenter : BaseWindowPresenter
     {
         [Inject] private RedactorManager _redactorManager;
         [Inject] private ObjectsRegistry _objectsRegistry;
-     
+
         [SerializeField] private LevelRedactorWindowModel _model;
+        [SerializeField] private LevelRedactorWindowView _view;
         protected override BaseWindowModel BaseModel => _model;
-        
+        protected override BaseWindowView BaseView => _view;
+
         public ReactiveCommand<int> SaveLevelCommand { get; } = new();
         public ReactiveCommand<int> LoadLevelCommand { get; } = new();
         public ReactiveCommand<int> PlayLevelCommand { get; } = new();

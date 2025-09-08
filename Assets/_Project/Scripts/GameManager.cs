@@ -18,33 +18,33 @@ namespace _Project.Scripts
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private Transform _buildPoolContainer;
-        [SerializeField] private Transform _characterPoolContainer;
-        [SerializeField] private Transform _projectilePoolContainer;
+        [SerializeField] protected Transform _buildPoolContainer;
+        [SerializeField] protected Transform _characterPoolContainer;
+        [SerializeField] protected Transform _projectilePoolContainer;
         
-        [Inject] private SaveLoadProgressService _saveLoadProgressService;
-        [Inject] private WindowsManager _windowsManager;
-        [Inject] private ObjectsRegistry _objectsRegistry;
-        [Inject] private BuildPool _buildPool;
-        [Inject] private CharacterPool _characterPool;
-        [Inject] private ProjectilePool _projectilePool;
+        [Inject] protected SaveLoadProgressService SaveLoadProgressService;
+        [Inject] protected WindowsManager WindowsManager;
+        [Inject] protected ObjectsRegistry ObjectsRegistry;
+        [Inject] protected BuildPool BuildPool;
+        [Inject] protected CharacterPool CharacterPool;
+        [Inject] protected ProjectilePool ProjectilePool;
         
-        public void Start()
+        public virtual void Start()
         {
             InjectManager.Inject(this);
             Application.targetFrameRate = 120;
-            _windowsManager.ShowWindow<GameWindowView>();
-            _buildPool.SetContainer(_buildPoolContainer);
-            _characterPool.SetContainer(_characterPoolContainer);
-            _projectilePool.SetContainer(_projectilePoolContainer);
-            var playerController = _characterPool.Get<PlayerController>(new Vector3(60, 1, 70));
+            WindowsManager.ShowWindow<GameWindowPresenter>();
+            BuildPool.SetContainer(_buildPoolContainer);
+            CharacterPool.SetContainer(_characterPoolContainer);
+            ProjectilePool.SetContainer(_projectilePoolContainer);
+            var playerController = CharacterPool.Get<PlayerController>(new Vector3(60, 1, 70));
             GlobalObjects.CameraController.CameraFollow.Init(GlobalObjects.CameraController.transform, playerController.transform);
             //StartLevel(0).Forget();
         }
 
-        public async UniTask StartLevel(int levelIndex)
+        public virtual async UniTask StartLevel(int levelIndex)
         {
-            await _saveLoadProgressService.LoadLevel(levelIndex);
+            await SaveLoadProgressService.LoadLevel(levelIndex);
         }
     }
 }

@@ -3,15 +3,18 @@ using UniRx;
 using UnityEngine;
 using VContainer;
 
-namespace _General.Scripts.UI.Windows.PauseWindow
+namespace _General.Scripts.UI.Windows.WinWindow
 {
-    public class PauseWindowViewModel : BaseWindowViewModel
+    public class WinWindowPresenter : BaseWindowPresenter
     {
-        [SerializeField] private PauseWindowModel _model;
         [Inject] private GameManager _gameManager;
         
-        protected override BaseWindowModel BaseModel => _model;
+        [SerializeField] private WinWindowModel _model;
+        [SerializeField] private WinWindowView _view;
         
+        protected override BaseWindowModel BaseModel => _model;
+        protected override BaseWindowView BaseView => _view;
+
         public ReactiveCommand HomeCommand { get; } = new();
         public ReactiveCommand RestartCommand { get; } = new();
         public ReactiveCommand ContinueCommand { get; } = new();
@@ -19,9 +22,15 @@ namespace _General.Scripts.UI.Windows.PauseWindow
         protected override void Awake()
         {
             base.Awake();
+            IsPaused.Subscribe(PauseGame).AddTo(this);
             HomeCommand.Subscribe(_ => HomeOnClick()).AddTo(this);
             RestartCommand.Subscribe(_ => RestartOnClick()).AddTo(this);
             ContinueCommand.Subscribe(_ => ContinueOnClick()).AddTo(this);
+        }
+
+        public void Initialize(bool isLevelWin)
+        {
+            
         }
         
         private void HomeOnClick()
@@ -30,13 +39,17 @@ namespace _General.Scripts.UI.Windows.PauseWindow
         
         private void RestartOnClick()
         {
-            _gameManager.StartLevel(0);
-            WindowsManager.HideWindow<PauseWindowView>();
+            WindowsManager.HideWindow<WinWindowPresenter>();
         }
         
         private void ContinueOnClick()
         {
-            WindowsManager.HideWindow<PauseWindowView>();
+            WindowsManager.HideWindow<WinWindowPresenter>();
+        }
+
+        private void PauseGame(bool isPaused)
+        {
+            Time.timeScale = isPaused ? 0 : 1;
         }
     }
 }

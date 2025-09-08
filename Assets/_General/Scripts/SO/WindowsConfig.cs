@@ -10,9 +10,9 @@ namespace _General.Scripts.SO
     [CreateAssetMenu(fileName = "WindowsConfig", menuName = "SO/Windows Config")]
     public class WindowsConfig : ScriptableObject, IInitializable
     {
-        [SerializeField] private List<BaseWindowView> windowsList = new();
+        [SerializeField] private List<BaseWindowPresenter> windowsList = new();
         
-        public Dictionary<Type, BaseWindowView> Windows;
+        public Dictionary<Type, BaseWindowPresenter> Windows;
         
         public void Initialize()
         {

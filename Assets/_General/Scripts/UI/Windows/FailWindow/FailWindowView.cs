@@ -7,18 +7,18 @@ namespace _General.Scripts.UI.Windows.FailWindow
     public class FailWindowView : BaseWindowView
     {
         [Header("Presenter")]
-        [SerializeField] private FailWindowViewModel _viewModel;
+        [SerializeField] private FailWindowPresenter _presenter;
 
         [Header("Buttons")]
         [SerializeField] private Button _homeButton;
         [SerializeField] private Button _restartButton;
 
-        protected override BaseWindowViewModel BaseViewModel => _viewModel;
+        protected override BaseWindowPresenter BasePresenter => _presenter;
         
         private void Start()
         {
-            _viewModel.HomeCommand.BindTo(_homeButton).AddTo(this);
-            _viewModel.RestartCommand.BindTo(_restartButton).AddTo(this);
+            _presenter.HomeCommand.BindTo(_homeButton).AddTo(this);
+            _presenter.RestartCommand.BindTo(_restartButton).AddTo(this);
         }
     }
 }

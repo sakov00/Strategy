@@ -91,7 +91,7 @@ namespace _Project.Scripts._VContainer
 
         private void RegisterServices(IContainerBuilder builder)
         {
-            builder.Register<ResetLevelService>(Lifetime.Singleton).AsSelf().As<IInitializable>();
+            builder.Register<ResetLevelService>(Lifetime.Singleton).AsSelf();
             builder.Register<SaveLoadProgressService>(Lifetime.Singleton).AsSelf();
             builder.Register<JsonLoader>(Lifetime.Singleton).AsSelf();
         }

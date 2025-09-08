@@ -9,7 +9,7 @@ namespace _Redactor.Scripts.LevelRedactorWindow
     public class LevelRedactorWindowView : BaseWindowView
     {
         [Header("Presenter")]
-        [SerializeField] private LevelRedactorWindowViewModel _viewModel;
+        [SerializeField] private LevelRedactorWindowPresenter _presenter;
         
         [Header("Dev")]
         [SerializeField] private Button _saveLevelButton;
@@ -17,16 +17,16 @@ namespace _Redactor.Scripts.LevelRedactorWindow
         [SerializeField] private Button _playLevelButton;
         [SerializeField] private TMP_InputField _selectLevelInputField;
         
-        protected override BaseWindowViewModel BaseViewModel => _viewModel;
+        protected override BaseWindowPresenter BasePresenter => _presenter;
 
         private void Start()
         {
             _saveLevelButton.gameObject.SetActive(true);
             _loadLevelButton.gameObject.SetActive(true);
             _selectLevelInputField.gameObject.SetActive(true);
-            _saveLevelButton.onClick.AddListener(() => _viewModel.SaveLevelCommand.Execute(int.Parse(_selectLevelInputField.text)));
-            _loadLevelButton.onClick.AddListener(() => _viewModel.LoadLevelCommand.Execute(int.Parse(_selectLevelInputField.text)));
-            _playLevelButton.onClick.AddListener(() => _viewModel.PlayLevelCommand.Execute(int.Parse(_selectLevelInputField.text)));
+            _saveLevelButton.onClick.AddListener(() => _presenter.SaveLevelCommand.Execute(int.Parse(_selectLevelInputField.text)));
+            _loadLevelButton.onClick.AddListener(() => _presenter.LoadLevelCommand.Execute(int.Parse(_selectLevelInputField.text)));
+            _playLevelButton.onClick.AddListener(() => _presenter.PlayLevelCommand.Execute(int.Parse(_selectLevelInputField.text)));
         }
         
         public override Tween Show()

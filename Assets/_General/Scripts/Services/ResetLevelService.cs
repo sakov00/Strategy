@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using _General.Scripts.AllAppData;
 using _General.Scripts.Registries;
@@ -10,11 +9,10 @@ using _Project.Scripts.GameObjects.EnemyRoads;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Pools;
 using VContainer;
-using VContainer.Unity;
 
 namespace _General.Scripts.Services
 {
-    public class ResetLevelService : IInitializable, IDisposable
+    public class ResetLevelService
     {
         [Inject] private AppData _appData;
         [Inject] private BuildPool _buildPool;
@@ -22,12 +20,7 @@ namespace _General.Scripts.Services
         [Inject] private ObjectsRegistry _objectsRegistry;
         [Inject] private WindowsManager _windowsManager;
         
-        public void Initialize()
-        {
-            _appData.LevelEvents.AllEnemiesKilled += ResetRound;
-        }
-        
-        private void ResetRound()
+        public void ResetRound()
         {
             foreach (var obj in _objectsRegistry.GetAllByInterface<ObjectController>())
             {
@@ -56,12 +49,7 @@ namespace _General.Scripts.Services
                 spawn.RefreshInfoRound();
             
             _objectsRegistry.Clear();
-            _windowsManager?.GetWindow<GameWindowView>()?.Reset();
-        }
-
-        public void Dispose()
-        {
-            _appData.LevelEvents.AllEnemiesKilled -= ResetRound;
+            _windowsManager?.GetWindow<GameWindowPresenter>()?.Reset();
         }
     }
 }

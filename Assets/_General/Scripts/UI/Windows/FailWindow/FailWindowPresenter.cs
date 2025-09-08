@@ -5,21 +5,24 @@ using VContainer;
 
 namespace _General.Scripts.UI.Windows.FailWindow
 {
-    public class FailWindowViewModel : BaseWindowViewModel
+    public class FailWindowPresenter : BaseWindowPresenter
     {
         [SerializeField] private FailWindowModel _model;
+        [SerializeField] private FailWindowView _view;
         
         [Inject] private GameManager _gameManager;
         
         protected override BaseWindowModel BaseModel => _model;
-        
+        protected override BaseWindowView BaseView => _view;
+
         public ReactiveCommand HomeCommand { get; } = new();
         public ReactiveCommand RestartCommand { get; } = new();
         
         
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             IsPaused.Subscribe(PauseGame).AddTo(this);
             HomeCommand.Subscribe(_ => HomeOnClick()).AddTo(this);
             RestartCommand.Subscribe(_ => RestartOnClick()).AddTo(this);
@@ -32,7 +35,7 @@ namespace _General.Scripts.UI.Windows.FailWindow
         private void RestartOnClick()
         {
             _gameManager.StartLevel(0);
-            WindowsManager.HideWindow<FailWindowView>();
+            WindowsManager.HideWindow<FailWindowPresenter>();
         }
 
         private void PauseGame(bool isPaused)

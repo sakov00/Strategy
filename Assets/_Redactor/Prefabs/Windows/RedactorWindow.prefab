@@ -907,6 +907,7 @@ MonoBehaviour:
     _windowType: 0
     _isPaused:
       value: 0
+  _view: {fileID: 6283936321557795076}
 --- !u!114 &6283936321557795076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,7 +921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Redactor.Scripts.GameWindow.LevelRedactorWindowView
   _canvasGroup: {fileID: 5061125597974301615}
-  _viewModel: {fileID: 105420395907749080}
+  _presenter: {fileID: 105420395907749080}
   _saveLevelButton: {fileID: 8767324863805646317}
   _loadLevelButton: {fileID: 4895236835939391761}
   _playLevelButton: {fileID: 8767324863805646317}

@@ -24,19 +24,30 @@ namespace _General.Scripts.UI.Windows
         [Inject] private IObjectResolver _resolver;
         [Inject] private WindowsConfig _windowsConfig;
         
-        private readonly Dictionary<Type, BaseWindowView> _cachedWindows = new ();
+        private readonly Dictionary<Type, BaseWindowPresenter> _cachedWindows = new ();
         
         public void Initialize()
         {
             InjectManager.Inject(this);
         }
         
-        public T GetWindow<T>() where T : BaseWindowView
+        public T GetWindow<T>() where T : BaseWindowPresenter
         {
             return _cachedWindows.TryGetValue(typeof(T), out var window) ? (T)window : null;
         }
         
-        public void ShowWindow<T>() where T : BaseWindowView
+        public T GetWindowOrInstantiate<T>() where T : BaseWindowPresenter
+        {
+            var windowType = _windowsConfig.Windows[typeof(T)].WindowType;
+            if (!_cachedWindows.TryGetValue(typeof(T), out var window))
+            {
+                window = _resolver.Instantiate(_windowsConfig.Windows[typeof(T)], parent: GetParent(windowType));
+                _cachedWindows.Add(typeof(T), window);
+            }
+            return window as T;
+        }
+        
+        public Tween ShowWindow<T>() where T : BaseWindowPresenter
         {
             var windowType = _windowsConfig.Windows[typeof(T)].WindowType;
             if (!_cachedWindows.TryGetValue(typeof(T), out var window))
@@ -49,9 +60,10 @@ namespace _General.Scripts.UI.Windows
             sequence.Append(window.Show());
             if (windowType == WindowType.Popup) sequence.Join(ShowDarkBackground());
             sequence.SetUpdate(true);
+            return sequence;
         }
         
-        public void HideWindow<T>() where T : BaseWindowView
+        public Tween HideWindow<T>() where T : BaseWindowPresenter
         {
             var windowType = _windowsConfig.Windows[typeof(T)].WindowType;
             if (!_cachedWindows.TryGetValue(typeof(T), out var window))
@@ -64,6 +76,7 @@ namespace _General.Scripts.UI.Windows
             sequence.Append(window.Hide());
             if (windowType == WindowType.Popup) sequence.Join(HideDarkBackground());
             sequence.SetUpdate(true);
+            return sequence;
         }
         
         private Tween ShowDarkBackground()
