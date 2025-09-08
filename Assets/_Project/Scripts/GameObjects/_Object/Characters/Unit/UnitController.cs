@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._Object.Characters.Character;
 using _Project.Scripts.GameObjects.ActionSystems;
 using UnityEngine;
-using VContainer;
 
 namespace _Project.Scripts.GameObjects._Object.Characters.Unit
 {
@@ -43,10 +41,17 @@ namespace _Project.Scripts.GameObjects._Object.Characters.Unit
             _damageSystem.Attack();
         }
         
+        public override void ReturnToPool()
+        {
+            CharacterPool.Return(this);
+            if(Model.WarSide == WarSide.Enemy)
+                ObjectsRegistry.Unregister(this);
+        }
+        
         public override void ClearData()
         {
             ObjectsRegistry.Unregister(this);
-            _regenerationHpSystem.Dispose();
+            _regenerationHpSystem?.Dispose();
         }
     }
 }

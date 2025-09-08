@@ -24,6 +24,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
     [RequireComponent(typeof(SplineContainer))]
     public class EnemyRoadController : MonoBehaviour, ISavableController, IClearData
     {
+        [Inject] private AppData _appData;
         [Inject] private CharacterPool _characterPool;
         [Inject] private ObjectsRegistry _objectsRegistry;
 
@@ -75,7 +76,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
 
         public void StartSpawn()
         {
-            int currentRound = AppData.LevelData.CurrentRound;
+            int currentRound = _appData.LevelData.CurrentRound;
             if (currentRound >= Model.RoundEnemyList.Count)
             {
                 Debug.LogWarning("Нет настроек для текущего раунда спавна.");
@@ -116,6 +117,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
                 wayPoints.Add(position + new Vector3(offsetX, 0f, 0f));
             }
             var enemyController = _characterPool.Get<UnitController>(enemyData.enemyType, wayPoints[0]);
+            enemyController.Model.CurrentHealth = enemyController.Model.MaxHealth;
             enemyController.Model.WayToAim = wayPoints;
         }
         

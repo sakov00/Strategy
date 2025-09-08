@@ -74,7 +74,10 @@ namespace _General.Scripts.Registries
 
         public void Clear()
         {
-            _typedCollections.Clear();
+            foreach (var collection in _typedCollections)
+            {
+                collection.Value.Clear();
+            }
         }
     }
 }

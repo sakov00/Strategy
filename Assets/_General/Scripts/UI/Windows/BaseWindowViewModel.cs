@@ -1,3 +1,4 @@
+using _General.Scripts._VContainer;
 using _General.Scripts.Enums;
 using UniRx;
 using UnityEngine;
@@ -12,10 +13,11 @@ namespace _General.Scripts.UI.Windows
         protected abstract BaseWindowModel BaseModel { get; }
 
         public IReactiveProperty<bool> IsPaused => BaseModel.IsPausedReactive;
-        public IReactiveProperty<WindowType> WindowType => BaseModel.WindowTypeReactive;
+        public WindowType WindowType => BaseModel.WindowType;
 
         protected virtual void Awake()
         {
+            InjectManager.Inject(this);
             IsPaused.Subscribe(PauseGame).AddTo(this);
         }
 

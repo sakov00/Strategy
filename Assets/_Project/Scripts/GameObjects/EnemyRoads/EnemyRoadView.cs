@@ -1,23 +1,28 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
 using _Project.Scripts.Enums;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Splines;
+using VContainer;
 using Object = UnityEngine.Object;
 
 namespace _Project.Scripts.GameObjects.EnemyRoads
 {
     public class EnemyRoadView : MonoBehaviour
     {
+        [Inject] private AppData _appData;
+        
         [SerializeField] private SplineAnimate _animatePrefab = new();
         [SerializeField] private List<TextMeshPro> _enemyIcons;
         [SerializeField] private float _distanceBetweenIcons = 4;
         
         public void Initialize(SplineContainer splineContainer)
         {
+            InjectManager.Inject(this);
             var roadLength = splineContainer.Spline.GetLength();
             var countAnimateObjects = roadLength / _distanceBetweenIcons;
             for (int i = 0; i < countAnimateObjects; i++)
@@ -37,7 +42,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
                 .ToArray();
             for (int i = 0; i < enemyValues.Length; i++)
             {
-                var countEnemy = roundEnemyList[AppData.LevelData.CurrentRound].enemies.Count(x => x.enemyType == enemyValues[i]);
+                var countEnemy = roundEnemyList[_appData.LevelData.CurrentRound].enemies.Count(x => x.enemyType == enemyValues[i]);
                 if (countEnemy > 0)
                 {
                     _enemyIcons[i].gameObject.SetActive(true);

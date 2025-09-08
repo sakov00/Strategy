@@ -27,6 +27,6 @@ namespace _General.Scripts.UI.Windows
             return sequence;
         }
         
-        public WindowType WindowType => BaseViewModel.WindowType.Value;
+        public WindowType WindowType => BaseViewModel.WindowType;
     }
 }

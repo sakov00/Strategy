@@ -23,6 +23,8 @@ namespace _Project.Scripts.Pools
             _containerTransform = transform;
         }
         
+        public List<BuildController> GetAvailableBuilds() => _availableBuilds;
+        
         public BuildController Get(BuildType buildType, Vector3 position = default, Quaternion rotation = default) 
         {
             var build = _availableBuilds.FirstOrDefault(c => c.BuildModel.BuildType == buildType);
@@ -74,6 +76,14 @@ namespace _Project.Scripts.Pools
             build.gameObject.SetActive(false);
             build.transform.SetParent(_containerTransform, false); 
             _objectsRegistry.Unregister(build);
+        }
+        
+        public void Remove<T>(T build) where T : BuildController
+        {
+            if (!_availableBuilds.Contains(build))
+            {
+                _availableBuilds.Remove(build);
+            }
         }
     }
 }

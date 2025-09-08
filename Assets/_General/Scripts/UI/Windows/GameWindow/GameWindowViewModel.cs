@@ -1,12 +1,10 @@
-using System.Linq;
+using _General.Scripts.AllAppData;
 using _General.Scripts.Registries;
-using _General.Scripts.UI.Windows.FailWindow;
 using _General.Scripts.UI.Windows.PauseWindow;
-using _General.Scripts.UI.Windows.WinWindow;
 using _Project.Scripts;
 using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects._Object.Characters.Character;
-using _Project.Scripts.GameObjects._Object.Characters.Unit;
+using _Project.Scripts.GameObjects._Object;
+using _Project.Scripts.GameObjects.EnemyRoads;
 using UniRx;
 using UnityEngine;
 using VContainer;
@@ -15,23 +13,16 @@ namespace _General.Scripts.UI.Windows.GameWindow
 {
     public class GameWindowViewModel : BaseWindowViewModel
     {
-        [SerializeField] private GameWindowModel _model;
-        
-        [Inject] private GameManager _gameManager;
+        [Inject] private AppData _appData;
         [Inject] private ObjectsRegistry _objectsRegistry;
+        
+        [SerializeField] private GameWindowModel _model;
         
         protected override BaseWindowModel BaseModel => _model;
         
         public ReactiveCommand OpenPauseWindowCommand { get; } = new();
         public ReactiveCommand NextRoundCommand { get; } = new();
         public ReactiveCommand SetStrategyModeCommand { get; } = new();
-        
-#if EDIT_MODE
-        public ReactiveCommand FastFailCommand { get; } = new();
-        public ReactiveCommand FastWinCommand { get; } = new();
-        public ReactiveCommand<int> SaveLevelCommand { get; } = new();
-        public ReactiveCommand<int> LoadLevelCommand { get; } = new();
-#endif
         
         public IReactiveProperty<bool> IsStrategyMode => _model.IsStrategyModeReactive;
         public IReactiveProperty<bool> IsNextRoundAvailable => _model.IsNextRoundAvailableReactive;
@@ -42,27 +33,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
             OpenPauseWindowCommand.Subscribe(_ => OpenPauseWindow()).AddTo(this);
             SetStrategyModeCommand.Subscribe(_ => SetStrategyMode()).AddTo(this);
             NextRoundCommand.Subscribe(_ => NextRoundOnClick()).AddTo(this);
-            
-            _objectsRegistry
-                .GetTypedList<UnitController>()
-                .ObserveRemove()
-                .Subscribe(_ => AllEnemiesDestroyed());
-#if EDIT_MODE
-            FastFailCommand.Subscribe(_ => OpenFailWindow());
-            FastWinCommand.Subscribe(_ => OpenWinWindow());
-            SaveLevelCommand.Subscribe(levelIndex => _gameManager.SaveLevel(levelIndex)).AddTo(this);
-            LoadLevelCommand.Subscribe(levelIndex => _gameManager.StartLevel(levelIndex)).AddTo(this);
-#endif
-        }
-        
-        private void OpenFailWindow()
-        {
-            WindowsManager.ShowWindow<FailWindowView>();
-        }
-        
-        private void OpenWinWindow()
-        {
-            WindowsManager.ShowWindow<WinWindowView>();
+            _appData.LevelEvents.AllEnemiesKilled += NextRoundAvailable;
         }
 
         private void OpenPauseWindow()
@@ -75,15 +46,16 @@ namespace _General.Scripts.UI.Windows.GameWindow
         private void NextRoundOnClick()
         {
             _model.IsNextRoundAvailable = false;
-            _gameManager.NextRound();
+            foreach (var spawnPoint in _objectsRegistry.GetTypedList<EnemyRoadController>())
+                spawnPoint.StartSpawn();
         }
 
-        private void AllEnemiesDestroyed()
+        private void NextRoundAvailable()
         {
-            if (_objectsRegistry.GetTypedList<UnitController>().Any(x => x.Model.WarSide == WarSide.Enemy)) 
-                return;
-
+            _appData.LevelData.CurrentRound++;
             _model.IsNextRoundAvailable = true;
+            foreach (var spawn in _objectsRegistry.GetTypedList<EnemyRoadController>())
+                spawn.RefreshInfoRound();
         }
 
         public void Reset()

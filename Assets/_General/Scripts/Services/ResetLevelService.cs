@@ -6,50 +6,42 @@ using _General.Scripts.UI.Windows;
 using _General.Scripts.UI.Windows.GameWindow;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._Object;
-using _Project.Scripts.GameObjects._Object.Characters.Unit;
 using _Project.Scripts.GameObjects.EnemyRoads;
 using _Project.Scripts.Interfaces;
-using UniRx;
+using _Project.Scripts.Pools;
 using VContainer;
 using VContainer.Unity;
 
 namespace _General.Scripts.Services
 {
-    public class ResetLevelService : IInitializable
+    public class ResetLevelService : IInitializable, IDisposable
     {
+        [Inject] private AppData _appData;
+        [Inject] private BuildPool _buildPool;
+        [Inject] private CharacterPool _characterPool;
         [Inject] private ObjectsRegistry _objectsRegistry;
         [Inject] private WindowsManager _windowsManager;
         
         public void Initialize()
         {
-            _objectsRegistry
-                .GetTypedList<UnitController>()
-                .ObserveRemove()
-                .Subscribe(_ => AllEnemiesDestroyed());
+            _appData.LevelEvents.AllEnemiesKilled += ResetRound;
         }
         
-        private void AllEnemiesDestroyed()
-        {
-            if (_objectsRegistry.GetTypedList<UnitController>().Any(x => x.Model.WarSide == WarSide.Enemy)) 
-                return;
-
-            AppData.LevelData.CurrentRound++;
-            NewRound();
-        }
-        
-        private void NewRound()
+        private void ResetRound()
         {
             foreach (var obj in _objectsRegistry.GetAllByInterface<ObjectController>())
             {
                 if (obj.ObjectModel.WarSide == WarSide.Friend)
-                {
-                    obj.ObjectModel.CurrentHealth = obj.ObjectModel.MaxHealth;
-                    obj.transform.position = obj.ObjectModel.NoAimPos;
-                    obj.transform.gameObject.SetActive(true);
-                }
+                    obj.Restore();
             }
-            foreach (var spawn in _objectsRegistry.GetTypedList<EnemyRoadController>())
-                spawn.RefreshInfoRound();
+            foreach (var obj in _buildPool.GetAvailableBuilds().Where(obj => obj.ObjectModel.WarSide == WarSide.Friend))
+            {
+                obj.Restore();
+            }
+            foreach (var obj in _characterPool.GetAvailableBuilds().Where(obj => obj.ObjectModel.WarSide == WarSide.Friend))
+            {
+                obj.Restore();
+            }
         }
         
         public void ResetLevel()
@@ -64,7 +56,12 @@ namespace _General.Scripts.Services
                 spawn.RefreshInfoRound();
             
             _objectsRegistry.Clear();
-            // _windowsManager?.GetWindow<GameWindowView>().Reset();
+            _windowsManager?.GetWindow<GameWindowView>()?.Reset();
+        }
+
+        public void Dispose()
+        {
+            _appData.LevelEvents.AllEnemiesKilled -= ResetRound;
         }
     }
 }

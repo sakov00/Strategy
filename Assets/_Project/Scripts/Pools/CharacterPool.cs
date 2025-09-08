@@ -22,6 +22,8 @@ namespace _Project.Scripts.Pools
         {
             _containerTransform = transform;
         }
+        
+        public List<MyCharacterController> GetAvailableBuilds() => _availableCharacters;
 
         public MyCharacterController Get(CharacterType characterType, Vector3 position = default, Quaternion rotation = default) 
         {
@@ -95,6 +97,14 @@ namespace _Project.Scripts.Pools
             character.gameObject.SetActive(false);
             character.transform.SetParent(_containerTransform, false);
             _objectsRegistry.Unregister(character);
+        }
+        
+        public void Remove<T>(T build) where T : MyCharacterController
+        {
+            if (!_availableCharacters.Contains(build))
+            {
+                _availableCharacters.Remove(build);
+            }
         }
     }
 }

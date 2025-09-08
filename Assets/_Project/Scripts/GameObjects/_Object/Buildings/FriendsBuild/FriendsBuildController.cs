@@ -1,6 +1,4 @@
 using _General.Scripts.Interfaces;
-using _General.Scripts.Json;
-using _General.Scripts.Registries;
 using _Project.Scripts.GameObjects._Object.Characters.Unit;
 using _Project.Scripts.Pools;
 using UnityEngine;
@@ -52,6 +50,17 @@ namespace _Project.Scripts.GameObjects._Object.FriendsBuild
                 Model = friendsBuildModel;
                 Initialize();
             }
+        }
+
+        public override void Restore()
+        {
+            base.Restore();
+            ObjectsRegistry.Register(this);
+        }
+
+        public override void ReturnToPool()
+        {
+            BuildPool.Return(this);
         }
 
         public override void ClearData()

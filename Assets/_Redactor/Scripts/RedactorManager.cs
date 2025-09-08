@@ -1,5 +1,8 @@
+using _General.Scripts._GlobalLogic;
 using _General.Scripts._VContainer;
 using _General.Scripts.UI.Windows;
+using _General.Scripts.UI.Windows.GameWindow;
+using _Project.Scripts.GameObjects._Object.Characters.Friends.Player;
 using _Project.Scripts.Pools;
 using _Project.Scripts.Services;
 using _Redactor.Scripts.LevelRedactorWindow;
@@ -31,8 +34,17 @@ namespace _Redactor.Scripts
             _characterPool.SetContainer(_characterPoolContainer);
             _projectilePool.SetContainer(_projectilePoolContainer);
         }
-
+        
         public async UniTask StartLevel(int levelIndex)
+        {
+            await _saveLoadProgressService.LoadLevel(levelIndex);
+            _windowsManager.HideWindow<LevelRedactorWindowView>();
+            _windowsManager.ShowWindow<GameWindowView>();
+            var playerController = _characterPool.Get<PlayerController>(new Vector3(60, 1, 70));
+            GlobalObjects.CameraController.CameraFollow.Init(GlobalObjects.CameraController.transform, playerController.transform);
+        }
+
+        public async UniTask LoadLevel(int levelIndex)
         {
             await _saveLoadProgressService.LoadLevel(levelIndex);
         }

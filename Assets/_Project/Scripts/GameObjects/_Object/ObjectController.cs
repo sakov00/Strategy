@@ -35,9 +35,10 @@ namespace _Project.Scripts.GameObjects._Object
         
         public abstract ISavableModel GetSavableModel();
         public abstract void SetSavableModel(ISavableModel model);
-        public abstract void ClearData();
+        public abstract void Restore();
         public abstract void ReturnToPool();
-        
+        public abstract void ClearData();
+
         private void OnDestroy()
         {
             ClearData();

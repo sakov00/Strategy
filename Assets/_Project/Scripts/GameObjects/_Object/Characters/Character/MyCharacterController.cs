@@ -7,7 +7,7 @@ namespace _Project.Scripts.GameObjects._Object.Characters.Character
 {
     public abstract class MyCharacterController : ObjectController
     {
-        [Inject] private CharacterPool _characterPool;
+        [Inject] protected CharacterPool CharacterPool;
         
         public abstract CharacterModel CharacterModel { get; }
         public abstract CharacterView CharacterView { get; }
@@ -20,9 +20,13 @@ namespace _Project.Scripts.GameObjects._Object.Characters.Character
             base.Initialize();
         }
         
-        public override void ReturnToPool()
+        public override void Restore()
         {
-            _characterPool.Return(this);
+            transform.SetParent(null);
+            CharacterModel.CurrentHealth = CharacterModel.MaxHealth;
+            CharacterModel.NoAimPos = transform.position;
+            CharacterPool.Remove(this);
+            gameObject.SetActive(true);
         }
     }
 }

@@ -389,13 +389,13 @@ MonoBehaviour:
     _warSide: 0
     _delayRegeneration: 3
     _regenerateHealthInSecond: 5
-    _maxHealth: 100
-    _currentHealth: 100
+    _maxHealth: 1000
+    _currentHealth: 1000
     <BuildType>k__BackingField: 1
     _priceList: 00000000
     _currentLevel: 0
     _attackRange: 20
-    _damageAmount: 10
+    _damageAmount: 25
     _allAnimAttackTime: 1
     _animAttackTime: 1
     _detectionRadius: 20

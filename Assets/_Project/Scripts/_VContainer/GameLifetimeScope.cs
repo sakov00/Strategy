@@ -18,34 +18,38 @@ namespace _Project.Scripts._VContainer
 {
     public class GameLifetimeScope : LifetimeScope
     {
-        [SerializeField] private WindowsManager _windowsManager;
-        [SerializeField] private GameManager _gameManager;
+        [SerializeField] protected WindowsManager _windowsManager;
+        [SerializeField] protected GameManager _gameManager;
         
         [Header("Configs")]
-        [SerializeField] private LevelsConfig _levelsConfig;
-        [SerializeField] private OthersPrefabConfig _othersPrefabConfig;
-        [SerializeField] private CharacterPrefabConfig _characterPrefabConfig;
-        [SerializeField] private BuildingPrefabConfig _buildingPrefabConfig;
-        [SerializeField] private ProjectilePrefabConfig _projectilePrefabConfig;
-        [SerializeField] private WindowsConfig _windowsConfig;
+        [SerializeField] protected LevelsConfig _levelsConfig;
+        [SerializeField] protected OthersPrefabConfig _othersPrefabConfig;
+        [SerializeField] protected CharacterPrefabConfig _characterPrefabConfig;
+        [SerializeField] protected BuildingPrefabConfig _buildingPrefabConfig;
+        [SerializeField] protected ProjectilePrefabConfig _projectilePrefabConfig;
+        [SerializeField] protected WindowsConfig _windowsConfig;
         
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterBuildCallback(InjectManager.Initialize);
             
             builder.Register<GameTimer>(Lifetime.Singleton).As<GameTimer, IInitializable, ITickable>();
-            builder.Register<AppData>(Lifetime.Singleton).AsSelf().As<IInitializable>();
             
-            builder.RegisterInstance(_gameManager).AsSelf();
-            builder.Register<ResetLevelService>(Lifetime.Singleton).AsSelf().As<IInitializable>();
-            builder.Register<SaveLoadProgressService>(Lifetime.Singleton).AsSelf();
-            builder.Register<JsonLoader>(Lifetime.Singleton).AsSelf();
+            if(_gameManager != null)
+                builder.RegisterInstance(_gameManager).AsSelf();
             
+            RegisterAppData(builder);
             RegisterWindows(builder);
             RegisterRegistries(builder);
             RegisterPools(builder);
             RegisterFactories(builder);
             RegisterSO(builder);
+            RegisterServices(builder);
+        }
+        
+        private void RegisterAppData(IContainerBuilder builder)
+        {
+            builder.Register<AppData>(Lifetime.Singleton).AsSelf().As<IInitializable>();
         }
         
         private void RegisterWindows(IContainerBuilder builder)
@@ -83,6 +87,13 @@ namespace _Project.Scripts._VContainer
             builder.RegisterInstance(_buildingPrefabConfig).AsSelf();
             builder.RegisterInstance(_projectilePrefabConfig).AsSelf();
             builder.RegisterInstance(_windowsConfig).AsSelf().As<IInitializable>();
+        }
+
+        private void RegisterServices(IContainerBuilder builder)
+        {
+            builder.Register<ResetLevelService>(Lifetime.Singleton).AsSelf().As<IInitializable>();
+            builder.Register<SaveLoadProgressService>(Lifetime.Singleton).AsSelf();
+            builder.Register<JsonLoader>(Lifetime.Singleton).AsSelf();
         }
     }
 }

@@ -11,6 +11,7 @@ namespace _Project.Scripts.GameObjects._Object.Characters.Friends.Player
 {
     public class PlayerController : MyCharacterController
     {
+        [Inject] private AppData _appData;
         [field:SerializeField] public PlayerModel Model { get; private set; }
         [field:SerializeField] public PlayerView View  { get; private set; }
         public override CharacterModel CharacterModel => Model;
@@ -33,7 +34,7 @@ namespace _Project.Scripts.GameObjects._Object.Characters.Friends.Player
 
         private void Update()
         {
-            _playerMovementSystem.MoveTo(AppData.LevelData.MoveDirection);
+            _playerMovementSystem.MoveTo(_appData.LevelData.MoveDirection);
         }
         
         public override ISavableModel GetSavableModel()
@@ -57,6 +58,17 @@ namespace _Project.Scripts.GameObjects._Object.Characters.Friends.Player
             base.FixedUpdate();
             _detectionAim.DetectAim();
             _damageSystem.Attack();
+        }
+        
+        public override void Restore()
+        {
+            base.Restore();
+            ObjectsRegistry.Register(this);
+        }
+        
+        public override void ReturnToPool()
+        {
+            CharacterPool.Return(this);
         }
         
         public override void ClearData()

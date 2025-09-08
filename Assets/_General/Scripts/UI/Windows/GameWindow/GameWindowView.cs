@@ -7,11 +7,14 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace _General.Scripts.UI.Windows.GameWindow
 {
     public class GameWindowView : BaseWindowView
     {
+        [Inject] private AppData _appData;
+        
         [Header("Presenter")]
         [SerializeField] private GameWindowViewModel _viewModel;
 
@@ -19,13 +22,6 @@ namespace _General.Scripts.UI.Windows.GameWindow
         [SerializeField] private Button _openPauseMenuButton;
         [SerializeField] private Button _nextRoundButton;
         [SerializeField] private Button _strategyModeButton;
-        
-        [Header("Dev")]
-        [SerializeField] private Button _fastFailButton;
-        [SerializeField] private Button _fastWinButton;
-        [SerializeField] private Button _saveLevelButton;
-        [SerializeField] private Button _loadLevelButton;
-        [SerializeField] private TMP_InputField _selectLevelInputField;
 
         [Header("UI Text")]
         [SerializeField] private TextMeshProUGUI _moneyText;
@@ -58,25 +54,13 @@ namespace _General.Scripts.UI.Windows.GameWindow
                 })
                 .AddTo(this);
             
-            AppData.User.MoneyReactive
+            _appData.LevelData.MoneyReactive
                 .Subscribe(money => _moneyText.text = string.Format(MoneyFormat, money))
                 .AddTo(this);
             
-            AppData.LevelData.CurrentRoundReactive
+            _appData.LevelData.CurrentRoundReactive
                 .Subscribe(roundIndex => _currentRoundText.text = string.Format(RoundFormat, roundIndex + 1))
                 .AddTo(this);
-
-#if EDIT_MODE
-            _fastFailButton.gameObject.SetActive(true);
-            _fastWinButton.gameObject.SetActive(true);
-            _saveLevelButton.gameObject.SetActive(true);
-            _loadLevelButton.gameObject.SetActive(true);
-            _selectLevelInputField.gameObject.SetActive(true);
-            _viewModel.FastFailCommand.BindTo(_fastFailButton).AddTo(this);
-            _viewModel.FastWinCommand.BindTo(_fastWinButton).AddTo(this);
-            _saveLevelButton.onClick.AddListener(() => _viewModel.SaveLevelCommand.Execute(int.Parse(_selectLevelInputField.text)));
-            _loadLevelButton.onClick.AddListener(() => _viewModel.LoadLevelCommand.Execute(int.Parse(_selectLevelInputField.text)));
-#endif
         }
         
         public override Tween Show()
@@ -99,8 +83,8 @@ namespace _General.Scripts.UI.Windows.GameWindow
         {
             var direction = _joystick.Direction;
             
-            if(!Mathf.Approximately(direction.x, AppData.LevelData.MoveDirection.x) && !Mathf.Approximately(direction.y, AppData.LevelData.MoveDirection.z))
-                AppData.LevelData.MoveDirection = new Vector3(direction.x, 0f, direction.y);
+            if(!Mathf.Approximately(direction.x, _appData.LevelData.MoveDirection.x) && !Mathf.Approximately(direction.y, _appData.LevelData.MoveDirection.z))
+                _appData.LevelData.MoveDirection = new Vector3(direction.x, 0f, direction.y);
         }
 
         public void Reset()

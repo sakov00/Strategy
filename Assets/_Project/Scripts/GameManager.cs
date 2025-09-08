@@ -46,18 +46,5 @@ namespace _Project.Scripts
         {
             await _saveLoadProgressService.LoadLevel(levelIndex);
         }
-        
-        public void SaveLevel(int levelIndex)
-        {
-            _saveLoadProgressService.SaveLevel(levelIndex);
-        }
-        
-        public void NextRound()
-        {
-            foreach (var spawnPoint in _objectsRegistry.GetTypedList<EnemyRoadController>())
-            {
-                spawnPoint.StartSpawn();
-            }
-        }
     }
 }

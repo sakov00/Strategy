@@ -11,7 +11,8 @@ namespace _Project.Scripts.GameObjects._Object
 {
     public abstract class BuildController : ObjectController, IBuy
     {
-        [Inject] private BuildPool _buildPool;
+        [Inject] protected AppData AppData;
+        [Inject] protected BuildPool BuildPool;
         
         public abstract BuildModel BuildModel { get; }
         public abstract BuildView BuildView { get; }
@@ -35,20 +36,24 @@ namespace _Project.Scripts.GameObjects._Object
             if(BuildModel.CurrentLevel < BuildModel.PriceList.Count)
                 upgradePrice = BuildModel.PriceList[BuildModel.CurrentLevel];
             
-            if (upgradePrice == null || upgradePrice > AppData.User.Money)
+            if (upgradePrice == null || upgradePrice > AppData.LevelData.Money)
             {
                 Debug.Log("Not enough money or max level");
                 return;
             }
             
-            AppData.User.Money -= upgradePrice.Value;
+            AppData.LevelData.Money -= upgradePrice.Value;
             BuildModel.CurrentLevel++;
             BuildView.UpdateTooltip(BuildModel.CurrentLevel, upgradePrice);
         }
-
-        public override void ReturnToPool()
+        
+        public override void Restore()
         {
-            _buildPool.Return(this);
+            transform.SetParent(null);
+            BuildModel.CurrentHealth = BuildModel.MaxHealth;
+            BuildModel.NoAimPos = transform.position;
+            BuildPool.Remove(this);
+            gameObject.SetActive(true);
         }
     }
 }

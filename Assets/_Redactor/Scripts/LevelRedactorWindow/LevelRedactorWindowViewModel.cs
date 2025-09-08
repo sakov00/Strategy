@@ -17,13 +17,15 @@ namespace _Redactor.Scripts.LevelRedactorWindow
         
         public ReactiveCommand<int> SaveLevelCommand { get; } = new();
         public ReactiveCommand<int> LoadLevelCommand { get; } = new();
+        public ReactiveCommand<int> PlayLevelCommand { get; } = new();
 
         protected override void Awake()
         {
             base.Awake();
             
             SaveLevelCommand.Subscribe(levelIndex => _redactorManager.SaveLevel(levelIndex)).AddTo(this);
-            LoadLevelCommand.Subscribe(levelIndex => _redactorManager.StartLevel(levelIndex).Forget()).AddTo(this);
+            LoadLevelCommand.Subscribe(levelIndex => _redactorManager.LoadLevel(levelIndex).Forget()).AddTo(this);
+            PlayLevelCommand.Subscribe(levelIndex => _redactorManager.StartLevel(levelIndex).Forget()).AddTo(this);
         }
     }
 }

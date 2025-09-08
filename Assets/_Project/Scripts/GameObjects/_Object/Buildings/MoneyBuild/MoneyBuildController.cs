@@ -10,13 +10,18 @@ namespace _Project.Scripts.GameObjects._Object.MoneyBuild
         public override BuildModel BuildModel => Model;
         public override BuildView BuildView => View;
 
-        private MoneyController _moneyController;
-
         public override void Initialize()
         {
             base.Initialize();
             ObjectsRegistry.Register(this);
-            _moneyController = new MoneyController(Model, View);
+            AppData.LevelEvents.AllEnemiesKilled += AddMoneyToPlayer;
+        }
+        
+        private void AddMoneyToPlayer()
+        {
+            var moneyAmount = Model.AddMoneyValue * (Model.CurrentLevel + 1);
+            AppData.LevelData.Money += moneyAmount;
+            View.MoneyUp(moneyAmount);
         }
         
         public override ISavableModel GetSavableModel()
@@ -35,10 +40,22 @@ namespace _Project.Scripts.GameObjects._Object.MoneyBuild
             }
         }
         
+        public override void Restore()
+        {
+            base.Restore();
+            ObjectsRegistry.Register(this);
+        }
+
+        public override void ReturnToPool()
+        {
+            ClearData();
+            BuildPool.Return(this);
+        }
+
         public override void ClearData()
         {
             ObjectsRegistry.Unregister(this);
-            _moneyController.Dispose();
+            AppData.LevelEvents.AllEnemiesKilled -= AddMoneyToPlayer;
         }
     }
 }

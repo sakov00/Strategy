@@ -45,6 +45,17 @@ namespace _Project.Scripts.GameObjects._Object.TowerDefence
             _damageSystem.Attack();
         }
         
+        public override void Restore()
+        {
+            base.Restore();
+            ObjectsRegistry.Register(this);
+        }
+        
+        public override void ReturnToPool()
+        {
+            BuildPool.Return(this);
+        }
+        
         public override void ClearData()
         {
             ObjectsRegistry.Unregister(this);

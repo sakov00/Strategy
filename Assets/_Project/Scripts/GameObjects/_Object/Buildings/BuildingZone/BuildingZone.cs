@@ -13,6 +13,7 @@ namespace _Project.Scripts.GameObjects._Object.BuildingZone
 {
     public class BuildingZone : MonoBehaviour, IBuy, ISavableController, IClearData
     {
+        [Inject] private AppData _appData;
         [Inject] private ObjectsRegistry _objectsRegistry;
         [Inject] private BuildFactory _buildFactory;
 
@@ -54,16 +55,17 @@ namespace _Project.Scripts.GameObjects._Object.BuildingZone
             await sequence.Play();
             
             var buildModel = _buildFactory.GetBuildModel(_model.BuildType);
-            if (buildModel.PriceList[0] > AppData.User.Money)
+            if (buildModel.PriceList[0] > _appData.LevelData.Money)
             {
                 Debug.Log("Not enough money");
                 return;
             }
             
-            AppData.User.Money -= buildModel.PriceList[0];
+            _appData.LevelData.Money -= buildModel.PriceList[0];
             var build = _buildFactory.CreateBuild(_model.BuildType, transform.position, transform.rotation);
             build.BuildModel.CurrentLevel++;
             ClearData();
+            DestroyObject();
         }
         
         private void OnDestroy()
