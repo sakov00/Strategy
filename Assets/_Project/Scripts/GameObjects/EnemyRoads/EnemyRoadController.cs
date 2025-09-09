@@ -34,7 +34,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
         [field:SerializeField] public EnemyRoadView View { get; private set; }
 
         private List<EnemyWithTime> _currentEnemyList;
-        public int LastNumberRound => _currentEnemyList.Count - 1;
+        public int CountRounds => Model.RoundEnemyList.Count;
         
         private void OnValidate()
         {

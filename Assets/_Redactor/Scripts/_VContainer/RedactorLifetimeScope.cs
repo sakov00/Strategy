@@ -10,7 +10,6 @@ namespace _Redactor.Scripts._VContainer
         protected override void Configure(IContainerBuilder builder)
         {
             base.Configure(builder);
-            builder.Register<SaveLoadLevelService>(Lifetime.Singleton).AsSelf();
         }
     }
 }

@@ -37,6 +37,10 @@ namespace _General.Scripts.UI.Windows.GameWindow
             OpenPauseWindowCommand.Subscribe(_ => OpenPauseWindow()).AddTo(this);
             SetStrategyModeCommand.Subscribe(_ => SetStrategyMode()).AddTo(this);
             NextRoundCommand.Subscribe(_ => NextRoundOnClick()).AddTo(this);
+        }
+
+        public void Initialize()
+        {
             _appData.LevelEvents.AllEnemiesKilled += NextRoundAvailable;
         }
 
@@ -60,13 +64,17 @@ namespace _General.Scripts.UI.Windows.GameWindow
             _model.IsNextRoundAvailable = true;
             
             var spawns = _objectsRegistry.GetTypedList<EnemyRoadController>();
-            var isLastRound = spawns.Any(spawn => spawn.LastNumberRound == _appData.LevelData.CurrentRound);
+            var isLastRound = spawns.Any(spawn => spawn.CountRounds == _appData.LevelData.CurrentRound);
             
             var winWindow = WindowsManager.GetWindowOrInstantiate<WinWindowPresenter>();
             winWindow.Initialize(isLastRound);
             await WindowsManager.ShowWindow<WinWindowPresenter>();
             
-            if (!isLastRound)
+            if (isLastRound)
+            {
+                _appData.LevelData.CurrentLevel++;
+            }
+            else
             {
                 _resetLevelService.ResetRound();
                 foreach (var spawn in spawns)
@@ -78,6 +86,11 @@ namespace _General.Scripts.UI.Windows.GameWindow
         {
             _model.IsStrategyMode = false;
             _model.IsNextRoundAvailable = true;
+        }
+
+        public void Dispose()
+        {
+            _appData.LevelEvents.AllEnemiesKilled -= NextRoundAvailable;
         }
     }
 }

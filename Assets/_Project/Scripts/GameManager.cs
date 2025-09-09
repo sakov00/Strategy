@@ -1,18 +1,15 @@
 using _General.Scripts._GlobalLogic;
 using _General.Scripts._VContainer;
+using _General.Scripts.AllAppData;
 using _General.Scripts.Registries;
-using _General.Scripts.Services;
 using _General.Scripts.UI.Windows;
 using _General.Scripts.UI.Windows.GameWindow;
-using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects._Object.Characters.Friends.Player;
-using _Project.Scripts.GameObjects.EnemyRoads;
 using _Project.Scripts.Pools;
-using _Project.Scripts.Services;
+using _Redactor.Scripts.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace _Project.Scripts
 {
@@ -22,7 +19,8 @@ namespace _Project.Scripts
         [SerializeField] protected Transform _characterPoolContainer;
         [SerializeField] protected Transform _projectilePoolContainer;
         
-        [Inject] protected SaveLoadProgressService SaveLoadProgressService;
+        [Inject] protected AppData AppData;
+        [Inject] protected SaveLoadLevelService SaveLoadLevelService;
         [Inject] protected WindowsManager WindowsManager;
         [Inject] protected ObjectsRegistry ObjectsRegistry;
         [Inject] protected BuildPool BuildPool;
@@ -33,7 +31,6 @@ namespace _Project.Scripts
         {
             InjectManager.Inject(this);
             Application.targetFrameRate = 120;
-            WindowsManager.ShowWindow<GameWindowPresenter>();
             BuildPool.SetContainer(_buildPoolContainer);
             CharacterPool.SetContainer(_characterPoolContainer);
             ProjectilePool.SetContainer(_projectilePoolContainer);
@@ -44,7 +41,19 @@ namespace _Project.Scripts
 
         public virtual async UniTask StartLevel(int levelIndex)
         {
-            await SaveLoadProgressService.LoadLevel(levelIndex);
+            WindowsManager.GetWindowOrInstantiate<GameWindowPresenter>().Dispose();
+            WindowsManager.ShowWindow<GameWindowPresenter>();
+            AppData.LevelEvents.Dispose();
+            AppData.LevelEvents.Initialize();
+            AppData.LevelData.CurrentLevel = levelIndex;
+            AppData.LevelData.CurrentRound = 0;
+            await LoadLevel(levelIndex);
+            WindowsManager.GetWindow<GameWindowPresenter>().Initialize();
+        }
+        
+        public virtual async UniTask LoadLevel(int levelIndex)
+        {
+            await SaveLoadLevelService.LoadLevelDefault(levelIndex);
         }
     }
 }

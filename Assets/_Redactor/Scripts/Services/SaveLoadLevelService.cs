@@ -32,38 +32,59 @@ namespace _Redactor.Scripts.Services
         
         private Dictionary<BuildType, Func<BuildController>> _buildTypeToClass;
         
-        private static string GetSavePath(int index) 
-            => Path.Combine(Application.persistentDataPath, $"level_{index}.dat");
+        private static string GetDefaultSavePath(int index) 
+            => Path.Combine(Application.streamingAssetsPath, $"level_{index}.dat");
+        private static string GetProgressSavePath(int index) 
+            => Path.Combine(Application.persistentDataPath, $"level_progress_{index}.dat");
 
-        public async UniTask SaveLevel(int index)
+        public async UniTask SaveLevelDefault(int index) => await Save(GetDefaultSavePath(index));
+        public async UniTask LoadLevelDefault(int index) => await Load(GetDefaultSavePath(index));
+        public async UniTask SaveLevelProgress(int index) => await Save(GetProgressSavePath(index));
+        public async UniTask LoadLevelProgress(int index) => await Load(GetProgressSavePath(index));
+
+        public async UniTask LoadLevel(int index)
+        {
+            if (File.Exists(GetProgressSavePath(index)))
+                await LoadLevelDefault(index);
+            else
+                await LoadLevelProgress(index);
+        }
+
+        public void RemoveProgress(int index)
+        {
+            if(File.Exists(GetProgressSavePath(index)))
+                File.Delete(GetProgressSavePath(index));
+        }
+
+        private async UniTask Save(string path)
         {
             var allObjects = _objectsRegistry.GetAllByInterface<ISavableController>();
             var levelModel = new LevelModel();
             levelModel.SavableModels.AddRange(allObjects.Select(o => o.GetSavableModel()).ToList());
 
             var data = MemoryPackSerializer.Serialize(levelModel);
-            await File.WriteAllBytesAsync(GetSavePath(index), data);
-            Debug.Log($"Level saved to {GetSavePath(index)}");
+            await File.WriteAllBytesAsync(path, data);
+            Debug.Log($"Level saved to {path}");
         }
 
-        public async UniTask LoadLevel(int index)
+        private async UniTask Load(string path)
         {
             _resetLevelService.ResetLevel();
-            if (!File.Exists(GetSavePath(index)))
+            if (!File.Exists(path))
             {
                 Debug.LogWarning("Save file not found!");
                 return;
             }
 
-            var data = await File.ReadAllBytesAsync(GetSavePath(index));
+            var data = await File.ReadAllBytesAsync(path);
             LevelModel levelModel = MemoryPackSerializer.Deserialize<LevelModel>(data);
 
             Debug.Log($"Loaded {levelModel.SavableModels.Count} objects.");
 
-            await InstantiateLoadedObjects(levelModel, index);
+            await InstantiateLoadedObjects(levelModel);
         }
 
-        private async UniTask InstantiateLoadedObjects(LevelModel levelModel, int levelIndex)
+        private async UniTask InstantiateLoadedObjects(LevelModel levelModel)
         {
             foreach (var model in levelModel.SavableModels)
             {
@@ -78,7 +99,7 @@ namespace _Redactor.Scripts.Services
                 }
                 if (model is TerrainModel terrainModel)
                 {
-                    savableController = _environmentFactory.CreateTerrain(levelIndex);
+                    savableController = _environmentFactory.CreateTerrain(0);
                 }
                 // if (model is EnvironmentModel environmentModel)
                 // {

@@ -6,22 +6,23 @@ using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._Object.Characters.Unit;
 using UniRx;
 using VContainer;
+using VContainer.Unity;
 
 namespace _General.Scripts.AllAppData
 {
-    public class LevelEvents : IDisposable
+    public class LevelEvents : IInitializable, IDisposable
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
 
         public event Action AllEnemiesKilled;
         public event Action MainBuildDestroyed;
 
-        private readonly CompositeDisposable _disposables = new();
+        private CompositeDisposable _disposables;
 
-        public LevelEvents()
+        public void Initialize()
         {
             InjectManager.Inject(this);
-
+            _disposables = new CompositeDisposable();
             _objectsRegistry
                 .GetTypedList<UnitController>()
                 .ObserveRemove()
@@ -39,7 +40,7 @@ namespace _General.Scripts.AllAppData
 
         public void Dispose()
         {
-            _disposables.Dispose();
+            _disposables?.Dispose();
         }
     }
 }

@@ -1,4 +1,6 @@
+using _General.Scripts.AllAppData;
 using _Project.Scripts;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using VContainer;
@@ -7,6 +9,7 @@ namespace _General.Scripts.UI.Windows.WinWindow
 {
     public class WinWindowPresenter : BaseWindowPresenter
     {
+        [Inject] private AppData _appData;
         [Inject] private GameManager _gameManager;
         
         [SerializeField] private WinWindowModel _model;
@@ -19,6 +22,8 @@ namespace _General.Scripts.UI.Windows.WinWindow
         public ReactiveCommand RestartCommand { get; } = new();
         public ReactiveCommand ContinueCommand { get; } = new();
 
+        private bool _isLevelWin;
+
         protected override void Awake()
         {
             base.Awake();
@@ -30,7 +35,7 @@ namespace _General.Scripts.UI.Windows.WinWindow
 
         public void Initialize(bool isLevelWin)
         {
-            
+            _isLevelWin = isLevelWin;
         }
         
         private void HomeOnClick()
@@ -44,6 +49,8 @@ namespace _General.Scripts.UI.Windows.WinWindow
         
         private void ContinueOnClick()
         {
+            if (_isLevelWin)
+                _gameManager.StartLevel(_appData.LevelData.CurrentLevel).Forget();
             WindowsManager.HideWindow<WinWindowPresenter>();
         }
 

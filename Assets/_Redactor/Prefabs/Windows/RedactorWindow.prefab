@@ -448,7 +448,7 @@ GameObject:
   - component: {fileID: 9018548118198426172}
   - component: {fileID: 2588368260627422035}
   m_Layer: 0
-  m_Name: SaveLevelButton (1)
+  m_Name: SaveLevelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -922,7 +922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Redactor.Scripts.GameWindow.LevelRedactorWindowView
   _canvasGroup: {fileID: 5061125597974301615}
   _presenter: {fileID: 105420395907749080}
-  _saveLevelButton: {fileID: 8767324863805646317}
+  _saveLevelButton: {fileID: 2588368260627422035}
   _loadLevelButton: {fileID: 4895236835939391761}
   _playLevelButton: {fileID: 8767324863805646317}
   _selectLevelInputField: {fileID: 2405755526049337838}

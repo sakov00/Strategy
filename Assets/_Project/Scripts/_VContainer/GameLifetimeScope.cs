@@ -8,8 +8,8 @@ using _General.Scripts.SO;
 using _General.Scripts.UI.Windows;
 using _Project.Scripts.Factories;
 using _Project.Scripts.Pools;
-using _Project.Scripts.Services;
 using _Project.Scripts.SO;
+using _Redactor.Scripts.Services;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -92,7 +92,7 @@ namespace _Project.Scripts._VContainer
         private void RegisterServices(IContainerBuilder builder)
         {
             builder.Register<ResetLevelService>(Lifetime.Singleton).AsSelf();
-            builder.Register<SaveLoadProgressService>(Lifetime.Singleton).AsSelf();
+            builder.Register<SaveLoadLevelService>(Lifetime.Singleton).AsSelf();
             builder.Register<JsonLoader>(Lifetime.Singleton).AsSelf();
         }
     }

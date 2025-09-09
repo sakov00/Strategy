@@ -38,9 +38,9 @@ namespace _General.Scripts.AllAppData
 
         public void Dispose()
         {
-            _currentLevel.Dispose();
-            _currentRound.Dispose();
-            _money.Dispose();
+            _currentLevel?.Dispose();
+            _currentRound?.Dispose();
+            _money?.Dispose();
         }
     }
 }
