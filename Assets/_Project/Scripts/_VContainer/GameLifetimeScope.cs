@@ -19,7 +19,7 @@ namespace _Project.Scripts._VContainer
     public class GameLifetimeScope : LifetimeScope
     {
         [SerializeField] protected WindowsManager _windowsManager;
-        [SerializeField] protected GameManager _gameManager;
+        [SerializeField] protected PoolsManager _poolsManager;
         
         [Header("Configs")]
         [SerializeField] protected LevelsConfig _levelsConfig;
@@ -35,9 +35,7 @@ namespace _Project.Scripts._VContainer
             
             builder.Register<GameTimer>(Lifetime.Singleton).As<GameTimer, IInitializable, ITickable>();
             
-            if(_gameManager != null)
-                builder.RegisterInstance(_gameManager).AsSelf();
-            
+            RegisterGameManager(builder);
             RegisterAppData(builder);
             RegisterWindows(builder);
             RegisterRegistries(builder);
@@ -45,6 +43,11 @@ namespace _Project.Scripts._VContainer
             RegisterFactories(builder);
             RegisterSO(builder);
             RegisterServices(builder);
+        }
+
+        public virtual void RegisterGameManager(IContainerBuilder builder)
+        {
+            builder.Register<GameManager>(Lifetime.Singleton).AsSelf().As<IStartable>();
         }
         
         private void RegisterAppData(IContainerBuilder builder)
@@ -91,6 +94,7 @@ namespace _Project.Scripts._VContainer
 
         private void RegisterServices(IContainerBuilder builder)
         {
+            builder.RegisterInstance(_poolsManager).AsSelf();
             builder.Register<ResetLevelService>(Lifetime.Singleton).AsSelf();
             builder.Register<SaveLoadLevelService>(Lifetime.Singleton).AsSelf();
             builder.Register<JsonLoader>(Lifetime.Singleton).AsSelf();
