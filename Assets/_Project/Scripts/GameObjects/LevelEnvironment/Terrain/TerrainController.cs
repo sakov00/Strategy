@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _General.Scripts._VContainer;
+using _General.Scripts.DTO;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Interfaces;
@@ -24,14 +25,29 @@ namespace _Project.Scripts.GameObjects.LevelEnvironment.Terrain
         
         public ISavableModel GetSavableModel()
         {            
-            if (_meshFilter != null && _meshFilter.mesh != null)
+            if (_meshFilter != null && _meshFilter.sharedMesh != null)
             {
-                Mesh mesh = _meshFilter.mesh;
+                Mesh mesh = _meshFilter.sharedMesh;
 
-                _model.Vertices = new List<Vector3>(mesh.vertices);
-                _model.Normals = new List<Vector3>(mesh.normals);
-                _model.UVs = new List<Vector2>(mesh.uv);
-                _model.Triangles = Array.ConvertAll(mesh.triangles, t => (ushort)t);
+                var vertices = mesh.vertices;
+                _model.Vertices = new Vector3Half[vertices.Length];
+                for (var i = 0; i < vertices.Length; i++)
+                    _model.Vertices[i] = new Vector3Half(vertices[i]);
+
+                var normals = mesh.normals;
+                _model.Normals = new Vector3Half[normals.Length];
+                for (var i = 0; i < normals.Length; i++)
+                    _model.Normals[i] = new Vector3Half(normals[i]);
+
+                var uvs = mesh.uv;
+                _model.UVs = new Vector2Half[uvs.Length];
+                for (var i = 0; i < uvs.Length; i++)
+                    _model.UVs[i] = new Vector2Half(uvs[i]);
+
+                var tris = mesh.triangles;
+                _model.Triangles = new ushort[tris.Length];
+                for (var i = 0; i < tris.Length; i++)
+                    _model.Triangles[i] = (ushort)tris[i];
             }
             _model.Position = transform.position;
             _model.Rotation = transform.rotation;
@@ -45,12 +61,23 @@ namespace _Project.Scripts.GameObjects.LevelEnvironment.Terrain
                 _model = terrainModel;
                 if (_meshFilter != null && _model.Vertices != null && _model.UVs != null && _model.Triangles != null)
                 {
-                    Mesh mesh = new Mesh();
-                    mesh.SetVertices(_model.Vertices);
-                    mesh.SetUVs(0, _model.UVs);
-                    mesh.SetTriangles(_model.Triangles, 0);
-                    mesh.SetNormals(_model.Normals);
-                    _meshFilter.mesh = mesh;
+                    var vertices = new Vector3[_model.Vertices.Length];
+                    for (int i = 0; i < vertices.Length; i++)
+                        vertices[i] = _model.Vertices[i].ToVector3();
+                    
+                    var uvs = new Vector2[_model.UVs.Length];
+                    for (int i = 0; i < uvs.Length; i++)
+                        uvs[i] = _model.UVs[i].ToVector2();
+
+                    var normals = new Vector3[_model.Normals.Length];
+                    for (int i = 0; i < normals.Length; i++)
+                        normals[i] = _model.Normals[i].ToVector3();
+                    
+                    _meshFilter.mesh.Clear();
+                    _meshFilter.mesh.SetVertices(vertices);
+                    _meshFilter.mesh.SetUVs(0, uvs);
+                    _meshFilter.mesh.SetTriangles(terrainModel.Triangles, 0);
+                    _meshFilter.mesh.SetNormals(normals);
                 }
             }
         }
