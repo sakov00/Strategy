@@ -11,8 +11,22 @@ namespace _General.Scripts.UI.Elements
         [SerializeField] private Vector3 _lastMousePosition;
         [SerializeField] private bool _isDragging = false;
 
+        private bool _justEnabled;
+
+        private void OnEnable()
+        {
+            _justEnabled = true;
+        }
+        
         private void Update()
         {
+            if (_justEnabled)
+            {
+                _justEnabled = false;
+                _isDragging = false;
+                return;
+            }
+            
 #if ANDROID_MODE
             HandleTouchDrag();
 #else

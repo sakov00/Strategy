@@ -46,11 +46,22 @@ namespace _General.Scripts.UI.Windows.GameWindow
             
             _presenter.SetStrategyModeCommand.BindTo(_strategyModeButton).AddTo(this);
             _presenter.IsStrategyMode
-                .Subscribe(isStrategy =>
+                .Subscribe(async isStrategy =>
                 {
-                    _joystick.gameObject.SetActive(!isStrategy);
-                    _touchAndMouseDragInput.gameObject.SetActive(isStrategy);
-                    GlobalObjects.CameraController.CameraFollow.IsFollowing = !isStrategy;
+                    if (isStrategy)
+                    {
+                        _touchAndMouseDragInput.gameObject.SetActive(true);
+                        _joystick.gameObject.SetActive(false);
+                        GlobalObjects.CameraController.CameraFollow.DisableFollowAnimation();
+                    }
+                    else
+                    {
+                        _touchAndMouseDragInput.gameObject.SetActive(false);
+                        await GlobalObjects.CameraController.CameraFollow.EnableFollowAnimation();
+                        _joystick.gameObject.SetActive(true);
+                    }
+
+                    
                 })
                 .AddTo(this);
             
