@@ -1,3 +1,4 @@
+using _General.Scripts.AllAppData;
 using _Project.Scripts;
 using UniRx;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace _General.Scripts.UI.Windows.FailWindow
         [SerializeField] private FailWindowModel _model;
         [SerializeField] private FailWindowView _view;
         
+        [Inject] private AppData _appData;
         [Inject] private GameManager _gameManager;
         
         protected override BaseWindowModel BaseModel => _model;
@@ -18,8 +20,6 @@ namespace _General.Scripts.UI.Windows.FailWindow
         public ReactiveCommand HomeCommand { get; } = new();
         public ReactiveCommand RestartCommand { get; } = new();
         
-        
-
         protected override void Awake()
         {
             base.Awake();
@@ -32,9 +32,9 @@ namespace _General.Scripts.UI.Windows.FailWindow
         {
         }
         
-        private void RestartOnClick()
+        private async void RestartOnClick()
         {
-            _gameManager.StartLevel(0);
+            await _gameManager.StartLevel(_appData.User.CurrentLevel);
             WindowsManager.HideWindow<FailWindowPresenter>();
         }
 

@@ -4,6 +4,7 @@ using _General.Scripts._VContainer;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._Object.Characters.Unit;
+using _Project.Scripts.GameObjects._Object.MainBuild;
 using UniRx;
 using VContainer;
 using VContainer.Unity;
@@ -14,8 +15,8 @@ namespace _General.Scripts.AllAppData
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
 
-        public event Action AllEnemiesKilled;
-        public event Action MainBuildDestroyed;
+        public event Action WinEvent;
+        public event Action FailEvent;
 
         private CompositeDisposable _disposables;
 
@@ -28,6 +29,12 @@ namespace _General.Scripts.AllAppData
                 .ObserveRemove()
                 .Subscribe(_ => TryInvokeAllEnemiesKilled())
                 .AddTo(_disposables);
+            
+            _objectsRegistry
+                .GetTypedList<MainBuildController>()
+                .ObserveRemove()
+                .Subscribe(_ => FailEvent?.Invoke())
+                .AddTo(_disposables);
         }
 
         private void TryInvokeAllEnemiesKilled()
@@ -35,9 +42,9 @@ namespace _General.Scripts.AllAppData
             if (_objectsRegistry.GetTypedList<UnitController>().Any(x => x.Model.WarSide == WarSide.Enemy))
                 return;
 
-            AllEnemiesKilled?.Invoke();
+            WinEvent?.Invoke();
         }
-
+        
         public void Dispose()
         {
             _disposables?.Dispose();

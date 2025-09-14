@@ -2,6 +2,7 @@ using System.Linq;
 using _General.Scripts.AllAppData;
 using _General.Scripts.Registries;
 using _General.Scripts.Services;
+using _General.Scripts.UI.Windows.FailWindow;
 using _General.Scripts.UI.Windows.PauseWindow;
 using _General.Scripts.UI.Windows.WinWindow;
 using _Project.Scripts.GameObjects.EnemyRoads;
@@ -41,7 +42,8 @@ namespace _General.Scripts.UI.Windows.GameWindow
 
         public void Initialize()
         {
-            _appData.LevelEvents.AllEnemiesKilled += NextRoundAvailable;
+            _appData.LevelEvents.WinEvent += WinHandle;
+            _appData.LevelEvents.FailEvent += FailHandle;
         }
 
         private void OpenPauseWindow()
@@ -58,13 +60,13 @@ namespace _General.Scripts.UI.Windows.GameWindow
                 spawnPoint.StartSpawn();
         }
 
-        private async void NextRoundAvailable()
+        private async void WinHandle()
         {
-            _appData.LevelData.CurrentRound++;
+            _appData.User.CurrentRound++;
             _model.IsNextRoundAvailable = true;
             
             var spawns = _objectsRegistry.GetTypedList<EnemyRoadController>();
-            var isLastRound = spawns.Any(spawn => spawn.CountRounds == _appData.LevelData.CurrentRound);
+            var isLastRound = spawns.Any(spawn => spawn.CountRounds == _appData.User.CurrentRound);
             
             var winWindow = WindowsManager.GetWindowOrInstantiate<WinWindowPresenter>();
             winWindow.Initialize(isLastRound);
@@ -72,7 +74,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
             
             if (isLastRound)
             {
-                _appData.LevelData.CurrentLevel++;
+                _appData.User.CurrentLevel++;
             }
             else
             {
@@ -80,6 +82,11 @@ namespace _General.Scripts.UI.Windows.GameWindow
                 foreach (var spawn in spawns)
                     spawn.RefreshInfoRound();
             }
+        }
+
+        private void FailHandle()
+        {
+            WindowsManager.ShowWindow<FailWindowPresenter>();
         }
 
         public void Reset()
@@ -90,7 +97,8 @@ namespace _General.Scripts.UI.Windows.GameWindow
 
         public void Dispose()
         {
-            _appData.LevelEvents.AllEnemiesKilled -= NextRoundAvailable;
+            _appData.LevelEvents.WinEvent -= WinHandle;
+            _appData.LevelEvents.FailEvent -= FailHandle;
         }
     }
 }

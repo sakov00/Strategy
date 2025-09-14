@@ -26,7 +26,7 @@ namespace _Project.Scripts
         {
             InjectManager.Inject(this);
             Application.targetFrameRate = 120;
-            StartLevel(0).Forget();
+            StartLevel(AppData.User.CurrentLevel).Forget();
         }
 
         public virtual async UniTask StartLevel(int levelIndex)
@@ -35,8 +35,8 @@ namespace _Project.Scripts
             WindowsManager.ShowWindow<GameWindowPresenter>();
             AppData.LevelEvents.Dispose();
             AppData.LevelEvents.Initialize();
-            AppData.LevelData.CurrentLevel = levelIndex;
-            AppData.LevelData.CurrentRound = 0;
+            AppData.User.CurrentLevel = levelIndex;
+            AppData.User.CurrentRound = 0;
             await LoadLevel(levelIndex);
             WindowsManager.GetWindow<GameWindowPresenter>().Initialize();
             var playerController = CharacterPool.Get<PlayerController>(new Vector3(60, 1, 70));

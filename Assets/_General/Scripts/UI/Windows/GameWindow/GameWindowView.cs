@@ -65,11 +65,11 @@ namespace _General.Scripts.UI.Windows.GameWindow
                 })
                 .AddTo(this);
             
-            _appData.LevelData.MoneyReactive
+            _appData.LevelData.LevelMoneyReactive
                 .Subscribe(money => _moneyText.text = string.Format(MoneyFormat, money))
                 .AddTo(this);
             
-            _appData.LevelData.CurrentRoundReactive
+            _appData.User.CurrentRoundReactive
                 .Subscribe(roundIndex => _currentRoundText.text = string.Format(RoundFormat, roundIndex + 1))
                 .AddTo(this);
         }

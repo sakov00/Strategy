@@ -1,12 +1,13 @@
 using _General.Scripts.Interfaces;
+using _Project.Scripts.GameObjects._Object.MoneyBuild;
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects._Object.MoneyBuild
+namespace _Project.Scripts.GameObjects._Object.MainBuild
 {
-    public class MoneyBuildController : BuildController
+    public class MainBuildController : BuildController
     {
-        [field:SerializeField] public MoneyBuildModel Model { get; private set; }
-        [field: SerializeField] public MoneyBuildingView View { get; private set; }
+        [field:SerializeField] public MainBuildModel Model { get; private set; }
+        [field: SerializeField] public MainBuildingView View { get; private set; }
         public override BuildModel BuildModel => Model;
         public override BuildView BuildView => View;
 
@@ -14,14 +15,6 @@ namespace _Project.Scripts.GameObjects._Object.MoneyBuild
         {
             base.Initialize();
             ObjectsRegistry.Register(this);
-            AppData.LevelEvents.WinEvent += AddMoneyToPlayer;
-        }
-        
-        private void AddMoneyToPlayer()
-        {
-            var moneyAmount = Model.AddMoneyValue * (Model.CurrentLevel + 1);
-            AppData.LevelData.Money += moneyAmount;
-            View.MoneyUp(moneyAmount);
         }
         
         public override ISavableModel GetSavableModel()
@@ -33,7 +26,7 @@ namespace _Project.Scripts.GameObjects._Object.MoneyBuild
         
         public override void SetSavableModel(ISavableModel savableModel)
         {
-            if (savableModel is MoneyBuildModel moneyBuildModel)
+            if (savableModel is MainBuildModel moneyBuildModel)
             {
                 Model = moneyBuildModel;
                 Initialize();
@@ -55,7 +48,6 @@ namespace _Project.Scripts.GameObjects._Object.MoneyBuild
         public override void ClearData()
         {
             ObjectsRegistry.Unregister(this);
-            AppData.LevelEvents.WinEvent -= AddMoneyToPlayer;
         }
     }
 }

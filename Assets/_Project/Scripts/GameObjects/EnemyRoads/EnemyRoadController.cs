@@ -77,7 +77,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
 
         public void StartSpawn()
         {
-            int currentRound = _appData.LevelData.CurrentRound;
+            int currentRound = _appData.User.CurrentRound;
             if (currentRound >= Model.RoundEnemyList.Count)
             {
                 Debug.LogWarning("Нет настроек для текущего раунда спавна.");

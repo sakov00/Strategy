@@ -50,7 +50,7 @@ namespace _General.Scripts.UI.Windows.WinWindow
         private void ContinueOnClick()
         {
             if (_isLevelWin)
-                _gameManager.StartLevel(_appData.LevelData.CurrentLevel).Forget();
+                _gameManager.StartLevel(_appData.User.CurrentLevel).Forget();
             WindowsManager.HideWindow<WinWindowPresenter>();
         }
 

@@ -30,6 +30,7 @@ namespace _General.Scripts.CameraLogic
         public async UniTask EnableFollowAnimation()
         {
             _moveTween.Kill();
+            if (_target == null) return; 
             var desiredPosition = _target.position + _offset;
 
             var distance = Vector3.Distance(_cameraTransform.position, desiredPosition);

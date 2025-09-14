@@ -42,7 +42,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
                 .ToArray();
             for (int i = 0; i < enemyValues.Length; i++)
             {
-                var countEnemy = roundEnemyList[_appData.LevelData.CurrentRound].enemies.Count(x => x.enemyType == enemyValues[i]);
+                var countEnemy = roundEnemyList[_appData.User.CurrentRound].enemies.Count(x => x.enemyType == enemyValues[i]);
                 if (countEnemy > 0)
                 {
                     _enemyIcons[i].gameObject.SetActive(true);
