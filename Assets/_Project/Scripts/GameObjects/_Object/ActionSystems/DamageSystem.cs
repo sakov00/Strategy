@@ -8,7 +8,7 @@ using _Project.Scripts.Pools;
 using UnityEngine;
 using VContainer;
 
-namespace _Project.Scripts.GameObjects.ActionSystems
+namespace _Project.Scripts.GameObjects._Object.ActionSystems
 {
     public class DamageSystem
     {

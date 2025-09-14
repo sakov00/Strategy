@@ -1,5 +1,5 @@
 using _General.Scripts.Interfaces;
-using _Project.Scripts.GameObjects.ActionSystems;
+using _Project.Scripts.GameObjects._Object.ActionSystems;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects._Object.TowerDefence

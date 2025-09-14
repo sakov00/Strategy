@@ -1,7 +1,6 @@
 using _General.Scripts._GlobalLogic;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
-using _General.Scripts.Json;
 using _General.Scripts.Registries;
 using _General.Scripts.Services;
 using _General.Scripts.SO;
@@ -9,7 +8,6 @@ using _General.Scripts.UI.Windows;
 using _Project.Scripts.Factories;
 using _Project.Scripts.Pools;
 using _Project.Scripts.SO;
-using _Redactor.Scripts.Services;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -97,7 +95,6 @@ namespace _Project.Scripts._VContainer
             builder.RegisterInstance(_poolsManager).AsSelf();
             builder.Register<ResetLevelService>(Lifetime.Singleton).AsSelf();
             builder.Register<SaveLoadLevelService>(Lifetime.Singleton).AsSelf();
-            builder.Register<JsonLoader>(Lifetime.Singleton).AsSelf();
         }
     }
 }

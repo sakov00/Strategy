@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects.CameraLogic
+namespace _General.Scripts.CameraLogic
 {
     [RequireComponent(typeof(Camera))]
     public class CameraController : MonoBehaviour

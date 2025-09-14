@@ -5,7 +5,6 @@ using System.Linq;
 using _General.Scripts.DTO;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
-using _General.Scripts.Services;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects._Object;
@@ -19,7 +18,7 @@ using MemoryPack;
 using UnityEngine;
 using VContainer;
 
-namespace _Redactor.Scripts.Services
+namespace _General.Scripts.Services
 {
     public class SaveLoadLevelService
     {

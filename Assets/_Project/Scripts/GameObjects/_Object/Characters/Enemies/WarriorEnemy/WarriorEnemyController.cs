@@ -1,5 +1,4 @@
 using _General.Scripts.Interfaces;
-using _General.Scripts.Json;
 using _Project.Scripts.GameObjects._Object.Characters.Unit;
 
 namespace _Project.Scripts.GameObjects._Object.Characters.Enemies.WarriorEnemy

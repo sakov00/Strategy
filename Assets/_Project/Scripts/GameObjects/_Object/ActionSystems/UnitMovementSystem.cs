@@ -2,7 +2,7 @@ using _General.Scripts.Extentions;
 using _Project.Scripts.GameObjects._Object.Characters.Unit;
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects.ActionSystems
+namespace _Project.Scripts.GameObjects._Object.ActionSystems
 {
     public class UnitMovementSystem
     {

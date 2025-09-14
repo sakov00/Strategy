@@ -1,11 +1,8 @@
 using System;
 using _General.Scripts._GlobalLogic;
-using _Project.Scripts.GameObjects._Object;
-using _Project.Scripts.Interfaces.Model;
-using _Project.Scripts.Interfaces.View;
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects.ActionSystems
+namespace _Project.Scripts.GameObjects._Object.ActionSystems
 {
     public class RegenerationHpSystem : IDisposable
     {

@@ -1,12 +1,11 @@
 using _General.Scripts._VContainer;
 using _General.Scripts.Extentions;
 using _General.Scripts.Registries;
-using _Project.Scripts.GameObjects._Object;
 using _Project.Scripts.Interfaces.Model;
 using UnityEngine;
 using VContainer;
 
-namespace _Project.Scripts.GameObjects.ActionSystems
+namespace _Project.Scripts.GameObjects._Object.ActionSystems
 {
     public class DetectionAim
     {

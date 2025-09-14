@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using _Project.Scripts.Enums;
+using _Project.Scripts.GameObjects._Object.ActionSystems;
 using _Project.Scripts.GameObjects._Object.Characters.Character;
-using _Project.Scripts.GameObjects.ActionSystems;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects._Object.Characters.Unit
