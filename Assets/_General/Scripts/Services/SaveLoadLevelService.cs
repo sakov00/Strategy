@@ -17,6 +17,7 @@ using Cysharp.Threading.Tasks;
 using MemoryPack;
 using UnityEngine;
 using VContainer;
+using K4os.Compression.LZ4;
 
 namespace _General.Scripts.Services
 {
@@ -62,7 +63,9 @@ namespace _General.Scripts.Services
             levelModel.SavableModels.AddRange(allObjects.Select(o => o.GetSavableModel()).ToList());
 
             var data = MemoryPackSerializer.Serialize(levelModel);
-            await File.WriteAllBytesAsync(path, data);
+            var compressed = LZ4Pickler.Pickle(data);
+            await File.WriteAllBytesAsync(path, compressed);
+            
             Debug.Log($"Level saved to {path}");
         }
 
@@ -75,7 +78,8 @@ namespace _General.Scripts.Services
                 return;
             }
 
-            var data = await File.ReadAllBytesAsync(path);
+            var compressed = await File.ReadAllBytesAsync(path);
+            var data = LZ4Pickler.Unpickle(compressed);
             LevelModel levelModel = MemoryPackSerializer.Deserialize<LevelModel>(data);
 
             Debug.Log($"Loaded {levelModel.SavableModels.Count} objects.");
