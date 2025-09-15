@@ -1,4 +1,5 @@
 using _General.Scripts.Interfaces;
+using _Project.Scripts.GameObjects._Object.ActionSystems;
 using _Project.Scripts.GameObjects._Object.MoneyBuild;
 using UnityEngine;
 
@@ -11,16 +12,26 @@ namespace _Project.Scripts.GameObjects._Object.MainBuild
         public override BuildModel BuildModel => Model;
         public override BuildView BuildView => View;
 
+        private DetectionAim _detectionAim;
+        private DamageSystem _damageSystem;
+
         public override void Initialize()
         {
             base.Initialize();
             ObjectsRegistry.Register(this);
+            _detectionAim = new DetectionAim(Model, transform);
+            _damageSystem = new DamageSystem(Model, View, transform);
+        }
+        
+        public override void BuildInGame()
+        {
+
         }
         
         public override ISavableModel GetSavableModel()
         {
-            Model.Position = transform.position;
-            Model.Rotation = transform.rotation;
+            Model.SavePosition = transform.position;
+            Model.SaveRotation = transform.rotation;
             return Model;
         }
         
@@ -31,6 +42,13 @@ namespace _Project.Scripts.GameObjects._Object.MainBuild
                 Model = moneyBuildModel;
                 Initialize();
             }
+        }
+        
+        protected override void FixedUpdate()
+        {            
+            base.FixedUpdate();
+            _detectionAim.DetectAim();
+            _damageSystem.Attack();
         }
         
         public override void Restore()

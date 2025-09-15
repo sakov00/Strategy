@@ -4,30 +4,18 @@ using VContainer.Unity;
 
 namespace _General.Scripts._GlobalLogic
 {
-    public class GameTimer : IInitializable, ITickable
+    public class GameTimer : ITickable
     {
-        public static GameTimer I { get; private set; }
-        
         public event Action OnEverySecond;
 
-        private float time;
-
-        public void Initialize()
-        {
-            if (I != null)
-            {
-                return;
-            }
-
-            I = this;
-        }
+        private float _time = 0;
 
         public void Tick()
         {
-            time += Time.deltaTime;
-            if (time >= 1f)
+            _time += Time.deltaTime;
+            if (_time >= 1f)
             {
-                time -= 1f;
+                _time -= 1f;
                 OnEverySecond?.Invoke();
             }
         }

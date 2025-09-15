@@ -1,20 +1,24 @@
 using System;
 using _General.Scripts._GlobalLogic;
+using _General.Scripts._VContainer;
 using UnityEngine;
+using VContainer;
 
 namespace _Project.Scripts.GameObjects._Object.ActionSystems
 {
     public class RegenerationHpSystem : IDisposable
     {
+        [Inject] private GameTimer _gameTimer;
         private readonly ObjectModel _objectModel;
         private readonly ObjectView _objectView;
 
         public RegenerationHpSystem(ObjectModel healthModel, ObjectView objectView)
         {
+            InjectManager.Inject(this);
             _objectModel = healthModel;
             _objectView = objectView;
             
-            GameTimer.I.OnEverySecond += TryRegenerateHealth;
+            _gameTimer.OnEverySecond += TryRegenerateHealth;
         }
 
         private void TryRegenerateHealth()
@@ -34,7 +38,7 @@ namespace _Project.Scripts.GameObjects._Object.ActionSystems
 
         public void Dispose()
         {
-            GameTimer.I.OnEverySecond -= TryRegenerateHealth;
+            _gameTimer.OnEverySecond -= TryRegenerateHealth;
         }
     }
 }

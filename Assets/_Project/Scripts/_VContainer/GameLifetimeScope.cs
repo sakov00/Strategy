@@ -31,7 +31,7 @@ namespace _Project.Scripts._VContainer
         {
             builder.RegisterBuildCallback(InjectManager.Initialize);
             
-            builder.Register<GameTimer>(Lifetime.Singleton).As<GameTimer, IInitializable, ITickable>();
+            builder.Register<GameTimer>(Lifetime.Singleton).As<GameTimer, ITickable>();
             
             RegisterGameManager(builder);
             RegisterAppData(builder);

@@ -11,7 +11,7 @@ namespace _Project.Scripts.GameObjects.LevelEnvironment.Environment
     public partial class EnvironmentModel : ISavableModel
     {
         [field:SerializeField] public EnvironmentType EnvironmentType { get; set; }
-        public Vector3 Position { get; set; }
-        public Quaternion Rotation { get; set; }
+        public Vector3 SavePosition { get; set; }
+        public Quaternion SaveRotation { get; set; }
     }
 }

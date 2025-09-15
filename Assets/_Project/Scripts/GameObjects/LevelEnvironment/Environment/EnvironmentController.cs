@@ -21,8 +21,8 @@ namespace _Project.Scripts.GameObjects.LevelEnvironment.Environment
 
         public ISavableModel GetSavableModel()
         {
-            _model.Position = transform.position;
-            _model.Rotation = transform.rotation;
+            _model.SavePosition = transform.position;
+            _model.SaveRotation = transform.rotation;
             return _model;
         }
         

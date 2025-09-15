@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects._Object.ActionSystems;
@@ -8,10 +9,12 @@ namespace _Project.Scripts.GameObjects._Object.Characters.Unit
 {
     public abstract class UnitController : MyCharacterController
     {
-        [field:SerializeField] public UnitModel Model { get; protected set; }
-        [field:SerializeField] public UnitView View  { get; protected set; }
+        [field:SerializeField] public UnitModel Model { get; set; }
+        [field:SerializeField] public UnitView View  { get; set; }
         public override CharacterModel CharacterModel => Model;
         public override CharacterView CharacterView => View;
+        
+        public Action<UnitController> OnKilled;
 
         private UnitMovementSystem _unitMovementSystem;
         private DetectionAim _detectionAim;
@@ -46,10 +49,12 @@ namespace _Project.Scripts.GameObjects._Object.Characters.Unit
             CharacterPool.Return(this);
             if(Model.WarSide == WarSide.Enemy)
                 ObjectsRegistry.Unregister(this);
+            OnKilled?.Invoke(this);
         }
         
         public override void ClearData()
         {
+            OnKilled = null;
             ObjectsRegistry.Unregister(this);
             _regenerationHpSystem?.Dispose();
         }

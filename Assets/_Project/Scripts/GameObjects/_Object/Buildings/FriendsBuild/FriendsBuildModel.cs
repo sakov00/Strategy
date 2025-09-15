@@ -12,19 +12,27 @@ namespace _Project.Scripts.GameObjects._Object.FriendsBuild
     public partial class FriendsBuildModel : BuildModel
     {
         [Header("Units")] 
-        [SerializeField] public CharacterType _characterType;
-        [SerializeField] public List<UnitModel> _buildUnits = new();
+        [SerializeField] private CharacterType _characterType;
+        [SerializeField] private int _timeCreateUnits = 5;
         
         public CharacterType CharacterType
         {
             get => _characterType;
             set => _characterType = value;
         }
-        
-        public List<UnitModel> BuildUnits
+
+        public int TimeCreateUnits
         {
-            get => _buildUnits;
-            set => _buildUnits = value;
+            get => _timeCreateUnits;
+            set => _timeCreateUnits = value;
         }
+        
+        public List<UnitModel> SaveBuildUnits { get; set; } = new();
+        
+        public int CurrentSpawnTimer { get; set; } = -1;
+        
+        [MemoryPackIgnore] public List<UnitController> BuildUnits { get; set; } = new();
+        
+        public Queue<UnitController> SpawnQueue { get; set; } = new();
     }
 }

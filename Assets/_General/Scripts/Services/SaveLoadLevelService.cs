@@ -10,6 +10,8 @@ using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects._Object;
 using _Project.Scripts.GameObjects._Object.BuildingZone;
 using _Project.Scripts.GameObjects._Object.Characters.Character;
+using _Project.Scripts.GameObjects._Object.Characters.Friends.ArcherFriend;
+using _Project.Scripts.GameObjects._Object.Characters.Friends.WarriorFriend;
 using _Project.Scripts.GameObjects.EnemyRoads;
 using _Project.Scripts.GameObjects.LevelEnvironment.Terrain;
 using _Project.Scripts.Pools;
@@ -59,8 +61,11 @@ namespace _General.Scripts.Services
         private async UniTask Save(string path)
         {
             var allObjects = _objectsRegistry.GetAllByInterface<ISavableController>();
+            var filteredAllObjects = 
+                allObjects.Where(x => x is not ArcherFriendController && x is not WarriorFriendController).ToList();
+            
             var levelModel = new LevelModel();
-            levelModel.SavableModels.AddRange(allObjects.Select(o => o.GetSavableModel()).ToList());
+            levelModel.SavableModels.AddRange(filteredAllObjects.Select(o => o.GetSavableModel()).ToList());
 
             var data = MemoryPackSerializer.Serialize(levelModel);
             var compressed = LZ4Pickler.Pickle(data);
@@ -91,32 +96,23 @@ namespace _General.Scripts.Services
         {
             foreach (var model in levelModel.SavableModels)
             {
-                ISavableController savableController = null;
-                if (model is BuildModel buildModel)
+                ISavableController savableController = model switch
                 {
-                    savableController = _buildPool.Get(buildModel.BuildType, buildModel.Position, buildModel.Rotation);
-                }
-                if (model is CharacterModel characterModel)
-                {
-                    savableController = _characterPool.Get(characterModel.CharacterType, characterModel.Position, characterModel.Rotation);
-                }
-                if (model is TerrainModel terrainModel)
-                {
-                    savableController = _environmentFactory.CreateTerrain(0);
-                }
-                // if (model is EnvironmentModel environmentModel)
-                // {
-                //     _environmentFactory.CreateEnvironment(levelIndex);
-                // }
-                if (model is EnemyRoadModel enemyRoadModel)
-                {
-                    savableController = _environmentFactory.CreateRoads(enemyRoadModel.Position, enemyRoadModel.Rotation);
-                }
-                if (model is BuildingZoneModel bindingZoneModel)
-                {
-                    savableController = _othersFactory.CreateBuildingZone(bindingZoneModel.Position, bindingZoneModel.Rotation);
-                }
+                    BuildModel buildModel => 
+                        _buildPool.Get(buildModel.BuildType, buildModel.SavePosition, buildModel.SaveRotation),
+                    CharacterModel characterModel => 
+                        _characterPool.Get(characterModel.CharacterType, characterModel.SavePosition, characterModel.SaveRotation),
+                    TerrainModel terrainModel => 
+                        _environmentFactory.CreateTerrain(0),
+                    EnemyRoadModel enemyRoadModel => 
+                        _environmentFactory.CreateRoads(enemyRoadModel.SavePosition, enemyRoadModel.SaveRotation),
+                    BuildingZoneModel buildingZoneModel => 
+                        _othersFactory.CreateBuildingZone(buildingZoneModel.SavePosition, buildingZoneModel.SaveRotation),
+                    _ => null
+                };
+
                 savableController?.SetSavableModel(model);
+
                 await UniTask.Yield();
             }
         }

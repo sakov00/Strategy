@@ -49,8 +49,8 @@ namespace _Project.Scripts.GameObjects.LevelEnvironment.Terrain
                 for (var i = 0; i < tris.Length; i++)
                     _model.Triangles[i] = (ushort)tris[i];
             }
-            _model.Position = transform.position;
-            _model.Rotation = transform.rotation;
+            _model.SavePosition = transform.position;
+            _model.SaveRotation = transform.rotation;
             return _model;
         }
         

@@ -7,7 +7,7 @@ namespace _Project.Scripts.GameObjects._Object
     public abstract class ObjectView : MonoBehaviour, IHealthView
     {
         [SerializeField] protected Renderer _objRenderer;
-        [SerializeField] protected HealthBar _healthBar;
+        [SerializeField] protected UniversalBar _healthBar;
         [SerializeField] protected Tooltip _tooltip;
         
         public virtual void Initialize() 
@@ -15,7 +15,7 @@ namespace _Project.Scripts.GameObjects._Object
         }
 
         public void UpdateHealthBar(float currentHealth, float maxHealth) =>
-            _healthBar.UpdateHealthBar(currentHealth, maxHealth);
+            _healthBar.UpdateBar(currentHealth, maxHealth);
         
         public void UpdateTooltip(int currentLvl, int? costUpgrade) =>
             _tooltip.UpdateTooltip(currentLvl, costUpgrade);

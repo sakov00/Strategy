@@ -22,10 +22,15 @@ namespace _Project.Scripts.GameObjects._Object.TowerDefence
             _damageSystem = new DamageSystem(Model, View, transform);
         }
         
+        public override void BuildInGame()
+        {
+
+        }
+        
         public override ISavableModel GetSavableModel()
         {
-            Model.Position = transform.position;
-            Model.Rotation = transform.rotation;
+            Model.SavePosition = transform.position;
+            Model.SaveRotation = transform.rotation;
             return Model;
         }
         

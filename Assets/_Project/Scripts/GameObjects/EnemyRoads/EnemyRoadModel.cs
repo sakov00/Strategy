@@ -14,8 +14,8 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
     {
         [field:SerializeField] public List<EnemyGroup> RoundEnemyList { get; set; } = new();
         
-        public Vector3 Position { get; set; }
-        public Quaternion Rotation { get; set; }
+        public Vector3 SavePosition { get; set; }
+        public Quaternion SaveRotation { get; set; }
         
         public SplineContainerData SplineContainerData { get; set; } = new();
         public List<Vector3> WorldPositions { get; set; } = new();

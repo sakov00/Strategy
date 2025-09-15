@@ -12,7 +12,7 @@ namespace _Project.Scripts.GameObjects._Object.BuildingZone
     {
         [field:SerializeField] public BuildType BuildType { get; private set; }
 
-        public Vector3 Position { get; set; }
-        public Quaternion Rotation { get; set; }
+        public Vector3 SavePosition { get; set; }
+        public Quaternion SaveRotation { get; set; }
     }
 }

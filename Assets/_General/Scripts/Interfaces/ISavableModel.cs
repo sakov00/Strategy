@@ -31,7 +31,7 @@ namespace _General.Scripts.Interfaces
     [MemoryPackUnion(12, typeof(TerrainModel))]
     public partial interface ISavableModel
     {
-        public Vector3 Position { get; set; }
-        public Quaternion Rotation { get; set; }
+        public Vector3 SavePosition { get; set; }
+        public Quaternion SaveRotation { get; set; }
     }
 }

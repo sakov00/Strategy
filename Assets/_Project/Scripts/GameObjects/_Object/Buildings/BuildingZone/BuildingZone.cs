@@ -29,8 +29,8 @@ namespace _Project.Scripts.GameObjects._Object.BuildingZone
 
         public ISavableModel GetSavableModel()
         {
-            _model.Position = transform.position;
-            _model.Rotation = transform.rotation;
+            _model.SavePosition = transform.position;
+            _model.SaveRotation = transform.rotation;
             return _model;
         }
 
@@ -64,6 +64,7 @@ namespace _Project.Scripts.GameObjects._Object.BuildingZone
             _appData.LevelData.Money -= buildModel.PriceList[0];
             var build = _buildFactory.CreateBuild(_model.BuildType, transform.position, transform.rotation);
             build.BuildModel.CurrentLevel++;
+            build.BuildInGame();
             ClearData();
             DestroyObject();
         }

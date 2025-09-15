@@ -25,6 +25,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
     public class EnemyRoadController : MonoBehaviour, ISavableController, IClearData
     {
         [Inject] private AppData _appData;
+        [Inject] private GameTimer _gameTimer;
         [Inject] private CharacterPool _characterPool;
         [Inject] private ObjectsRegistry _objectsRegistry;
 
@@ -61,8 +62,8 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
         
         public ISavableModel GetSavableModel()
         {
-            Model.Position = transform.position;
-            Model.Rotation = transform.rotation;
+            Model.SavePosition = transform.position;
+            Model.SaveRotation = transform.rotation;
             return Model;
         }
         
@@ -89,8 +90,8 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
             Model.CurrentIndex = 0;
             Model.ElapsedTime = 0f;
 
-            GameTimer.I.OnEverySecond -= Tick;
-            GameTimer.I.OnEverySecond += Tick;
+            _gameTimer.OnEverySecond -= Tick;
+            _gameTimer.OnEverySecond += Tick;
         }
 
         private void Tick()
@@ -105,7 +106,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
 
             if (Model.CurrentIndex >= _currentEnemyList.Count)
             {
-                GameTimer.I.OnEverySecond -= Tick;
+                _gameTimer.OnEverySecond -= Tick;
             }
         }
 
@@ -126,7 +127,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
 
         private void OnDestroy()
         {
-            GameTimer.I.OnEverySecond -= Tick;
+            _gameTimer.OnEverySecond -= Tick;
             ClearData();
         }
         

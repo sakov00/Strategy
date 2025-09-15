@@ -132,11 +132,18 @@ MonoBehaviour:
     _warSide: 0
     _delayRegeneration: 0
     _regenerateHealthInSecond: 0
-    _maxHealth: 100
-    _currentHealth: 100
+    _maxHealth: 1000
+    _currentHealth: 1000
     <BuildType>k__BackingField: 4
     _priceList: 
     _currentLevel: 0
+    _attackRange: 20
+    _damageAmount: 25
+    _allAnimAttackTime: 1
+    _animAttackTime: 1
+    _detectionRadius: 20
+    _typeAttack: 1
+    _aimObject: {fileID: 0}
   <View>k__BackingField: {fileID: 980575573167198939}
 --- !u!114 &980575573167198939
 MonoBehaviour:
@@ -153,6 +160,9 @@ MonoBehaviour:
   _objRenderer: {fileID: 8392064191958766038}
   _healthBar: {fileID: 924772688440896264}
   _tooltip: {fileID: 4440407429061833310}
+  <ProjectileType>k__BackingField: 2
+  <FirePoint>k__BackingField: {fileID: 1673183873552162724}
+  <ProjectileSpeed>k__BackingField: 50
 --- !u!1 &7034719443205392120
 GameObject:
   m_ObjectHideFlags: 0

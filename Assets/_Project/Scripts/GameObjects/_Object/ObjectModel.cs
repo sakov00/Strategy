@@ -31,17 +31,33 @@ namespace _Project.Scripts.GameObjects._Object
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private float _currentHealth = 100f;
         
-        public Vector3 Position { get; set; }
-        public Quaternion Rotation { get; set; }
+        public Vector3 SavePosition { get; set; }
+        public Quaternion SaveRotation { get; set; }
         
         public float HeightObject { get; set; }
         public Vector3 NoAimPos { get; set; }
         
         public int SecondsWithoutDamage { get; set; }
         public WarSide WarSide => _warSide;
-        public float DelayRegeneration => _delayRegeneration;
-        public float RegenerateHealthInSecond => _regenerateHealthInSecond;
-        public float MaxHealth => _maxHealth;
+
+        public float DelayRegeneration
+        {
+            get => _delayRegeneration;
+            set => _delayRegeneration = value;
+        }
+
+        public float RegenerateHealthInSecond
+        {
+            get => _regenerateHealthInSecond;
+            set => _regenerateHealthInSecond = value;
+        }
+
+        public float MaxHealth
+        {
+            get => _maxHealth;
+            set => _maxHealth = value;
+        }
+
         [MemoryPackInclude] public float CurrentHealth
         {
             get => _currentHealth;
@@ -49,7 +65,7 @@ namespace _Project.Scripts.GameObjects._Object
             {
                 if (value < _currentHealth)
                     SecondsWithoutDamage = 0;
-                _currentHealth = Mathf.Clamp(value, 0, _maxHealth);
+                _currentHealth = Mathf.Clamp(value, 0, MaxHealth);
             }
         }
         

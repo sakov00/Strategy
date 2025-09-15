@@ -1,4 +1,5 @@
-using _General.Scripts.AllAppData; 
+using _General.Scripts.AllAppData;
+using _General.Scripts.Interfaces;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Pools;
@@ -20,6 +21,8 @@ namespace _Project.Scripts.GameObjects._Object
         public override ObjectView ObjectView => BuildView;
         
         private Vector3 _originalScale;
+
+        public abstract void BuildInGame();
         
         public virtual async UniTask TryBuy()
         {
