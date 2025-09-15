@@ -10,8 +10,8 @@ namespace _General.Scripts.SO
     [CreateAssetMenu(fileName = "LevelsConfig", menuName = "SO/Levels Config")]
     public class LevelsConfig : ScriptableObject
     {
-        [SerializeField] public List<TerrainController> terrainControllers = new();
-        [SerializeField] public List<EnvironmentController> environmentPrefabs = new();
-        [SerializeField] public EnemyRoadController roadPrefab = new();
+        [SerializeField] public List<TerrainController> terrainControllers;
+        [SerializeField] public List<EnvironmentController> environmentPrefabs;
+        [SerializeField] public EnemyRoadController roadPrefab;
     }
 }

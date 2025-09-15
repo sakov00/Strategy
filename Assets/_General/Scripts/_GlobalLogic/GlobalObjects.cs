@@ -1,5 +1,4 @@
 using _General.Scripts.CameraLogic;
-using LunarConsolePlugin;
 using UnityEngine;
 
 namespace _General.Scripts._GlobalLogic
@@ -9,10 +8,8 @@ namespace _General.Scripts._GlobalLogic
         public static GlobalObjects Instance { get; private set; }
         
         public static CameraController CameraController => Instance.cameraController;
-        public static LunarConsole LunarConsole => Instance.lunarConsole;
         
         [SerializeField] private CameraController cameraController;
-        [SerializeField] private LunarConsole lunarConsole;
         
         private void Awake()
         {

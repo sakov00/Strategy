@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using _General.Scripts.AllAppData;
 using _General.Scripts.Registries;
@@ -94,6 +95,8 @@ namespace _General.Scripts.UI.Windows.GameWindow
             _model.IsStrategyMode = false;
             _model.IsNextRoundAvailable = true;
         }
+
+        private void OnDestroy() => Dispose();
 
         public void Dispose()
         {

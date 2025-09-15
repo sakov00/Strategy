@@ -30,19 +30,19 @@ namespace _Project.Scripts.GameObjects.LevelEnvironment.Terrain
                 Mesh mesh = _meshFilter.sharedMesh;
 
                 var vertices = mesh.vertices;
-                _model.Vertices = new Vector3Half[vertices.Length];
+                _model.Vertices = new Vector3Scaled[vertices.Length];
                 for (var i = 0; i < vertices.Length; i++)
-                    _model.Vertices[i] = new Vector3Half(vertices[i]);
+                    _model.Vertices[i] = new Vector3Scaled(vertices[i]);
 
                 var normals = mesh.normals;
-                _model.Normals = new Vector3Half[normals.Length];
+                _model.Normals = new Vector3Scaled[normals.Length];
                 for (var i = 0; i < normals.Length; i++)
-                    _model.Normals[i] = new Vector3Half(normals[i]);
+                    _model.Normals[i] = new Vector3Scaled(normals[i]);
 
                 var uvs = mesh.uv;
-                _model.UVs = new Vector2Half[uvs.Length];
+                _model.UVs = new Vector2Scaled[uvs.Length];
                 for (var i = 0; i < uvs.Length; i++)
-                    _model.UVs[i] = new Vector2Half(uvs[i]);
+                    _model.UVs[i] = new Vector2Scaled(uvs[i]);
 
                 var tris = mesh.triangles;
                 _model.Triangles = new ushort[tris.Length];
@@ -62,21 +62,25 @@ namespace _Project.Scripts.GameObjects.LevelEnvironment.Terrain
                 if (_meshFilter != null && _model.Vertices != null && _model.UVs != null && _model.Triangles != null)
                 {
                     var vertices = new Vector3[_model.Vertices.Length];
-                    for (int i = 0; i < vertices.Length; i++)
+                    for (var i = 0; i < vertices.Length; i++)
                         vertices[i] = _model.Vertices[i].ToVector3();
                     
                     var uvs = new Vector2[_model.UVs.Length];
-                    for (int i = 0; i < uvs.Length; i++)
+                    for (var i = 0; i < uvs.Length; i++)
                         uvs[i] = _model.UVs[i].ToVector2();
 
+                    var triangles = new ushort[_model.Triangles.Length];
+                    for (var i = 0; i < triangles.Length; i++)
+                        triangles[i] = _model.Triangles[i];
+                    
                     var normals = new Vector3[_model.Normals.Length];
-                    for (int i = 0; i < normals.Length; i++)
+                    for (var i = 0; i < normals.Length; i++)
                         normals[i] = _model.Normals[i].ToVector3();
                     
                     _meshFilter.mesh.Clear();
                     _meshFilter.mesh.SetVertices(vertices);
                     _meshFilter.mesh.SetUVs(0, uvs);
-                    _meshFilter.mesh.SetTriangles(terrainModel.Triangles, 0);
+                    _meshFilter.mesh.SetTriangles(triangles, 0);
                     _meshFilter.mesh.SetNormals(normals);
                 }
             }

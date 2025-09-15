@@ -28,7 +28,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
         [Inject] private CharacterPool _characterPool;
         [Inject] private ObjectsRegistry _objectsRegistry;
 
-        [SerializeField] private SplineContainer _splineContainer = new();
+        [SerializeField] private SplineContainer _splineContainer;
         
         [field:SerializeField] public EnemyRoadModel Model { get; private set; }
         [field:SerializeField] public EnemyRoadView View { get; private set; }

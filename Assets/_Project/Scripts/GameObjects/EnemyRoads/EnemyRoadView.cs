@@ -16,7 +16,7 @@ namespace _Project.Scripts.GameObjects.EnemyRoads
     {
         [Inject] private AppData _appData;
         
-        [SerializeField] private SplineAnimate _animatePrefab = new();
+        [SerializeField] private SplineAnimate _animatePrefab;
         [SerializeField] private List<TextMeshPro> _enemyIcons;
         [SerializeField] private float _distanceBetweenIcons = 4;
         

@@ -10,9 +10,9 @@ namespace _Project.Scripts.GameObjects.LevelEnvironment.Terrain
     [MemoryPackable]
     public partial class TerrainModel : ISavableModel
     {
-        public Vector3Half[] Vertices { get; set; }
-        public Vector3Half[] Normals { get; set; }
-        public Vector2Half[] UVs { get; set; }
+        public Vector3Scaled[] Vertices { get; set; }
+        public Vector3Scaled[] Normals { get; set; }
+        public Vector2Scaled[] UVs { get; set; }
         public ushort[] Triangles { get; set; }
         public Vector3 Position { get; set; }
         public Quaternion Rotation { get; set; }
