@@ -1,6 +1,6 @@
 using System.Linq;
 using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects.Projectiles;
+using _Project.Scripts.GameObjects.Additional.Projectiles;
 using _Project.Scripts.SO;
 using UnityEngine;
 using VContainer;

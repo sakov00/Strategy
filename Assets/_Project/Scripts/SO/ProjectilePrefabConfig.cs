@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using _Project.Scripts.GameObjects.Projectiles;
+using _Project.Scripts.GameObjects.Additional.Projectiles;
 using UnityEngine;
 
 namespace _Project.Scripts.SO

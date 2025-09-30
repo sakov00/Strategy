@@ -3,7 +3,7 @@ using System.Linq;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
-using _Project.Scripts.GameObjects.Projectiles;
+using _Project.Scripts.GameObjects.Additional.Projectiles;
 using UnityEngine;
 using VContainer;
 

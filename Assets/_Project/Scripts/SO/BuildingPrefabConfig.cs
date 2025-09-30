@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using _Project.Scripts.GameObjects;
-using _Project.Scripts.GameObjects._Object;
-using _Project.Scripts.GameObjects._Object.BuildingZone;
+using _Project.Scripts.GameObjects.Abstract;
+using _Project.Scripts.GameObjects.Concrete.BuildingZone;
 using UnityEngine;
 
 namespace _Project.Scripts.SO

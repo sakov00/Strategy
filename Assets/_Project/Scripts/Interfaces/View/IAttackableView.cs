@@ -1,5 +1,4 @@
 using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects.Projectiles;
 using UnityEngine;
 
 namespace _Project.Scripts.Interfaces.View

@@ -1,5 +1,5 @@
 using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects._Object;
+using _Project.Scripts.GameObjects.Abstract.BaseObject;
 
 namespace _Project.Scripts.Interfaces.Model
 {

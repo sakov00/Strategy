@@ -3,8 +3,8 @@ using System.Linq;
 using _General.Scripts._VContainer;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects._Object.Characters.Unit;
-using _Project.Scripts.GameObjects._Object.MainBuild;
+using _Project.Scripts.GameObjects.Abstract.Unit;
+using _Project.Scripts.GameObjects.Concrete.MainBuild;
 using UniRx;
 using VContainer;
 using VContainer.Unity;
@@ -39,7 +39,7 @@ namespace _General.Scripts.AllAppData
 
         private void TryInvokeAllEnemiesKilled()
         {
-            if (_objectsRegistry.GetTypedList<UnitController>().Any(x => x.Model.WarSide == WarSide.Enemy))
+            if (_objectsRegistry.GetTypedList<UnitController>().Any(x => x.WarSide == WarSide.Enemy))
                 return;
 
             WinEvent?.Invoke();

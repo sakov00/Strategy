@@ -1,0 +1,30 @@
+using _General.Scripts.UI.Info;
+using _Project.Scripts.Interfaces.View;
+using UnityEngine;
+
+namespace _Project.Scripts.GameObjects.Abstract.BaseObject
+{
+    public abstract class ObjectView : MonoBehaviour, IHealthView
+    {
+        [SerializeField] protected Renderer _objRenderer;
+        [SerializeField] protected UniversalBar _healthBar;
+        [SerializeField] protected Tooltip _tooltip;
+
+        public abstract void Initialize();
+
+        public void UpdateHealthBar(float currentHealth, float maxHealth)
+        {
+            _healthBar.UpdateBar(currentHealth, maxHealth);
+        }
+
+        public void UpdateTooltip(int currentLvl, int? costUpgrade)
+        {
+            _tooltip.UpdateTooltip(currentLvl, costUpgrade);
+        }
+
+        public float GetHeightObject()
+        {
+            return _objRenderer.bounds.size.y;
+        }
+    }
+}

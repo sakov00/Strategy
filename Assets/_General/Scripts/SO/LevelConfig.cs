@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
-using _Project.Scripts.GameObjects.EnemyRoads;
-using _Project.Scripts.GameObjects.LevelEnvironment.Environment;
-using _Project.Scripts.GameObjects.LevelEnvironment.Terrain;
+using _Project.Scripts.GameObjects.Additional.EnemyRoads;
+using _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment;
+using _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain;
 using UnityEngine;
 
 namespace _General.Scripts.SO

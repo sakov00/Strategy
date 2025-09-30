@@ -1,10 +1,11 @@
 using System.Linq;
 using _Project.Scripts.Enums;
-using _Project.Scripts.GameObjects._Object;
+using _Project.Scripts.GameObjects.Abstract;
 using _Project.Scripts.SO;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
+using BuildModel = _Project.Scripts.GameObjects.Abstract.BuildModel;
 
 namespace _Project.Scripts.Factories
 {
@@ -23,22 +24,6 @@ namespace _Project.Scripts.Factories
                 }
             }
             return null;
-        }
-
-        public BuildController CreateBuild(BuildType buildType, Vector3 position = default, Quaternion rotation = default)
-        {
-            var prefab = _buildingPrefabConfig.allBuildPrefabs
-                .FirstOrDefault(p => p.BuildModel.BuildType == buildType);
-
-            return prefab != null ? _resolver.Instantiate(prefab, position, rotation) : null;
-        }
-
-        public BuildModel GetBuildModel(BuildType buildType)
-        {
-            var prefab = _buildingPrefabConfig.allBuildPrefabs
-                .FirstOrDefault(p => p.BuildModel.BuildType == buildType);
-
-            return prefab != null ? prefab.BuildModel : null;
         }
     }
 }

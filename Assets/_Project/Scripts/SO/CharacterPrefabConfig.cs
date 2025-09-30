@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using _General.Scripts.CameraLogic;
-using _Project.Scripts.GameObjects._Object.Characters.Character;
+using _Project.Scripts.GameObjects.Abstract.Unit;
 using UnityEngine;
 
 namespace _Project.Scripts.SO
@@ -9,7 +9,7 @@ namespace _Project.Scripts.SO
     public class CharacterPrefabConfig : ScriptableObject
     {
         [Header("Character Prefabs")] 
-        public List<MyCharacterController> allCharacterPrefabs = new();
+        public List<UnitController> allCharacterPrefabs = new();
         public CameraFollow cameraPrefab;
     }
 }

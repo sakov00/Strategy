@@ -1,5 +1,5 @@
 using _General.Scripts.Registries;
-using _Project.Scripts.GameObjects._Object.BuildingZone;
+using _Project.Scripts.GameObjects.Concrete.BuildingZone;
 using _Project.Scripts.SO;
 using UnityEngine;
 using VContainer;

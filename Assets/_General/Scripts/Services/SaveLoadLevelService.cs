@@ -7,19 +7,20 @@ using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
-using _Project.Scripts.GameObjects._Object;
-using _Project.Scripts.GameObjects._Object.BuildingZone;
-using _Project.Scripts.GameObjects._Object.Characters.Character;
-using _Project.Scripts.GameObjects._Object.Characters.Friends.ArcherFriend;
-using _Project.Scripts.GameObjects._Object.Characters.Friends.WarriorFriend;
-using _Project.Scripts.GameObjects.EnemyRoads;
-using _Project.Scripts.GameObjects.LevelEnvironment.Terrain;
+using _Project.Scripts.GameObjects.Abstract;
+using _Project.Scripts.GameObjects.Concrete.ArcherFriend;
+using _Project.Scripts.GameObjects.Concrete.WarriorFriend;
 using _Project.Scripts.Pools;
 using Cysharp.Threading.Tasks;
 using MemoryPack;
 using UnityEngine;
 using VContainer;
 using K4os.Compression.LZ4;
+using BuildingZoneModel = _Project.Scripts.GameObjects.Concrete.BuildingZone.BuildingZoneModel;
+using BuildModel = _Project.Scripts.GameObjects.Abstract.BuildModel;
+using EnemyRoadModel = _Project.Scripts.GameObjects.Additional.EnemyRoads.EnemyRoadModel;
+using TerrainModel = _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain.TerrainModel;
+using UnitModel = _Project.Scripts.GameObjects.Abstract.Unit.UnitModel;
 
 namespace _General.Scripts.Services
 {
@@ -100,8 +101,8 @@ namespace _General.Scripts.Services
                 {
                     BuildModel buildModel => 
                         _buildPool.Get(buildModel.BuildType, buildModel.SavePosition, buildModel.SaveRotation),
-                    CharacterModel characterModel => 
-                        _characterPool.Get(characterModel.CharacterType, characterModel.SavePosition, characterModel.SaveRotation),
+                    UnitModel characterModel => 
+                        _characterPool.Get(characterModel.UnitType, characterModel.SavePosition, characterModel.SaveRotation),
                     TerrainModel terrainModel => 
                         _environmentFactory.CreateTerrain(0),
                     EnemyRoadModel enemyRoadModel => 

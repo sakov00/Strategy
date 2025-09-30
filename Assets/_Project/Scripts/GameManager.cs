@@ -5,7 +5,7 @@ using _General.Scripts.Registries;
 using _General.Scripts.Services;
 using _General.Scripts.UI.Windows;
 using _General.Scripts.UI.Windows.GameWindow;
-using _Project.Scripts.GameObjects._Object.Characters.Friends.Player;
+using _Project.Scripts.GameObjects.Concrete.Player;
 using _Project.Scripts.Pools;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

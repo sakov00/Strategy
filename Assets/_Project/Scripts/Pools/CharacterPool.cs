@@ -4,7 +4,7 @@ using System.Linq;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
-using _Project.Scripts.GameObjects._Object.Characters.Character;
+using _Project.Scripts.GameObjects.Abstract.Unit;
 using UnityEngine;
 using VContainer;
 
@@ -16,37 +16,16 @@ namespace _Project.Scripts.Pools
         [Inject] private ObjectsRegistry _objectsRegistry;
 
         private Transform _containerTransform;
-        private readonly List<MyCharacterController> _availableCharacters = new();
+        private readonly List<UnitController> _availableCharacters = new();
 
         public void SetContainer(Transform transform)
         {
             _containerTransform = transform;
         }
         
-        public List<MyCharacterController> GetAvailableBuilds() => _availableCharacters;
-
-        public MyCharacterController Get(CharacterType characterType, Vector3 position = default, Quaternion rotation = default) 
-        {
-            var character = _availableCharacters.FirstOrDefault(c => c.CharacterModel.CharacterType == characterType);
-            if (character != null)
-            {
-                _availableCharacters.Remove(character);
-                character.transform.position = position;
-                character.transform.rotation = rotation;
-                character.gameObject.SetActive(true);
-                character.Initialize();
-            }
-            else
-            {
-                character = _characterFactory.CreateCharacter(characterType, position, rotation);
-            }
-
-            character.transform.SetParent(null);
-            _objectsRegistry.Register(character);
-            return character;
-        }
+        public List<UnitController> GetAvailableBuilds() => _availableCharacters;
         
-        public T Get<T>(Vector3 position = default, Quaternion rotation = default) where T : MyCharacterController
+        public T Get<T>(Vector3 position = default, Quaternion rotation = default) where T : UnitController
         {
             var character = _availableCharacters.OfType<T>().FirstOrDefault();
             if (character != null)
@@ -66,28 +45,7 @@ namespace _Project.Scripts.Pools
             return character;
         }
 
-        public T Get<T>(CharacterType characterType, Vector3 position = default, Quaternion rotation = default) 
-            where T : MyCharacterController
-        {
-            var character = _availableCharacters.OfType<T>().FirstOrDefault(c => c.CharacterModel.CharacterType == characterType);
-            if (character != null)
-            {
-                _availableCharacters.Remove(character);
-                character.transform.position = position;
-                character.transform.rotation = rotation;
-                character.gameObject.SetActive(true);
-            }
-            else
-            {
-                character = _characterFactory.CreateCharacter<T>(characterType, position, rotation);
-            }
-
-            character.transform.SetParent(null);
-            _objectsRegistry.Register(character);
-            return character;
-        }
-
-        public void Return<T>(T character) where T : MyCharacterController
+        public void Return<T>(T character) where T : UnitController
         {
             if (!_availableCharacters.Contains(character))
             {
@@ -99,7 +57,7 @@ namespace _Project.Scripts.Pools
             _objectsRegistry.Unregister(character);
         }
         
-        public void Remove<T>(T build) where T : MyCharacterController
+        public void Remove<T>(T build) where T : UnitController
         {
             if (!_availableCharacters.Contains(build))
             {

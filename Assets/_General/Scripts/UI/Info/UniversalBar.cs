@@ -1,7 +1,7 @@
 using _General.Scripts._GlobalLogic;
 using UnityEngine;
 
-namespace _Project.Scripts.GameObjects.Info
+namespace _General.Scripts.UI.Info
 {
     public class UniversalBar : MonoBehaviour
     {
