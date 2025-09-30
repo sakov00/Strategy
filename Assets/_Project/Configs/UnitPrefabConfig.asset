@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfa0fd45327b4f13ac8ffeeac655e068, type: 3}
-  m_Name: CharacterPrefabConfig
+  m_Name: UnitPrefabConfig
   m_EditorClassIdentifier: 
-  allCharacterPrefabs:
+  allUnitPrefabs:
   - {fileID: 727004643926444983, guid: 08a642a0595c20d4180778ff6bb8d4eb, type: 3}
-  - {fileID: 257078088719806101, guid: 540e1a8d322178847a3e3f10f3cd8f44, type: 3}
-  - {fileID: 1717123951199246250, guid: 39d72efaf1b66234ba30f80bed4305df, type: 3}
-  - {fileID: 5608380024814131166, guid: 28dc6e094cf31fa4bade2478c744ced6, type: 3}
   - {fileID: 7231524114703381670, guid: 7a02f0b6d89b7634298f3073be2c69e2, type: 3}
+  - {fileID: 5608380024814131166, guid: 28dc6e094cf31fa4bade2478c744ced6, type: 3}
+  - {fileID: 1717123951199246250, guid: 39d72efaf1b66234ba30f80bed4305df, type: 3}
+  - {fileID: 257078088719806101, guid: 540e1a8d322178847a3e3f10f3cd8f44, type: 3}
   cameraPrefab:
     _offset: {x: 0, y: 20, z: -12}
     _followSpeed: 5
+    _returnSpeed: 30
+    _limitSecondsReturn: 1

@@ -1,10 +1,12 @@
 using System;
 using _Project.Scripts.GameObjects.Abstract.Unit;
+using MemoryPack;
 
 namespace _Project.Scripts.GameObjects.Concrete.ArcherEnemy
 {
     [Serializable]
-    public class ArcherEnemyModel : UnitModel
+    [MemoryPackable]
+    public partial class ArcherEnemyModel : UnitModel
     {
     }
 }

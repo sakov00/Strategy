@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using _General.Scripts.AllAppData;
 using _General.Scripts.Interfaces;
 using _Project.Scripts.Enums;
@@ -13,37 +14,37 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         [Inject] private AppData _appData;
         [field: SerializeField] public PlayerModel Model { get; private set; }
         [field: SerializeField] public PlayerView View { get; private set; }
+        protected override UnitModel UnitModel => Model;
+        protected override UnitView UnitView => View;
         
         private DamageSystem _damageSystem;
         private DetectionAim _detectionAim;
         private PlayerMovementSystem _playerMovementSystem;
         private RegenerationHpSystem _regenerationHpSystem;
-        
-        public override WarSide WarSide => Model.WarSide;
-        public override float CurrentHealth { get => Model.CurrentHealth; set => Model.CurrentHealth = value; }
-
-        private void Update()
-        {
-            _playerMovementSystem.MoveTo(_appData.LevelData.MoveDirection);
-        }
-
-        protected void FixedUpdate()
-        {
-            View.UpdateHealthBar(Model.CurrentHealth, Model.MaxHealth);
-            _detectionAim.DetectAim();
-            _damageSystem.Attack();
-        }
 
         public override void Initialize()
         {
-            View.Initialize();
-            HeightObject = View.GetHeightObject();
-            Model.NoAimPos = transform.position;
-            ObjectsRegistry.Register(this);
+            base.Initialize();
+            
+            Model.CurrentHealth = Model.MaxHealth;
+            
             _playerMovementSystem = new PlayerMovementSystem(Model, View, transform);
             _detectionAim = new DetectionAim(Model, transform);
             _damageSystem = new DamageSystem(Model, View, transform);
             _regenerationHpSystem = new RegenerationHpSystem(Model, View);
+            View.Initialize();
+        }
+
+        protected override void FixedUpdate()
+        {
+            base.FixedUpdate();
+            _detectionAim.DetectAim();
+            _damageSystem.Attack();
+        }
+
+        private void Update()
+        {
+            _playerMovementSystem.MoveTo(_appData.LevelData.MoveDirection);
         }
 
         public override ISavableModel GetSavableModel()
@@ -62,25 +63,15 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             }
         }
 
-        public override void Restore()
-        {
-            transform.SetParent(null);
-            Model.CurrentHealth = Model.MaxHealth;
-            Model.NoAimPos = transform.position;
-            CharacterPool.Remove(this);
-            gameObject.SetActive(true);
-            ObjectsRegistry.Register(this);
-        }
-
         public override void ReturnToPool()
         {
-            CharacterPool.Return(this);
+            UnitPool.Return(this);
         }
 
         public override void ClearData()
         {
             ObjectsRegistry.Unregister(this);
-            _regenerationHpSystem.Dispose();
+            _regenerationHpSystem?.Dispose();
         }
     }
 }

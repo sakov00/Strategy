@@ -10,7 +10,11 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         [SerializeField] protected UniversalBar _healthBar;
         [SerializeField] protected Tooltip _tooltip;
 
-        public abstract void Initialize();
+        public virtual void Initialize()
+        {
+            transform.SetParent(null);
+            gameObject.SetActive(true);
+        }
 
         public void UpdateHealthBar(float currentHealth, float maxHealth)
         {

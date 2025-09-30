@@ -1,15 +1,28 @@
 using System;
+using System.Collections.Generic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract.BaseObject;
 using _Project.Scripts.Pools;
+using UnityEngine;
 using VContainer;
 
 namespace _Project.Scripts.GameObjects.Abstract.Unit
 {
     public abstract class UnitController : ObjectController
     {
-        [Inject] protected CharacterPool CharacterPool;
+        [Inject] protected UnitPool UnitPool;
+
+        protected abstract UnitModel UnitModel { get; }
+        protected abstract UnitView UnitView { get; }
+        protected override ObjectModel ObjectModel => UnitModel;
+        protected override ObjectView ObjectView => UnitView;
+
 
         public Action<UnitController> OnKilled;
+        public UnitType UnitType => UnitModel.UnitType;
+        public void SetWayToPoint(List<Vector3> waypoints)
+        {
+            UnitModel.WayToAim = waypoints;
+        }
     }
 }

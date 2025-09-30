@@ -25,26 +25,26 @@ namespace _Project.Scripts.Pools
         
         public List<BuildController> GetAvailableBuilds() => _availableBuilds;
         
-        public T Get<T>(Vector3 position = default, Quaternion rotation = default) where T : BuildController
+        public BuildController Get(BuildType buildType, Vector3 position = default, Quaternion rotation = default) 
         {
-            var build = _availableBuilds.OfType<T>().FirstOrDefault();
-
+            var build = _availableBuilds.FirstOrDefault(c => c.BuildType == buildType);
             if (build != null)
             {
                 _availableBuilds.Remove(build);
                 build.transform.position = position;
                 build.transform.rotation = rotation;
                 build.gameObject.SetActive(true);
+                build.Initialize();
             }
             else
             {
-                build = _buildFactory.CreateBuild<T>(position, rotation);
+                build = _buildFactory.CreateBuild(buildType, position, rotation);
             }
-            
+
             build.transform.SetParent(null);
-            _objectsRegistry.Register(build);
             return build;
         }
+
 
         public void Return<T>(T build) where T : BuildController
         {

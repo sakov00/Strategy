@@ -136,9 +136,8 @@ MonoBehaviour:
     _maxHealth: 100
     _currentHealth: 100
     <BuildType>k__BackingField: 2
-    _priceList: 00000000
-    _currentLevel: 0
-    _characterType: 1
+    <BuildPrice>k__BackingField: 0
+    _unitType: 1
     _timeCreateUnits: 5
   <View>k__BackingField: {fileID: 4564933277160738802}
 --- !u!114 &4564933277160738802

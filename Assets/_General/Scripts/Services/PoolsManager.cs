@@ -13,14 +13,14 @@ namespace _General.Scripts.Services
         [SerializeField] private Transform _projectilePoolContainer;
         
         [Inject] private BuildPool _buildPool;
-        [Inject] private CharacterPool _characterPool;
+        [Inject] private UnitPool _unitPool;
         [Inject] private ProjectilePool _projectilePool;
 
         private void Start()
         {
             InjectManager.Inject(this);
             _buildPool.SetContainer(_buildPoolContainer);
-            _characterPool.SetContainer(_characterPoolContainer);
+            _unitPool.SetContainer(_characterPoolContainer);
             _projectilePool.SetContainer(_projectilePoolContainer);
         }
     }

@@ -6,5 +6,9 @@ namespace _Project.Scripts.GameObjects.Abstract
     [Serializable]
     public abstract class BuildView : ObjectView
     {
+        public override void Initialize()
+        { 
+            base.Initialize();
+        }
     }
 }

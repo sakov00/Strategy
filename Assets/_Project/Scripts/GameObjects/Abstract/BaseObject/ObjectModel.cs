@@ -1,10 +1,15 @@
 using System;
 using _General.Scripts.Interfaces;
 using _Project.Scripts.Enums;
+using _Project.Scripts.GameObjects.Concrete.ArcherEnemy;
+using _Project.Scripts.GameObjects.Concrete.ArcherFriend;
+using _Project.Scripts.GameObjects.Concrete.FlyingEnemy;
 using _Project.Scripts.GameObjects.Concrete.FriendsBuild;
 using _Project.Scripts.GameObjects.Concrete.MoneyBuild;
 using _Project.Scripts.GameObjects.Concrete.Player;
 using _Project.Scripts.GameObjects.Concrete.TowerDefence;
+using _Project.Scripts.GameObjects.Concrete.WarriorEnemy;
+using _Project.Scripts.GameObjects.Concrete.WarriorFriend;
 using _Project.Scripts.Interfaces.Model;
 using MemoryPack;
 using UnityEngine;
@@ -20,7 +25,11 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
     [MemoryPackUnion(3, typeof(TowerDefenceModel))]
     [MemoryPackUnion(4, typeof(UnitModel))]
     [MemoryPackUnion(5, typeof(PlayerModel))]
-    [MemoryPackUnion(6, typeof(UnitModel))]
+    [MemoryPackUnion(6, typeof(WarriorEnemyModel))]
+    [MemoryPackUnion(7, typeof(WarriorFriendModel))]
+    [MemoryPackUnion(8, typeof(ArcherEnemyModel))]
+    [MemoryPackUnion(9, typeof(ArcherFriendModel))]
+    [MemoryPackUnion(10, typeof(FlyingEnemyModel))]
     public abstract partial class ObjectModel : IHealthModel, ISavableModel
     {
         [Header("Health")] 
@@ -29,8 +38,6 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         [SerializeField] private float _regenerateHealthInSecond = 5f;
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private float _currentHealth = 100f;
-
-        public Vector3 NoAimPos { get; set; }
 
         public int SecondsWithoutDamage { get; set; }
         public WarSide WarSide => _warSide;

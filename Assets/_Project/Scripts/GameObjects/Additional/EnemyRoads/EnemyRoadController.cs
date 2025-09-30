@@ -25,7 +25,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
         [field: SerializeField] public EnemyRoadModel Model { get; private set; }
         [field: SerializeField] public EnemyRoadView View { get; private set; }
         [Inject] private AppData _appData;
-        [Inject] private CharacterPool _characterPool;
+        [Inject] private UnitPool _unitPool;
 
         private List<EnemyWithTime> _currentEnemyList;
         [Inject] private GameTimer _gameTimer;
@@ -66,7 +66,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             _objectsRegistry.Unregister(this);
         }
 
-        public void DestroyObject()
+        public void DeleteFromScene()
         {
             Destroy(gameObject);
         }
@@ -124,9 +124,8 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             var offsetX = Random.Range(-5f, 5f);
             var wayPoints = new List<Vector3>();
             foreach (var position in Model.WorldPositions) wayPoints.Add(position + new Vector3(offsetX, 0f, 0f));
-            var enemyController = _characterPool.Get<UnitController>(enemyData.enemyType, wayPoints[0]);
-            enemyController.Model.CurrentHealth = enemyController.Model.MaxHealth;
-            enemyController.Model.WayToAim = wayPoints;
+            var enemyController = _unitPool.Get(enemyData.enemyType, wayPoints[0]);
+            enemyController.SetWayToPoint(wayPoints);
         }
 
         public void RefreshInfoRound()

@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 253004234346408404}
   - component: {fileID: 8760214948618722432}
   - component: {fileID: 5608380024814131166}
-  - component: {fileID: 8563257859194667371}
+  - component: {fileID: 6574901080452885705}
   m_Layer: 0
   m_Name: ArcherFriend
   m_TagString: Untagged
@@ -248,7 +248,7 @@ MonoBehaviour:
     _regenerateHealthInSecond: 5
     _maxHealth: 100
     _currentHealth: 100
-    <CharacterType>k__BackingField: 3
+    <UnitType>k__BackingField: 3
     _moveSpeed: 10
     _rotationSpeed: 10
     _gravity: -20
@@ -261,8 +261,8 @@ MonoBehaviour:
     _aimObject: {fileID: 0}
     _currentWaypointIndex: 0
     _wayToAim: []
-  <View>k__BackingField: {fileID: 8563257859194667371}
---- !u!114 &8563257859194667371
+  <View>k__BackingField: {fileID: 6574901080452885705}
+--- !u!114 &6574901080452885705
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -271,9 +271,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5556611430182395226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f3859cff1c149118054c40c9538b54a, type: 3}
+  m_Script: {fileID: 11500000, guid: f788d6e15d1745549624d2466e2855cc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.Concrete.ArcherFriend.ArcherFriendView
   _objRenderer: {fileID: 6325934801687606467}
   _healthBar: {fileID: 7757102756358357087}
   _tooltip: {fileID: 0}
@@ -281,7 +281,7 @@ MonoBehaviour:
   <Agent>k__BackingField: {fileID: 253004234346408404}
   <ProjectileType>k__BackingField: 1
   <FirePoint>k__BackingField: {fileID: 3946377445745853680}
-  <ProjectileSpeed>k__BackingField: 30
+  <ProjectileSpeed>k__BackingField: 10
 --- !u!1 &8111565066530959347
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,12 @@
+using System.Linq;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Factories;
 using _Project.Scripts.Interfaces;
+using _Project.Scripts.Pools;
+using _Project.Scripts.SO;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -13,11 +16,13 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
 {
     public class BuildingZone : MonoBehaviour, IBuy, ISavableController, IClearData
     {
-        [SerializeField] public BuildingZoneModel _model;
         [Inject] private AppData _appData;
-        [Inject] private BuildFactory _buildFactory;
+        [Inject] private BuildingPrefabConfig _buildingPrefabConfig;
+        [Inject] private BuildPool _buildPool;
         [Inject] private ObjectsRegistry _objectsRegistry;
 
+        [SerializeField] public BuildingZoneModel _model;
+        
         private Vector3 _originalScale;
 
         private void Start()
@@ -43,19 +48,18 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
             sequence.Append(transform.DOScale(_originalScale, 0.25f));
             await sequence.Play();
 
-            var buildModel = _buildFactory.GetBuildModel(_model.BuildType);
-            if (buildModel.PriceList[0] > _appData.LevelData.Money)
+            var prefab = _buildingPrefabConfig.allBuildPrefabs.First(p => p.BuildType == _model.BuildType);
+            var price = prefab.BuildPrice;
+            if (price > _appData.LevelData.Money)
             {
                 Debug.Log("Not enough money");
                 return;
             }
 
-            _appData.LevelData.Money -= buildModel.PriceList[0];
-            var build = _buildFactory.CreateBuild(_model.BuildType, transform.position, transform.rotation);
-            build.BuildModel.CurrentLevel++;
-            build.BuildInGame();
+            _appData.LevelData.Money -= price;
+            _buildPool.Get(_model.BuildType, transform.position, transform.rotation);
             ClearData();
-            DestroyObject();
+            DeleteFromScene();
         }
 
         public void ClearData()
@@ -63,12 +67,7 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
             _objectsRegistry.Unregister(this);
         }
 
-        public void ReturnToPool()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void DestroyObject()
+        public void DeleteFromScene()
         {
             Destroy(gameObject);
         }

@@ -16,7 +16,7 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
         [field: SerializeField] public NavMeshAgent Agent { get; private set; }
         [field: SerializeField] public ProjectileType ProjectileType { get; set; }
         [field: SerializeField] public Transform FirePoint { get; set; }
-        [field: SerializeField] public float ProjectileSpeed { get; set; } = 10f;
+        [field: SerializeField] public float ProjectileSpeed { get; set; } = 40f;
 
         public event Action AttackHitEvent;
 
@@ -41,7 +41,8 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
         }
 
         public override void Initialize()
-        {
+        { 
+            base.Initialize();
             SetWalking(true);
         }
 

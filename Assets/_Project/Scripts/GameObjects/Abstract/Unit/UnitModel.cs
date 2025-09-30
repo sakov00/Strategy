@@ -2,7 +2,12 @@ using System;
 using System.Collections.Generic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract.BaseObject;
+using _Project.Scripts.GameObjects.Concrete.ArcherEnemy;
+using _Project.Scripts.GameObjects.Concrete.ArcherFriend;
+using _Project.Scripts.GameObjects.Concrete.FlyingEnemy;
 using _Project.Scripts.GameObjects.Concrete.Player;
+using _Project.Scripts.GameObjects.Concrete.WarriorEnemy;
+using _Project.Scripts.GameObjects.Concrete.WarriorFriend;
 using _Project.Scripts.Interfaces.Model;
 using MemoryPack;
 using UnityEngine;
@@ -12,6 +17,11 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
     [Serializable]
     [MemoryPackable]
     [MemoryPackUnion(0, typeof(PlayerModel))]
+    [MemoryPackUnion(1, typeof(WarriorEnemyModel))]
+    [MemoryPackUnion(2, typeof(WarriorFriendModel))]
+    [MemoryPackUnion(3, typeof(ArcherEnemyModel))]
+    [MemoryPackUnion(4, typeof(ArcherFriendModel))]
+    [MemoryPackUnion(5, typeof(FlyingEnemyModel))]
     public abstract partial class UnitModel : ObjectModel, IFightObjectModel
     {
         [field: Header("Unit Type")]

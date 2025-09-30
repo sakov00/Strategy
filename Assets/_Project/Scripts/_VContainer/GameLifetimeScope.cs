@@ -22,7 +22,7 @@ namespace _Project.Scripts._VContainer
         [Header("Configs")]
         [SerializeField] protected LevelsConfig _levelsConfig;
         [SerializeField] protected OthersPrefabConfig _othersPrefabConfig;
-        [SerializeField] protected CharacterPrefabConfig _characterPrefabConfig;
+        [SerializeField] protected UnitPrefabConfig _unitPrefabConfig;
         [SerializeField] protected BuildingPrefabConfig _buildingPrefabConfig;
         [SerializeField] protected ProjectilePrefabConfig _projectilePrefabConfig;
         [SerializeField] protected WindowsConfig _windowsConfig;
@@ -67,7 +67,7 @@ namespace _Project.Scripts._VContainer
         private void RegisterPools(IContainerBuilder builder)
         {
             builder.Register<BuildPool>(Lifetime.Singleton).AsSelf();
-            builder.Register<CharacterPool>(Lifetime.Singleton).AsSelf();
+            builder.Register<UnitPool>(Lifetime.Singleton).AsSelf();
             builder.Register<ProjectilePool>(Lifetime.Singleton).AsSelf();
         }
         
@@ -76,7 +76,7 @@ namespace _Project.Scripts._VContainer
             builder.Register<OthersFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<BuildFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<ProjectileFactory>(Lifetime.Singleton).AsSelf();
-            builder.Register<CharacterFactory>(Lifetime.Singleton).AsSelf();
+            builder.Register<UnitFactory>(Lifetime.Singleton).AsSelf();
             builder.Register<EnvironmentFactory>(Lifetime.Singleton).AsSelf();
         }
         
@@ -84,7 +84,7 @@ namespace _Project.Scripts._VContainer
         {
             builder.RegisterInstance(_levelsConfig).AsSelf();
             builder.RegisterInstance(_othersPrefabConfig).AsSelf();
-            builder.RegisterInstance(_characterPrefabConfig).AsSelf();
+            builder.RegisterInstance(_unitPrefabConfig).AsSelf();
             builder.RegisterInstance(_buildingPrefabConfig).AsSelf();
             builder.RegisterInstance(_projectilePrefabConfig).AsSelf();
             builder.RegisterInstance(_windowsConfig).AsSelf().As<IInitializable>();

@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 988c9940b5f24368a08fba2ddaa2e9cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBarRenderer: {fileID: 4912113428068058692}
+  _universalBarRenderer: {fileID: 4912113428068058692}
 --- !u!23 &4912113428068058692 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1251067684197333953, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
@@ -550,7 +550,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 49b7b0a46cf50c941b682697fc5cfa5f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7933941872836951361}
+      addedObject: {fileID: 2874532331939233336}
   m_SourcePrefab: {fileID: 100100000, guid: 49b7b0a46cf50c941b682697fc5cfa5f, type: 3}
 --- !u!1 &6975946869574012185 stripped
 GameObject:
@@ -643,7 +643,7 @@ MonoBehaviour:
     _regenerateHealthInSecond: 5
     _maxHealth: 100
     _currentHealth: 100
-    <CharacterType>k__BackingField: 4
+    <UnitType>k__BackingField: 4
     _moveSpeed: 10
     _rotationSpeed: 10
     _gravity: -20
@@ -656,8 +656,8 @@ MonoBehaviour:
     _aimObject: {fileID: 0}
     _currentWaypointIndex: 0
     _wayToAim: []
-  <View>k__BackingField: {fileID: 7933941872836951361}
---- !u!114 &7933941872836951361
+  <View>k__BackingField: {fileID: 2874532331939233336}
+--- !u!114 &2874532331939233336
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -666,9 +666,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6975946869574012185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f3859cff1c149118054c40c9538b54a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ad126c279524f0d84463a7b77eda185, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.Concrete.ArcherEnemy.ArcherEnemyView
   _objRenderer: {fileID: 8306672324081057310}
   _healthBar: {fileID: 62154589785583304}
   _tooltip: {fileID: 0}
@@ -676,7 +676,7 @@ MonoBehaviour:
   <Agent>k__BackingField: {fileID: 2010110707927957712}
   <ProjectileType>k__BackingField: 1
   <FirePoint>k__BackingField: {fileID: 7880186478471826682}
-  <ProjectileSpeed>k__BackingField: 30
+  <ProjectileSpeed>k__BackingField: 10
 --- !u!4 &7747416331636791203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 49b7b0a46cf50c941b682697fc5cfa5f,

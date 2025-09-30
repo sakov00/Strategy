@@ -5,7 +5,7 @@ using _General.Scripts.Registries;
 using _General.Scripts.Services;
 using _General.Scripts.UI.Windows;
 using _General.Scripts.UI.Windows.GameWindow;
-using _Project.Scripts.GameObjects.Concrete.Player;
+using _Project.Scripts.Enums;
 using _Project.Scripts.Pools;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -20,7 +20,7 @@ namespace _Project.Scripts
         [Inject] protected SaveLoadLevelService SaveLoadLevelService;
         [Inject] protected WindowsManager WindowsManager;
         [Inject] protected ObjectsRegistry ObjectsRegistry;
-        [Inject] protected CharacterPool CharacterPool;
+        [Inject] protected UnitPool UnitPool;
         
         public virtual void Start()
         {
@@ -39,7 +39,7 @@ namespace _Project.Scripts
             AppData.User.CurrentRound = 0;
             await LoadLevel(levelIndex);
             WindowsManager.GetWindow<GameWindowPresenter>().Initialize();
-            var playerController = CharacterPool.Get<PlayerController>(new Vector3(60, 1, 70));
+            var playerController = UnitPool.Get(UnitType.Player, new Vector3(60, 1, 70));
             GlobalObjects.CameraController.CameraFollow.Init(GlobalObjects.CameraController.transform, playerController.transform);
         }
         

@@ -30,7 +30,7 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
             _objectsRegistry.Unregister(this);
         }
 
-        public void DestroyObject()
+        public void DeleteFromScene()
         {
             Destroy(gameObject);
         }

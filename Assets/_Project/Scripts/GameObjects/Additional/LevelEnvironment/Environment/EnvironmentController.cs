@@ -28,7 +28,7 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
             _objectsRegistry.Unregister(this);
         }
 
-        public void DestroyObject()
+        public void DeleteFromScene()
         {
             Destroy(gameObject);
         }

@@ -1,10 +1,12 @@
 using System;
 using _Project.Scripts.GameObjects.Abstract.Unit;
+using MemoryPack;
 
 namespace _Project.Scripts.GameObjects.Concrete.WarriorEnemy
 {
     [Serializable]
-    public class WarriorEnemyModel : UnitModel
+    [MemoryPackable]
+    public partial class WarriorEnemyModel : UnitModel
     {
     }
 }

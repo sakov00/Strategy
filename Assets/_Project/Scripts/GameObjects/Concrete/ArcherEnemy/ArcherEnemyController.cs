@@ -1,6 +1,4 @@
-using _General.Scripts._VContainer;
 using _General.Scripts.Interfaces;
-using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract.Unit;
 using _Project.Scripts.GameObjects.ActionSystems;
 using UnityEngine;
@@ -11,17 +9,16 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherEnemy
     {
         [field: SerializeField] public ArcherEnemyModel Model { get; private set; }
         [field: SerializeField] public ArcherEnemyView View { get; private set; }
+        protected override UnitModel UnitModel => Model;
+        protected override UnitView UnitView => View;
         
         private DamageSystem _damageSystem;
         private DetectionAim _detectionAim;
         private UnitMovementSystem _unitMovementSystem;
-        
-        public override WarSide WarSide => Model.WarSide;
-        public override float CurrentHealth { get => Model.CurrentHealth; set => Model.CurrentHealth = value; }
 
-        protected void FixedUpdate()
+        protected override void FixedUpdate()
         {
-            View.UpdateHealthBar(Model.CurrentHealth, Model.MaxHealth);
+            base.FixedUpdate();
             _detectionAim.DetectAim();
             _unitMovementSystem.MoveToAim();
             _damageSystem.Attack();
@@ -29,15 +26,15 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherEnemy
 
         public override void Initialize()
         {
-            InjectManager.Inject(this);
-
-            View.Initialize();
-            HeightObject = View.GetHeightObject();
-            Model.NoAimPos = transform.position;
-            ObjectsRegistry.Register(this);
+            base.Initialize();
+            
+            Model.CurrentHealth = Model.MaxHealth;
+            
             _unitMovementSystem = new UnitMovementSystem(Model, View, transform);
             _detectionAim = new DetectionAim(Model, transform);
             _damageSystem = new DamageSystem(Model, View, transform);
+            
+            View.Initialize();
         }
 
         public override ISavableModel GetSavableModel()
@@ -56,13 +53,9 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherEnemy
             }
         }
 
-        public override void Restore()
-        {
-        }
-
         public override void ReturnToPool()
         {
-            CharacterPool.Return(this);
+            UnitPool.Return(this);
             ObjectsRegistry.Unregister(this);
             OnKilled?.Invoke(this);
         }

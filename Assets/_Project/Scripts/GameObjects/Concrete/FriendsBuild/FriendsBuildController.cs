@@ -1,7 +1,5 @@
 using _General.Scripts._GlobalLogic;
-using _General.Scripts._VContainer;
 using _General.Scripts.Interfaces;
-using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract;
 using _Project.Scripts.GameObjects.Abstract.Unit;
 using _Project.Scripts.Pools;
@@ -12,62 +10,38 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
 {
     public class FriendsBuildController : BuildController
     {
-        [Inject] private CharacterPool _characterPool;
+        [Inject] private UnitPool _unitPool;
         [Inject] private GameTimer _gameTimer;
         
         [field: SerializeField] public FriendsBuildModel Model { get; set; }
         [field: SerializeField] public FriendsBuildView View { get; set; }
-        
-        public override WarSide WarSide => Model.WarSide;
-        public override float CurrentHealth { get => Model.CurrentHealth; set => Model.CurrentHealth = value; }
+        protected override BuildModel BuildModel => Model;
+        protected override BuildView BuildView => View;
 
         public override void Initialize()
         {
-            InjectManager.Inject(this);
+            base.Initialize();
+            Model.CurrentHealth = Model.MaxHealth;
 
             View.Initialize();
-            HeightObject = View.GetHeightObject();
-            Model.NoAimPos = transform.position;
-            ObjectsRegistry.Register(this);
+            CreateFriends();
         }
-
-        public override void BuildInGame()
-        {
-            Model.SaveBuildUnits.Clear();
-            Model.BuildUnits.Clear();
-            CreateFriendsOnGame();
-        }
-
-        private void CreateFriendsOnGame()
+        
+        private void CreateFriends()
         {
             foreach (var friendUnit in View._buildUnitPositions)
             {
-                var unitController = _characterPool.Get<UnitController>(Model.UnitType, friendUnit.position);
-                Model.SaveBuildUnits.Add(unitController.Model);
+                var unitController = _unitPool.Get(Model.UnitType, friendUnit.position);
                 Model.BuildUnits.Add(unitController);
-                unitController.OnKilled += CheckRemovedUnits;
-            }
-        }
-
-        private void CreateFriendsOnLoad()
-        {
-            foreach (var saveBuildUnit in Model.SaveBuildUnits)
-            {
-                var unitController = _characterPool.Get<UnitController>(Model.UnitType);
-                Model.BuildUnits.Add(unitController);
-                unitController.Model = saveBuildUnit;
-                unitController.transform.position += unitController.Model.SavePosition;
                 unitController.OnKilled += CheckRemovedUnits;
             }
         }
 
         private void CheckRemovedUnits(UnitController unitController)
         {
-            if (Model.SpawnQueue.Contains(unitController)) return;
+            Model.NeedRestoreUnitsCount++;
 
-            Model.SpawnQueue.Enqueue(unitController);
-
-            if (Model.SpawnQueue.Count > 0 && Model.CurrentSpawnTimer < 0)
+            if (Model.NeedRestoreUnitsCount > 0 && Model.CurrentSpawnTimer < 0)
             {
                 Model.CurrentSpawnTimer = 0;
                 _gameTimer.OnEverySecond += HandleSpawnTimer;
@@ -81,14 +55,12 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
 
             if (Model.CurrentSpawnTimer < Model.TimeCreateUnits) return;
 
-            if (Model.SpawnQueue.Count > 0)
+            if (Model.NeedRestoreUnitsCount > 0)
             {
-                var friendUnit = Model.SpawnQueue.Dequeue();
-                _characterPool.Remove(friendUnit);
-                friendUnit.Restore();
+                _unitPool.Get(Model.UnitType, transform.position);
             }
 
-            if (Model.SpawnQueue.Count > 0)
+            if (Model.NeedRestoreUnitsCount > 0)
             {
                 Model.CurrentSpawnTimer = 0;
             }
@@ -111,20 +83,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
             if (savableModel is FriendsBuildModel friendsBuildModel)
             {
                 Model = friendsBuildModel;
-                Initialize();
-                CreateFriendsOnLoad();
             }
-        }
-
-        public override void Restore()
-        {
-            transform.SetParent(null);
-            Model.CurrentHealth = Model.MaxHealth;
-            Model.NoAimPos = transform.position;
-            BuildPool.Remove(this);
-            gameObject.SetActive(true);
-            ObjectsRegistry.Register(this);
-            _gameTimer.OnEverySecond -= HandleSpawnTimer;
         }
 
         public override void ReturnToPool()

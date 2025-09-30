@@ -97,17 +97,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 944e80848bccbd64aba410d635ebf7c8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 77.83276
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 944e80848bccbd64aba410d635ebf7c8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.712346
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 944e80848bccbd64aba410d635ebf7c8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 40.872818
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 944e80848bccbd64aba410d635ebf7c8,
         type: 3}
@@ -186,7 +186,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 944e80848bccbd64aba410d635ebf7c8,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -3633122475770971463}
+      addedObject: {fileID: 3861844187260915091}
   m_SourcePrefab: {fileID: 100100000, guid: 944e80848bccbd64aba410d635ebf7c8, type: 3}
 --- !u!137 &3577828355485931451 stripped
 SkinnedMeshRenderer:
@@ -285,7 +285,7 @@ MonoBehaviour:
     _regenerateHealthInSecond: 5
     _maxHealth: 100
     _currentHealth: 100
-    <CharacterType>k__BackingField: 2
+    <UnitType>k__BackingField: 2
     _moveSpeed: 10
     _rotationSpeed: 10
     _gravity: -20
@@ -298,8 +298,8 @@ MonoBehaviour:
     _aimObject: {fileID: 0}
     _currentWaypointIndex: 0
     _wayToAim: []
-  <View>k__BackingField: {fileID: -3633122475770971463}
---- !u!114 &-3633122475770971463
+  <View>k__BackingField: {fileID: 3861844187260915091}
+--- !u!114 &3861844187260915091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -308,9 +308,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7303883060677341878}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f3859cff1c149118054c40c9538b54a, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d32d55481e04e208482d60a5ef51929, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.Concrete.WarriorEnemy.WarriorEnemyView
   _objRenderer: {fileID: 3577828355485931451}
   _healthBar: {fileID: 5379700981253545673}
   _tooltip: {fileID: 0}
@@ -318,7 +318,7 @@ MonoBehaviour:
   <Agent>k__BackingField: {fileID: 2801405599123745041}
   <ProjectileType>k__BackingField: 0
   <FirePoint>k__BackingField: {fileID: 0}
-  <ProjectileSpeed>k__BackingField: 10
+  <ProjectileSpeed>k__BackingField: 40
 --- !u!4 &7932891039077640204 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 944e80848bccbd64aba410d635ebf7c8,

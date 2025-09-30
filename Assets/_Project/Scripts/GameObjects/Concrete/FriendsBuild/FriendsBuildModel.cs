@@ -12,8 +12,8 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
     [MemoryPackable]
     public partial class FriendsBuildModel : BuildModel
     {
-        [Header("Units")] [SerializeField] private UnitType _unitType;
-
+        [Header("Units")] 
+        [SerializeField] private UnitType _unitType;
         [SerializeField] private int _timeCreateUnits = 5;
 
         public UnitType UnitType
@@ -28,12 +28,10 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
             set => _timeCreateUnits = value;
         }
 
-        public List<UnitModel> SaveBuildUnits { get; set; } = new();
-
+        public int NeedRestoreUnitsCount { get; set; }
         public int CurrentSpawnTimer { get; set; } = -1;
 
         [MemoryPackIgnore] public List<UnitController> BuildUnits { get; set; } = new();
 
-        public Queue<UnitController> SpawnQueue { get; set; } = new();
     }
 }

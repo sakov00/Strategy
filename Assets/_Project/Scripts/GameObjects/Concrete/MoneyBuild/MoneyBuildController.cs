@@ -1,6 +1,5 @@
 using _General.Scripts._VContainer;
 using _General.Scripts.Interfaces;
-using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract;
 using UnityEngine;
 
@@ -10,30 +9,23 @@ namespace _Project.Scripts.GameObjects.Concrete.MoneyBuild
     {
         [field: SerializeField] public MoneyBuildModel Model { get; private set; }
         [field: SerializeField] public MoneyBuildingView View { get; private set; }
-        
-        public override WarSide WarSide => Model.WarSide;
-        public override float CurrentHealth { get => Model.CurrentHealth; set => Model.CurrentHealth = value; }
-
-        protected void FixedUpdate()
-        {
-            View.UpdateHealthBar(Model.CurrentHealth, Model.MaxHealth);
-        }
+        protected override BuildModel BuildModel => Model;
+        protected override BuildView BuildView => View;
         
         public override void Initialize()
         {
             InjectManager.Inject(this);
-
+            ObjectsRegistry.Register(this);
+            
+            Model.CurrentHealth = Model.MaxHealth;
+            
             View.Initialize();
-            HeightObject = View.GetHeightObject();
-            Model.NoAimPos = transform.position;
-            ObjectsRegistry.Register(this);
-            ObjectsRegistry.Register(this);
             AppData.LevelEvents.WinEvent += AddMoneyToPlayer;
         }
 
         private void AddMoneyToPlayer()
         {
-            var moneyAmount = Model.AddMoneyValue * (Model.CurrentLevel + 1);
+            var moneyAmount = Model.AddMoneyValue;
             AppData.LevelData.Money += moneyAmount;
             View.MoneyUp(moneyAmount);
         }
@@ -52,16 +44,6 @@ namespace _Project.Scripts.GameObjects.Concrete.MoneyBuild
                 Model = moneyBuildModel;
                 Initialize();
             }
-        }
-
-        public override void Restore()
-        {
-            transform.SetParent(null);
-            Model.CurrentHealth = Model.MaxHealth;
-            Model.NoAimPos = transform.position;
-            BuildPool.Remove(this);
-            gameObject.SetActive(true);
-            ObjectsRegistry.Register(this);
         }
 
         public override void ReturnToPool()

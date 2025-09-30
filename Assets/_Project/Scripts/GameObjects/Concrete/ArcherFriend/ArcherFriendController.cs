@@ -11,20 +11,19 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherFriend
 {
     public class ArcherFriendController : UnitController
     {
-        [field: SerializeField] public FlyingEnemyModel Model { get; private set; }
-        [field: SerializeField] public FlyingEnemyView View { get; private set; }
+        [field: SerializeField] public ArcherFriendModel Model { get; private set; }
+        [field: SerializeField] public ArcherFriendView View { get; private set; }
+        protected override UnitModel UnitModel => Model;
+        protected override UnitView UnitView => View;
         
         private DamageSystem _damageSystem;
         private DetectionAim _detectionAim;
         private RegenerationHpSystem _regenerationHpSystem;
         private UnitMovementSystem _unitMovementSystem;
-        
-        public override WarSide WarSide => Model.WarSide;
-        public override float CurrentHealth { get => Model.CurrentHealth; set => Model.CurrentHealth = value; }
 
-        protected void FixedUpdate()
+        protected override void FixedUpdate()
         {
-            View.UpdateHealthBar(Model.CurrentHealth, Model.MaxHealth);
+            base.FixedUpdate();
             _detectionAim.DetectAim();
             _unitMovementSystem.MoveToAim();
             _damageSystem.Attack();
@@ -32,18 +31,16 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherFriend
 
         public override void Initialize()
         {
-            InjectManager.Inject(this);
-
-            View.Initialize();
-            HeightObject = View.GetHeightObject();
-            Model.NoAimPos = transform.position;
-            ObjectsRegistry.Register(this);
+            base.Initialize();
+            
+            Model.CurrentHealth = Model.MaxHealth;
+            
             _unitMovementSystem = new UnitMovementSystem(Model, View, transform);
             _detectionAim = new DetectionAim(Model, transform);
             _damageSystem = new DamageSystem(Model, View, transform);
             _regenerationHpSystem = new RegenerationHpSystem(Model, View);
-
-            Model.WayToAim = new List<Vector3> { transform.position };
+            
+            View.Initialize();
         }
 
         public override ISavableModel GetSavableModel()
@@ -55,27 +52,18 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherFriend
 
         public override void SetSavableModel(ISavableModel savableModel)
         {
-            if (savableModel is FlyingEnemyModel unitModel)
+            if (savableModel is ArcherFriendModel unitModel)
             {
                 Model = unitModel;
                 Initialize();
             }
         }
 
-        public override void Restore()
-        {
-            transform.SetParent(null);
-            Model.CurrentHealth = Model.MaxHealth;
-            Model.NoAimPos = transform.position;
-            CharacterPool.Remove(this);
-            gameObject.SetActive(true);
-        }
-
         public override void ReturnToPool()
         {
-            CharacterPool.Return(this);
-            ObjectsRegistry.Unregister(this);
+            UnitPool.Return(this);
             OnKilled?.Invoke(this);
+            ClearData();
         }
 
         public override void ClearData()

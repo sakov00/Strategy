@@ -29,7 +29,7 @@ namespace _General.Scripts.Services
         [Inject] private ObjectsRegistry _objectsRegistry;
         [Inject] private OthersFactory _othersFactory;
         [Inject] private BuildPool _buildPool;
-        [Inject] private CharacterPool _characterPool;
+        [Inject] private UnitPool _unitPool;
         [Inject] private EnvironmentFactory _environmentFactory;
         [Inject] private ResetLevelService _resetLevelService;
         
@@ -102,7 +102,7 @@ namespace _General.Scripts.Services
                     BuildModel buildModel => 
                         _buildPool.Get(buildModel.BuildType, buildModel.SavePosition, buildModel.SaveRotation),
                     UnitModel characterModel => 
-                        _characterPool.Get(characterModel.UnitType, characterModel.SavePosition, characterModel.SaveRotation),
+                        _unitPool.Get(characterModel.UnitType, characterModel.SavePosition, characterModel.SaveRotation),
                     TerrainModel terrainModel => 
                         _environmentFactory.CreateTerrain(0),
                     EnemyRoadModel enemyRoadModel => 

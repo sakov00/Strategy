@@ -11,29 +11,28 @@ namespace _Project.Scripts.GameObjects.Concrete.TowerDefence
     {
         [field: SerializeField] public TowerDefenceModel Model { get; private set; }
         [field: SerializeField] public TowerDefenceView View { get; private set; }
+        protected override BuildModel BuildModel => Model;
+        protected override BuildView BuildView => View;
         
         private DamageSystem _damageSystem;
         private DetectionAim _detectionAim;
-        public override WarSide WarSide => Model.WarSide;
-        public override float CurrentHealth { get => Model.CurrentHealth; set => Model.CurrentHealth = value; }
 
-        protected void FixedUpdate()
+        protected override void FixedUpdate()
         {
-            View.UpdateHealthBar(Model.CurrentHealth, Model.MaxHealth);
+            base.FixedUpdate();
             _detectionAim.DetectAim();
             _damageSystem.Attack();
         }
 
         public override void Initialize()
         {
-            InjectManager.Inject(this);
+            base.Initialize();
+            
+            Model.CurrentHealth = Model.MaxHealth;
 
-            View.Initialize();
-            HeightObject = View.GetHeightObject();
-            Model.NoAimPos = transform.position;
-            ObjectsRegistry.Register(this);
             _detectionAim = new DetectionAim(Model, transform);
             _damageSystem = new DamageSystem(Model, View, transform);
+            View.Initialize();
         }
 
         public override ISavableModel GetSavableModel()
@@ -50,16 +49,6 @@ namespace _Project.Scripts.GameObjects.Concrete.TowerDefence
                 Model = towerDefenceModel;
                 Initialize();
             }
-        }
-        
-        public override void Restore()
-        {
-            transform.SetParent(null);
-            Model.CurrentHealth = Model.MaxHealth;
-            Model.NoAimPos = transform.position;
-            BuildPool.Remove(this);
-            gameObject.SetActive(true);
-            ObjectsRegistry.Register(this);
         }
 
         public override void ReturnToPool()

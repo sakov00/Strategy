@@ -16,7 +16,7 @@ namespace _General.Scripts.Services
     {
         [Inject] private AppData _appData;
         [Inject] private BuildPool _buildPool;
-        [Inject] private CharacterPool _characterPool;
+        [Inject] private UnitPool _unitPool;
         [Inject] private ObjectsRegistry _objectsRegistry;
         [Inject] private WindowsManager _windowsManager;
         
@@ -25,22 +25,17 @@ namespace _General.Scripts.Services
             foreach (var obj in _objectsRegistry.GetAllByInterface<ObjectController>())
             {
                 if (obj.WarSide == WarSide.Friend)
-                    obj.Restore();
-            }
-            foreach (var obj in _buildPool.GetAvailableBuilds().Where(obj => obj.WarSide == WarSide.Friend))
-            {
-                obj.Restore();
-            }
-            foreach (var obj in _characterPool.GetAvailableBuilds().Where(obj => obj.WarSide == WarSide.Friend))
-            {
-                obj.Restore();
+                    obj.Initialize();
             }
         }
         
         public void ResetLevel()
         {
             foreach (var obj in _objectsRegistry.GetAllByInterface<IClearData>())
+            {
                 obj.ClearData();
+                obj.DeleteFromScene();
+            }
 
             foreach (var spawn in _objectsRegistry.GetTypedList<EnemyRoadController>())
                 spawn.RefreshInfoRound();
