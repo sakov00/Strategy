@@ -3,8 +3,8 @@ using System.Linq;
 using _General.Scripts._VContainer;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
+using _Project.Scripts.GameObjects.Abstract;
 using _Project.Scripts.GameObjects.Abstract.Unit;
-using _Project.Scripts.GameObjects.Concrete.MainBuild;
 using UniRx;
 using VContainer;
 using VContainer.Unity;
@@ -31,9 +31,9 @@ namespace _General.Scripts.AllAppData
                 .AddTo(_disposables);
             
             _objectsRegistry
-                .GetTypedList<MainBuildController>()
+                .GetTypedList<BuildController>()
                 .ObserveRemove()
-                .Subscribe(_ => FailEvent?.Invoke())
+                .Subscribe(_ => TryInvokeMainBuildDestroyed())
                 .AddTo(_disposables);
         }
 
@@ -43,6 +43,14 @@ namespace _General.Scripts.AllAppData
                 return;
 
             WinEvent?.Invoke();
+        }
+        
+        private void TryInvokeMainBuildDestroyed()
+        {
+            if (_objectsRegistry.GetTypedList<BuildController>().Any(x => x.BuildType == BuildType.MainBuild))
+                return;
+
+            FailEvent?.Invoke();
         }
         
         public void Dispose()

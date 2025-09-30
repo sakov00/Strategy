@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _General.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract.BaseObject;
 using _Project.Scripts.Pools;
@@ -20,6 +21,14 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
 
         public Action<UnitController> OnKilled;
         public UnitType UnitType => UnitModel.UnitType;
+
+        public override void Initialize()
+        {
+            InjectManager.Inject(this);
+            base.Initialize();
+            ObjectsRegistry.Register(this);
+        }
+
         public void SetWayToPoint(List<Vector3> waypoints)
         {
             UnitModel.WayToAim = waypoints;

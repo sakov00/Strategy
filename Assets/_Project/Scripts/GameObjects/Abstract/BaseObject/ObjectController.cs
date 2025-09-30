@@ -37,9 +37,7 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
 
         public virtual void Initialize()
         {
-            InjectManager.Inject(this);
             ClearData();
-            ObjectsRegistry.Register(this);
             HeightObject = ObjectView.GetHeightObject();
         }
 

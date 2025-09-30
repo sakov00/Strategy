@@ -1,3 +1,4 @@
+using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract.BaseObject;
@@ -18,5 +19,12 @@ namespace _Project.Scripts.GameObjects.Abstract
 
         public BuildType BuildType => BuildModel.BuildType;
         public int BuildPrice => BuildModel.BuildPrice;
+        
+        public override void Initialize()
+        {
+            InjectManager.Inject(this);
+            base.Initialize();
+            ObjectsRegistry.Register(this);
+        }
     }
 }

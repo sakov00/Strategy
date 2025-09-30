@@ -14,7 +14,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
 
         public override void Initialize()
         {
-            
+            _loadBar.UpdateBar(1, 1);
         }
 
         public void UpdateLoadBar(float currentValue, float maxValue)

@@ -55,7 +55,7 @@ namespace _Project.Scripts.Pools
             
             build.gameObject.SetActive(false);
             build.transform.SetParent(_containerTransform, false); 
-            _objectsRegistry.Unregister(build);
+            _objectsRegistry.Unregister<BuildController>(build);
         }
         
         public void Remove<T>(T build) where T : BuildController

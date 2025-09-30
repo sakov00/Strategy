@@ -52,7 +52,7 @@ namespace _Project.Scripts.Pools
 
             character.gameObject.SetActive(false);
             character.transform.SetParent(_containerTransform, false);
-            _objectsRegistry.Unregister(character);
+            _objectsRegistry.Unregister<UnitController>(character);
         }
         
         public void Remove<T>(T build) where T : UnitController
