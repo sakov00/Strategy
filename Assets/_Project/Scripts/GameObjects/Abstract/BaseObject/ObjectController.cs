@@ -9,7 +9,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Abstract.BaseObject
 {
-    public abstract class ObjectController : MonoBehaviour, ISavableController, IClearData
+    public abstract class ObjectController : MonoBehaviour, ISavableController, IClearScene
     {
         [Inject] protected ObjectsRegistry ObjectsRegistry;
         
@@ -32,20 +32,16 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
 
         private void OnDestroy()
         {
-            ClearData();
+            DeleteFromScene(true);
         }
 
         public virtual void Initialize()
         {
-            ClearData();
             HeightObject = ObjectView.GetHeightObject();
         }
 
-        public void DeleteFromScene() => ReturnToPool();
-        
+        public abstract void DeleteFromScene(bool realDelete = false);
         public abstract ISavableModel GetSavableModel();
         public abstract void SetSavableModel(ISavableModel model);
-        public abstract void ClearData();
-        public abstract void ReturnToPool();
     }
 }

@@ -71,7 +71,7 @@ namespace _Project.Scripts.GameObjects.ActionSystems
             }
 
             _fightObjectModel.AimObject.CurrentHealth -= _fightObjectModel.DamageAmount;
-            if (_fightObjectModel.AimObject.CurrentHealth <= 0) _fightObjectModel.AimObject.ReturnToPool();
+            if (_fightObjectModel.AimObject.CurrentHealth <= 0) _fightObjectModel.AimObject.DeleteFromScene();
             //_fightObjectModel.AimObject.ObjectModel.Transform.gameObject.SetActive(false);
         }
 

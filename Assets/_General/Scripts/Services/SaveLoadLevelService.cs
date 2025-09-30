@@ -27,11 +27,6 @@ namespace _General.Scripts.Services
     public class SaveLoadLevelService
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
-        [Inject] private OthersFactory _othersFactory;
-        [Inject] private BuildPool _buildPool;
-        [Inject] private UnitPool _unitPool;
-        [Inject] private EnvironmentFactory _environmentFactory;
-        [Inject] private ResetLevelService _resetLevelService;
         
         private Dictionary<BuildType, Func<BuildController>> _buildTypeToClass;
         
@@ -41,16 +36,16 @@ namespace _General.Scripts.Services
             => Path.Combine(Application.persistentDataPath, $"level_progress_{index}.dat");
 
         public async UniTask SaveLevelDefault(int index) => await Save(GetDefaultSavePath(index));
-        public async UniTask LoadLevelDefault(int index) => await Load(GetDefaultSavePath(index));
+        public async UniTask<LevelModel> LoadLevelDefault(int index) => await Load(GetDefaultSavePath(index));
         public async UniTask SaveLevelProgress(int index) => await Save(GetProgressSavePath(index));
-        public async UniTask LoadLevelProgress(int index) => await Load(GetProgressSavePath(index));
+        public async UniTask<LevelModel> LoadLevelProgress(int index) => await Load(GetProgressSavePath(index));
 
-        public async UniTask LoadLevel(int index)
+        public async UniTask<LevelModel> LoadLevel(int index)
         {
             if (File.Exists(GetProgressSavePath(index)))
-                await LoadLevelDefault(index);
+                return await LoadLevelDefault(index);
             else
-                await LoadLevelProgress(index);
+                return await LoadLevelProgress(index);
         }
 
         public void RemoveProgress(int index)
@@ -75,13 +70,12 @@ namespace _General.Scripts.Services
             Debug.Log($"Level saved to {path}");
         }
 
-        private async UniTask Load(string path)
+        private async UniTask<LevelModel> Load(string path)
         {
-            _resetLevelService.ResetLevel();
             if (!File.Exists(path))
             {
                 Debug.LogWarning("Save file not found!");
-                return;
+                return null;
             }
 
             var compressed = await File.ReadAllBytesAsync(path);
@@ -89,33 +83,7 @@ namespace _General.Scripts.Services
             LevelModel levelModel = MemoryPackSerializer.Deserialize<LevelModel>(data);
 
             Debug.Log($"Loaded {levelModel.SavableModels.Count} objects.");
-
-            await InstantiateLoadedObjects(levelModel);
-        }
-
-        private async UniTask InstantiateLoadedObjects(LevelModel levelModel)
-        {
-            foreach (var model in levelModel.SavableModels)
-            {
-                ISavableController savableController = model switch
-                {
-                    BuildModel buildModel => 
-                        _buildPool.Get(buildModel.BuildType, buildModel.SavePosition, buildModel.SaveRotation),
-                    UnitModel characterModel => 
-                        _unitPool.Get(characterModel.UnitType, characterModel.SavePosition, characterModel.SaveRotation),
-                    TerrainModel terrainModel => 
-                        _environmentFactory.CreateTerrain(0),
-                    EnemyRoadModel enemyRoadModel => 
-                        _environmentFactory.CreateRoads(enemyRoadModel.SavePosition, enemyRoadModel.SaveRotation),
-                    BuildingZoneModel buildingZoneModel => 
-                        _othersFactory.CreateBuildingZone(buildingZoneModel.SavePosition, buildingZoneModel.SaveRotation),
-                    _ => null
-                };
-
-                savableController?.SetSavableModel(model);
-
-                await UniTask.Yield();
-            }
+            return levelModel;
         }
     }
 }

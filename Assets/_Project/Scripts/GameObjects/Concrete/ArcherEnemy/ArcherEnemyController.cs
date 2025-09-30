@@ -53,17 +53,9 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherEnemy
             }
         }
 
-        public override void ReturnToPool()
+        public override void DeleteFromScene(bool realDelete = false)
         {
-            UnitPool.Return(this);
-            ObjectsRegistry.Unregister(this);
-            OnKilled?.Invoke(this);
-        }
-
-        public override void ClearData()
-        {
-            OnKilled = null;
-            ObjectsRegistry.Unregister(this);
+            base.DeleteFromScene(realDelete);
             _damageSystem?.Dispose();
         }
     }

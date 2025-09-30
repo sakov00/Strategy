@@ -18,7 +18,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
 {
     [Serializable]
     [RequireComponent(typeof(SplineContainer))]
-    public class EnemyRoadController : MonoBehaviour, ISavableController, IClearData
+    public class EnemyRoadController : MonoBehaviour, ISavableController, IClearScene
     {
         [SerializeField] private SplineContainer _splineContainer;
 
@@ -66,7 +66,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             _objectsRegistry.Unregister(this);
         }
 
-        public void DeleteFromScene()
+        public void DeleteFromScene(bool realDelete = false)
         {
             Destroy(gameObject);
         }

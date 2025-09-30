@@ -26,5 +26,13 @@ namespace _Project.Scripts.GameObjects.Abstract
             base.Initialize();
             ObjectsRegistry.Register(this);
         }
+        
+        public override void DeleteFromScene(bool realDelete = false)
+        {
+            if(realDelete)
+                ObjectsRegistry.Unregister(this);
+            else
+                BuildPool.Return(this);
+        }
     }
 }

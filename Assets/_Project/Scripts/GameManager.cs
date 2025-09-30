@@ -1,6 +1,7 @@
 using _General.Scripts._GlobalLogic;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
+using _General.Scripts.DTO;
 using _General.Scripts.Registries;
 using _General.Scripts.Services;
 using _General.Scripts.UI.Windows;
@@ -18,8 +19,9 @@ namespace _Project.Scripts
     {
         [Inject] protected AppData AppData;
         [Inject] protected SaveLoadLevelService SaveLoadLevelService;
+        [Inject] protected ResetLevelService ResetLevelService;
+        [Inject] protected SceneCreator SceneCreator;
         [Inject] protected WindowsManager WindowsManager;
-        [Inject] protected ObjectsRegistry ObjectsRegistry;
         [Inject] protected UnitPool UnitPool;
         
         public virtual void Start()
@@ -31,21 +33,23 @@ namespace _Project.Scripts
 
         public virtual async UniTask StartLevel(int levelIndex)
         {
-            WindowsManager.GetWindowOrInstantiate<GameWindowPresenter>().Dispose();
+            WindowsManager.GetWindow<GameWindowPresenter>().Dispose();
             WindowsManager.ShowWindow<GameWindowPresenter>();
+            ResetLevelService.ResetLevel();
             AppData.LevelEvents.Dispose();
             AppData.LevelEvents.Initialize();
             AppData.User.CurrentLevel = levelIndex;
             AppData.User.CurrentRound = 0;
-            await LoadLevel(levelIndex);
+            var levelModel = await LoadLevel(levelIndex);
+            await SceneCreator.InstantiateLoadedObjects(levelModel);
             WindowsManager.GetWindow<GameWindowPresenter>().Initialize();
             var playerController = UnitPool.Get(UnitType.Player, new Vector3(60, 1, 70));
             GlobalObjects.CameraController.CameraFollow.Init(GlobalObjects.CameraController.transform, playerController.transform);
         }
         
-        public virtual async UniTask LoadLevel(int levelIndex)
+        public virtual async UniTask<LevelModel> LoadLevel(int levelIndex)
         {
-            await SaveLoadLevelService.LoadLevelDefault(levelIndex);
+            return await SaveLoadLevelService.LoadLevelDefault(levelIndex);
         }
     }
 }

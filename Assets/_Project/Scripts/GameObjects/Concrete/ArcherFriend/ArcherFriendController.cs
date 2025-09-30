@@ -58,18 +58,10 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherFriend
                 Initialize();
             }
         }
-
-        public override void ReturnToPool()
+        
+        public override void DeleteFromScene(bool realDelete = false)
         {
-            UnitPool.Return(this);
-            OnKilled?.Invoke(this);
-            ClearData();
-        }
-
-        public override void ClearData()
-        {
-            OnKilled = null;
-            ObjectsRegistry.Unregister(this);
+            base.DeleteFromScene(realDelete);
             _regenerationHpSystem?.Dispose();
             _damageSystem?.Dispose();
         }

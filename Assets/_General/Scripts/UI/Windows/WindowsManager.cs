@@ -33,11 +33,6 @@ namespace _General.Scripts.UI.Windows
         
         public T GetWindow<T>() where T : BaseWindowPresenter
         {
-            return _cachedWindows.TryGetValue(typeof(T), out var window) ? (T)window : null;
-        }
-        
-        public T GetWindowOrInstantiate<T>() where T : BaseWindowPresenter
-        {
             var windowType = _windowsConfig.Windows[typeof(T)].WindowType;
             if (!_cachedWindows.TryGetValue(typeof(T), out var window))
             {

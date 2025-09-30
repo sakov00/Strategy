@@ -7,7 +7,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
 {
-    public class EnvironmentController : MonoBehaviour, ISavableController, IClearData
+    public class EnvironmentController : MonoBehaviour, ISavableController, IClearScene
     {
         [SerializeField] protected EnvironmentModel _model;
         [Inject] private ObjectsRegistry _objectsRegistry;
@@ -28,7 +28,7 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
             _objectsRegistry.Unregister(this);
         }
 
-        public void DeleteFromScene()
+        public void DeleteFromScene(bool realDelete = false)
         {
             Destroy(gameObject);
         }

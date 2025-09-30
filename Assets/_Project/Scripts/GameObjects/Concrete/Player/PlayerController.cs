@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using _General.Scripts.AllAppData;
 using _General.Scripts.Interfaces;
 using _Project.Scripts.Enums;
+using _Project.Scripts.GameObjects.Abstract;
 using _Project.Scripts.GameObjects.Abstract.Unit;
 using _Project.Scripts.GameObjects.ActionSystems;
 using UnityEngine;
@@ -62,15 +63,10 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
                 Initialize();
             }
         }
-
-        public override void ReturnToPool()
+        
+        public override void DeleteFromScene(bool realDelete = false)
         {
-            UnitPool.Return(this);
-        }
-
-        public override void ClearData()
-        {
-            ObjectsRegistry.Unregister(this);
+            base.DeleteFromScene(realDelete);
             _regenerationHpSystem?.Dispose();
             _damageSystem?.Dispose();
         }

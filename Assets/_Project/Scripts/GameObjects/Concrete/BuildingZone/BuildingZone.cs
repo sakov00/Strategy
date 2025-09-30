@@ -14,7 +14,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
 {
-    public class BuildingZone : MonoBehaviour, IBuy, ISavableController, IClearData
+    public class BuildingZone : MonoBehaviour, IBuy, ISavableController, IClearScene
     {
         [Inject] private AppData _appData;
         [Inject] private BuildingPrefabConfig _buildingPrefabConfig;
@@ -67,7 +67,7 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
             _objectsRegistry.Unregister(this);
         }
 
-        public void DeleteFromScene()
+        public void DeleteFromScene(bool realDelete = false)
         {
             Destroy(gameObject);
         }

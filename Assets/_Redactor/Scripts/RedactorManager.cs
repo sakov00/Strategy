@@ -1,4 +1,5 @@
 using _General.Scripts._VContainer;
+using _General.Scripts.DTO;
 using _Project.Scripts;
 using _Redactor.Scripts.LevelRedactorWindow;
 using Cysharp.Threading.Tasks;
@@ -21,9 +22,9 @@ namespace _Redactor.Scripts
             await base.StartLevel(levelIndex);
         }
 
-        public override async UniTask LoadLevel(int levelIndex)
+        public override async UniTask<LevelModel> LoadLevel(int levelIndex)
         {
-            await SaveLoadLevelService.LoadLevelDefault(levelIndex);
+            return await SaveLoadLevelService.LoadLevelDefault(levelIndex);
         }
         
         public void SaveLevel(int levelIndex)

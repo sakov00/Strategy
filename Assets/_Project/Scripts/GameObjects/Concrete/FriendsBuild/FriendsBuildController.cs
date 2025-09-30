@@ -88,17 +88,10 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
                 Model = friendsBuildModel;
             }
         }
-
-        public override void ReturnToPool()
+        
+        public override void DeleteFromScene(bool realDelete = false)
         {
-            BuildPool.Return(this);
-            _gameTimer.OnEverySecond -= HandleSpawnTimer;
-            Model.BuildUnits.ForEach(unitController => unitController.OnKilled -= CheckRemovedUnits);
-        }
-
-        public override void ClearData()
-        {
-            ObjectsRegistry.Unregister(this);
+            base.DeleteFromScene(realDelete);
             _gameTimer.OnEverySecond -= HandleSpawnTimer;
             Model.BuildUnits.ForEach(unitController => unitController.OnKilled -= CheckRemovedUnits);
         }

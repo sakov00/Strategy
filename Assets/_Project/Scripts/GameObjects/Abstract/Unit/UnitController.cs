@@ -33,5 +33,17 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
         {
             UnitModel.WayToAim = waypoints;
         }
+
+        public override void DeleteFromScene(bool realDelete = false)
+        {
+            if(realDelete)
+                ObjectsRegistry.Unregister(this);
+            else
+            {
+                UnitPool.Return(this);
+                OnKilled?.Invoke(this);
+                OnKilled = null;
+            }
+        }
     }
 }

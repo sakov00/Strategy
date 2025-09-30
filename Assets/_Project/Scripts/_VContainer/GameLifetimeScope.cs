@@ -95,6 +95,7 @@ namespace _Project.Scripts._VContainer
             builder.RegisterInstance(_poolsManager).AsSelf();
             builder.Register<ResetLevelService>(Lifetime.Singleton).AsSelf();
             builder.Register<SaveLoadLevelService>(Lifetime.Singleton).AsSelf();
+            builder.Register<SceneCreator>(Lifetime.Singleton).AsSelf();
         }
     }
 }

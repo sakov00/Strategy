@@ -45,16 +45,10 @@ namespace _Project.Scripts.GameObjects.Concrete.MoneyBuild
                 Initialize();
             }
         }
-
-        public override void ReturnToPool()
+        
+        public override void DeleteFromScene(bool realDelete = false)
         {
-            ClearData();
-            BuildPool.Return(this);
-        }
-
-        public override void ClearData()
-        {
-            ObjectsRegistry.Unregister(this);
+            base.DeleteFromScene(realDelete);
             AppData.LevelEvents.WinEvent -= AddMoneyToPlayer;
         }
     }

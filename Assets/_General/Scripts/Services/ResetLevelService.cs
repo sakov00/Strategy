@@ -31,11 +31,8 @@ namespace _General.Scripts.Services
         
         public void ResetLevel()
         {
-            foreach (var obj in _objectsRegistry.GetAllByInterface<IClearData>())
-            {
-                obj.ClearData();
+            foreach (var obj in _objectsRegistry.GetAllByInterface<IClearScene>())
                 obj.DeleteFromScene();
-            }
 
             foreach (var spawn in _objectsRegistry.GetTypedList<EnemyRoadController>())
                 spawn.RefreshInfoRound();

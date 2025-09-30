@@ -46,7 +46,7 @@ namespace _Project.Scripts.Pools
         }
 
 
-        public void Return<T>(T build) where T : BuildController
+        public void Return(BuildController build)
         {
             if (!_availableBuilds.Contains(build))
             {
@@ -55,15 +55,7 @@ namespace _Project.Scripts.Pools
             
             build.gameObject.SetActive(false);
             build.transform.SetParent(_containerTransform, false); 
-            _objectsRegistry.Unregister<BuildController>(build);
-        }
-        
-        public void Remove<T>(T build) where T : BuildController
-        {
-            if (!_availableBuilds.Contains(build))
-            {
-                _availableBuilds.Remove(build);
-            }
+            _objectsRegistry.Unregister(build);
         }
     }
 }

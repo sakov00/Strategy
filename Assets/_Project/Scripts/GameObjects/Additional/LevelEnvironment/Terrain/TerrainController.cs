@@ -8,7 +8,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
 {
-    public class TerrainController : MonoBehaviour, ISavableController, IClearData
+    public class TerrainController : MonoBehaviour, ISavableController, IClearScene
     {
         [SerializeField] private TerrainModel _model;
         [SerializeField] private MeshFilter _meshFilter;
@@ -30,7 +30,7 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
             _objectsRegistry.Unregister(this);
         }
 
-        public void DeleteFromScene()
+        public void DeleteFromScene(bool realDelete = false)
         {
             Destroy(gameObject);
         }

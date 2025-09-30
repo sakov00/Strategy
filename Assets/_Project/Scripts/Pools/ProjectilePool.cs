@@ -42,7 +42,7 @@ namespace _Project.Scripts.Pools
             return projectile;
         }
 
-        public void Return<T>(T projectile) where T : Projectile
+        public void Return(Projectile projectile)
         {
             if (!_availableProjectiles.Contains(projectile))
             {

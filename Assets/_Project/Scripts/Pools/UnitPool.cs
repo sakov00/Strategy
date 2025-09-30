@@ -43,24 +43,16 @@ namespace _Project.Scripts.Pools
             return unit;
         }
 
-        public void Return<T>(T character) where T : UnitController
+        public void Return(UnitController unit)
         {
-            if (!_availableUnits.Contains(character))
+            if (!_availableUnits.Contains(unit))
             {
-                _availableUnits.Add(character);
+                _availableUnits.Add(unit);
             }
 
-            character.gameObject.SetActive(false);
-            character.transform.SetParent(_containerTransform, false);
-            _objectsRegistry.Unregister<UnitController>(character);
-        }
-        
-        public void Remove<T>(T build) where T : UnitController
-        {
-            if (!_availableUnits.Contains(build))
-            {
-                _availableUnits.Remove(build);
-            }
+            unit.gameObject.SetActive(false);
+            unit.transform.SetParent(_containerTransform, false);
+            _objectsRegistry.Unregister(unit);
         }
     }
 }

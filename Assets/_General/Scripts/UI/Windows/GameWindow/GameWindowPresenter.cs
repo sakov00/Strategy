@@ -69,7 +69,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
             var spawns = _objectsRegistry.GetTypedList<EnemyRoadController>();
             var isLastRound = spawns.Any(spawn => spawn.CountRounds == _appData.User.CurrentRound);
             
-            var winWindow = WindowsManager.GetWindowOrInstantiate<WinWindowPresenter>();
+            var winWindow = WindowsManager.GetWindow<WinWindowPresenter>();
             winWindow.Initialize(isLastRound);
             await WindowsManager.ShowWindow<WinWindowPresenter>();
             
