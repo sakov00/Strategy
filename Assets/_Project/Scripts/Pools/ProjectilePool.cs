@@ -41,27 +41,6 @@ namespace _Project.Scripts.Pools
             _objectsRegistry.Register(projectile);
             return projectile;
         }
-        
-        public T Get<T>(Vector3 position = default, Quaternion rotation = default) where T : Projectile
-        {
-            var projectile = _availableProjectiles.OfType<T>().FirstOrDefault();
-
-            if (projectile != null)
-            {
-                _availableProjectiles.Remove(projectile);
-                projectile.transform.position = position;
-                projectile.transform.rotation = rotation;
-                projectile.gameObject.SetActive(true);
-            }
-            else
-            {
-                projectile = _projectileFactory.CreateProjectile<T>(position, rotation);
-            }
-            
-            projectile.transform.SetParent(null);
-            _objectsRegistry.Register(projectile);
-            return projectile;
-        }
 
         public void Return<T>(T projectile) where T : Projectile
         {

@@ -72,6 +72,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         {
             ObjectsRegistry.Unregister(this);
             _regenerationHpSystem?.Dispose();
+            _damageSystem?.Dispose();
         }
     }
 }

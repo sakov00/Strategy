@@ -66,6 +66,7 @@ namespace _Project.Scripts.GameObjects.Concrete.WarriorEnemy
         {
             OnKilled = null;
             ObjectsRegistry.Unregister(this);
+            _damageSystem?.Dispose();
         }
     }
 }

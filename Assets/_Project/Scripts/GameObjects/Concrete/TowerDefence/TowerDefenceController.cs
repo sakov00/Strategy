@@ -59,6 +59,7 @@ namespace _Project.Scripts.GameObjects.Concrete.TowerDefence
         public override void ClearData()
         {
             ObjectsRegistry.Unregister(this);
+            _damageSystem?.Dispose();
         }
     }
 }

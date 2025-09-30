@@ -68,6 +68,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FlyingEnemy
         {
             OnKilled = null;
             ObjectsRegistry.Unregister(this);
+            _damageSystem?.Dispose();
         }
     }
 }

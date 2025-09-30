@@ -10,9 +10,10 @@ namespace _Project.Scripts.GameObjects.ActionSystems
 {
     public class DetectionAim
     {
+        [Inject] private ObjectsRegistry _objectsRegistry;
+        
         private readonly IFightObjectModel _fightObjectModel;
         private readonly Transform _transform;
-        [Inject] private ObjectsRegistry _objectsRegistry;
 
         public DetectionAim(IFightObjectModel fightObjectModel, Transform transform)
         {

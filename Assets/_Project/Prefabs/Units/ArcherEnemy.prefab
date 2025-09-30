@@ -676,7 +676,7 @@ MonoBehaviour:
   <Agent>k__BackingField: {fileID: 2010110707927957712}
   <ProjectileType>k__BackingField: 1
   <FirePoint>k__BackingField: {fileID: 7880186478471826682}
-  <ProjectileSpeed>k__BackingField: 10
+  <ProjectileSpeed>k__BackingField: 40
 --- !u!4 &7747416331636791203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 49b7b0a46cf50c941b682697fc5cfa5f,

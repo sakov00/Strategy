@@ -30,8 +30,8 @@ namespace _Project.Scripts.GameObjects.ActionSystems
 
             InjectManager.Inject(this);
 
-            if (fightObjectModel.TypeAttack == TypeAttack.Melee) attackableView.AttackHitEvent += MeleeAttack;
-            if (fightObjectModel.TypeAttack == TypeAttack.Distance) attackableView.AttackHitEvent += DistanceAttack;
+            if (fightObjectModel.TypeAttack == TypeAttack.Melee) _attackableView.AttackHitEvent += MeleeAttack;
+            if (fightObjectModel.TypeAttack == TypeAttack.Distance) _attackableView.AttackHitEvent += DistanceAttack;
         }
 
         public void Attack()
@@ -86,6 +86,12 @@ namespace _Project.Scripts.GameObjects.ActionSystems
             projectile.LaunchToPoint(_fightObjectModel.AimObject.transform.position +
                                      Vector3.up * (_fightObjectModel.AimObject.HeightObject / 2),
                 _attackableView.ProjectileSpeed);
+        }
+
+        public void Dispose()
+        {
+            if (_fightObjectModel.TypeAttack == TypeAttack.Melee) _attackableView.AttackHitEvent -= MeleeAttack;
+            if (_fightObjectModel.TypeAttack == TypeAttack.Distance) _attackableView.AttackHitEvent -= DistanceAttack;
         }
     }
 }

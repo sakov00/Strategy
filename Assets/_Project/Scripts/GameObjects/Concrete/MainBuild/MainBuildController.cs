@@ -60,6 +60,7 @@ namespace _Project.Scripts.GameObjects.Concrete.MainBuild
         public override void ClearData()
         {
             ObjectsRegistry.Unregister(this);
+            _damageSystem?.Dispose();
         }
     }
 }

@@ -67,6 +67,7 @@ namespace _Project.Scripts.GameObjects.Concrete.WarriorFriend
             OnKilled = null;
             ObjectsRegistry.Unregister(this);
             _regenerationHpSystem?.Dispose();
+            _damageSystem?.Dispose();
         }
     }
 }

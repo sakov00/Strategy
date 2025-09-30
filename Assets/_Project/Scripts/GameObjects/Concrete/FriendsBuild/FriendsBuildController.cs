@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using _General.Scripts._GlobalLogic;
 using _General.Scripts.Interfaces;
 using _Project.Scripts.GameObjects.Abstract;
@@ -32,6 +33,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
             foreach (var friendUnit in View._buildUnitPositions)
             {
                 var unitController = _unitPool.Get(Model.UnitType, friendUnit.position);
+                unitController.SetWayToPoint(new List<Vector3> { friendUnit.position });
                 Model.BuildUnits.Add(unitController);
                 unitController.OnKilled += CheckRemovedUnits;
             }
@@ -58,6 +60,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
             if (Model.NeedRestoreUnitsCount > 0)
             {
                 _unitPool.Get(Model.UnitType, transform.position);
+                Model.NeedRestoreUnitsCount--;
             }
 
             if (Model.NeedRestoreUnitsCount > 0)

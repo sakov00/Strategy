@@ -64,6 +64,7 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherEnemy
         {
             OnKilled = null;
             ObjectsRegistry.Unregister(this);
+            _damageSystem?.Dispose();
         }
     }
 }
