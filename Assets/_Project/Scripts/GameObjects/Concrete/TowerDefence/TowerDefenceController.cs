@@ -51,9 +51,9 @@ namespace _Project.Scripts.GameObjects.Concrete.TowerDefence
             }
         }
         
-        public override void DeleteFromScene(bool realDelete = false)
+        public override void Dispose(bool returnToPool = true)
         {
-            base.DeleteFromScene(realDelete);
+            base.Dispose(returnToPool);
             _damageSystem?.Dispose();
         }
     }

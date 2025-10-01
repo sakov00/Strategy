@@ -1,6 +1,9 @@
 using _General.Scripts.AllAppData;
+using _General.Scripts.Enums;
+using _General.Scripts.UI.Windows.BaseWindow;
 using _Project.Scripts;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UniRx;
 using UnityEngine;
 using VContainer;
@@ -15,25 +18,24 @@ namespace _General.Scripts.UI.Windows.WinWindow
         [SerializeField] private WinWindowModel _model;
         [SerializeField] private WinWindowView _view;
         
-        protected override BaseWindowModel BaseModel => _model;
-        protected override BaseWindowView BaseView => _view;
-
+        public override BaseWindowModel Model => _model;
+        public override BaseWindowView View => _view;
+        
         public ReactiveCommand HomeCommand { get; } = new();
         public ReactiveCommand RestartCommand { get; } = new();
         public ReactiveCommand ContinueCommand { get; } = new();
 
         private bool _isLevelWin;
 
-        protected override void Awake()
+        public override void Initialize()
         {
-            base.Awake();
-            IsPaused.Subscribe(PauseGame).AddTo(this);
-            HomeCommand.Subscribe(_ => HomeOnClick()).AddTo(this);
-            RestartCommand.Subscribe(_ => RestartOnClick()).AddTo(this);
-            ContinueCommand.Subscribe(_ => ContinueOnClick()).AddTo(this);
+            base.Initialize();
+            HomeCommand.Subscribe(_ => HomeOnClick()).AddTo(Disposables);
+            RestartCommand.Subscribe(_ => RestartOnClick()).AddTo(Disposables);
+            ContinueCommand.Subscribe(_ => ContinueOnClick()).AddTo(Disposables);
         }
 
-        public void Initialize(bool isLevelWin)
+        public void SetWindowData(bool isLevelWin)
         {
             _isLevelWin = isLevelWin;
         }
@@ -52,11 +54,6 @@ namespace _General.Scripts.UI.Windows.WinWindow
             if (_isLevelWin)
                 _gameManager.StartLevel(_appData.User.CurrentLevel).Forget();
             WindowsManager.HideWindow<WinWindowPresenter>();
-        }
-
-        private void PauseGame(bool isPaused)
-        {
-            Time.timeScale = isPaused ? 0 : 1;
         }
     }
 }

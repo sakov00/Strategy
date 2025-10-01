@@ -34,7 +34,7 @@ namespace _Project.Scripts.GameObjects.Additional.Projectiles
             {
                 target.CurrentHealth -= _damage;
                 ReturnToPool();
-                if (target.CurrentHealth <= 0) target.DeleteFromScene();
+                if (target.CurrentHealth <= 0) target.Dispose();
             }
             else if (target != null)
             {

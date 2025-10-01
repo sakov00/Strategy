@@ -1,3 +1,4 @@
+using _General.Scripts;
 using _General.Scripts._GlobalLogic;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
@@ -18,6 +19,7 @@ namespace _Project.Scripts._VContainer
     {
         [SerializeField] protected WindowsManager _windowsManager;
         [SerializeField] protected PoolsManager _poolsManager;
+        [SerializeField] protected ApplicationEventsHandler _applicationEventsHandler;
         
         [Header("Configs")]
         [SerializeField] protected LevelsConfig _levelsConfig;
@@ -43,9 +45,9 @@ namespace _Project.Scripts._VContainer
             RegisterServices(builder);
         }
 
-        public virtual void RegisterGameManager(IContainerBuilder builder)
+        protected virtual void RegisterGameManager(IContainerBuilder builder)
         {
-            builder.Register<GameManager>(Lifetime.Singleton).AsSelf().As<IStartable>();
+            builder.Register<GameManager>(Lifetime.Singleton).AsSelf().As<IAsyncStartable>();
         }
         
         private void RegisterAppData(IContainerBuilder builder)
@@ -93,6 +95,7 @@ namespace _Project.Scripts._VContainer
         private void RegisterServices(IContainerBuilder builder)
         {
             builder.RegisterInstance(_poolsManager).AsSelf();
+            builder.RegisterInstance(_applicationEventsHandler).AsSelf();
             builder.Register<ResetLevelService>(Lifetime.Singleton).AsSelf();
             builder.Register<SaveLoadLevelService>(Lifetime.Singleton).AsSelf();
             builder.Register<SceneCreator>(Lifetime.Singleton).AsSelf();

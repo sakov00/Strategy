@@ -1,13 +1,17 @@
+using System;
+using System.Linq;
+using System.Threading;
+using _General.Scripts;
 using _General.Scripts._GlobalLogic;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
-using _General.Scripts.DTO;
 using _General.Scripts.Registries;
 using _General.Scripts.Services;
 using _General.Scripts.UI.Windows;
 using _General.Scripts.UI.Windows.GameWindow;
+using _General.Scripts.UI.Windows.LoadingWindow;
 using _Project.Scripts.Enums;
-using _Project.Scripts.Pools;
+using _Project.Scripts.GameObjects.Abstract.Unit;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
@@ -15,41 +19,58 @@ using VContainer.Unity;
 
 namespace _Project.Scripts
 {
-    public class GameManager : IStartable
+    public class GameManager : IAsyncStartable, IDisposable
     {
         [Inject] protected AppData AppData;
         [Inject] protected SaveLoadLevelService SaveLoadLevelService;
         [Inject] protected ResetLevelService ResetLevelService;
         [Inject] protected SceneCreator SceneCreator;
         [Inject] protected WindowsManager WindowsManager;
-        [Inject] protected UnitPool UnitPool;
+        [Inject] protected ObjectsRegistry ObjectsRegistry;
+        [Inject] protected ApplicationEventsHandler ApplicationEventsHandler;
         
-        public virtual void Start()
+        public virtual async UniTask StartAsync(CancellationToken cancellation = default)
         {
             InjectManager.Inject(this);
             Application.targetFrameRate = 120;
-            StartLevel(AppData.User.CurrentLevel).Forget();
+            WindowsManager.ShowFastWindow<LoadingWindowPresenter>();
+            await StartLevel(AppData.User.CurrentLevel);
         }
 
         public virtual async UniTask StartLevel(int levelIndex)
         {
             WindowsManager.GetWindow<GameWindowPresenter>().Dispose();
-            WindowsManager.ShowWindow<GameWindowPresenter>();
-            ResetLevelService.ResetLevel();
+            await WindowsManager.ShowWindow<LoadingWindowPresenter>();
             AppData.LevelEvents.Dispose();
             AppData.LevelEvents.Initialize();
             AppData.User.CurrentLevel = levelIndex;
             AppData.User.CurrentRound = 0;
-            var levelModel = await LoadLevel(levelIndex);
+            ResetLevelService.ResetLevel();
+            var levelModel = await SaveLoadLevelService.LoadLevelDefault(levelIndex);
             await SceneCreator.InstantiateLoadedObjects(levelModel);
-            WindowsManager.GetWindow<GameWindowPresenter>().Initialize();
-            var playerController = UnitPool.Get(UnitType.Player, new Vector3(60, 1, 70));
+            WindowsManager.ShowFastWindow<GameWindowPresenter>();
+            // ApplicationEventsHandler.OnApplicationQuited += OnApplicationQuit;
+            // ApplicationEventsHandler.OnApplicationPaused += OnApplicationPause;
+            var playerController = ObjectsRegistry.GetTypedList<UnitController>().First(x => x.UnitType == UnitType.Player);
             GlobalObjects.CameraController.CameraFollow.Init(GlobalObjects.CameraController.transform, playerController.transform);
+            await WindowsManager.HideWindow<LoadingWindowPresenter>();
         }
         
-        public virtual async UniTask<LevelModel> LoadLevel(int levelIndex)
+        private void OnApplicationQuit()
         {
-            return await SaveLoadLevelService.LoadLevelDefault(levelIndex);
+            SaveLoadLevelService?.SaveLevelProgress(AppData.User.CurrentLevel).Forget();
+        }
+        
+        private void OnApplicationPause(bool pause)
+        {
+            if (pause)
+                SaveLoadLevelService?.SaveLevelProgress(AppData.User.CurrentLevel).Forget();
+        }
+        
+        public void Dispose()
+        {
+            ApplicationEventsHandler.OnApplicationQuited -= OnApplicationQuit;
+            ApplicationEventsHandler.OnApplicationPaused -= OnApplicationPause;
         }
     }
 }

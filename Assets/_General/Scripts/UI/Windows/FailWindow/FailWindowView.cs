@@ -1,3 +1,4 @@
+using _General.Scripts.UI.Windows.BaseWindow;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,13 +13,12 @@ namespace _General.Scripts.UI.Windows.FailWindow
         [Header("Buttons")]
         [SerializeField] private Button _homeButton;
         [SerializeField] private Button _restartButton;
-
-        protected override BaseWindowPresenter BasePresenter => _presenter;
         
-        private void Start()
+        public override void Initialize()
         {
-            _presenter.HomeCommand.BindTo(_homeButton).AddTo(this);
-            _presenter.RestartCommand.BindTo(_restartButton).AddTo(this);
+            base.Initialize();
+            _presenter.HomeCommand.BindTo(_homeButton).AddTo(Disposables);
+            _presenter.RestartCommand.BindTo(_restartButton).AddTo(Disposables);
         }
     }
 }

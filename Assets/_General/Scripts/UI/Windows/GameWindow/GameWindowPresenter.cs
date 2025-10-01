@@ -1,13 +1,16 @@
-using System;
 using System.Linq;
+using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
+using _General.Scripts.Enums;
 using _General.Scripts.Registries;
 using _General.Scripts.Services;
+using _General.Scripts.UI.Windows.BaseWindow;
 using _General.Scripts.UI.Windows.FailWindow;
 using _General.Scripts.UI.Windows.PauseWindow;
 using _General.Scripts.UI.Windows.WinWindow;
 using _Project.Scripts.GameObjects.Additional.EnemyRoads;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UniRx;
 using UnityEngine;
 using VContainer;
@@ -23,9 +26,10 @@ namespace _General.Scripts.UI.Windows.GameWindow
         [SerializeField] private GameWindowModel _model;
         [SerializeField] private GameWindowView _view;
         
-        protected override BaseWindowModel BaseModel => _model;
-        protected override BaseWindowView BaseView => _view;
-
+        public override BaseWindowModel Model => _model;
+        public override BaseWindowView View => _view;
+        
+        public ReactiveCommand OpenSettingsWindowCommand { get; } = new();
         public ReactiveCommand OpenPauseWindowCommand { get; } = new();
         public ReactiveCommand NextRoundCommand { get; } = new();
         public ReactiveCommand SetStrategyModeCommand { get; } = new();
@@ -33,27 +37,21 @@ namespace _General.Scripts.UI.Windows.GameWindow
         public IReactiveProperty<bool> IsStrategyMode => _model.IsStrategyModeReactive;
         public IReactiveProperty<bool> IsNextRoundAvailable => _model.IsNextRoundAvailableReactive;
 
-        protected override void Awake()
+        public override void Initialize()
         {
-            base.Awake();
-            OpenPauseWindowCommand.Subscribe(_ => OpenPauseWindow()).AddTo(this);
-            SetStrategyModeCommand.Subscribe(_ => SetStrategyMode()).AddTo(this);
-            NextRoundCommand.Subscribe(_ => NextRoundOnClick()).AddTo(this);
-        }
-
-        public void Initialize()
-        {
+            base.Initialize();
+            OpenSettingsWindowCommand.Subscribe(_ => OpenSettingsWindow()).AddTo(Disposables);
+            OpenPauseWindowCommand.Subscribe(_ => OpenPauseWindow()).AddTo(Disposables);
+            SetStrategyModeCommand.Subscribe(_ => SetStrategyMode()).AddTo(Disposables);
+            NextRoundCommand.Subscribe(_ => NextRoundOnClick()).AddTo(Disposables);
             _appData.LevelEvents.WinEvent += WinHandle;
             _appData.LevelEvents.FailEvent += FailHandle;
+            _view.Initialize();
         }
 
-        private void OpenPauseWindow()
-        {
-            WindowsManager.ShowWindow<PauseWindowPresenter>();
-        }
-        
+        private void OpenPauseWindow() => WindowsManager.ShowWindow<PauseWindowPresenter>();
+        private void OpenSettingsWindow() => WindowsManager.ShowWindow<PauseWindowPresenter>();
         private void SetStrategyMode() => _model.IsStrategyMode = !_model.IsStrategyMode;
-        
         private void NextRoundOnClick()
         {
             _model.IsNextRoundAvailable = false;
@@ -70,7 +68,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
             var isLastRound = spawns.Any(spawn => spawn.CountRounds == _appData.User.CurrentRound);
             
             var winWindow = WindowsManager.GetWindow<WinWindowPresenter>();
-            winWindow.Initialize(isLastRound);
+            winWindow.SetWindowData(isLastRound);
             await WindowsManager.ShowWindow<WinWindowPresenter>();
             
             if (isLastRound)
@@ -90,16 +88,13 @@ namespace _General.Scripts.UI.Windows.GameWindow
             WindowsManager.ShowWindow<FailWindowPresenter>();
         }
 
-        public void Reset()
-        {
-            _model.IsStrategyMode = false;
-            _model.IsNextRoundAvailable = true;
-        }
-
         private void OnDestroy() => Dispose();
 
-        public void Dispose()
+        public override void Dispose()
         {
+            base.Dispose();
+            _model.IsStrategyMode = false;
+            _model.IsNextRoundAvailable = true;
             _appData.LevelEvents.WinEvent -= WinHandle;
             _appData.LevelEvents.FailEvent -= FailHandle;
         }

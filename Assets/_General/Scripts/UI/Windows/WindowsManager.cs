@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _General.Scripts._VContainer;
 using _General.Scripts.Enums;
 using _General.Scripts.SO;
+using _General.Scripts.UI.Windows.BaseWindow;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,7 +34,7 @@ namespace _General.Scripts.UI.Windows
         
         public T GetWindow<T>() where T : BaseWindowPresenter
         {
-            var windowType = _windowsConfig.Windows[typeof(T)].WindowType;
+            var windowType = _windowsConfig.Windows[typeof(T)].Model.WindowType;
             if (!_cachedWindows.TryGetValue(typeof(T), out var window))
             {
                 window = _resolver.Instantiate(_windowsConfig.Windows[typeof(T)], parent: GetParent(windowType));
@@ -44,34 +45,36 @@ namespace _General.Scripts.UI.Windows
         
         public Tween ShowWindow<T>() where T : BaseWindowPresenter
         {
-            var windowType = _windowsConfig.Windows[typeof(T)].WindowType;
-            if (!_cachedWindows.TryGetValue(typeof(T), out var window))
-            {
-                window = _resolver.Instantiate(_windowsConfig.Windows[typeof(T)], parent: GetParent(windowType));
-                _cachedWindows.Add(typeof(T), window);
-            }
+            var windowType = _windowsConfig.Windows[typeof(T)].Model.WindowType;
+            var window = GetWindow<T>();
+            window.Initialize();
             
-            var sequence = DOTween.Sequence();
-            sequence.Append(window.Show());
-            if (windowType == WindowType.Popup) sequence.Join(ShowDarkBackground());
-            sequence.SetUpdate(true);
-            return sequence;
+            if (windowType == WindowType.Popup) ShowDarkBackground();
+            return window.View.Show();
         }
-        
+
+        public void ShowFastWindow<T>() where T : BaseWindowPresenter
+        {
+            var window = GetWindow<T>();
+            window.Initialize();
+            window.View.ShowFast();
+        }
+
         public Tween HideWindow<T>() where T : BaseWindowPresenter
         {
-            var windowType = _windowsConfig.Windows[typeof(T)].WindowType;
-            if (!_cachedWindows.TryGetValue(typeof(T), out var window))
-            {
-                window = _resolver.Instantiate(_windowsConfig.Windows[typeof(T)], parent: GetParent(windowType));
-                _cachedWindows.Add(typeof(T), window);
-            }
-    
-            var sequence = DOTween.Sequence();
-            sequence.Append(window.Hide());
-            if (windowType == WindowType.Popup) sequence.Join(HideDarkBackground());
-            sequence.SetUpdate(true);
-            return sequence;
+            var windowType = _windowsConfig.Windows[typeof(T)].Model.WindowType;
+            var window = GetWindow<T>();
+            window.Dispose();
+            
+            if (windowType == WindowType.Popup) HideDarkBackground();
+            return window.View.Hide();
+        }
+
+        public void HideFastWindow<T>() where T : BaseWindowPresenter
+        {
+            var window = GetWindow<T>();
+            window.Dispose();
+            window.View.HideFast();
         }
         
         private Tween ShowDarkBackground()
@@ -104,6 +107,5 @@ namespace _General.Scripts.UI.Windows
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
         }
-        
     }
 }

@@ -7,7 +7,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
 {
-    public class EnvironmentController : MonoBehaviour, ISavableController, IClearScene
+    public class EnvironmentController : MonoBehaviour, ISavableController, IPoolableDispose
     {
         [SerializeField] protected EnvironmentModel _model;
         [Inject] private ObjectsRegistry _objectsRegistry;
@@ -16,21 +16,6 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
         {
             InjectManager.Inject(this);
             _objectsRegistry.Register(this);
-        }
-
-        private void OnDestroy()
-        {
-            ClearData();
-        }
-
-        public void ClearData()
-        {
-            _objectsRegistry.Unregister(this);
-        }
-
-        public void DeleteFromScene(bool realDelete = false)
-        {
-            Destroy(gameObject);
         }
 
         public ISavableModel GetSavableModel()
@@ -43,6 +28,16 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
         public void SetSavableModel(ISavableModel savableModel)
         {
             if (savableModel is EnvironmentModel buildingZoneModel) _model = buildingZoneModel;
+        }
+
+        public void Dispose(bool returnToPool = true)
+        {
+            Destroy(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            _objectsRegistry.Unregister(this);
         }
     }
 }

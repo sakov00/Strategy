@@ -25,7 +25,6 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
         public override void Initialize()
         {
             InjectManager.Inject(this);
-            base.Initialize();
             ObjectsRegistry.Register(this);
         }
 
@@ -34,16 +33,15 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
             UnitModel.WayToAim = waypoints;
         }
 
-        public override void DeleteFromScene(bool realDelete = false)
+        public override void Dispose(bool returnToPool = true)
         {
-            if(realDelete)
-                ObjectsRegistry.Unregister(this);
-            else
-            {
+            if(returnToPool)
                 UnitPool.Return(this);
-                OnKilled?.Invoke(this);
-                OnKilled = null;
-            }
+            else
+                ObjectsRegistry.Unregister(this);
+            
+            OnKilled?.Invoke(this);
+            OnKilled = null;
         }
     }
 }

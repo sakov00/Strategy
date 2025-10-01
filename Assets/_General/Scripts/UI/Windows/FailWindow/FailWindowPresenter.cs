@@ -1,5 +1,8 @@
 using _General.Scripts.AllAppData;
+using _General.Scripts.Enums;
+using _General.Scripts.UI.Windows.BaseWindow;
 using _Project.Scripts;
+using DG.Tweening;
 using UniRx;
 using UnityEngine;
 using VContainer;
@@ -8,24 +11,22 @@ namespace _General.Scripts.UI.Windows.FailWindow
 {
     public class FailWindowPresenter : BaseWindowPresenter
     {
-        [SerializeField] private FailWindowModel _model;
-        [SerializeField] private FailWindowView _view;
-        
         [Inject] private AppData _appData;
         [Inject] private GameManager _gameManager;
         
-        protected override BaseWindowModel BaseModel => _model;
-        protected override BaseWindowView BaseView => _view;
-
+        [SerializeField] private FailWindowModel _model;
+        [SerializeField] private FailWindowView _view;
+        public override BaseWindowModel Model => _model;
+        public override BaseWindowView View => _view;
+        
         public ReactiveCommand HomeCommand { get; } = new();
         public ReactiveCommand RestartCommand { get; } = new();
         
-        protected override void Awake()
+        public override void Initialize()
         {
-            base.Awake();
-            IsPaused.Subscribe(PauseGame).AddTo(this);
-            HomeCommand.Subscribe(_ => HomeOnClick()).AddTo(this);
-            RestartCommand.Subscribe(_ => RestartOnClick()).AddTo(this);
+            base.Initialize();
+            HomeCommand.Subscribe(_ => HomeOnClick()).AddTo(Disposables);
+            RestartCommand.Subscribe(_ => RestartOnClick()).AddTo(Disposables);
         }
         
         private void HomeOnClick()
@@ -36,11 +37,6 @@ namespace _General.Scripts.UI.Windows.FailWindow
         {
             await _gameManager.StartLevel(_appData.User.CurrentLevel);
             WindowsManager.HideWindow<FailWindowPresenter>();
-        }
-
-        private void PauseGame(bool isPaused)
-        {
-            Time.timeScale = isPaused ? 0 : 1;
         }
     }
 }

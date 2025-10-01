@@ -1,3 +1,4 @@
+using _General.Scripts.UI.Windows.BaseWindow;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,14 +14,13 @@ namespace _General.Scripts.UI.Windows.PauseWindow
         [SerializeField] private Button _homeButton;
         [SerializeField] private Button _restartButton;
         [SerializeField] private Button _continueButton;
-        
-        protected override BaseWindowPresenter BasePresenter => _presenter;
 
-        private void Start()
+        public override void Initialize()
         {
-            _presenter.HomeCommand.BindTo(_homeButton).AddTo(this);
-            _presenter.RestartCommand.BindTo(_restartButton).AddTo(this);
-            _presenter.ContinueCommand.BindTo(_continueButton).AddTo(this);
+            base.Initialize();
+            _presenter.HomeCommand.BindTo(_homeButton).AddTo(Disposables);
+            _presenter.RestartCommand.BindTo(_restartButton).AddTo(Disposables);
+            _presenter.ContinueCommand.BindTo(_continueButton).AddTo(Disposables);
         }
     }
 }

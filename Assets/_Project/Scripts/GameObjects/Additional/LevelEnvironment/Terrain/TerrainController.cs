@@ -8,7 +8,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
 {
-    public class TerrainController : MonoBehaviour, ISavableController, IClearScene
+    public class TerrainController : MonoBehaviour, ISavableController, IPoolableDispose
     {
         [SerializeField] private TerrainModel _model;
         [SerializeField] private MeshFilter _meshFilter;
@@ -18,21 +18,6 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
         {
             InjectManager.Inject(this);
             _objectsRegistry.Register(this);
-        }
-
-        private void OnDestroy()
-        {
-            ClearData();
-        }
-
-        public void ClearData()
-        {
-            _objectsRegistry.Unregister(this);
-        }
-
-        public void DeleteFromScene(bool realDelete = false)
-        {
-            Destroy(gameObject);
         }
 
         public ISavableModel GetSavableModel()
@@ -97,6 +82,16 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
                     _meshFilter.mesh.SetNormals(normals);
                 }
             }
+        }
+
+        public void Dispose(bool returnToPool = true)
+        {
+            Destroy(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            _objectsRegistry.Unregister(this);
         }
     }
 }

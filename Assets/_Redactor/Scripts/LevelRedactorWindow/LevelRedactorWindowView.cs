@@ -1,4 +1,5 @@
 using _General.Scripts.UI.Windows;
+using _General.Scripts.UI.Windows.BaseWindow;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -16,8 +17,6 @@ namespace _Redactor.Scripts.LevelRedactorWindow
         [SerializeField] private Button _loadLevelButton;
         [SerializeField] private Button _playLevelButton;
         [SerializeField] private TMP_InputField _selectLevelInputField;
-        
-        protected override BaseWindowPresenter BasePresenter => _presenter;
 
         private void Start()
         {

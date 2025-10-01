@@ -31,14 +31,13 @@ namespace _General.Scripts.Services
         
         public void ResetLevel()
         {
-            foreach (var obj in _objectsRegistry.GetAllByInterface<IClearScene>())
-                obj.DeleteFromScene();
+            foreach (var obj in _objectsRegistry.GetAllByInterface<IPoolableDispose>())
+                obj.Dispose();
 
             foreach (var spawn in _objectsRegistry.GetTypedList<EnemyRoadController>())
                 spawn.RefreshInfoRound();
             
             _objectsRegistry.Clear();
-            _windowsManager?.GetWindow<GameWindowPresenter>()?.Reset();
         }
     }
 }

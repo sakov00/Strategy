@@ -251,9 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _model:
-    _windowType: 0
-    _isPaused:
-      value: 0
+    _windowType: 1
   _view: {fileID: 7216117274241126373}
 --- !u!114 &7216117274241126373
 MonoBehaviour:

@@ -6,7 +6,6 @@ using _General.Scripts.AllAppData;
 using _General.Scripts.Extentions;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
-using _Project.Scripts.GameObjects.Abstract.Unit;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Pools;
 using UnityEngine;
@@ -18,18 +17,20 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
 {
     [Serializable]
     [RequireComponent(typeof(SplineContainer))]
-    public class EnemyRoadController : MonoBehaviour, ISavableController, IClearScene
+    public class EnemyRoadController : MonoBehaviour, ISavableController, IPoolableDispose
     {
-        [SerializeField] private SplineContainer _splineContainer;
-
-        [field: SerializeField] public EnemyRoadModel Model { get; private set; }
-        [field: SerializeField] public EnemyRoadView View { get; private set; }
         [Inject] private AppData _appData;
         [Inject] private UnitPool _unitPool;
-
-        private List<EnemyWithTime> _currentEnemyList;
         [Inject] private GameTimer _gameTimer;
         [Inject] private ObjectsRegistry _objectsRegistry;
+        
+        [SerializeField] private SplineContainer _splineContainer;
+        
+        private List<EnemyWithTime> _currentEnemyList;
+        
+        [field: SerializeField] public EnemyRoadModel Model { get; private set; }
+        [field: SerializeField] public EnemyRoadView View { get; private set; }
+        
         public int CountRounds => Model.RoundEnemyList.Count;
 
         private void Start()
@@ -50,25 +51,9 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             View.RefreshInfoRound(_splineContainer, Model.RoundEnemyList);
         }
 
-        private void OnDestroy()
-        {
-            _gameTimer.OnEverySecond -= Tick;
-            ClearData();
-        }
-
         private void OnValidate()
         {
             _splineContainer ??= GetComponent<SplineContainer>();
-        }
-
-        public void ClearData()
-        {
-            _objectsRegistry.Unregister(this);
-        }
-
-        public void DeleteFromScene(bool realDelete = false)
-        {
-            Destroy(gameObject);
         }
 
         public ISavableModel GetSavableModel()
@@ -131,6 +116,17 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
         public void RefreshInfoRound()
         {
             View.RefreshInfoRound(_splineContainer, Model.RoundEnemyList);
+        }
+        
+        public void Dispose(bool returnToPool = true)
+        {
+            Destroy(gameObject);
+        }
+        
+        private void OnDestroy()
+        {
+            _gameTimer.OnEverySecond -= Tick;
+            _objectsRegistry.Unregister(this);
         }
     }
 }

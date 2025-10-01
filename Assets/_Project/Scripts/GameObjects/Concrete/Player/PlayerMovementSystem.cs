@@ -22,6 +22,8 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
 
         public void MoveTo(Vector3 inputVector)
         {
+            if (!_playerView.Agent.isOnNavMesh) return;
+            
             if (inputVector.sqrMagnitude < 0.01f)
             {
                 _playerView.Agent.isStopped = true;

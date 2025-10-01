@@ -1,5 +1,6 @@
+using System.Threading;
 using _General.Scripts._VContainer;
-using _General.Scripts.DTO;
+using _General.Scripts.UI.Windows.GameWindow;
 using _Project.Scripts;
 using _Redactor.Scripts.LevelRedactorWindow;
 using Cysharp.Threading.Tasks;
@@ -9,22 +10,25 @@ namespace _Redactor.Scripts
 {
     public class RedactorManager : GameManager
     {
-        public override void Start()
+        public override async UniTask StartAsync(CancellationToken cancellation = default)
         {
             InjectManager.Inject(this);
             Application.targetFrameRate = 120;
-            WindowsManager.ShowWindow<LevelRedactorWindowPresenter>();
+            WindowsManager.HideFastWindow<GameWindowPresenter>();
+            WindowsManager.ShowFastWindow<LevelRedactorWindowPresenter>();
         }
         
         public override async UniTask StartLevel(int levelIndex)
         {
-            WindowsManager.HideWindow<LevelRedactorWindowPresenter>();
+            WindowsManager.HideFastWindow<LevelRedactorWindowPresenter>();
             await base.StartLevel(levelIndex);
         }
 
-        public override async UniTask<LevelModel> LoadLevel(int levelIndex)
+        public async UniTask LoadLevel(int levelIndex)
         {
-            return await SaveLoadLevelService.LoadLevelDefault(levelIndex);
+            ResetLevelService.ResetLevel();
+            var levelModel = await SaveLoadLevelService.LoadLevelDefault(levelIndex);
+            await SceneCreator.InstantiateLoadedObjects(levelModel);
         }
         
         public void SaveLevel(int levelIndex)

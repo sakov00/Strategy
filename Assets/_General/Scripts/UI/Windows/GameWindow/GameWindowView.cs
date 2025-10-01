@@ -1,7 +1,7 @@
 using _General.Scripts._GlobalLogic;
 using _General.Scripts.AllAppData;
 using _General.Scripts.UI.Elements;
-using DG.Tweening;
+using _General.Scripts.UI.Windows.BaseWindow;
 using Joystick_Pack.Scripts.Base;
 using TMPro;
 using UniRx;
@@ -31,20 +31,21 @@ namespace _General.Scripts.UI.Windows.GameWindow
         [SerializeField] private Joystick _joystick;
         [SerializeField] private TouchAndMouseDragInput _touchAndMouseDragInput;
         
-        protected override BaseWindowPresenter BasePresenter => _presenter;
+        private CompositeDisposable _disposables;
         
         private const string MoneyFormat = "Money: {0}";
         private const string RoundFormat = "Round: {0}";
 
-        private void Start()
+        public void Initialize()
         {
-            _presenter.OpenPauseWindowCommand.BindTo(_openPauseMenuButton).AddTo(this);
-            _presenter.NextRoundCommand.BindTo(_nextRoundButton).AddTo(this);
+            _disposables = new CompositeDisposable();
+            _presenter.OpenPauseWindowCommand.BindTo(_openPauseMenuButton).AddTo(_disposables);
+            _presenter.NextRoundCommand.BindTo(_nextRoundButton).AddTo(_disposables);
             _presenter.IsNextRoundAvailable
                 .Subscribe(isVisible => _nextRoundButton.gameObject.SetActive(isVisible))
-                .AddTo(this);
+                .AddTo(_disposables);
             
-            _presenter.SetStrategyModeCommand.BindTo(_strategyModeButton).AddTo(this);
+            _presenter.SetStrategyModeCommand.BindTo(_strategyModeButton).AddTo(_disposables);
             _presenter.IsStrategyMode
                 .Subscribe(async isStrategy =>
                 {
@@ -63,31 +64,15 @@ namespace _General.Scripts.UI.Windows.GameWindow
 
                     
                 })
-                .AddTo(this);
+                .AddTo(_disposables);
             
             _appData.LevelData.LevelMoneyReactive
                 .Subscribe(money => _moneyText.text = string.Format(MoneyFormat, money))
-                .AddTo(this);
+                .AddTo(_disposables);
             
             _appData.User.CurrentRoundReactive
                 .Subscribe(roundIndex => _currentRoundText.text = string.Format(RoundFormat, roundIndex + 1))
-                .AddTo(this);
-        }
-        
-        public override Tween Show()
-        {
-            var sequence = DOTween.Sequence();
-            sequence.AppendCallback(() => gameObject.SetActive(true));
-            sequence.Append(_canvasGroup.DOFade(1f, 0.5f).From(0));
-            return sequence;
-        }
-
-        public override Tween Hide()
-        {
-            var sequence = DOTween.Sequence();
-            sequence.Append(_canvasGroup.DOFade(0f, 0.5f).From(1));
-            sequence.AppendCallback(() => gameObject.SetActive(false));
-            return sequence;
+                .AddTo(_disposables);
         }
 
         public void Update()
@@ -98,9 +83,9 @@ namespace _General.Scripts.UI.Windows.GameWindow
                 _appData.LevelData.MoveDirection = new Vector3(direction.x, 0f, direction.y);
         }
 
-        public void Reset()
+        public void Dispose()
         {
-            _presenter.Reset();
+            _disposables?.Dispose();
         }
     }
 }

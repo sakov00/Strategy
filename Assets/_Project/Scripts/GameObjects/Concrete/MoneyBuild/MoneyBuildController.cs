@@ -14,8 +14,7 @@ namespace _Project.Scripts.GameObjects.Concrete.MoneyBuild
         
         public override void Initialize()
         {
-            InjectManager.Inject(this);
-            ObjectsRegistry.Register(this);
+            base.Initialize();
             
             Model.CurrentHealth = Model.MaxHealth;
             
@@ -46,9 +45,9 @@ namespace _Project.Scripts.GameObjects.Concrete.MoneyBuild
             }
         }
         
-        public override void DeleteFromScene(bool realDelete = false)
+        public override void Dispose(bool returnToPool = true)
         {
-            base.DeleteFromScene(realDelete);
+            base.Dispose(returnToPool);
             AppData.LevelEvents.WinEvent -= AddMoneyToPlayer;
         }
     }

@@ -59,9 +59,9 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherFriend
             }
         }
         
-        public override void DeleteFromScene(bool realDelete = false)
+        public override void Dispose(bool returnToPool = true)
         {
-            base.DeleteFromScene(realDelete);
+            base.Dispose(returnToPool);
             _regenerationHpSystem?.Dispose();
             _damageSystem?.Dispose();
         }

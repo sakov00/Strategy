@@ -8,14 +8,9 @@ namespace _Redactor.Scripts._VContainer
 {
     public class RedactorLifetimeScope : GameLifetimeScope
     {
-        protected override void Configure(IContainerBuilder builder)
+        protected override void RegisterGameManager(IContainerBuilder builder)
         {
-            base.Configure(builder);
-        }
-        
-        public override void RegisterGameManager(IContainerBuilder builder)
-        {
-            builder.Register<RedactorManager>(Lifetime.Singleton).AsSelf().As<IStartable, GameManager>();
+            builder.Register<RedactorManager>(Lifetime.Singleton).AsSelf().As<IAsyncStartable, GameManager>();
         }
     }
 }

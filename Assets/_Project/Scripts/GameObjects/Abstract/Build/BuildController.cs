@@ -23,16 +23,15 @@ namespace _Project.Scripts.GameObjects.Abstract
         public override void Initialize()
         {
             InjectManager.Inject(this);
-            base.Initialize();
             ObjectsRegistry.Register(this);
         }
         
-        public override void DeleteFromScene(bool realDelete = false)
+        public override void Dispose(bool returnToPool = true)
         {
-            if(realDelete)
-                ObjectsRegistry.Unregister(this);
-            else
+            if(returnToPool)
                 BuildPool.Return(this);
+            else
+                ObjectsRegistry.Unregister(this);
         }
     }
 }

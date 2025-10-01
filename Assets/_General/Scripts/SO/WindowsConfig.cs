@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using _General.Scripts.UI.Windows;
+using _General.Scripts.UI.Windows.BaseWindow;
 using UnityEngine;
 using VContainer.Unity;
 

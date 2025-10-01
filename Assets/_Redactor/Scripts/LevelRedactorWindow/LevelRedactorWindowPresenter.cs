@@ -1,5 +1,7 @@
+using _General.Scripts.Enums;
 using _General.Scripts.Registries;
 using _General.Scripts.UI.Windows;
+using _General.Scripts.UI.Windows.BaseWindow;
 using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
@@ -14,20 +16,19 @@ namespace _Redactor.Scripts.LevelRedactorWindow
 
         [SerializeField] private LevelRedactorWindowModel _model;
         [SerializeField] private LevelRedactorWindowView _view;
-        protected override BaseWindowModel BaseModel => _model;
-        protected override BaseWindowView BaseView => _view;
+        public override BaseWindowModel Model => _model;
+        public override BaseWindowView View => _view;
 
         public ReactiveCommand<int> SaveLevelCommand { get; } = new();
         public ReactiveCommand<int> LoadLevelCommand { get; } = new();
         public ReactiveCommand<int> PlayLevelCommand { get; } = new();
 
-        protected override void Awake()
+        public override void Initialize()
         {
-            base.Awake();
-            
-            SaveLevelCommand.Subscribe(levelIndex => _redactorManager.SaveLevel(levelIndex)).AddTo(this);
-            LoadLevelCommand.Subscribe(levelIndex => _redactorManager.LoadLevel(levelIndex).Forget()).AddTo(this);
-            PlayLevelCommand.Subscribe(levelIndex => _redactorManager.StartLevel(levelIndex).Forget()).AddTo(this);
+            base.Initialize();
+            SaveLevelCommand.Subscribe(levelIndex => _redactorManager.SaveLevel(levelIndex)).AddTo(Disposables);
+            LoadLevelCommand.Subscribe(levelIndex => _redactorManager.LoadLevel(levelIndex).Forget()).AddTo(Disposables);
+            PlayLevelCommand.Subscribe(levelIndex => _redactorManager.StartLevel(levelIndex).Forget()).AddTo(Disposables);
         }
     }
 }
