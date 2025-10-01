@@ -12,7 +12,6 @@ namespace _Project.Scripts.Pools
     public class ProjectilePool
     {
         [Inject] private ProjectileFactory _projectileFactory;
-        [Inject] private ObjectsRegistry _objectsRegistry;
         
         private Transform _containerTransform;
         private readonly List<Projectile> _availableProjectiles = new();
@@ -38,7 +37,6 @@ namespace _Project.Scripts.Pools
             }
 
             projectile.transform.SetParent(null);
-            _objectsRegistry.Register(projectile);
             return projectile;
         }
 
@@ -51,7 +49,6 @@ namespace _Project.Scripts.Pools
             
             projectile.gameObject.SetActive(false);
             projectile.transform.SetParent(_containerTransform, false); 
-            _objectsRegistry.Unregister(projectile);
         }
     }
 }

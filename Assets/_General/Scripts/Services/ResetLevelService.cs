@@ -18,6 +18,7 @@ namespace _General.Scripts.Services
         [Inject] private BuildPool _buildPool;
         [Inject] private UnitPool _unitPool;
         [Inject] private ObjectsRegistry _objectsRegistry;
+        [Inject] private IdsRegistry _idsRegistry;
         [Inject] private WindowsManager _windowsManager;
         
         public void ResetRound()
@@ -33,6 +34,7 @@ namespace _General.Scripts.Services
             foreach (var spawn in _objectsRegistry.GetTypedList<EnemyRoadController>())
                 spawn.RefreshInfoRound();
             
+            _idsRegistry.Clear();
             _objectsRegistry.Clear();
         }
     }

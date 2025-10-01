@@ -22,25 +22,38 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
         public override void Initialize()
         {
             base.Initialize();
+            
             Model.CurrentHealth = Model.MaxHealth;
 
             View.Initialize();
-            CreateFriends();
+            AddFriends();
         }
         
-        private void CreateFriends()
+        private void AddFriends()
         {
-            foreach (var friendUnit in View._buildUnitPositions)
+            if (Model.BuildUnitIds.Count == 0)
             {
-                var unitController = _unitPool.Get(Model.UnitType, friendUnit.position);
-                unitController.SetWayToPoint(new List<Vector3> { friendUnit.position });
-                Model.BuildUnits.Add(unitController);
-                unitController.OnKilled += CheckRemovedUnits;
+                foreach (var friendUnit in View._buildUnitPositions)
+                {
+                    var unitController = _unitPool.Get(Model.UnitType, friendUnit.position);
+                    unitController.SetWayToPoint(new List<Vector3> { friendUnit.position });
+                    Model.BuildUnitIds.Add(unitController.Id);
+                    unitController.OnKilled += CheckRemovedUnits;
+                }  
+            }
+            else
+            {
+                foreach (var unitId in Model.BuildUnitIds)
+                {
+                   var unit = (UnitController)IdsRegistry.Get(unitId);
+                   unit.OnKilled += CheckRemovedUnits;
+                }
             }
         }
 
         private void CheckRemovedUnits(UnitController unitController)
         {
+            Model.BuildUnitIds.Remove(unitController.Id);
             Model.NeedRestoreUnitsCount++;
 
             if (Model.NeedRestoreUnitsCount > 0 && Model.CurrentSpawnTimer < 0)
@@ -59,7 +72,8 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
 
             if (Model.NeedRestoreUnitsCount > 0)
             {
-                _unitPool.Get(Model.UnitType, transform.position);
+                var unitController = _unitPool.Get(Model.UnitType, transform.position);
+                Model.BuildUnitIds.Add(unitController.Id);
                 Model.NeedRestoreUnitsCount--;
             }
 
@@ -93,7 +107,12 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
         {
             base.Dispose(returnToPool, clearFromRegistry);
             _gameTimer.OnEverySecond -= HandleSpawnTimer;
-            Model.BuildUnits.ForEach(unitController => unitController.OnKilled -= CheckRemovedUnits);
+            if(Model.BuildUnitIds.Count == 0) return;
+            foreach (var unitId in Model.BuildUnitIds)
+            {
+                var unit = (UnitController)IdsRegistry.Get(unitId);
+                unit.OnKilled -= CheckRemovedUnits;
+            }
         }
     }
 }

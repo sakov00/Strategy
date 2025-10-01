@@ -12,7 +12,6 @@ namespace _Project.Scripts.Pools
     public class UnitPool
     {
         [Inject] private UnitFactory _unitFactory;
-        [Inject] private ObjectsRegistry _objectsRegistry;
 
         private Transform _containerTransform;
         private readonly List<UnitController> _availableUnits = new();
@@ -52,7 +51,6 @@ namespace _Project.Scripts.Pools
 
             unit.gameObject.SetActive(false);
             unit.transform.SetParent(_containerTransform, false);
-            _objectsRegistry.Unregister(unit);
         }
     }
 }

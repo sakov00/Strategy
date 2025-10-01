@@ -24,13 +24,18 @@ namespace _Project.Scripts.GameObjects.Abstract
         {
             InjectManager.Inject(this);
             ObjectsRegistry.Register(this);
+            IdsRegistry.Register(this);
             Dispose(false, false);
         }
         
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
             if(returnToPool) BuildPool.Return(this);
-            if(returnToPool == false && clearFromRegistry) ObjectsRegistry.Unregister(this);
+            if (clearFromRegistry)
+            {
+                ObjectsRegistry.Unregister(this);
+                IdsRegistry.Unregister(this);
+            }
         }
     }
 }

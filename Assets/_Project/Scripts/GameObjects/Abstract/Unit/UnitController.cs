@@ -26,6 +26,7 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
         {
             InjectManager.Inject(this);
             ObjectsRegistry.Register(this);
+            IdsRegistry.Register(this);
             Dispose(false,false);
         }
 
@@ -36,11 +37,17 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
 
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
-            if(returnToPool) UnitPool.Return(this);
-            if(returnToPool == false && clearFromRegistry) ObjectsRegistry.Unregister(this);
-            
-            OnKilled?.Invoke(this);
-            OnKilled = null;
+            if (returnToPool)
+            {
+                UnitPool.Return(this);
+                OnKilled?.Invoke(this);
+                OnKilled = null;
+            }
+            if (clearFromRegistry)
+            {
+                ObjectsRegistry.Unregister(this);
+                IdsRegistry.Unregister(this);
+            }
         }
     }
 }

@@ -6,21 +6,14 @@ using _General.Scripts.DTO;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
-using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects.Abstract;
 using _Project.Scripts.GameObjects.Concrete.ArcherFriend;
 using _Project.Scripts.GameObjects.Concrete.WarriorFriend;
-using _Project.Scripts.Pools;
 using Cysharp.Threading.Tasks;
 using MemoryPack;
 using UnityEngine;
 using VContainer;
 using K4os.Compression.LZ4;
-using BuildingZoneModel = _Project.Scripts.GameObjects.Concrete.BuildingZone.BuildingZoneModel;
-using BuildModel = _Project.Scripts.GameObjects.Abstract.BuildModel;
-using EnemyRoadModel = _Project.Scripts.GameObjects.Additional.EnemyRoads.EnemyRoadModel;
-using TerrainModel = _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain.TerrainModel;
-using UnitModel = _Project.Scripts.GameObjects.Abstract.Unit.UnitModel;
 
 namespace _General.Scripts.Services
 {
@@ -57,11 +50,8 @@ namespace _General.Scripts.Services
         private async UniTask Save(string path)
         {
             var allObjects = _objectsRegistry.GetAllByInterface<ISavableController>();
-            var filteredAllObjects = 
-                allObjects.Where(x => x is not ArcherFriendController && x is not WarriorFriendController).ToList();
-            
             var levelModel = new LevelModel();
-            levelModel.SavableModels.AddRange(filteredAllObjects.Select(o => o.GetSavableModel()).ToList());
+            levelModel.SavableModels.AddRange(allObjects.Select(o => o.GetSavableModel()).ToList());
 
             var data = MemoryPackSerializer.Serialize(levelModel);
             var compressed = LZ4Pickler.Pickle(data);

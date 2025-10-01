@@ -20,6 +20,7 @@ namespace _Project.Scripts.GameObjects.ActionSystems
 
         public void MoveToAim()
         {
+            if (!_unitView.Agent.isOnNavMesh) return;
             var thresholdSqr = 0.5f;
             if (_unitModel.CurrentWaypointIndex < _unitModel.WayToAim.Count - 1)
                 if ((_transform.position - _unitModel.WayToAim[_unitModel.CurrentWaypointIndex]).sqrMagnitude <

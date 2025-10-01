@@ -32,13 +32,15 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
     [MemoryPackUnion(10, typeof(FlyingEnemyModel))]
     public abstract partial class ObjectModel : IHealthModel, ISavableModel
     {
+        [MemoryPackInclude] [field:SerializeField] public int Id { get; set; }
+        
         [Header("Health")] 
         [SerializeField] private WarSide _warSide;
         [SerializeField] private float _delayRegeneration = 3f;
         [SerializeField] private float _regenerateHealthInSecond = 5f;
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private float _currentHealth = 100f;
-
+        
         public int SecondsWithoutDamage { get; set; }
         public WarSide WarSide => _warSide;
 

@@ -1,9 +1,7 @@
 using System.Collections.Generic; 
 using System.Linq;
-using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Factories;
-using _Project.Scripts.GameObjects;
 using _Project.Scripts.GameObjects.Abstract;
 using UnityEngine;
 using VContainer;
@@ -13,7 +11,6 @@ namespace _Project.Scripts.Pools
     public class BuildPool
     {
         [Inject] private BuildFactory _buildFactory;
-        [Inject] private ObjectsRegistry _objectsRegistry;
         
         private Transform _containerTransform;
         private readonly List<BuildController> _availableBuilds = new();
@@ -54,7 +51,6 @@ namespace _Project.Scripts.Pools
             
             build.gameObject.SetActive(false);
             build.transform.SetParent(_containerTransform, false); 
-            _objectsRegistry.Unregister(build);
         }
     }
 }

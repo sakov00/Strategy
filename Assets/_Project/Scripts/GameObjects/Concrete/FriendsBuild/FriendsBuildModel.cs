@@ -15,6 +15,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
         [Header("Units")] 
         [SerializeField] private UnitType _unitType;
         [SerializeField] private int _timeCreateUnits = 5;
+        [SerializeField] private List<int> _buildUnitIds = new();
 
         public UnitType UnitType
         {
@@ -27,11 +28,14 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
             get => _timeCreateUnits;
             set => _timeCreateUnits = value;
         }
-
+        
+        public List<int> BuildUnitIds
+        {
+            get => _buildUnitIds;
+            set => _buildUnitIds = value;
+        }
+        
         public int NeedRestoreUnitsCount { get; set; }
         public int CurrentSpawnTimer { get; set; } = -1;
-
-        [MemoryPackIgnore] public List<UnitController> BuildUnits { get; set; } = new();
-
     }
 }

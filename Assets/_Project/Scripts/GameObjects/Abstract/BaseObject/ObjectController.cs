@@ -10,10 +10,12 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
     public abstract class ObjectController : MonoBehaviour, ISavableController, IPoolableDispose
     {
         [Inject] protected ObjectsRegistry ObjectsRegistry;
+        [Inject] protected IdsRegistry IdsRegistry;
         
         protected abstract ObjectModel ObjectModel { get; }
         protected abstract ObjectView ObjectView { get; }
         
+        public int Id { get => ObjectModel.Id; set => ObjectModel.Id = value; }
         public float HeightObject { get; protected set; }
         public WarSide WarSide => ObjectModel.WarSide;
         public float CurrentHealth { get => ObjectModel.CurrentHealth; set => ObjectModel.CurrentHealth = value; }

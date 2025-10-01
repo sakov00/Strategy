@@ -21,6 +21,7 @@ namespace _General.Scripts.Services
         
         public async UniTask InstantiateLoadedObjects(LevelModel levelModel)
         {
+            levelModel.SavableModels.Sort();
             foreach (var model in levelModel.SavableModels)
             {
                 ISavableController savableController = model switch
