@@ -34,6 +34,7 @@ namespace _Project.Scripts
             InjectManager.Inject(this);
             Application.targetFrameRate = 120;
             WindowsManager.ShowFastWindow<LoadingWindowPresenter>();
+            WindowsManager.ShowFastWindow<GameWindowPresenter>();
             await StartLevel(AppData.User.CurrentLevel);
         }
 
@@ -48,11 +49,11 @@ namespace _Project.Scripts
             ResetLevelService.ResetLevel();
             var levelModel = await SaveLoadLevelService.LoadLevelDefault(levelIndex);
             await SceneCreator.InstantiateLoadedObjects(levelModel);
-            WindowsManager.ShowFastWindow<GameWindowPresenter>();
             // ApplicationEventsHandler.OnApplicationQuited += OnApplicationQuit;
             // ApplicationEventsHandler.OnApplicationPaused += OnApplicationPause;
             var playerController = ObjectsRegistry.GetTypedList<UnitController>().First(x => x.UnitType == UnitType.Player);
             GlobalObjects.CameraController.CameraFollow.Init(GlobalObjects.CameraController.transform, playerController.transform);
+            WindowsManager.ShowFastWindow<GameWindowPresenter>();
             await WindowsManager.HideWindow<LoadingWindowPresenter>();
         }
         

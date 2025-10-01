@@ -1,5 +1,3 @@
-using System;
-using _General.Scripts._VContainer;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
@@ -33,12 +31,12 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
 
         private void OnDestroy()
         {
-            Dispose();
+            Dispose(false);
         }
 
         public abstract void Initialize();
-        public abstract void Dispose(bool returnToPool = true);
         public abstract ISavableModel GetSavableModel();
         public abstract void SetSavableModel(ISavableModel model);
+        public abstract void Dispose(bool returnToPool = true, bool clearFromRegistry = true);
     }
 }

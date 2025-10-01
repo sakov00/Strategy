@@ -118,7 +118,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             View.RefreshInfoRound(_splineContainer, Model.RoundEnemyList);
         }
         
-        public void Dispose(bool returnToPool = true)
+        public void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
             Destroy(gameObject);
         }

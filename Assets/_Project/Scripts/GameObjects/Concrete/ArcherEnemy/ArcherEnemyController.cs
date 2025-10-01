@@ -53,9 +53,9 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherEnemy
             }
         }
 
-        public override void Dispose(bool returnToPool = true)
+        public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
-            base.Dispose(returnToPool);
+            base.Dispose(returnToPool, clearFromRegistry);
             _damageSystem?.Dispose();
         }
     }

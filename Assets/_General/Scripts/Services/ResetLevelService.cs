@@ -22,11 +22,7 @@ namespace _General.Scripts.Services
         
         public void ResetRound()
         {
-            foreach (var obj in _objectsRegistry.GetAllByInterface<ObjectController>())
-            {
-                if (obj.WarSide == WarSide.Friend)
-                    obj.Initialize();
-            }
+            // можно сделать сохранение состояния когда игрок запускает раунд, промежуточный файл будет
         }
         
         public void ResetLevel()

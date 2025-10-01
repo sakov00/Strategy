@@ -26,6 +26,7 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
         {
             InjectManager.Inject(this);
             ObjectsRegistry.Register(this);
+            Dispose(false,false);
         }
 
         public void SetWayToPoint(List<Vector3> waypoints)
@@ -33,12 +34,10 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
             UnitModel.WayToAim = waypoints;
         }
 
-        public override void Dispose(bool returnToPool = true)
+        public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
-            if(returnToPool)
-                UnitPool.Return(this);
-            else
-                ObjectsRegistry.Unregister(this);
+            if(returnToPool) UnitPool.Return(this);
+            if(returnToPool == false && clearFromRegistry) ObjectsRegistry.Unregister(this);
             
             OnKilled?.Invoke(this);
             OnKilled = null;

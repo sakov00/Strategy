@@ -89,9 +89,9 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
             }
         }
         
-        public override void Dispose(bool returnToPool = true)
+        public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
-            base.Dispose(returnToPool);
+            base.Dispose(returnToPool, clearFromRegistry);
             _gameTimer.OnEverySecond -= HandleSpawnTimer;
             Model.BuildUnits.ForEach(unitController => unitController.OnKilled -= CheckRemovedUnits);
         }

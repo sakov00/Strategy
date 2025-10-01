@@ -64,9 +64,9 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             }
         }
         
-        public override void Dispose(bool returnToPool = true)
+        public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
-            base.Dispose(returnToPool);
+            base.Dispose(returnToPool, clearFromRegistry);
             _regenerationHpSystem?.Dispose();
             _damageSystem?.Dispose();
         }

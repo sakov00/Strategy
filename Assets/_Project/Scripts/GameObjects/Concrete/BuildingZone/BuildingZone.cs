@@ -56,7 +56,7 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
             Dispose();
         }
 
-        public void Dispose(bool returnToPool = true)
+        public void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
             Destroy(gameObject);
         }

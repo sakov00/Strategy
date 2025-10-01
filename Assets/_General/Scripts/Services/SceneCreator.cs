@@ -27,8 +27,8 @@ namespace _General.Scripts.Services
                 {
                     BuildModel buildModel => 
                         _buildPool.Get(buildModel.BuildType, buildModel.SavePosition, buildModel.SaveRotation),
-                    UnitModel characterModel => 
-                        _unitPool.Get(characterModel.UnitType, characterModel.SavePosition, characterModel.SaveRotation),
+                    UnitModel unitModel => 
+                        _unitPool.Get(unitModel.UnitType, unitModel.SavePosition, unitModel.SaveRotation),
                     TerrainModel terrainModel => 
                         _environmentFactory.CreateTerrain(0),
                     EnemyRoadModel enemyRoadModel => 
