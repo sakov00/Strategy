@@ -49,7 +49,6 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherEnemy
             if (savableModel is ArcherEnemyModel unitModel)
             {
                 Model = unitModel;
-                Initialize();
             }
         }
 

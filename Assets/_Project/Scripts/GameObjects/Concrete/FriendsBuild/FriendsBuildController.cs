@@ -37,6 +37,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
                 {
                     var unitController = _unitPool.Get(Model.UnitType, friendUnit.position);
                     unitController.SetWayToPoint(new List<Vector3> { friendUnit.position });
+                    unitController.Initialize();
                     Model.BuildUnitIds.Add(unitController.Id);
                     unitController.OnKilled += CheckRemovedUnits;
                 }  
@@ -73,6 +74,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
             if (Model.NeedRestoreUnitsCount > 0)
             {
                 var unitController = _unitPool.Get(Model.UnitType, transform.position);
+                unitController.Initialize();
                 Model.BuildUnitIds.Add(unitController.Id);
                 Model.NeedRestoreUnitsCount--;
             }
@@ -110,8 +112,8 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
             if(Model.BuildUnitIds.Count == 0) return;
             foreach (var unitId in Model.BuildUnitIds)
             {
-                var unit = (UnitController)IdsRegistry.Get(unitId);
-                unit.OnKilled -= CheckRemovedUnits;
+                var obj = IdsRegistry.Get(unitId);
+                if (obj != null) (obj as UnitController).OnKilled -= CheckRemovedUnits;
             }
         }
     }

@@ -53,7 +53,6 @@ namespace _Project.Scripts.GameObjects.Concrete.FlyingEnemy
             if (savableModel is FlyingEnemyModel unitModel)
             {
                 Model = unitModel;
-                Initialize();
             }
         }
         

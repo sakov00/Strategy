@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
@@ -25,7 +26,9 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
         
         private Vector3 _originalScale;
 
-        private void Start()
+        private void Awake() => Initialize(); 
+
+        public void Initialize()
         {
             InjectManager.Inject(this);
             _objectsRegistry.Register(this);
@@ -45,13 +48,13 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
 
             var prefab = _buildingPrefabConfig.allBuildPrefabs.First(p => p.BuildType == _model.BuildType);
             var price = prefab.BuildPrice;
-            if (price > _appData.LevelData.Money)
+            if (price > _appData.LevelData.LevelMoney)
             {
                 Debug.Log("Not enough money");
                 return;
             }
 
-            _appData.LevelData.Money -= price;
+            _appData.LevelData.LevelMoney -= price;
             _buildPool.Get(_model.BuildType, transform.position, transform.rotation);
             Dispose();
         }

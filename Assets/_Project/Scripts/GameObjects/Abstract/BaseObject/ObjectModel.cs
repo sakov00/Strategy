@@ -42,7 +42,12 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         [SerializeField] private float _currentHealth = 100f;
         
         public int SecondsWithoutDamage { get; set; }
-        public WarSide WarSide => _warSide;
+        
+        public WarSide WarSide
+        {
+            get => _warSide;
+            set => _warSide = value;
+        }
 
         public float DelayRegeneration
         {

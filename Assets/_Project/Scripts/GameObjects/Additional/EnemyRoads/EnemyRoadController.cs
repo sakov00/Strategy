@@ -33,7 +33,8 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
         
         public int CountRounds => Model.RoundEnemyList.Count;
 
-        private void Start()
+        private void Awake() => Initialize();
+        public void Initialize()
         {
             InjectManager.Inject(this);
             _objectsRegistry.Register(this);

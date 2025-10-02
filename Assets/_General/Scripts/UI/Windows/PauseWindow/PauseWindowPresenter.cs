@@ -1,4 +1,5 @@
 using _General.Scripts.AllAppData;
+using _General.Scripts.Services;
 using _General.Scripts.UI.Windows.BaseWindow;
 using _Project.Scripts;
 using Cysharp.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace _General.Scripts.UI.Windows.PauseWindow
     {
         [Inject] private AppData _appData;
         [Inject] private GameManager _gameManager;
+        [Inject] private SaveLoadLevelService _saveLoadLevelService;
         
         [SerializeField] private PauseWindowModel _model;
         [SerializeField] private PauseWindowView _view;
@@ -38,6 +40,7 @@ namespace _General.Scripts.UI.Windows.PauseWindow
         private async UniTask RestartOnClick()
         {
             WindowsManager.HideWindow<PauseWindowPresenter>();
+            _saveLoadLevelService.RemoveProgress(_appData.User.CurrentLevel);
             await _gameManager.StartLevel(_appData.User.CurrentLevel);
         }
         

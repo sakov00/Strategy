@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using _General.Scripts.AllAppData;
 using _General.Scripts.DTO;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract;
-using _Project.Scripts.GameObjects.Concrete.ArcherFriend;
-using _Project.Scripts.GameObjects.Concrete.WarriorFriend;
 using Cysharp.Threading.Tasks;
 using MemoryPack;
 using UnityEngine;
@@ -19,6 +18,7 @@ namespace _General.Scripts.Services
 {
     public class SaveLoadLevelService
     {
+        [Inject] private AppData _appData;
         [Inject] private ObjectsRegistry _objectsRegistry;
         
         private Dictionary<BuildType, Func<BuildController>> _buildTypeToClass;
@@ -36,9 +36,9 @@ namespace _General.Scripts.Services
         public async UniTask<LevelModel> LoadLevel(int index)
         {
             if (File.Exists(GetProgressSavePath(index)))
-                return await LoadLevelDefault(index);
-            else
                 return await LoadLevelProgress(index);
+            else
+                return await LoadLevelDefault(index);
         }
 
         public void RemoveProgress(int index)
@@ -51,6 +51,9 @@ namespace _General.Scripts.Services
         {
             var allObjects = _objectsRegistry.GetAllByInterface<ISavableController>();
             var levelModel = new LevelModel();
+            levelModel.CurrentRound = _appData.User.CurrentRound;
+            levelModel.LevelMoney = _appData.LevelData.LevelMoney;
+            levelModel.IsFighting = _appData.LevelData.IsFighting;
             levelModel.SavableModels.AddRange(allObjects.Select(o => o.GetSavableModel()).ToList());
 
             var data = MemoryPackSerializer.Serialize(levelModel);

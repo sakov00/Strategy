@@ -60,7 +60,6 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             if (savableModel is PlayerModel playerModel)
             {
                 Model = playerModel;
-                Initialize();
             }
         }
         

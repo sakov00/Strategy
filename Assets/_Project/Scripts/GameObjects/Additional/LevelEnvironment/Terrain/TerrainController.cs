@@ -10,11 +10,12 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
 {
     public class TerrainController : MonoBehaviour, ISavableController, IPoolableDispose
     {
+        [Inject] private ObjectsRegistry _objectsRegistry;
         [SerializeField] private TerrainModel _model;
         [SerializeField] private MeshFilter _meshFilter;
-        [Inject] private ObjectsRegistry _objectsRegistry;
-
-        private void Start()
+        
+        private void Awake() => Initialize();
+        public void Initialize()
         {
             InjectManager.Inject(this);
             _objectsRegistry.Register(this);

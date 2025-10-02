@@ -47,7 +47,6 @@ namespace _Project.Scripts.GameObjects.Concrete.TowerDefence
             if (savableModel is TowerDefenceModel towerDefenceModel)
             {
                 Model = towerDefenceModel;
-                Initialize();
             }
         }
         

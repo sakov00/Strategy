@@ -51,7 +51,6 @@ namespace _Project.Scripts.GameObjects.Concrete.WarriorEnemy
             if (savableModel is WarriorEnemyModel unitModel)
             {
                 Model = unitModel;
-                Initialize();
             }
         }
         

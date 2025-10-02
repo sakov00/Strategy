@@ -55,7 +55,6 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherFriend
             if (savableModel is ArcherFriendModel unitModel)
             {
                 Model = unitModel;
-                Initialize();
             }
         }
         

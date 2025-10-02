@@ -24,7 +24,7 @@ namespace _Redactor.Scripts
             await base.StartLevel(levelIndex);
         }
 
-        public async UniTask LoadLevel(int levelIndex)
+        public override async UniTask LoadLevel(int levelIndex)
         {
             ResetLevelService.ResetLevel();
             var levelModel = await SaveLoadLevelService.LoadLevelDefault(levelIndex);

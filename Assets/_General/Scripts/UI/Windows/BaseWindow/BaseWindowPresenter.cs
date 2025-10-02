@@ -1,3 +1,4 @@
+using System;
 using _General.Scripts._VContainer;
 using _General.Scripts.Enums;
 using DG.Tweening;
@@ -23,7 +24,12 @@ namespace _General.Scripts.UI.Windows.BaseWindow
             Disposables = new CompositeDisposable();
             View.Initialize();
         }
-        
+
+        private void OnDestroy()
+        {
+            Dispose();
+        }
+
         public virtual void Dispose()
         {
             Disposables?.Dispose();

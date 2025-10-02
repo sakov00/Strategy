@@ -31,21 +31,19 @@ namespace _General.Scripts.UI.Windows.GameWindow
         [SerializeField] private Joystick _joystick;
         [SerializeField] private TouchAndMouseDragInput _touchAndMouseDragInput;
         
-        private CompositeDisposable _disposables;
-        
         private const string MoneyFormat = "Money: {0}";
         private const string RoundFormat = "Round: {0}";
 
-        public void Initialize()
+        public override void Initialize()
         {
-            _disposables = new CompositeDisposable();
-            _presenter.OpenPauseWindowCommand.BindTo(_openPauseMenuButton).AddTo(_disposables);
-            _presenter.NextRoundCommand.BindTo(_nextRoundButton).AddTo(_disposables);
-            _presenter.IsNextRoundAvailable
-                .Subscribe(isVisible => _nextRoundButton.gameObject.SetActive(isVisible))
-                .AddTo(_disposables);
+            base.Initialize();
+            _presenter.OpenPauseWindowCommand.BindTo(_openPauseMenuButton).AddTo(Disposables);
+            _presenter.NextRoundCommand.BindTo(_nextRoundButton).AddTo(Disposables);
+            _presenter.IsNextRoundActive
+                .Subscribe(roundActive => _nextRoundButton.gameObject.SetActive(!roundActive))
+                .AddTo(Disposables);
             
-            _presenter.SetStrategyModeCommand.BindTo(_strategyModeButton).AddTo(_disposables);
+            _presenter.SetStrategyModeCommand.BindTo(_strategyModeButton).AddTo(Disposables);
             _presenter.IsStrategyMode
                 .Subscribe(async isStrategy =>
                 {
@@ -64,15 +62,15 @@ namespace _General.Scripts.UI.Windows.GameWindow
 
                     
                 })
-                .AddTo(_disposables);
+                .AddTo(Disposables);
             
             _appData.LevelData.LevelMoneyReactive
                 .Subscribe(money => _moneyText.text = string.Format(MoneyFormat, money))
-                .AddTo(_disposables);
+                .AddTo(Disposables);
             
             _appData.User.CurrentRoundReactive
                 .Subscribe(roundIndex => _currentRoundText.text = string.Format(RoundFormat, roundIndex + 1))
-                .AddTo(_disposables);
+                .AddTo(Disposables);
         }
 
         public void Update()
@@ -81,11 +79,6 @@ namespace _General.Scripts.UI.Windows.GameWindow
             
             if(!Mathf.Approximately(direction.x, _appData.LevelData.MoveDirection.x) && !Mathf.Approximately(direction.y, _appData.LevelData.MoveDirection.z))
                 _appData.LevelData.MoveDirection = new Vector3(direction.x, 0f, direction.y);
-        }
-
-        public void Dispose()
-        {
-            _disposables?.Dispose();
         }
     }
 }

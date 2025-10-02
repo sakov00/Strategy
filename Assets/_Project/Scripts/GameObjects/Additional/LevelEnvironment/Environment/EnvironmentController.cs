@@ -1,3 +1,4 @@
+using System;
 using _General.Scripts._VContainer;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
@@ -12,7 +13,8 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
         [SerializeField] protected EnvironmentModel _model;
         [Inject] private ObjectsRegistry _objectsRegistry;
 
-        private void Start()
+        private void Awake() => Initialize();
+        public void Initialize()
         {
             InjectManager.Inject(this);
             _objectsRegistry.Register(this);

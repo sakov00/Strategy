@@ -25,7 +25,7 @@ namespace _Project.Scripts.GameObjects.Concrete.MoneyBuild
         private void AddMoneyToPlayer()
         {
             var moneyAmount = Model.AddMoneyValue;
-            AppData.LevelData.Money += moneyAmount;
+            AppData.LevelData.LevelMoney += moneyAmount;
             View.MoneyUp(moneyAmount);
         }
 
@@ -41,7 +41,6 @@ namespace _Project.Scripts.GameObjects.Concrete.MoneyBuild
             if (savableModel is MoneyBuildModel moneyBuildModel)
             {
                 Model = moneyBuildModel;
-                Initialize();
             }
         }
         

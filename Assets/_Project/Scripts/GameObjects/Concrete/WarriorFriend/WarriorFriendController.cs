@@ -51,7 +51,6 @@ namespace _Project.Scripts.GameObjects.Concrete.WarriorFriend
             if (savableModel is WarriorFriendModel unitModel)
             {
                 Model = unitModel;
-                Initialize();
             }
         }
         

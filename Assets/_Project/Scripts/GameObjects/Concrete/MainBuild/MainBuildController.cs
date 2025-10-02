@@ -47,7 +47,6 @@ namespace _Project.Scripts.GameObjects.Concrete.MainBuild
             if (savableModel is MainBuildModel moneyBuildModel)
             {
                 Model = moneyBuildModel;
-                Initialize();
             }
         }
         

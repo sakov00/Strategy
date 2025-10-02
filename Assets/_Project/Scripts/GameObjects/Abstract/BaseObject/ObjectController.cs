@@ -20,7 +20,7 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         public WarSide WarSide => ObjectModel.WarSide;
         public float CurrentHealth { get => ObjectModel.CurrentHealth; set => ObjectModel.CurrentHealth = value; }
 
-        protected virtual void Awake()
+        protected virtual void Start()
         {
             HeightObject = ObjectView.GetHeightObject();
             Initialize();

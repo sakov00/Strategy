@@ -35,7 +35,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
         public ReactiveCommand SetStrategyModeCommand { get; } = new();
         
         public IReactiveProperty<bool> IsStrategyMode => _model.IsStrategyModeReactive;
-        public IReactiveProperty<bool> IsNextRoundAvailable => _model.IsNextRoundAvailableReactive;
+        public IReactiveProperty<bool> IsNextRoundActive => _appData.LevelData.IsFightingReactive;
 
         public override void Initialize()
         {
@@ -54,7 +54,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
         private void SetStrategyMode() => _model.IsStrategyMode = !_model.IsStrategyMode;
         private void NextRoundOnClick()
         {
-            _model.IsNextRoundAvailable = false;
+            _appData.LevelData.IsFighting = true;
             foreach (var spawnPoint in _objectsRegistry.GetTypedList<EnemyRoadController>())
                 spawnPoint.StartSpawn();
         }
@@ -62,7 +62,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
         private async void WinHandle()
         {
             _appData.User.CurrentRound++;
-            _model.IsNextRoundAvailable = true;
+            _appData.LevelData.IsFighting = false;
             
             var spawns = _objectsRegistry.GetTypedList<EnemyRoadController>();
             var isLastRound = spawns.Any(spawn => spawn.CountRounds == _appData.User.CurrentRound);
@@ -88,13 +88,10 @@ namespace _General.Scripts.UI.Windows.GameWindow
             WindowsManager.ShowWindow<FailWindowPresenter>();
         }
 
-        private void OnDestroy() => Dispose();
-
         public override void Dispose()
         {
             base.Dispose();
             _model.IsStrategyMode = false;
-            _model.IsNextRoundAvailable = true;
             _appData.LevelEvents.WinEvent -= WinHandle;
             _appData.LevelEvents.FailEvent -= FailHandle;
         }

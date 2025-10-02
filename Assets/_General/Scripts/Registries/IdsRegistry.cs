@@ -6,7 +6,6 @@ namespace _General.Scripts.Registries
     public class IdsRegistry
     {
         private readonly Dictionary<int, ObjectController> _dictionary = new();
-        private int _nextId = 1;
         
         public void Register(ObjectController obj)
         {
@@ -17,9 +16,17 @@ namespace _General.Scripts.Registries
                 return;
             }
     
-            var newId = _nextId++;
+            var newId = GetFreeId();
             obj.Id = newId;
             _dictionary.Add(newId, obj);
+        }
+        
+        private int GetFreeId()
+        {
+            var id = 1;
+            while (_dictionary.ContainsKey(id))
+                id++;
+            return id;
         }
         
         public void Unregister(ObjectController obj)
@@ -38,7 +45,6 @@ namespace _General.Scripts.Registries
             foreach (var obj in _dictionary.Values)
                 obj.Id = 0;
             _dictionary.Clear();
-            _nextId = 1;
         }
     }
 }

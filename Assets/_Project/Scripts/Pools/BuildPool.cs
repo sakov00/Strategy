@@ -31,7 +31,6 @@ namespace _Project.Scripts.Pools
                 build.transform.position = position;
                 build.transform.rotation = rotation;
                 build.gameObject.SetActive(true);
-                build.Initialize();
             }
             else
             {

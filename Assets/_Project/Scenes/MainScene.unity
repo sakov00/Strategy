@@ -693,6 +693,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1580835042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1580835044}
+  - component: {fileID: 1580835043}
+  m_Layer: 0
+  m_Name: ApplicationEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1580835043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580835042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898c9391b73043a8a0f2a22743eff01d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_General.Scripts.ApplicationEventsHandler
+--- !u!4 &1580835044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580835042}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1780521260
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,11 +787,11 @@ MonoBehaviour:
   autoInjectGameObjects: []
   _windowsManager: {fileID: 1554406476}
   _poolsManager: {fileID: 381239458}
+  _applicationEventsHandler: {fileID: 1580835043}
   _levelsConfig: {fileID: 11400000, guid: f69ef2b7f255c2047b2dfe2894252877, type: 2}
   _othersPrefabConfig: {fileID: 11400000, guid: be087a3e5732a8242b47d954dfa1775d,
     type: 2}
-  _characterPrefabConfig: {fileID: 11400000, guid: 9768599ec48076349993a7fe900a6ef2,
-    type: 2}
+  _unitPrefabConfig: {fileID: 11400000, guid: 9768599ec48076349993a7fe900a6ef2, type: 2}
   _buildingPrefabConfig: {fileID: 11400000, guid: 4707147491c3e5b438d235a1093e9f5d,
     type: 2}
   _projectilePrefabConfig: {fileID: 11400000, guid: 9c14b83fbb27999448d2c0fddf7c6d9a,
@@ -837,6 +881,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1780521262}
+  - {fileID: 1580835044}
   - {fileID: 1554406474}
   - {fileID: 6499465765731980117}
   - {fileID: 553239864}
