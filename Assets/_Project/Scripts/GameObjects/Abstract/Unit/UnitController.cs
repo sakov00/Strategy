@@ -17,8 +17,7 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
         protected abstract UnitView UnitView { get; }
         protected override ObjectModel ObjectModel => UnitModel;
         protected override ObjectView ObjectView => UnitView;
-
-
+        
         public Action<UnitController> OnKilled;
         public UnitType UnitType => UnitModel.UnitType;
 

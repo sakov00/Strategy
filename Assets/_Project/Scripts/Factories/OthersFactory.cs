@@ -12,8 +12,6 @@ namespace _Project.Scripts.Factories
         [Inject] private IObjectResolver _resolver;
         [Inject] private OthersPrefabConfig _othersPrefabConfig;
         
-        [Inject] private ObjectsRegistry _objectsRegistry;
-        
         public BuildingZone CreateBuildingZone(Vector3 position = default, Quaternion rotation = default)
         {
             return _resolver.Instantiate(_othersPrefabConfig.buildingZonePrefab, position, rotation);

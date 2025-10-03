@@ -1,5 +1,6 @@
 using System.Threading;
 using _General.Scripts._VContainer;
+using _General.Scripts.AllAppData;
 using _General.Scripts.UI.Windows.GameWindow;
 using _Project.Scripts;
 using _Redactor.Scripts.LevelRedactorWindow;
@@ -14,7 +15,6 @@ namespace _Redactor.Scripts
         {
             InjectManager.Inject(this);
             Application.targetFrameRate = 120;
-            WindowsManager.HideFastWindow<GameWindowPresenter>();
             WindowsManager.ShowFastWindow<LevelRedactorWindowPresenter>();
         }
         
@@ -26,9 +26,9 @@ namespace _Redactor.Scripts
 
         public override async UniTask LoadLevel(int levelIndex)
         {
-            ResetLevelService.ResetLevel();
-            var levelModel = await SaveLoadLevelService.LoadLevelDefault(levelIndex);
-            await SceneCreator.InstantiateLoadedObjects(levelModel);
+            ResetService.ResetLevel();
+            await SaveLoadLevelService.LoadLevelDefault(levelIndex);
+            await SceneCreator.InstantiateObjects(AppData.LevelData.SavableModels);
         }
         
         public void SaveLevel(int levelIndex)

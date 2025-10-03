@@ -28,17 +28,17 @@ namespace _General.Scripts.Services
         private static string GetProgressSavePath(int index) 
             => Path.Combine(Application.persistentDataPath, $"level_progress_{index}.dat");
 
+        public async UniTask LoadLevelDefault(int index) => await Load(GetDefaultSavePath(index));
+        public async UniTask LoadLevelProgress(int index) => await Load(GetProgressSavePath(index));
         public async UniTask SaveLevelDefault(int index) => await Save(GetDefaultSavePath(index));
-        public async UniTask<LevelModel> LoadLevelDefault(int index) => await Load(GetDefaultSavePath(index));
         public async UniTask SaveLevelProgress(int index) => await Save(GetProgressSavePath(index));
-        public async UniTask<LevelModel> LoadLevelProgress(int index) => await Load(GetProgressSavePath(index));
 
-        public async UniTask<LevelModel> LoadLevel(int index)
+        public async UniTask LoadLevel(int index)
         {
             if (File.Exists(GetProgressSavePath(index)))
-                return await LoadLevelProgress(index);
+                await LoadLevelProgress(index);
             else
-                return await LoadLevelDefault(index);
+                await LoadLevelDefault(index);
         }
 
         public void RemoveProgress(int index)
@@ -50,33 +50,28 @@ namespace _General.Scripts.Services
         private async UniTask Save(string path)
         {
             var allObjects = _objectsRegistry.GetAllByInterface<ISavableController>();
-            var levelModel = new LevelModel();
-            levelModel.CurrentRound = _appData.User.CurrentRound;
-            levelModel.LevelMoney = _appData.LevelData.LevelMoney;
-            levelModel.IsFighting = _appData.LevelData.IsFighting;
-            levelModel.SavableModels.AddRange(allObjects.Select(o => o.GetSavableModel()).ToList());
+            _appData.LevelData.SavableModels.Clear();
+            _appData.LevelData.SavableModels.AddRange(allObjects.Select(o => o.GetSavableModel()).ToList());
 
-            var data = MemoryPackSerializer.Serialize(levelModel);
+            var data = MemoryPackSerializer.Serialize(_appData.LevelData);
             var compressed = LZ4Pickler.Pickle(data);
             await File.WriteAllBytesAsync(path, compressed);
             
             Debug.Log($"Level saved to {path}");
         }
 
-        private async UniTask<LevelModel> Load(string path)
+        private async UniTask Load(string path)
         {
             if (!File.Exists(path))
             {
                 Debug.LogWarning("Save file not found!");
-                return null;
+                return;
             }
 
             var compressed = await File.ReadAllBytesAsync(path);
             var data = LZ4Pickler.Unpickle(compressed);
-            LevelModel levelModel = MemoryPackSerializer.Deserialize<LevelModel>(data);
-
-            Debug.Log($"Loaded {levelModel.SavableModels.Count} objects.");
-            return levelModel;
+            var levelData = MemoryPackSerializer.Deserialize<LevelData>(data);
+            _appData.LevelData.SetData(levelData);
         }
     }
 }

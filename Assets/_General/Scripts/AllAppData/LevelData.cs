@@ -1,34 +1,58 @@
 using System;
+using System.Collections.Generic;
+using _General.Scripts.DTO;
+using _General.Scripts.Interfaces;
+using _Project.Scripts.GameObjects.Abstract.BaseObject;
+using MemoryPack;
 using UniRx;
 using UnityEngine;
 
 namespace _General.Scripts.AllAppData
 {
-    public class LevelData : IDisposable
+    [MemoryPackable]
+    public partial class LevelData
     {
-        private readonly IntReactiveProperty _levelMoney = new(30);
-        private readonly BoolReactiveProperty _isFighting = new(false);
-        public IReactiveProperty<int> LevelMoneyReactive => _levelMoney;
-        public IReactiveProperty<bool> IsFightingReactive => _isFighting;
+        public List<ISavableModel> SavableModels { get; set; } = new();
+        public List<ISavableModel> ObjectsForRestoring { get; set; } = new();
+
+        [MemoryPackIgnore] public readonly IntReactiveProperty CurrentRoundReactive;
+        [MemoryPackIgnore] public readonly IntReactiveProperty LevelMoneyReactive;
+        [MemoryPackIgnore] public readonly BoolReactiveProperty IsFightingReactive;
         
+        public int CurrentRound
+        {
+            get => CurrentRoundReactive.Value;
+            set => CurrentRoundReactive.Value = value;
+        }
+
         public int LevelMoney
         {
-            get => _levelMoney.Value;
-            set => _levelMoney.Value = value;
+            get => LevelMoneyReactive.Value;
+            set => LevelMoneyReactive.Value = value;
         }
-        
+
         public bool IsFighting
         {
-            get => _isFighting.Value;
-            set => _isFighting.Value = value;
+            get => IsFightingReactive.Value;
+            set => IsFightingReactive.Value = value;
         }
         
-        public Vector3 MoveDirection { get; set; }
+        [MemoryPackIgnore] public Vector3 MoveDirection { get; set; }
 
-
-        public void Dispose()
+        public LevelData()
         {
-            _levelMoney?.Dispose();
+            CurrentRoundReactive = new IntReactiveProperty(0);
+            LevelMoneyReactive = new IntReactiveProperty(0);
+            IsFightingReactive = new BoolReactiveProperty(false);
+        }
+
+        public void SetData(LevelData levelData)
+        {
+            SavableModels = levelData.SavableModels;
+            ObjectsForRestoring = levelData.ObjectsForRestoring;
+            CurrentRoundReactive.Value = levelData.CurrentRound;
+            LevelMoneyReactive.Value = levelData.LevelMoney;
+            IsFightingReactive.Value = levelData.IsFighting;
         }
     }
 }

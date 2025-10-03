@@ -12,7 +12,6 @@ namespace _Redactor.Scripts.LevelRedactorWindow
     public class LevelRedactorWindowPresenter : BaseWindowPresenter
     {
         [Inject] private RedactorManager _redactorManager;
-        [Inject] private ObjectsRegistry _objectsRegistry;
 
         [SerializeField] private LevelRedactorWindowModel _model;
         [SerializeField] private LevelRedactorWindowView _view;

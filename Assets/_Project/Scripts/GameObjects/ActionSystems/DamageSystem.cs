@@ -19,7 +19,6 @@ namespace _Project.Scripts.GameObjects.ActionSystems
         private Coroutine _attackCoroutine;
 
         private float _lastAttackTime = -Mathf.Infinity;
-        [Inject] private ObjectsRegistry _objectsRegistry;
         [Inject] private ProjectilePool _projectilePool;
 
         public DamageSystem(IFightObjectModel fightObjectModel, IAttackableView attackableView, Transform transform)

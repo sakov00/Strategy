@@ -40,7 +40,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
                 .ToArray();
             for (var i = 0; i < enemyValues.Length; i++)
             {
-                var countEnemy = roundEnemyList[_appData.User.CurrentRound].enemies
+                var countEnemy = roundEnemyList[_appData.LevelData.CurrentRound].enemies
                     .Count(x => x.enemyType == enemyValues[i]);
                 if (countEnemy > 0)
                 {

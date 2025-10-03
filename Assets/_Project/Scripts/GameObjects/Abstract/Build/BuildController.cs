@@ -9,7 +9,6 @@ namespace _Project.Scripts.GameObjects.Abstract
 {
     public abstract class BuildController : ObjectController
     {
-        [Inject] protected AppData AppData;
         [Inject] protected BuildPool BuildPool;
         
         protected abstract BuildModel BuildModel { get; }

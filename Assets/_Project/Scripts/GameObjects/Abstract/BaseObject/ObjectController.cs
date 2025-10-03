@@ -1,3 +1,4 @@
+using _General.Scripts.AllAppData;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
@@ -9,6 +10,7 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
 {
     public abstract class ObjectController : MonoBehaviour, ISavableController, IPoolableDispose
     {
+        [Inject] protected AppData AppData;
         [Inject] protected ObjectsRegistry ObjectsRegistry;
         [Inject] protected IdsRegistry IdsRegistry;
         

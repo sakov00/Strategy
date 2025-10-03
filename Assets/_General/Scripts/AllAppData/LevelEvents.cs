@@ -27,7 +27,7 @@ namespace _General.Scripts.AllAppData
             _objectsRegistry
                 .GetTypedList<UnitController>()
                 .ObserveRemove()
-                .Subscribe(_ => TryInvokeAllEnemiesKilled())
+                .Subscribe(removedUnit =>  TryInvokeAllEnemiesKilled(removedUnit.Value))
                 .AddTo(_disposables);
             
             _objectsRegistry
@@ -37,11 +37,12 @@ namespace _General.Scripts.AllAppData
                 .AddTo(_disposables);
         }
 
-        private void TryInvokeAllEnemiesKilled()
+        private void TryInvokeAllEnemiesKilled(UnitController unitController)
         {
-            if (_objectsRegistry.GetTypedList<UnitController>().Any(x => x.WarSide == WarSide.Enemy))
+            if (unitController.WarSide == WarSide.Friend ||
+                _objectsRegistry.GetTypedList<UnitController>().Any(x => x.WarSide == WarSide.Enemy))
                 return;
-
+            
             WinEvent?.Invoke();
         }
         

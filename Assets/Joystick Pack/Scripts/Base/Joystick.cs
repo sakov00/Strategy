@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using _General.Scripts._VContainer;
+using _General.Scripts.AllAppData;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using VContainer;
 
 namespace Joystick_Pack.Scripts.Base
 {
     public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {
+        [Inject] private AppData _appData;
         public float Horizontal { get { return (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; } }
         public float Vertical { get { return (snapY) ? SnapFloat(input.y, AxisOptions.Vertical) : input.y; } }
         public Vector2 Direction { get { return new Vector2(Horizontal, Vertical); } }
@@ -42,6 +46,7 @@ namespace Joystick_Pack.Scripts.Base
 
         protected virtual void Start()
         {
+            InjectManager.Inject(this);
             HandleRange = handleRange;
             DeadZone = deadZone;
             baseRect = GetComponent<RectTransform>();
@@ -85,6 +90,8 @@ namespace Joystick_Pack.Scripts.Base
             }
             else
                 input = Vector2.zero;
+            
+            _appData.LevelData.MoveDirection = new Vector3(input.x, 0, input.y);
         }
 
         private void FormatInput()
@@ -133,6 +140,7 @@ namespace Joystick_Pack.Scripts.Base
         {
             input = Vector2.zero;
             handle.anchoredPosition = Vector2.zero;
+            _appData.LevelData.MoveDirection = new Vector3(input.x, 0, input.y);
         }
 
         protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)

@@ -5,6 +5,7 @@ using _General.Scripts.UI.Windows.BaseWindow;
 using Joystick_Pack.Scripts.Base;
 using TMPro;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -39,11 +40,8 @@ namespace _General.Scripts.UI.Windows.GameWindow
             base.Initialize();
             _presenter.OpenPauseWindowCommand.BindTo(_openPauseMenuButton).AddTo(Disposables);
             _presenter.NextRoundCommand.BindTo(_nextRoundButton).AddTo(Disposables);
-            _presenter.IsNextRoundActive
-                .Subscribe(roundActive => _nextRoundButton.gameObject.SetActive(!roundActive))
-                .AddTo(Disposables);
-            
             _presenter.SetStrategyModeCommand.BindTo(_strategyModeButton).AddTo(Disposables);
+            
             _presenter.IsStrategyMode
                 .Subscribe(async isStrategy =>
                 {
@@ -59,26 +57,20 @@ namespace _General.Scripts.UI.Windows.GameWindow
                         await GlobalObjects.CameraController.CameraFollow.EnableFollowAnimation();
                         _joystick.gameObject.SetActive(true);
                     }
-
-                    
                 })
+                .AddTo(Disposables);
+            
+            _appData.LevelData.IsFightingReactive
+                .Subscribe(roundActive => _nextRoundButton.gameObject.SetActive(!roundActive))
                 .AddTo(Disposables);
             
             _appData.LevelData.LevelMoneyReactive
                 .Subscribe(money => _moneyText.text = string.Format(MoneyFormat, money))
                 .AddTo(Disposables);
             
-            _appData.User.CurrentRoundReactive
+            _appData.LevelData.CurrentRoundReactive
                 .Subscribe(roundIndex => _currentRoundText.text = string.Format(RoundFormat, roundIndex + 1))
                 .AddTo(Disposables);
-        }
-
-        public void Update()
-        {
-            var direction = _joystick.Direction;
-            
-            if(!Mathf.Approximately(direction.x, _appData.LevelData.MoveDirection.x) && !Mathf.Approximately(direction.y, _appData.LevelData.MoveDirection.z))
-                _appData.LevelData.MoveDirection = new Vector3(direction.x, 0f, direction.y);
         }
     }
 }

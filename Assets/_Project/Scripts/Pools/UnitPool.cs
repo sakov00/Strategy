@@ -52,5 +52,13 @@ namespace _Project.Scripts.Pools
             unit.gameObject.SetActive(false);
             unit.transform.SetParent(_containerTransform, false);
         }
+        
+        public void Remove(UnitController unit)
+        {
+            if (!_availableUnits.Contains(unit))
+            {
+                _availableUnits.Remove(unit);
+            }
+        }
     }
 }

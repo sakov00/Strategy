@@ -75,7 +75,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
 
         public void StartSpawn()
         {
-            var currentRound = _appData.User.CurrentRound;
+            var currentRound = _appData.LevelData.CurrentRound;
             if (currentRound >= Model.RoundEnemyList.Count)
             {
                 Debug.LogWarning("Нет настроек для текущего раунда спавна.");
@@ -112,11 +112,6 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             foreach (var position in Model.WorldPositions) wayPoints.Add(position + new Vector3(offsetX, 0f, 0f));
             var enemyController = _unitPool.Get(enemyData.enemyType, wayPoints[0]);
             enemyController.SetWayToPoint(wayPoints);
-        }
-
-        public void RefreshInfoRound()
-        {
-            View.RefreshInfoRound(_splineContainer, Model.RoundEnemyList);
         }
         
         public void Dispose(bool returnToPool = true, bool clearFromRegistry = true)

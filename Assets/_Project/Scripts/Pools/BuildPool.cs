@@ -51,5 +51,13 @@ namespace _Project.Scripts.Pools
             build.gameObject.SetActive(false);
             build.transform.SetParent(_containerTransform, false); 
         }
+        
+        public void Remove(BuildController build)
+        {
+            if (!_availableBuilds.Contains(build))
+            {
+                _availableBuilds.Remove(build);
+            }
+        }
     }
 }

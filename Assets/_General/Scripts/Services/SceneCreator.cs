@@ -30,10 +30,10 @@ namespace _General.Scripts.Services
             { typeof(BuildModel), 4 },
         };
         
-        public async UniTask InstantiateLoadedObjects(LevelModel levelModel)
+        public async UniTask InstantiateObjects<T>(List<T> objects) where T : ISavableModel
         {
-            SortSavableModels(levelModel);
-            foreach (var model in levelModel.SavableModels)
+            SortSavableModels(objects);
+            foreach (var model in objects)
             {
                 ISavableController savableController = model switch
                 {
@@ -57,9 +57,9 @@ namespace _General.Scripts.Services
             }
         }
         
-        public void SortSavableModels(LevelModel levelModel)
+        public void SortSavableModels<T>(List<T> objects) where T : ISavableModel
         {
-            levelModel.SavableModels.Sort((a, b) =>
+            objects.Sort((a, b) =>
             {
                 int aPriority = GetPriority(a.GetType());
                 int bPriority = GetPriority(b.GetType());
