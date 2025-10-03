@@ -1,4 +1,7 @@
+using _General.Scripts._GlobalLogic;
+using Cysharp.Threading.Tasks;
 using UniRx;
+using UnityEngine;
 
 namespace _General.Scripts.AllAppData
 {
@@ -20,6 +23,22 @@ namespace _General.Scripts.AllAppData
         {
             get => _currentLevel.Value;
             set => _currentLevel.Value = value;
+        }
+        
+        public User()
+        {
+            int savedLevel = PlayerPrefs.GetInt(GameConstants.PrefKeys.CurrentLevel, 0);
+            _currentLevel = new IntReactiveProperty(savedLevel);
+
+            _currentLevel
+                .Skip(1)
+                .Subscribe(SaveLevel);
+        }
+        
+        private void SaveLevel(int level)
+        {
+            PlayerPrefs.SetInt(GameConstants.PrefKeys.CurrentLevel, level);
+            PlayerPrefs.Save();
         }
     }
 }
