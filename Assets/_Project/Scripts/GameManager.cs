@@ -53,7 +53,6 @@ namespace _Project.Scripts
         public virtual async UniTask StartLevel(int levelIndex)
         {
             Dispose();
-            AppData.LevelEvents.Dispose();
             AppData.User.CurrentLevel = levelIndex;
             
             await WindowsManager.ShowWindow<LoadingWindowPresenter>();
@@ -62,6 +61,7 @@ namespace _Project.Scripts
             var playerController = ObjectsRegistry.GetTypedList<UnitController>().First(x => x.UnitType == UnitType.Player);
             GlobalObjects.CameraController.CameraFollow.Init(GlobalObjects.CameraController.transform, playerController.transform);
             
+            if(AppData.LevelData.IsFighting) AppData.LevelEvents.Initialize();
             ApplicationEventsHandler.OnApplicationQuited += OnApplicationQuit;
             ApplicationEventsHandler.OnApplicationPaused += OnApplicationPause;
             

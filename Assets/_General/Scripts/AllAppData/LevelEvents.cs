@@ -12,7 +12,7 @@ using VContainer.Unity;
 
 namespace _General.Scripts.AllAppData
 {
-    public class LevelEvents : IInitializable, IDisposable
+    public class LevelEvents : IInitializable
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
 
@@ -23,19 +23,16 @@ namespace _General.Scripts.AllAppData
 
         public void Initialize()
         {
-            Dispose();
-            _disposables = new CompositeDisposable();
             _objectsRegistry
                 .GetTypedList<UnitController>()
                 .ObserveRemove()
-                .Subscribe(removedUnit =>  TryInvokeAllEnemiesKilled(removedUnit.Value))
-                .AddTo(_disposables);
-            
+                .Subscribe(removedUnit => TryInvokeAllEnemiesKilled(removedUnit.Value));
+
+
             _objectsRegistry
                 .GetTypedList<BuildController>()
                 .ObserveRemove()
-                .Subscribe(_ => TryInvokeMainBuildDestroyed())
-                .AddTo(_disposables);
+                .Subscribe(_ => TryInvokeMainBuildDestroyed());
         }
 
         private void TryInvokeAllEnemiesKilled(UnitController unitController)
@@ -53,11 +50,6 @@ namespace _General.Scripts.AllAppData
                 return;
 
             FailEvent?.Invoke();
-        }
-        
-        public void Dispose()
-        {
-            _disposables?.Dispose();
         }
     }
 }

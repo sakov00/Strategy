@@ -70,6 +70,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
         private async UniTaskVoid WinHandle()
         {
             Dispose();
+            _appData.LevelData.IsFighting = false;
             await WindowsManager.ShowWindow<WinWindowPresenter>();
             WindowsManager.HideFastWindow<GameWindowPresenter>();
         }
@@ -77,6 +78,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
         private async UniTaskVoid FailHandle()
         {
             Dispose();
+            _appData.LevelData.IsFighting = false;
             await WindowsManager.ShowWindow<FailWindowPresenter>();
             WindowsManager.HideFastWindow<GameWindowPresenter>();
         }
@@ -85,8 +87,6 @@ namespace _General.Scripts.UI.Windows.GameWindow
         {
             base.Dispose();
             _model.IsStrategyMode = false;
-            _appData.LevelData.IsFighting = false;
-            _appData.LevelEvents.Dispose();
             _appData.LevelEvents.WinEvent -= WinHandle;
             _appData.LevelEvents.FailEvent -= FailHandle;
         }

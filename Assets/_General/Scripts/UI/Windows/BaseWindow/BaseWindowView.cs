@@ -20,6 +20,7 @@ namespace _General.Scripts.UI.Windows.BaseWindow
             var sequence = DOTween.Sequence();
             sequence.AppendCallback(() => gameObject.SetActive(true));
             sequence.Append(_canvasGroup.DOFade(1f, 0.5f).From(0));
+            sequence.SetUpdate(true);
             return sequence;
         }
 
@@ -28,6 +29,7 @@ namespace _General.Scripts.UI.Windows.BaseWindow
             var sequence = DOTween.Sequence();
             sequence.Append(_canvasGroup.DOFade(0f, 0.5f).From(1));
             sequence.AppendCallback(() => gameObject.SetActive(false));
+            sequence.SetUpdate(true);
             return sequence;
         }
         

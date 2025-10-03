@@ -38,8 +38,8 @@ namespace _General.Scripts.UI.Windows.PauseWindow
         
         private async UniTaskVoid RestartOnClick()
         {
-            await _gameManager.RestartLevel();
             WindowsManager.HideWindow<PauseWindowPresenter>();
+            await _gameManager.RestartLevel();
         }
         
         private void ContinueOnClick()

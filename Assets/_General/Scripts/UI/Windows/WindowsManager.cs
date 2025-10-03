@@ -84,6 +84,7 @@ namespace _General.Scripts.UI.Windows
             var sequence = DOTween.Sequence();
             sequence.AppendCallback(() => _darkBackground.gameObject.SetActive(true));
             sequence.Append(_darkBackground.DOColor(color, 0.5f));
+            sequence.SetUpdate(true);
             return sequence;
         }
         
@@ -94,6 +95,7 @@ namespace _General.Scripts.UI.Windows
             var sequence = DOTween.Sequence();
             sequence.Append(_darkBackground.DOColor(color, 0.5f));
             sequence.AppendCallback(() => _darkBackground.gameObject.SetActive(false));
+            sequence.SetUpdate(true);
             return sequence;
         }
         
