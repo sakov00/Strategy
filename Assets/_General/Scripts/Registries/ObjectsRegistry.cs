@@ -54,7 +54,7 @@ namespace _General.Scripts.Registries
             return newList;
         }
         
-        public List<T> GetAllByInterface<T>() where T : class
+        public List<T> GetAllByType<T>() where T : class
         {
             var result = new List<T>();
 

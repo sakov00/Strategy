@@ -1,6 +1,7 @@
 using _General.Scripts._VContainer;
 using _General.Scripts.Interfaces;
 using _Project.Scripts.GameObjects.Abstract;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Concrete.MoneyBuild
@@ -22,11 +23,12 @@ namespace _Project.Scripts.GameObjects.Concrete.MoneyBuild
             AppData.LevelEvents.WinEvent += AddMoneyToPlayer;
         }
 
-        private void AddMoneyToPlayer()
+        private UniTaskVoid AddMoneyToPlayer()
         {
             var moneyAmount = Model.AddMoneyValue;
             AppData.LevelData.LevelMoney += moneyAmount;
             View.MoneyUp(moneyAmount);
+            return default;
         }
 
         public override ISavableModel GetSavableModel()

@@ -28,7 +28,7 @@ namespace _Project.Scripts.GameObjects.ActionSystems
             ObjectController nearestTarget = null;
             var nearestDistanceSqr = _fightObjectModel.DetectionRadius;
 
-            foreach (var obj in _objectsRegistry.GetAllByInterface<ObjectController>())
+            foreach (var obj in _objectsRegistry.GetAllByType<ObjectController>())
             {
                 if (obj == null || obj.CurrentHealth <= 0 ||
                     obj.WarSide == _fightObjectModel.WarSide)

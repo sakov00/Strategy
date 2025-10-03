@@ -12,13 +12,13 @@ namespace _General.Scripts.Services
         
         public void ResetRound()
         {
-            foreach (var obj in _objectsRegistry.GetAllByInterface<ObjectController>())
+            foreach (var obj in _objectsRegistry.GetAllByType<ObjectController>())
                 obj.Dispose();
         }
         
         public void ResetLevel()
         {
-            foreach (var obj in _objectsRegistry.GetAllByInterface<IPoolableDispose>())
+            foreach (var obj in _objectsRegistry.GetAllByType<IPoolableDispose>())
                 obj.Dispose();
             
             _idsRegistry.Clear();

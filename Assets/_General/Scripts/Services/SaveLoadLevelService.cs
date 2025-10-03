@@ -49,7 +49,7 @@ namespace _General.Scripts.Services
 
         private async UniTask Save(string path)
         {
-            var allObjects = _objectsRegistry.GetAllByInterface<ISavableController>();
+            var allObjects = _objectsRegistry.GetAllByType<ISavableController>();
             _appData.LevelData.SavableModels.Clear();
             _appData.LevelData.SavableModels.AddRange(allObjects.Select(o => o.GetSavableModel()).ToList());
 

@@ -27,33 +27,39 @@ namespace _General.Scripts.UI.Windows.WinWindow
         public ReactiveCommand RestartCommand { get; } = new();
         public ReactiveCommand ContinueCommand { get; } = new();
 
-        private bool _isLevelWin;
+        private bool _isLevelCompleted;
 
         public override void Initialize()
         {
             base.Initialize();
             HomeCommand.Subscribe(_ => HomeOnClick()).AddTo(Disposables);
-            RestartCommand.Subscribe(_ => RestartOnClick()).AddTo(Disposables);
-            ContinueCommand.Subscribe(_ => ContinueOnClick()).AddTo(Disposables);
+            RestartCommand.Subscribe(_ => RestartOnClick().Forget()).AddTo(Disposables);
+            ContinueCommand.Subscribe(_ => ContinueOnClick().Forget()).AddTo(Disposables);
             
             var spawns = _objectsRegistry.GetTypedList<EnemyRoadController>();
-            _isLevelWin = spawns.Any(spawn => spawn.CountRounds == _appData.LevelData.CurrentRound);
-            if (_isLevelWin) _appData.User.CurrentLevel++;
+            _isLevelCompleted = spawns.Any(spawn => spawn.CountRounds == _appData.LevelData.CurrentRound);
+            if (_isLevelCompleted) 
+                _appData.User.CurrentLevel++;
+            else
+                _appData.LevelData.CurrentRound++;
         }
         
         private void HomeOnClick()
         {
         }
         
-        private void RestartOnClick()
+        private async UniTaskVoid RestartOnClick()
         {
+            await _gameManager.RestartLevel();
             WindowsManager.HideWindow<WinWindowPresenter>();
         }
         
-        private void ContinueOnClick()
+        private async UniTaskVoid ContinueOnClick()
         {
-            if (_isLevelWin)
-                _gameManager.StartLevel(_appData.User.CurrentLevel).Forget();
+            if (_isLevelCompleted)
+                await _gameManager.StartLevel(_appData.User.CurrentLevel);
+            else
+                await _gameManager.ResetRound();
             WindowsManager.HideWindow<WinWindowPresenter>();
         }
     }

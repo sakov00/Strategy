@@ -9,6 +9,7 @@ using _General.Scripts.UI.Windows.WinWindow;
 using _Project.Scripts;
 using _Project.Scripts.GameObjects.Abstract.BaseObject;
 using _Project.Scripts.GameObjects.Additional.EnemyRoads;
+using _Project.Scripts.GameObjects.Concrete.Player;
 using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
@@ -46,10 +47,8 @@ namespace _General.Scripts.UI.Windows.GameWindow
             SetStrategyModeCommand.Subscribe(_ => SetStrategyMode()).AddTo(Disposables);
             NextRoundCommand.Subscribe(_ => NextRoundOnClick()).AddTo(Disposables);
             
-            _winEventHandler = () => UniTask.Void(WinHandle);
-            _failEventHandler = () => UniTask.Void(FailHandle);
-            _appData.LevelEvents.WinEvent += _winEventHandler;
-            _appData.LevelEvents.FailEvent += _failEventHandler;
+            _appData.LevelEvents.WinEvent += WinHandle;
+            _appData.LevelEvents.FailEvent += FailHandle;
         }
 
         private void OpenPauseWindow() => WindowsManager.ShowWindow<PauseWindowPresenter>();
@@ -58,30 +57,26 @@ namespace _General.Scripts.UI.Windows.GameWindow
         private void NextRoundOnClick()
         {
             _appData.LevelData.IsFighting = true;
+            _appData.LevelData.ObjectsForRestoring = _objectsRegistry
+                .GetAllByType<ObjectController>()
+                .Where(o => o is not PlayerController)
+                .Select(o => o.GetSavableModel())
+                .ToList();
             
-            _appData.LevelData.ObjectsForRestoring.Clear();
-            foreach (var objectController in _objectsRegistry.GetAllByInterface<ObjectController>())
-                _appData.LevelData.ObjectsForRestoring.Add(objectController.GetSavableModel());
-            
-            foreach (var spawnPoint in _objectsRegistry.GetTypedList<EnemyRoadController>())
-                spawnPoint.StartSpawn();
+            _objectsRegistry.GetAllByType<EnemyRoadController>().ForEach(x => x.StartSpawn());
             _appData.LevelEvents.Initialize();
         }
 
         private async UniTaskVoid WinHandle()
         {
-            _appData.LevelEvents.Dispose();
-            _appData.LevelData.CurrentRound++;
-            _appData.LevelData.IsFighting = false;
-            
+            Dispose();
             await WindowsManager.ShowWindow<WinWindowPresenter>();
             WindowsManager.HideFastWindow<GameWindowPresenter>();
-            await _gameManager.ResetRound();
         }
 
         private async UniTaskVoid FailHandle()
         {
-            _appData.LevelEvents.Dispose();
+            Dispose();
             await WindowsManager.ShowWindow<FailWindowPresenter>();
             WindowsManager.HideFastWindow<GameWindowPresenter>();
         }
@@ -90,8 +85,10 @@ namespace _General.Scripts.UI.Windows.GameWindow
         {
             base.Dispose();
             _model.IsStrategyMode = false;
-            _appData.LevelEvents.WinEvent -= _winEventHandler;
-            _appData.LevelEvents.FailEvent -= _failEventHandler;
+            _appData.LevelData.IsFighting = false;
+            _appData.LevelEvents.Dispose();
+            _appData.LevelEvents.WinEvent -= WinHandle;
+            _appData.LevelEvents.FailEvent -= FailHandle;
         }
     }
 }

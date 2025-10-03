@@ -58,7 +58,6 @@ namespace _Project.Scripts._VContainer
         private void RegisterWindows(IContainerBuilder builder)
         {
             builder.RegisterInstance(_windowsManager).AsSelf().As<IInitializable>();
-            //builder.RegisterComponentInNewPrefab(windowsConfig.gameWindowViewModel, Lifetime.Singleton);
         }
         
         private void RegisterRegistries(IContainerBuilder builder)

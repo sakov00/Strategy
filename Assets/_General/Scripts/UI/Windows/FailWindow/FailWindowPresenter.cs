@@ -2,6 +2,7 @@ using _General.Scripts.AllAppData;
 using _General.Scripts.Enums;
 using _General.Scripts.UI.Windows.BaseWindow;
 using _Project.Scripts;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UniRx;
 using UnityEngine;
@@ -26,16 +27,16 @@ namespace _General.Scripts.UI.Windows.FailWindow
         {
             base.Initialize();
             HomeCommand.Subscribe(_ => HomeOnClick()).AddTo(Disposables);
-            RestartCommand.Subscribe(_ => RestartOnClick()).AddTo(Disposables);
+            RestartCommand.Subscribe(_ => RestartOnClick().Forget()).AddTo(Disposables);
         }
         
         private void HomeOnClick()
         {
         }
         
-        private async void RestartOnClick()
+        private async UniTaskVoid RestartOnClick()
         {
-            await _gameManager.StartLevel(_appData.User.CurrentLevel);
+            await _gameManager.RestartLevel();
             WindowsManager.HideWindow<FailWindowPresenter>();
         }
     }

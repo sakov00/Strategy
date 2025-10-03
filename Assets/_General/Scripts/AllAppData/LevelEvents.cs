@@ -5,6 +5,7 @@ using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract;
 using _Project.Scripts.GameObjects.Abstract.Unit;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using VContainer;
 using VContainer.Unity;
@@ -15,14 +16,14 @@ namespace _General.Scripts.AllAppData
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
 
-        public event Action WinEvent;
-        public event Action FailEvent;
+        public event Func<UniTaskVoid> WinEvent;
+        public event Func<UniTaskVoid> FailEvent;
 
         private CompositeDisposable _disposables;
 
         public void Initialize()
         {
-            InjectManager.Inject(this);
+            Dispose();
             _disposables = new CompositeDisposable();
             _objectsRegistry
                 .GetTypedList<UnitController>()
