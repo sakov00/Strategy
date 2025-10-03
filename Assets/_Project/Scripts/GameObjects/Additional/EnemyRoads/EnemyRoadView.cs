@@ -34,6 +34,9 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
 
         public void RefreshInfoRound(SplineContainer splineContainer, List<EnemyGroup> roundEnemyList)
         {
+            if(_appData.LevelData.CurrentRound >= roundEnemyList.Count)
+                return;
+            
             var enemyValues = Enum.GetValues(typeof(UnitType))
                 .Cast<UnitType>()
                 .Where(e => e.ToString().Contains("Enemy"))

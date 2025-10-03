@@ -74,13 +74,8 @@ namespace _General.Scripts.UI.Windows.GameWindow
             _appData.LevelData.CurrentRound++;
             _appData.LevelData.IsFighting = false;
             
-            var spawns = _objectsRegistry.GetTypedList<EnemyRoadController>();
-            var isLastRound = spawns.Any(spawn => spawn.CountRounds == _appData.LevelData.CurrentRound);
-            if (isLastRound) _appData.User.CurrentLevel++;
-            
-            var winWindow = WindowsManager.GetWindow<WinWindowPresenter>();
-            winWindow.SetWindowData(isLastRound);
             await WindowsManager.ShowWindow<WinWindowPresenter>();
+            WindowsManager.HideFastWindow<GameWindowPresenter>();
             await _gameManager.ResetRound();
         }
 
@@ -88,6 +83,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
         {
             _appData.LevelEvents.Dispose();
             await WindowsManager.ShowWindow<FailWindowPresenter>();
+            WindowsManager.HideFastWindow<GameWindowPresenter>();
         }
 
         public override void Dispose()

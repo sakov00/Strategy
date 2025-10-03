@@ -1,9 +1,10 @@
+using System.Linq;
 using _General.Scripts.AllAppData;
-using _General.Scripts.Enums;
+using _General.Scripts.Registries;
 using _General.Scripts.UI.Windows.BaseWindow;
 using _Project.Scripts;
+using _Project.Scripts.GameObjects.Additional.EnemyRoads;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UniRx;
 using UnityEngine;
 using VContainer;
@@ -14,6 +15,7 @@ namespace _General.Scripts.UI.Windows.WinWindow
     {
         [Inject] private AppData _appData;
         [Inject] private GameManager _gameManager;
+        [Inject] private ObjectsRegistry _objectsRegistry;
         
         [SerializeField] private WinWindowModel _model;
         [SerializeField] private WinWindowView _view;
@@ -33,11 +35,10 @@ namespace _General.Scripts.UI.Windows.WinWindow
             HomeCommand.Subscribe(_ => HomeOnClick()).AddTo(Disposables);
             RestartCommand.Subscribe(_ => RestartOnClick()).AddTo(Disposables);
             ContinueCommand.Subscribe(_ => ContinueOnClick()).AddTo(Disposables);
-        }
-
-        public void SetWindowData(bool isLevelWin)
-        {
-            _isLevelWin = isLevelWin;
+            
+            var spawns = _objectsRegistry.GetTypedList<EnemyRoadController>();
+            _isLevelWin = spawns.Any(spawn => spawn.CountRounds == _appData.LevelData.CurrentRound);
+            if (_isLevelWin) _appData.User.CurrentLevel++;
         }
         
         private void HomeOnClick()

@@ -41,6 +41,7 @@ namespace _Project.Scripts
         {
             ResetService.ResetRound();
             await SceneCreator.InstantiateObjects(AppData.LevelData.ObjectsForRestoring);
+            WindowsManager.ShowFastWindow<GameWindowPresenter>();
         }
 
         public virtual async UniTask RestartLevel()
@@ -70,6 +71,7 @@ namespace _Project.Scripts
         
         public virtual async UniTask LoadLevel(int levelIndex)
         {
+            // need return bool and handle(exists file or not)
             ResetService.ResetLevel();
             await SaveLoadLevelService.LoadLevel(levelIndex);
             await SceneCreator.InstantiateObjects(AppData.LevelData.SavableModels);

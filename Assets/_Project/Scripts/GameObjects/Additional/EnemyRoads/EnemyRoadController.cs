@@ -111,6 +111,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             var wayPoints = new List<Vector3>();
             foreach (var position in Model.WorldPositions) wayPoints.Add(position + new Vector3(offsetX, 0f, 0f));
             var enemyController = _unitPool.Get(enemyData.enemyType, wayPoints[0]);
+            enemyController.Initialize();
             enemyController.SetWayToPoint(wayPoints);
         }
         
