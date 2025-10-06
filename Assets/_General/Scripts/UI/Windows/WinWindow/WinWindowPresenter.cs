@@ -50,8 +50,8 @@ namespace _General.Scripts.UI.Windows.WinWindow
         
         private async UniTaskVoid RestartOnClick()
         {
+            await WindowsManager.HideWindow<WinWindowPresenter>();
             await _gameManager.RestartLevel();
-            WindowsManager.HideWindow<WinWindowPresenter>();
         }
         
         private async UniTaskVoid ContinueOnClick()

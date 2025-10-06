@@ -36,8 +36,8 @@ namespace _General.Scripts.UI.Windows.FailWindow
         
         private async UniTaskVoid RestartOnClick()
         {
+            await WindowsManager.HideWindow<FailWindowPresenter>();
             await _gameManager.RestartLevel();
-            WindowsManager.HideWindow<FailWindowPresenter>();
         }
     }
 }
