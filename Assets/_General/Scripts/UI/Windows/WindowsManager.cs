@@ -38,6 +38,7 @@ namespace _General.Scripts.UI.Windows
             if (!_cachedWindows.TryGetValue(typeof(T), out var window))
             {
                 window = _resolver.Instantiate(_windowsConfig.Windows[typeof(T)], parent: GetParent(windowType));
+                window.View.HideFast();
                 _cachedWindows.Add(typeof(T), window);
             }
             return window as T;

@@ -1,5 +1,4 @@
 using _General.Scripts.AllAppData;
-using _General.Scripts.Services;
 using _General.Scripts.UI.Windows.BaseWindow;
 using _Project.Scripts;
 using Cysharp.Threading.Tasks;
@@ -38,7 +37,7 @@ namespace _General.Scripts.UI.Windows.PauseWindow
         
         private async UniTaskVoid RestartOnClick()
         {
-            WindowsManager.HideWindow<PauseWindowPresenter>();
+            await WindowsManager.HideWindow<PauseWindowPresenter>();
             await _gameManager.RestartLevel();
         }
         
