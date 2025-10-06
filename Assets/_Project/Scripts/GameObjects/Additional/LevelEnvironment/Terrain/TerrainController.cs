@@ -8,7 +8,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
 {
-    public class TerrainController : MonoBehaviour, ISavableController, IPoolableDispose
+    public class TerrainController : MonoBehaviour, ISavableController, IDestroyable
     {
         [Inject] private ObjectsRegistry _objectsRegistry;
         [SerializeField] private TerrainModel _model;
@@ -85,10 +85,7 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
             }
         }
 
-        public void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
-        {
-            Destroy(gameObject);
-        }
+        public void Destroy() => Destroy(gameObject);
 
         private void OnDestroy()
         {

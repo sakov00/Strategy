@@ -13,14 +13,20 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
 {
     public class EnemyRoadView : MonoBehaviour
     {
+        [Inject] private AppData _appData;
+        
         [SerializeField] private SplineAnimate _animatePrefab;
         [SerializeField] private List<TextMeshPro> _enemyIcons;
         [SerializeField] private float _distanceBetweenIcons = 4;
-        [Inject] private AppData _appData;
+        
+        private List<SplineAnimate> _animates = new();
 
         public void Initialize(SplineContainer splineContainer)
         {
             InjectManager.Inject(this);
+            
+            if (_animates.Count != 0) return;
+            
             var roadLength = splineContainer.Spline.GetLength();
             var countAnimateObjects = roadLength / _distanceBetweenIcons;
             for (var i = 0; i < countAnimateObjects; i++)
@@ -29,6 +35,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
                 splineAnimate.Container = splineContainer;
                 splineAnimate.StartOffset = i / countAnimateObjects;
                 splineAnimate.Play();
+                _animates.Add(splineAnimate);
             }
         }
 

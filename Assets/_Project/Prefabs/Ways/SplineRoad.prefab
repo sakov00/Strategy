@@ -111,37 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e510430e65b545909c2e5f8c07642b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.EnemyRoads.EnemyRoadController
+  _model:
+    <RoundEnemyList>k__BackingField: []
+  _view: {fileID: 8545495577338552256}
   _splineContainer: {fileID: 7231377394497565690}
-  <Model>k__BackingField:
-    <RoundEnemyList>k__BackingField:
-    - enemies:
-      - time: 0
-        enemyType: 2
-      - time: 0
-        enemyType: 2
-      - time: 0
-        enemyType: 4
-    - enemies:
-      - time: 0
-        enemyType: 2
-      - time: 0
-        enemyType: 2
-      - time: 0
-        enemyType: 4
-      - time: 0
-        enemyType: 4
-    - enemies:
-      - time: 0
-        enemyType: 2
-      - time: 0
-        enemyType: 2
-      - time: 0
-        enemyType: 2
-      - time: 0
-        enemyType: 4
-      - time: 0
-        enemyType: 4
-  <View>k__BackingField: {fileID: 8545495577338552256}
 --- !u!114 &8545495577338552256
 MonoBehaviour:
   m_ObjectHideFlags: 0

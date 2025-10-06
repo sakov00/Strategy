@@ -56,6 +56,8 @@ namespace _Project.Scripts
             AppData.User.CurrentLevel = levelIndex;
             
             await WindowsManager.ShowWindow<LoadingWindowPresenter>();
+            WindowsManager.HideFastWindow<GameWindowPresenter>();
+            
             await LoadLevel(levelIndex);
 
             var playerController = ObjectsRegistry.GetTypedList<UnitController>().First(x => x.UnitType == UnitType.Player);

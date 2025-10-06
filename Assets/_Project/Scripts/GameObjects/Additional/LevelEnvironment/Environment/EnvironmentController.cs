@@ -8,7 +8,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
 {
-    public class EnvironmentController : MonoBehaviour, ISavableController, IPoolableDispose
+    public class EnvironmentController : MonoBehaviour, ISavableController, IDestroyable
     {
         [SerializeField] protected EnvironmentModel _model;
         [Inject] private ObjectsRegistry _objectsRegistry;
@@ -32,10 +32,7 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
             if (savableModel is EnvironmentModel buildingZoneModel) _model = buildingZoneModel;
         }
 
-        public void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
-        {
-            Destroy(gameObject);
-        }
+        public void Destroy() => Destroy(gameObject);
 
         private void OnDestroy()
         {

@@ -15,7 +15,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
 {
-    public class BuildingZone : MonoBehaviour, IBuy, ISavableController, IPoolableDispose
+    public class BuildingZone : MonoBehaviour, IBuy, ISavableController, IDestroyable
     {
         [Inject] private AppData _appData;
         [Inject] private BuildingPrefabConfig _buildingPrefabConfig;
@@ -56,12 +56,7 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
 
             _appData.LevelData.LevelMoney -= price;
             _buildPool.Get(_model.BuildType, transform.position, transform.rotation);
-            Dispose();
-        }
-
-        public void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
-        {
-            Destroy(gameObject);
+            Destroy();
         }
 
         public ISavableModel GetSavableModel()
@@ -75,7 +70,9 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
         {
             if (savableModel is BuildingZoneModel buildingZoneModel) _model = buildingZoneModel;
         }
-        
+
+        public void Destroy() => Destroy(gameObject);
+
         private void OnDestroy()
         {
             _objectsRegistry.Unregister(this);

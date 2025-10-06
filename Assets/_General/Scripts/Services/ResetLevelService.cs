@@ -23,6 +23,9 @@ namespace _General.Scripts.Services
         
         public void ResetLevel()
         {
+            foreach (var obj in _objectsRegistry.GetAllByType<IDestroyable>())
+                obj.Destroy();
+            
             foreach (var obj in _objectsRegistry.GetAllByType<IPoolableDispose>())
                 obj.Dispose();
             
