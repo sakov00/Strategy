@@ -55,6 +55,7 @@ namespace _Project.Scripts
             Dispose();
             AppData.User.CurrentLevel = levelIndex;
             
+            Time.timeScale = 0;
             await WindowsManager.ShowWindow<LoadingWindowPresenter>();
             WindowsManager.HideFastWindow<GameWindowPresenter>();
             
@@ -69,6 +70,7 @@ namespace _Project.Scripts
             
             WindowsManager.ShowFastWindow<GameWindowPresenter>();
             await WindowsManager.HideWindow<LoadingWindowPresenter>();
+            Time.timeScale = 1;
         }
         
         public virtual async UniTask LoadLevel(int levelIndex)

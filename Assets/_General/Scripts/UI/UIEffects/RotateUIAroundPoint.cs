@@ -37,6 +37,7 @@ namespace _Project.Scripts.UI.UIEffects
                     obj.anchoredPosition = _centerPoint.anchoredPosition + pos;
                 }, startAngle + Mathf.PI * 2, _duration)
                 .SetEase(Ease.Linear)
+                .SetUpdate(true)
                 .SetLoops(-1, LoopType.Restart);
         }
 
