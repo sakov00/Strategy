@@ -34,9 +34,10 @@ namespace _Project.Scripts.GameObjects.ActionSystems
                 return;
             }
 
-            var distance = PositionExtention.GetDistanceBetweenObjects(_transform, _unitModel.AimObject.transform);
+            var distance = PositionExtention.GetDistanceBetweenObjects(_transform, _unitModel.AimObject.transform,
+                out var nearestPointA, out var nearestPointB);
             _unitView.Agent.isStopped = distance < _unitModel.AttackRange;
-            _unitView.Agent.SetDestination(_unitModel.AimObject.transform.position);
+            _unitView.Agent.SetDestination(nearestPointB);
         }
     }
 }

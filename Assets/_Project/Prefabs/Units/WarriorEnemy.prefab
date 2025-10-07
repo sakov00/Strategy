@@ -319,7 +319,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7303883060677341878}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.4
+  m_Radius: 0.3
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -400,7 +400,7 @@ MonoBehaviour:
     _moveSpeed: 10
     _rotationSpeed: 10
     _gravity: -20
-    _attackRange: 1
+    _attackRange: 2
     _damageAmount: 10
     _allAnimAttackTime: 1
     _animAttackTime: 1
@@ -425,6 +425,7 @@ MonoBehaviour:
   _objRenderer: {fileID: 3577828355485931451}
   _healthBar: {fileID: 5379700981253545673}
   _tooltip: {fileID: 0}
+  _outline: {fileID: 0}
   _animator: {fileID: -4408281087418554947}
   <Agent>k__BackingField: {fileID: 2801405599123745041}
   <ProjectileType>k__BackingField: 0
