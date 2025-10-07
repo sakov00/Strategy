@@ -1,15 +1,12 @@
-using System.Collections.Generic;
-using _General.Scripts._VContainer;
 using _General.Scripts.Interfaces;
-using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract.Unit;
 using _Project.Scripts.GameObjects.ActionSystems;
-using _Project.Scripts.GameObjects.Concrete.FlyingEnemy;
+using _Project.Scripts.Interfaces;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Concrete.ArcherFriend
 {
-    public class ArcherFriendController : UnitController
+    public class ArcherFriendController : UnitController, ISelectableUnit
     {
         [field: SerializeField] public ArcherFriendModel Model { get; private set; }
         [field: SerializeField] public ArcherFriendView View { get; private set; }
@@ -56,6 +53,23 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherFriend
             {
                 Model = unitModel;
             }
+        }
+        
+        public void Select()
+        {
+            View.EnableOutline(true);
+        }
+
+        public void Deselect()
+        {
+            View.EnableOutline(false);
+        }
+
+        public void MoveTo(Vector3 position)
+        {
+            View.Agent.enabled = false;
+            transform.position = position;
+            View.Agent.enabled = true;
         }
         
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)

@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 3052630911340187564}
   - component: {fileID: 257078088719806101}
   - component: {fileID: 5516086144725825973}
-  m_Layer: 0
+  - component: {fileID: -1483572026877774864}
+  m_Layer: 8
   m_Name: WarriorFriend
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.Units.Friends.WarriorFriend.WarriorFriendController
   <Model>k__BackingField:
+    <Id>k__BackingField: 0
     _warSide: 0
     _delayRegeneration: 3
     _regenerateHealthInSecond: 5
@@ -129,11 +131,30 @@ MonoBehaviour:
   _objRenderer: {fileID: 1924798556776072654}
   _healthBar: {fileID: 4617991586976072514}
   _tooltip: {fileID: 0}
+  _outline: {fileID: -1483572026877774864}
   _animator: {fileID: 0}
   <Agent>k__BackingField: {fileID: 5435124656432188814}
   <ProjectileType>k__BackingField: 0
   <FirePoint>k__BackingField: {fileID: 0}
   <ProjectileSpeed>k__BackingField: 40
+--- !u!114 &-1483572026877774864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2804439903886800851}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0.9306718, b: 0, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &970481426546825546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -227,6 +248,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FriendMeleeModel
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7e4e45b3b44d8d8488d0858b48023e3f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -306,6 +332,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8337824269587287870, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

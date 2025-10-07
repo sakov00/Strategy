@@ -3,6 +3,7 @@ using _General.Scripts.DTO;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Interfaces;
+using Unity.AI.Navigation;
 using UnityEngine;
 using VContainer;
 
@@ -13,6 +14,8 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
         [Inject] private ObjectsRegistry _objectsRegistry;
         [SerializeField] private TerrainModel _model;
         [SerializeField] private MeshFilter _meshFilter;
+        [SerializeField] private MeshCollider _meshCollider;
+        [SerializeField] private NavMeshSurface _meshSurface;
         
         private void Awake() => Initialize();
         public void Initialize()
@@ -82,6 +85,9 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
                     _meshFilter.mesh.SetTriangles(triangles, 0);
                     _meshFilter.mesh.SetNormals(normals);
                 }
+                _meshCollider.sharedMesh = null;
+                _meshCollider.sharedMesh = _meshFilter.mesh;
+                _meshSurface.BuildNavMesh();
             }
         }
 

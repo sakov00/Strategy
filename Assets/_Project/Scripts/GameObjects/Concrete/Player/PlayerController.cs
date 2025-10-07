@@ -5,12 +5,13 @@ using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract;
 using _Project.Scripts.GameObjects.Abstract.Unit;
 using _Project.Scripts.GameObjects.ActionSystems;
+using _Project.Scripts.Interfaces;
 using UnityEngine;
 using VContainer;
 
 namespace _Project.Scripts.GameObjects.Concrete.Player
 {
-    public class PlayerController : UnitController
+    public class PlayerController : UnitController, ISelectableUnit
     {
         [Inject] private AppData _appData;
         [field: SerializeField] public PlayerModel Model { get; private set; }
@@ -22,6 +23,9 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         private DetectionAim _detectionAim;
         private PlayerMovementSystem _playerMovementSystem;
         private RegenerationHpSystem _regenerationHpSystem;
+        
+        private Color _defaultColor;
+        [SerializeField] private Color _selectedColor = Color.yellow;
 
         public override void Initialize()
         {
@@ -61,6 +65,23 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             {
                 Model = playerModel;
             }
+        }
+        
+        public void Select()
+        {
+            View.EnableOutline(true);
+        }
+
+        public void Deselect()
+        {
+            View.EnableOutline(false);
+        }
+
+        public void MoveTo(Vector3 position)
+        {
+            View.Agent.enabled = false;
+            transform.position = position;
+            View.Agent.enabled = true;
         }
         
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)

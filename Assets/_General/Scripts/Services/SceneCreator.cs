@@ -23,11 +23,11 @@ namespace _General.Scripts.Services
         
         private static readonly Dictionary<Type, int> TypePriority = new()
         {
-            { typeof(TerrainModel), 0 },
-            { typeof(EnemyRoadModel), 1 },
-            { typeof(UnitModel), 2 },
-            { typeof(BuildingZoneModel), 3 },
-            { typeof(BuildModel), 4 },
+            { typeof(UnitModel), 0 },
+            { typeof(BuildingZoneModel), 1 },
+            { typeof(BuildModel), 2 },
+            { typeof(TerrainModel), 3 },
+            { typeof(EnemyRoadModel), 4 },
         };
         
         public async UniTask InstantiateObjects<T>(List<T> objects) where T : ISavableModel

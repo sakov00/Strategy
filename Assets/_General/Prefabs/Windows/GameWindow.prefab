@@ -49,8 +49,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dragSpeed: 2
-  _lastMousePosition: {x: 0, y: 0, z: 0}
-  _isDragging: 0
+  _minDragThreshold: 4
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _unitMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &2454595660079852641
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,10 +901,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _model:
     _windowType: 0
-    _isPaused:
-      value: 0
-    _isNextRoundAvailable:
-      value: 1
     _isStrategyMode:
       value: 0
   _view: {fileID: 9106743238255189466}

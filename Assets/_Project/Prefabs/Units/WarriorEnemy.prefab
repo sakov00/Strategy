@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBar
       objectReference: {fileID: 0}
+    - target: {fileID: 8337824269587287870, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -144,6 +149,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8112500991877570243, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7572231656735494583, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7393812604740607021, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7084372570514542218, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4420329721335215220, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3916284982054284232, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -2865682662467020708, guid: 944e80848bccbd64aba410d635ebf7c8,
         type: 3}
       propertyPath: m_CastShadows
@@ -154,10 +189,85 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: aed570118c613e04abc4c290e4a402c8, type: 2}
+    - target: {fileID: -2198516081281965076, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 944e80848bccbd64aba410d635ebf7c8,
         type: 3}
       propertyPath: m_Name
       value: WarriorEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2109806666516208998, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325065161254462423, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120335630203561453, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279644430347134192, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348326417913936838, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239700964582446470, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668804706908347324, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785693691196470766, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6484134090631960568, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476509232931439689, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386514194564127460, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614976361697116204, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637126150705560715, guid: 944e80848bccbd64aba410d635ebf7c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -280,6 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.Units.Enemies.WarriorEnemy.WarriorEnemyController
   <Model>k__BackingField:
+    <Id>k__BackingField: 0
     _warSide: 1
     _delayRegeneration: 3
     _regenerateHealthInSecond: 5

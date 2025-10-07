@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4153237039961208969}
   - component: {fileID: 7851637115227594051}
   - component: {fileID: 7345799183981944055}
+  - component: {fileID: -3135848715622150961}
   - component: {fileID: 8089973434820199287}
   - component: {fileID: 3108341575151675289}
   - component: {fileID: 4564933277160738802}
@@ -96,6 +97,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &-3135848715622150961
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353225968917812093}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!65 &8089973434820199287
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -130,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Model>k__BackingField:
+    <Id>k__BackingField: 0
     _warSide: 0
     _delayRegeneration: 3
     _regenerateHealthInSecond: 5
@@ -139,6 +157,7 @@ MonoBehaviour:
     <BuildPrice>k__BackingField: 0
     _unitType: 1
     _timeCreateUnits: 5
+    _buildUnitIds: 
   <View>k__BackingField: {fileID: 4564933277160738802}
 --- !u!114 &4564933277160738802
 MonoBehaviour:
@@ -155,6 +174,7 @@ MonoBehaviour:
   _objRenderer: {fileID: 7345799183981944055}
   _healthBar: {fileID: 5143482536254737764}
   _tooltip: {fileID: 6983696979498181610}
+  _outline: {fileID: 0}
   _buildUnitPositions:
   - {fileID: 2444088782556222454}
   - {fileID: 2688157222307622312}

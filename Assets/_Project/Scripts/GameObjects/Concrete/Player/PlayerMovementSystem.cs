@@ -44,5 +44,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
                     _playerModel.RotationSpeed * Time.deltaTime * 3f);
             }
         }
+        
+        
     }
 }

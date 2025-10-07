@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 4277981963085814760}
   - component: {fileID: 6119987703836528281}
   - component: {fileID: 8392064191958766038}
+  - component: {fileID: -4179115650077682843}
   - component: {fileID: 5023625458649568532}
   - component: {fileID: 4833467767796555782}
   - component: {fileID: 980575573167198939}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MainBuild
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,6 +96,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &-4179115650077682843
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3165963288832333277}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!65 &5023625458649568532
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -129,14 +146,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects._Object.MainBuild.MainBuildController
   <Model>k__BackingField:
+    <Id>k__BackingField: 0
     _warSide: 0
     _delayRegeneration: 0
     _regenerateHealthInSecond: 0
     _maxHealth: 1000
     _currentHealth: 1000
     <BuildType>k__BackingField: 4
-    _priceList: 
-    _currentLevel: 0
+    <BuildPrice>k__BackingField: 0
     _attackRange: 20
     _damageAmount: 25
     _allAnimAttackTime: 1
@@ -160,6 +177,7 @@ MonoBehaviour:
   _objRenderer: {fileID: 8392064191958766038}
   _healthBar: {fileID: 924772688440896264}
   _tooltip: {fileID: 4440407429061833310}
+  _outline: {fileID: 0}
   <ProjectileType>k__BackingField: 2
   <FirePoint>k__BackingField: {fileID: 1673183873552162724}
   <ProjectileSpeed>k__BackingField: 50

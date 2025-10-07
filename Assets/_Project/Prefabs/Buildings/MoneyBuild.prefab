@@ -373,6 +373,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoneyBuild
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 764ed5f149f551947ad3f022baa9613d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -389,6 +394,10 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2062877135496898820}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 764ed5f149f551947ad3f022baa9613d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7529740728826971057}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 764ed5f149f551947ad3f022baa9613d,
         type: 3}
       insertIndex: -1
@@ -414,6 +423,22 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7399996297824762030}
   m_PrefabAsset: {fileID: 0}
+--- !u!208 &7529740728826971057
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7670607343134033407}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.5740001, y: 2.686, z: 2.4060001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.12100001, y: 2.615, z: 0.51600003}
+  m_TimeToStationary: 0.5
 --- !u!65 &9058534439814739006
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -448,14 +473,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Model>k__BackingField:
+    <Id>k__BackingField: 0
     _warSide: 0
     _delayRegeneration: 0
     _regenerateHealthInSecond: 0
     _maxHealth: 100
     _currentHealth: 100
     <BuildType>k__BackingField: 0
-    _priceList: 00000000
-    _currentLevel: 0
+    <BuildPrice>k__BackingField: 0
     _addMoneyValue: 1
   <View>k__BackingField: {fileID: 2752996952492913048}
 --- !u!114 &2752996952492913048
@@ -473,6 +498,7 @@ MonoBehaviour:
   _objRenderer: {fileID: 8175023764034970666}
   _healthBar: {fileID: 3419078999095563644}
   _tooltip: {fileID: 3627643236564240803}
+  _outline: {fileID: 0}
   _moneyUpText: {fileID: 7070703048352248572}
 --- !u!23 &8175023764034970666 stripped
 MeshRenderer:

@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 9034691814021122156}
   - component: {fileID: 5844096116420212797}
   - component: {fileID: 3207808652228905389}
-  - component: {fileID: 3831614332727038183}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -121,27 +120,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3831614332727038183
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5425698250931864606}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8384456974013278440
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +135,8 @@ GameObject:
   - component: {fileID: 4049317812071654719}
   - component: {fileID: 727004643926444983}
   - component: {fileID: 4816044730722103744}
-  m_Layer: 0
+  - component: {fileID: 8644983890299632833}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -296,11 +275,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Model>k__BackingField:
+    <Id>k__BackingField: 0
     _warSide: 0
     _delayRegeneration: 3
     _regenerateHealthInSecond: 5
     _maxHealth: 100
     _currentHealth: 100
+    <UnitType>k__BackingField: 0
     _moveSpeed: 10
     _rotationSpeed: 10
     _gravity: -20
@@ -311,7 +292,10 @@ MonoBehaviour:
     _detectionRadius: 20
     _typeAttack: 1
     _aimObject: {fileID: 0}
+    _currentWaypointIndex: 0
+    _wayToAim: []
   <View>k__BackingField: {fileID: 4816044730722103744}
+  _selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &4816044730722103744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,11 +311,30 @@ MonoBehaviour:
   _objRenderer: {fileID: 1965842239332045838}
   _healthBar: {fileID: 909583209078686947}
   _tooltip: {fileID: 0}
+  _outline: {fileID: 8644983890299632833}
   _animator: {fileID: 0}
   <Agent>k__BackingField: {fileID: 8192558378893770235}
   <ProjectileType>k__BackingField: 1
   <FirePoint>k__BackingField: {fileID: 3287887312038049354}
   <ProjectileSpeed>k__BackingField: 30
+--- !u!114 &8644983890299632833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8384456974013278440}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0.9306718, b: 0, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &6427857212625835950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -394,6 +397,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8337824269587287870, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -104,7 +104,8 @@ GameObject:
   - component: {fileID: 8760214948618722432}
   - component: {fileID: 5608380024814131166}
   - component: {fileID: 6574901080452885705}
-  m_Layer: 0
+  - component: {fileID: -6475412966088422129}
+  m_Layer: 8
   m_Name: ArcherFriend
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,6 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.Units.Friends.ArcherFriend.ArcherFriendController
   <Model>k__BackingField:
+    <Id>k__BackingField: 0
     _warSide: 0
     _delayRegeneration: 3
     _regenerateHealthInSecond: 5
@@ -262,6 +264,7 @@ MonoBehaviour:
     _currentWaypointIndex: 0
     _wayToAim: []
   <View>k__BackingField: {fileID: 6574901080452885705}
+  _selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &6574901080452885705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,11 +280,30 @@ MonoBehaviour:
   _objRenderer: {fileID: 6325934801687606467}
   _healthBar: {fileID: 7757102756358357087}
   _tooltip: {fileID: 0}
+  _outline: {fileID: -6475412966088422129}
   _animator: {fileID: 0}
   <Agent>k__BackingField: {fileID: 253004234346408404}
   <ProjectileType>k__BackingField: 1
   <FirePoint>k__BackingField: {fileID: 3946377445745853680}
   <ProjectileSpeed>k__BackingField: 40
+--- !u!114 &-6475412966088422129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5556611430182395226}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0.9306718, b: 0, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &8111565066530959347
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +397,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8337824269587287870, guid: 7991bbbe44995004f8967dc6b9d6b3c9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

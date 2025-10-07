@@ -2,11 +2,12 @@ using _General.Scripts._VContainer;
 using _General.Scripts.Interfaces;
 using _Project.Scripts.GameObjects.Abstract.Unit;
 using _Project.Scripts.GameObjects.ActionSystems;
+using _Project.Scripts.Interfaces;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Concrete.WarriorFriend
 {
-    public class WarriorFriendController : UnitController
+    public class WarriorFriendController : UnitController, ISelectableUnit
     {
         [field: SerializeField] public WarriorFriendModel Model { get; private set; }
         [field: SerializeField] public WarriorFriendView View { get; private set; }
@@ -52,6 +53,23 @@ namespace _Project.Scripts.GameObjects.Concrete.WarriorFriend
             {
                 Model = unitModel;
             }
+        }
+        
+        public void Select()
+        {
+            View.EnableOutline(true);
+        }
+
+        public void Deselect()
+        {
+            View.EnableOutline(false);
+        }
+
+        public void MoveTo(Vector3 position)
+        {
+            View.Agent.enabled = false;
+            transform.position = position;
+            View.Agent.enabled = true;
         }
         
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)

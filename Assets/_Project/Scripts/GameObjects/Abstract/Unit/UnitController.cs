@@ -44,8 +44,8 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
             }
             if (clearFromRegistry)
             {
-                ObjectsRegistry.Unregister(this);
                 IdsRegistry.Unregister(this);
+                ObjectsRegistry.Unregister(this);
             }
         }
     }

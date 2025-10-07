@@ -1,3 +1,4 @@
+using System;
 using _General.Scripts.UI.Info;
 using _Project.Scripts.Interfaces.View;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         [SerializeField] protected Renderer _objRenderer;
         [SerializeField] protected UniversalBar _healthBar;
         [SerializeField] protected Tooltip _tooltip;
+        [SerializeField] protected Outline _outline;
 
         public virtual void Initialize()
         {
@@ -29,6 +31,12 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         public float GetHeightObject()
         {
             return _objRenderer.bounds.size.y;
+        }
+        
+        public void EnableOutline(bool enable)
+        {
+            if (_outline != null)
+                _outline.enabled = enable;
         }
     }
 }

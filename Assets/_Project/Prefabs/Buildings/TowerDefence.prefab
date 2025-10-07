@@ -316,6 +316,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerDefence
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cca984cd424bf894885bfe0366683315,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -332,6 +337,10 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3276773915444923101}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cca984cd424bf894885bfe0366683315,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7447125744168681917}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cca984cd424bf894885bfe0366683315,
         type: 3}
       insertIndex: -1
@@ -357,6 +366,22 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2495708765438251415}
   m_PrefabAsset: {fileID: 0}
+--- !u!208 &-7447125744168681917
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3342761879004753094}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.8080001, y: 3.3850002, z: 1.9610001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.13800001, y: 3.3120003, z: 0.004}
+  m_TimeToStationary: 0.5
 --- !u!65 &1832049453763797010
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -391,14 +416,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Model>k__BackingField:
+    <Id>k__BackingField: 0
     _warSide: 0
     _delayRegeneration: 0
     _regenerateHealthInSecond: 0
     _maxHealth: 1000
     _currentHealth: 1000
     <BuildType>k__BackingField: 1
-    _priceList: 00000000
-    _currentLevel: 0
+    <BuildPrice>k__BackingField: 0
     _attackRange: 20
     _damageAmount: 25
     _allAnimAttackTime: 1
@@ -422,6 +447,7 @@ MonoBehaviour:
   _objRenderer: {fileID: 3846949601871662355}
   _healthBar: {fileID: 6569375006375228098}
   _tooltip: {fileID: 2048203932679248659}
+  _outline: {fileID: 0}
   <ProjectileType>k__BackingField: 2
   <FirePoint>k__BackingField: {fileID: 3276773915444923101}
   <ProjectileSpeed>k__BackingField: 50
