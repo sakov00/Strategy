@@ -55,7 +55,8 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
             }
 
             _appData.LevelData.LevelMoney -= price;
-            _buildPool.Get(_model.BuildType, transform.position, transform.rotation);
+            var build = _buildPool.Get(_model.BuildType, transform.position, transform.rotation);
+            build.Initialize();
             Destroy();
         }
 

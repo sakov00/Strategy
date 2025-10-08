@@ -25,7 +25,6 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         protected virtual void Start()
         {
             HeightObject = ObjectView.GetHeightObject();
-            Initialize();
         }
 
         protected virtual void FixedUpdate()

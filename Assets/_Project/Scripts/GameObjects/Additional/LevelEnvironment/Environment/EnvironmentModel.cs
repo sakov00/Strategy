@@ -13,5 +13,9 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
         [field: SerializeField] public EnvironmentType EnvironmentType { get; set; }
         public Vector3 SavePosition { get; set; }
         public Quaternion SaveRotation { get; set; }
+        public ISavableModel DeepClone()
+        {
+            return (EnvironmentModel)MemberwiseClone();
+        }
     }
 }

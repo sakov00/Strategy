@@ -9,9 +9,11 @@ using _General.Scripts.UI.Windows.WinWindow;
 using _Project.Scripts;
 using _Project.Scripts.GameObjects.Abstract.BaseObject;
 using _Project.Scripts.GameObjects.Additional.EnemyRoads;
+using _Project.Scripts.GameObjects.Concrete.FriendsGroup;
 using _Project.Scripts.GameObjects.Concrete.Player;
 using Cysharp.Threading.Tasks;
 using UniRx;
+using Unity.VisualScripting;
 using UnityEngine;
 using VContainer;
 
@@ -60,8 +62,13 @@ namespace _General.Scripts.UI.Windows.GameWindow
             _appData.LevelData.ObjectsForRestoring = _objectsRegistry
                 .GetAllByType<ObjectController>()
                 .Where(o => o is not PlayerController)
-                .Select(o => o.GetSavableModel())
+                .Select(o => o.GetSavableModel().DeepClone())
                 .ToList();
+            
+            _appData.LevelData.ObjectsForRestoring.AddRange(_objectsRegistry
+                .GetAllByType<FriendsGroupController>()
+                .Select(o => o.GetSavableModel().DeepClone())
+                .ToList()); 
             
             _objectsRegistry.GetAllByType<EnemyRoadController>().ForEach(x => x.StartSpawn());
             _appData.LevelEvents.Initialize();

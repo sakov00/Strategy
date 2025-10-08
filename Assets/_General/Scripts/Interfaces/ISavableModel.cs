@@ -44,5 +44,6 @@ namespace _General.Scripts.Interfaces
     {
         public Vector3 SavePosition { get; set; }
         public Quaternion SaveRotation { get; set; }
+        public ISavableModel DeepClone();
     }
 }

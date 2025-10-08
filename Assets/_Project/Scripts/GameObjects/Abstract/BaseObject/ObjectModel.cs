@@ -81,5 +81,10 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
 
         public Vector3 SavePosition { get; set; }
         public Quaternion SaveRotation { get; set; }
+
+        public ISavableModel DeepClone()
+        {
+            return (ObjectModel)MemberwiseClone();
+        }
     }
 }

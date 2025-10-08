@@ -16,5 +16,9 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
         public ushort[] Triangles { get; set; }
         public Vector3 SavePosition { get; set; }
         public Quaternion SaveRotation { get; set; }
+        public ISavableModel DeepClone()
+        {
+            return (TerrainModel)MemberwiseClone();
+        }
     }
 }

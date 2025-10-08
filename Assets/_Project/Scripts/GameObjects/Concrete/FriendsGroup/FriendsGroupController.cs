@@ -125,6 +125,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsGroup
                 _objectsRegistry.Unregister(this);
                 _idsRegistry.Unregister(this);
             }
+            Destroy(gameObject);
         }
 
         private void OnDestroy()

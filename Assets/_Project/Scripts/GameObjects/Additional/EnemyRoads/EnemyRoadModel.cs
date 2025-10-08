@@ -21,6 +21,10 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
 
         public Vector3 SavePosition { get; set; }
         public Quaternion SaveRotation { get; set; }
+        public ISavableModel DeepClone()
+        {
+            return (EnemyRoadModel)MemberwiseClone();
+        }
     }
 
     [Serializable]

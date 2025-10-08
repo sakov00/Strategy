@@ -18,5 +18,17 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsGroup
         [field:SerializeField] public float GroupRadius { get; set; }
         public Vector3 SavePosition { get; set; }
         public Quaternion SaveRotation { get; set; }
+        public ISavableModel DeepClone()
+        {
+            return new FriendsGroupModel
+            {
+                Id = Id,
+                UnitIds = new HashSet<int>(UnitIds),
+                UnitType = UnitType,
+                GroupRadius = GroupRadius,
+                SavePosition = SavePosition,
+                SaveRotation = SaveRotation
+            };
+        }
     }
 }

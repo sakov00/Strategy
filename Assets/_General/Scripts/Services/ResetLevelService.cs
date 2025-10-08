@@ -2,6 +2,7 @@ using System.Linq;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract.BaseObject;
+using _Project.Scripts.GameObjects.Concrete.FriendsGroup;
 using _Project.Scripts.GameObjects.Concrete.Player;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Pools;
@@ -17,6 +18,11 @@ namespace _General.Scripts.Services
         
         public void ResetRound()
         {
+            foreach (var o in _objectsRegistry.GetAllByType<FriendsGroupController>())
+            {
+                o.Dispose();
+            }
+
             foreach (var o in _objectsRegistry.GetAllByType<ObjectController>())
             {
                 if (o is PlayerController)
