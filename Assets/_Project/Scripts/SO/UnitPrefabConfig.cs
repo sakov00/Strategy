@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using _General.Scripts.CameraLogic;
 using _Project.Scripts.GameObjects.Abstract.Unit;
+using _Project.Scripts.GameObjects.Concrete.FriendsGroup;
 using UnityEngine;
 
 namespace _Project.Scripts.SO
@@ -10,6 +11,7 @@ namespace _Project.Scripts.SO
     {
         [Header("Unit Prefabs")] 
         public List<UnitController> allUnitPrefabs = new();
+        public List<FriendsGroupController> allGroupController = new();
         public CameraFollow cameraPrefab;
     }
 }

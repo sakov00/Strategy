@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using _Project.Scripts.GameObjects.Abstract.BaseObject;
+using _Project.Scripts.Interfaces;
 
 namespace _General.Scripts.Registries
 {
     public class IdsRegistry
     {
-        private readonly Dictionary<int, ObjectController> _dictionary = new();
+        private readonly Dictionary<int, IId> _dictionary = new();
         
-        public void Register(ObjectController obj)
+        public void Register(IId obj)
         {
             if (obj.Id != 0)
             {
@@ -29,13 +30,13 @@ namespace _General.Scripts.Registries
             return id;
         }
         
-        public void Unregister(ObjectController obj)
+        public void Unregister(IId obj)
         {
             _dictionary.Remove(obj.Id);
             obj.Id = 0;
         }
 
-        public ObjectController Get(int id)
+        public IId Get(int id)
         {
             return _dictionary.TryGetValue(id, out var obj) ? obj : null;
         }

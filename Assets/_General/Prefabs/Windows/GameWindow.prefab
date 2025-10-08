@@ -53,9 +53,9 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 128
-  _unitMask:
+  _ignoreMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
 --- !u!1 &2454595660079852641
 GameObject:
   m_ObjectHideFlags: 0

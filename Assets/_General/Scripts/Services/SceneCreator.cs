@@ -8,6 +8,7 @@ using _Project.Scripts.GameObjects.Abstract.Unit;
 using _Project.Scripts.GameObjects.Additional.EnemyRoads;
 using _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain;
 using _Project.Scripts.GameObjects.Concrete.BuildingZone;
+using _Project.Scripts.GameObjects.Concrete.FriendsGroup;
 using _Project.Scripts.Pools;
 using Cysharp.Threading.Tasks;
 using VContainer;
@@ -16,18 +17,20 @@ namespace _General.Scripts.Services
 {
     public class SceneCreator 
     {
-        [Inject] private OthersFactory _othersFactory;
         [Inject] private BuildPool _buildPool;
         [Inject] private UnitPool _unitPool;
+        [Inject] private UnitFactory _unitFactory;
+        [Inject] private OthersFactory _othersFactory;
         [Inject] private EnvironmentFactory _environmentFactory;
         
         private static readonly Dictionary<Type, int> TypePriority = new()
         {
             { typeof(UnitModel), 0 },
             { typeof(BuildingZoneModel), 1 },
-            { typeof(BuildModel), 2 },
-            { typeof(TerrainModel), 3 },
-            { typeof(EnemyRoadModel), 4 },
+            { typeof(FriendsGroupModel), 2 },
+            { typeof(BuildModel), 3 },
+            { typeof(TerrainModel), 4 },
+            { typeof(EnemyRoadModel), 5 },
         };
         
         public async UniTask InstantiateObjects<T>(List<T> objects) where T : ISavableModel
@@ -41,6 +44,8 @@ namespace _General.Scripts.Services
                         _buildPool.Get(buildModel.BuildType, buildModel.SavePosition, buildModel.SaveRotation),
                     UnitModel unitModel => 
                         _unitPool.Get(unitModel.UnitType, unitModel.SavePosition, unitModel.SaveRotation),
+                    FriendsGroupModel friendsGroupModel => 
+                        _unitFactory.CreateFriendsGroup(friendsGroupModel.UnitType, friendsGroupModel.SavePosition, friendsGroupModel.SaveRotation),
                     TerrainModel terrainModel => 
                         _environmentFactory.CreateTerrain(0),
                     EnemyRoadModel enemyRoadModel => 

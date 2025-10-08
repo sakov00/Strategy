@@ -8,7 +8,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Abstract.BaseObject
 {
-    public abstract class ObjectController : MonoBehaviour, ISavableController, IPoolableDispose
+    public abstract class ObjectController : MonoBehaviour, ISavableController, IPoolableDispose, IId
     {
         [Inject] protected AppData AppData;
         [Inject] protected ObjectsRegistry ObjectsRegistry;

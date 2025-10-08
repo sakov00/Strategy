@@ -9,6 +9,7 @@ using _Project.Scripts.GameObjects.Concrete.ArcherFriend;
 using _Project.Scripts.GameObjects.Concrete.BuildingZone;
 using _Project.Scripts.GameObjects.Concrete.FlyingEnemy;
 using _Project.Scripts.GameObjects.Concrete.FriendsBuild;
+using _Project.Scripts.GameObjects.Concrete.FriendsGroup;
 using _Project.Scripts.GameObjects.Concrete.MainBuild;
 using _Project.Scripts.GameObjects.Concrete.MoneyBuild;
 using _Project.Scripts.GameObjects.Concrete.Player;
@@ -38,6 +39,7 @@ namespace _General.Scripts.Interfaces
     [MemoryPackUnion(14, typeof(ArcherEnemyModel))]
     [MemoryPackUnion(15, typeof(ArcherFriendModel))]
     [MemoryPackUnion(16, typeof(FlyingEnemyModel))]
+    [MemoryPackUnion(17, typeof(FriendsGroupModel))]
     public partial interface ISavableModel
     {
         public Vector3 SavePosition { get; set; }

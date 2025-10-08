@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _General.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract.BaseObject;
+using _Project.Scripts.Interfaces;
 using _Project.Scripts.Pools;
 using UnityEngine;
 using VContainer;
@@ -32,6 +33,23 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
         public void SetWayToPoint(List<Vector3> waypoints)
         {
             UnitModel.WayToAim = waypoints;
+        }
+        
+        public void Select()
+        {
+            UnitView.EnableOutline(true);
+        }
+
+        public void Deselect()
+        {
+            UnitView.EnableOutline(false);
+        }
+
+        public void MoveTo(Vector3 position)
+        {
+            UnitView.Agent.enabled = false;
+            transform.position = position;
+            UnitView.Agent.enabled = true;
         }
 
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)

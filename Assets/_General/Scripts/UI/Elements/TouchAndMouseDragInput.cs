@@ -1,3 +1,4 @@
+using System;
 using _General.Scripts._GlobalLogic;
 using _Project.Scripts.Interfaces;
 using Cysharp.Threading.Tasks;
@@ -13,13 +14,14 @@ namespace _General.Scripts.UI.Elements
 
         [Header("Raycast Layers")]
         [SerializeField] private LayerMask _groundMask;
+        [SerializeField] private LayerMask _ignoreMask;
 
         private Vector3 _lastPointerPosition;
         private bool _isDragging = false;
         private bool _clickedOnObject = false;
         private bool _justEnabled;
 
-        private ISelectableUnit _selectedUnit;
+        private ISelectable _selected;
         private Camera _camera;
 
         private void Awake()
@@ -73,14 +75,14 @@ namespace _General.Scripts.UI.Elements
             if (Input.GetMouseButtonUp(0))
             {
                 _isDragging = false;
-                if (_selectedUnit != null)
+                if (_selected != null)
                 {
                     if (TryGetGroundPoint(Input.mousePosition, out var target))
                     {
-                        _selectedUnit.MoveTo(target);
+                        _selected.MoveTo(target);
                     }
-                    _selectedUnit.Deselect();
-                    _selectedUnit = null;
+                    _selected.Deselect();
+                    _selected = null;
                 }
                 else
                 {
@@ -123,13 +125,13 @@ namespace _General.Scripts.UI.Elements
             {
                 _isDragging = false;
 
-                if (_selectedUnit != null)
+                if (_selected != null)
                 {
                     if (TryGetGroundPoint(touch.position, out var target))
                     {
-                        _selectedUnit.MoveTo(target);
-                        _selectedUnit.Deselect();
-                        _selectedUnit = null;
+                        _selected.MoveTo(target);
+                        _selected.Deselect();
+                        _selected = null;
                     }
                 }
                 else
@@ -155,39 +157,50 @@ namespace _General.Scripts.UI.Elements
             var ray = _camera.ScreenPointToRay(screenPos);
             if (!Physics.Raycast(ray, out RaycastHit hit, 1000f)) return false;
 
-            if (hit.collider.TryGetComponent<ISelectableUnit>(out var unit))
+            if (hit.collider.TryGetComponent<ISelectable>(out var unit))
             {
-                if (_selectedUnit != null)
-                    _selectedUnit.Deselect();
+                if (_selected != null)
+                    _selected.Deselect();
 
-                _selectedUnit = unit;
-                _selectedUnit.Select();
+                _selected = unit;
+                _selected.Select();
                 return true;
             }
 
             return false;
         }
 
-        private bool TryGetGroundPoint(Vector2 screenPos, out Vector3 point)
+        public bool TryGetGroundPoint(Vector2 screenPos, out Vector3 point)
         {
             var ray = _camera.ScreenPointToRay(screenPos);
-            if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
+            float maxDistance = 1000f;
+
+            var hits = Physics.RaycastAll(ray, maxDistance);
+
+            Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+            foreach (var hit in hits)
             {
-                if (((1 << hit.collider.gameObject.layer) & _groundMask) != 0)
+                int layerBit = 1 << hit.collider.gameObject.layer;
+
+                if ((_groundMask & layerBit) != 0)
                 {
                     point = hit.point;
                     return true;
                 }
-                else
+
+                if ((_ignoreMask & layerBit) != 0)
                 {
-                    point = default;
-                    return false;
+                    continue;
                 }
+
+                break;
             }
 
             point = default;
             return false;
         }
+
 
         private void TryHandleBuy(Vector2 screenPos)
         {

@@ -9,8 +9,9 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
     [Serializable]
     public class FriendsBuildView : BuildView
     {
-        [SerializeField] public List<Transform> _buildUnitPositions = new();
         [SerializeField] private UniversalBar _loadBar;
+        [field:SerializeField] public Transform SpawnPoint { get; set; }
+        [field:SerializeField] public Transform GroupPoint { get; set; }
 
         public override void Initialize()
         {

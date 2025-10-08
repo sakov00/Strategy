@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Concrete.ArcherFriend
 {
-    public class ArcherFriendController : UnitController, ISelectableUnit
+    public class ArcherFriendController : UnitController
     {
         [field: SerializeField] public ArcherFriendModel Model { get; private set; }
         [field: SerializeField] public ArcherFriendView View { get; private set; }
@@ -53,23 +53,6 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherFriend
             {
                 Model = unitModel;
             }
-        }
-        
-        public void Select()
-        {
-            View.EnableOutline(true);
-        }
-
-        public void Deselect()
-        {
-            View.EnableOutline(false);
-        }
-
-        public void MoveTo(Vector3 position)
-        {
-            View.Agent.enabled = false;
-            transform.position = position;
-            View.Agent.enabled = true;
         }
         
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)

@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract;
-using _Project.Scripts.GameObjects.Abstract.Unit;
+using _Project.Scripts.GameObjects.Concrete.FriendsGroup;
 using MemoryPack;
 using UnityEngine;
 
@@ -13,9 +12,9 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
     public partial class FriendsBuildModel : BuildModel
     {
         [Header("Units")] 
-        [SerializeField] private UnitType _unitType;
-        [SerializeField] private int _timeCreateUnits = 5;
-        [SerializeField] private List<int> _buildUnitIds = new();
+        [field:SerializeField] private UnitType _unitType;
+        [field:SerializeField] private int _timeCreateUnits = 5;
+        [field:SerializeField] private int _friendsGroupId;
 
         public UnitType UnitType
         {
@@ -29,10 +28,10 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
             set => _timeCreateUnits = value;
         }
         
-        public List<int> BuildUnitIds
+        public int FriendsGroupId
         {
-            get => _buildUnitIds;
-            set => _buildUnitIds = value;
+            get => _friendsGroupId;
+            set => _friendsGroupId = value;
         }
         
         public int NeedRestoreUnitsCount { get; set; }

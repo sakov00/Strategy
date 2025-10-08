@@ -11,7 +11,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Concrete.Player
 {
-    public class PlayerController : UnitController, ISelectableUnit
+    public class PlayerController : UnitController, ISelectable
     {
         [Inject] private AppData _appData;
         [field: SerializeField] public PlayerModel Model { get; private set; }

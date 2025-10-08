@@ -1,9 +1,11 @@
-using System.Collections.Generic;
 using _General.Scripts._GlobalLogic;
 using _General.Scripts.Interfaces;
+using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects.Abstract;
 using _Project.Scripts.GameObjects.Abstract.Unit;
+using _Project.Scripts.GameObjects.Concrete.FriendsGroup;
 using _Project.Scripts.Pools;
+using UniRx;
 using UnityEngine;
 using VContainer;
 
@@ -11,13 +13,16 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
 {
     public class FriendsBuildController : BuildController
     {
-        [Inject] private UnitPool _unitPool;
         [Inject] private GameTimer _gameTimer;
+        [Inject] private UnitPool _unitPool;
+        [Inject] private UnitFactory _unitFactory;
         
         [field: SerializeField] public FriendsBuildModel Model { get; set; }
         [field: SerializeField] public FriendsBuildView View { get; set; }
         protected override BuildModel BuildModel => Model;
         protected override BuildView BuildView => View;
+        
+        private FriendsGroupController FriendsGroup { get; set; }
 
         public override void Initialize()
         {
@@ -25,36 +30,28 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
             
             Model.CurrentHealth = Model.MaxHealth;
 
+            SetFriendsGroup();
+            
             View.Initialize();
-            AddFriends();
         }
-        
-        private void AddFriends()
+
+        private void SetFriendsGroup()
         {
-            if (Model.BuildUnitIds.Count == 0)
+            if (Model.FriendsGroupId == 0)
             {
-                foreach (var friendUnit in View._buildUnitPositions)
-                {
-                    var unitController = _unitPool.Get(Model.UnitType, friendUnit.position);
-                    unitController.SetWayToPoint(new List<Vector3> { friendUnit.position });
-                    unitController.Initialize();
-                    Model.BuildUnitIds.Add(unitController.Id);
-                    unitController.OnKilled += CheckRemovedUnits;
-                }  
+                FriendsGroup = _unitFactory.CreateFriendsGroup(Model.UnitType, View.GroupPoint.position);
+                FriendsGroup.Initialize();
+                Model.FriendsGroupId = FriendsGroup.Id;
             }
             else
             {
-                foreach (var unitId in Model.BuildUnitIds)
-                {
-                   var unit = (UnitController)IdsRegistry.Get(unitId);
-                   unit.OnKilled += CheckRemovedUnits;
-                }
+                FriendsGroup = (FriendsGroupController)IdsRegistry.Get(Model.FriendsGroupId);
             }
+            FriendsGroup.UnitOnKilled += CheckRemovedUnit;
         }
 
-        private void CheckRemovedUnits(UnitController unitController)
+        private void CheckRemovedUnit(UnitController removedUnit)
         {
-            Model.BuildUnitIds.Remove(unitController.Id);
             Model.NeedRestoreUnitsCount++;
 
             if (Model.NeedRestoreUnitsCount > 0 && Model.CurrentSpawnTimer < 0)
@@ -73,9 +70,9 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
 
             if (Model.NeedRestoreUnitsCount > 0)
             {
-                var unitController = _unitPool.Get(Model.UnitType, transform.position);
+                var unitController = _unitPool.Get(Model.UnitType, View.SpawnPoint.position);
                 unitController.Initialize();
-                Model.BuildUnitIds.Add(unitController.Id);
+                FriendsGroup.Units.Add(unitController);
                 Model.NeedRestoreUnitsCount--;
             }
 
@@ -109,12 +106,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
         {
             base.Dispose(returnToPool, clearFromRegistry);
             _gameTimer.OnEverySecond -= HandleSpawnTimer;
-            if(Model.BuildUnitIds.Count == 0) return;
-            foreach (var unitId in Model.BuildUnitIds)
-            {
-                var obj = IdsRegistry.Get(unitId);
-                if (obj != null) (obj as UnitController).OnKilled -= CheckRemovedUnits;
-            }
+            if(FriendsGroup != null) FriendsGroup.UnitOnKilled -= CheckRemovedUnit;
         }
     }
 }
