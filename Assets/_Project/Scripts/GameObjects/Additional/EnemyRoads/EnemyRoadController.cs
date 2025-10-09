@@ -37,9 +37,13 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             _splineContainer ??= GetComponent<SplineContainer>();
         }
 
-        private void Start()
+        private void Awake()
         {
             InjectManager.Inject(this);
+        }
+
+        private void Start()
+        {
             if (_appData.AppMode == AppMode.Redactor)
                 Initialize();
         }

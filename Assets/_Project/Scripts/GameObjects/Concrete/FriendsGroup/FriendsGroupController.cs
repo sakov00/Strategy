@@ -33,18 +33,15 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsGroup
         
         private CompositeDisposable _disposables;
 
-        private void Start()
+        private void Awake()
         {
+            InjectManager.Inject(this);
             if (_appData.AppMode == AppMode.Redactor)
-            {
-                InjectManager.Inject(this);
                 _objectsRegistry.Register(this);
-            }
         }
 
         public void Initialize()
         {
-            InjectManager.Inject(this);
             _objectsRegistry.Register(this);
             _idsRegistry.Register(this);
             
