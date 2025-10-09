@@ -27,7 +27,7 @@ namespace _Project.Scripts
         [Inject] protected ResetLevelService ResetService;
         [Inject] protected SceneCreator SceneCreator;
         [Inject] protected WindowsManager WindowsManager;
-        [Inject] protected ObjectsRegistry ObjectsRegistry;
+        [Inject] protected SaveRegistry SaveRegistry;
         [Inject] protected ApplicationEventsHandler ApplicationEventsHandler;
         
         public virtual void Initialize()
@@ -44,7 +44,7 @@ namespace _Project.Scripts
 
         public virtual async UniTask ResetRound()
         {
-            ResetService.ResetRound();
+            await ResetService.ResetLevel();
             await SceneCreator.InstantiateObjects(AppData.LevelData.ObjectsForRestoring);
             WindowsManager.ShowFastWindow<GameWindowPresenter>();
         }
@@ -66,13 +66,13 @@ namespace _Project.Scripts
             
             await LoadLevel(levelIndex);
 
-            var playerController = ObjectsRegistry.GetTypedList<UnitController>().First(x => x.UnitType == UnitType.Player);
+            var playerController = SaveRegistry.GetAllByType<UnitController>().First(x => x.UnitType == UnitType.Player);
             GlobalObjects.CameraController.CameraFollow.Init(GlobalObjects.CameraController.transform, playerController.transform);
-            
+
             if(AppData.LevelData.IsFighting) AppData.LevelEvents.Initialize();
-            // ApplicationEventsHandler.OnApplicationQuited += OnApplicationQuit;
-            // ApplicationEventsHandler.OnApplicationPaused += OnApplicationPause;
-            
+            ApplicationEventsHandler.OnApplicationQuited += OnApplicationQuit;
+            ApplicationEventsHandler.OnApplicationPaused += OnApplicationPause;
+
             WindowsManager.ShowFastWindow<GameWindowPresenter>();
             await WindowsManager.HideWindow<LoadingWindowPresenter>();
             Time.timeScale = 1;
@@ -81,7 +81,7 @@ namespace _Project.Scripts
         public virtual async UniTask LoadLevel(int levelIndex, bool isInitialize = true)
         {
             // need return bool and handle(exists file or not)
-            ResetService.ResetLevel();
+            await ResetService.ResetLevel();
             await SaveLoadLevelService.LoadLevel(levelIndex);
             await SceneCreator.InstantiateObjects(AppData.LevelData.SavableModels, isInitialize);
         }

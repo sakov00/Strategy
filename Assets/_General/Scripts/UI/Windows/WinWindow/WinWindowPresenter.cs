@@ -2,6 +2,7 @@ using System.Linq;
 using _General.Scripts.AllAppData;
 using _General.Scripts.Registries;
 using _General.Scripts.UI.Windows.BaseWindow;
+using _General.Scripts.UI.Windows.LoadingWindow;
 using _Project.Scripts;
 using _Project.Scripts.GameObjects.Additional.EnemyRoads;
 using Cysharp.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace _General.Scripts.UI.Windows.WinWindow
     {
         [Inject] private AppData _appData;
         [Inject] private GameManager _gameManager;
-        [Inject] private ObjectsRegistry _objectsRegistry;
+        [Inject] private SaveRegistry _saveRegistry;
         
         [SerializeField] private WinWindowModel _model;
         [SerializeField] private WinWindowView _view;
@@ -36,7 +37,7 @@ namespace _General.Scripts.UI.Windows.WinWindow
             RestartCommand.Subscribe(_ => RestartOnClick().Forget()).AddTo(Disposables);
             ContinueCommand.Subscribe(_ => ContinueOnClick().Forget()).AddTo(Disposables);
             
-            var spawns = _objectsRegistry.GetTypedList<EnemyRoadController>();
+            var spawns = _saveRegistry.GetAllByType<EnemyRoadController>();
             _isLevelCompleted = spawns.Any(spawn => spawn.CountRounds == _appData.LevelData.CurrentRound);
             if (_isLevelCompleted) 
                 _appData.User.CurrentLevel++;
@@ -56,11 +57,13 @@ namespace _General.Scripts.UI.Windows.WinWindow
         
         private async UniTaskVoid ContinueOnClick()
         {
+            await WindowsManager.ShowWindow<LoadingWindowPresenter>();
+            WindowsManager.HideFastWindow<WinWindowPresenter>();
             if (_isLevelCompleted)
                 await _gameManager.StartLevel(_appData.User.CurrentLevel);
             else
                 await _gameManager.ResetRound();
-            WindowsManager.HideWindow<WinWindowPresenter>();
+            await WindowsManager.HideWindow<LoadingWindowPresenter>();
         }
     }
 }

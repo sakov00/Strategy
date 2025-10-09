@@ -19,7 +19,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsGroup
     public class FriendsGroupController : MonoBehaviour, ISavableController, IPoolableDispose, ISelectable, IId
     {
         [Inject] private AppData _appData;
-        [Inject] private ObjectsRegistry _objectsRegistry;
+        [Inject] private SaveRegistry _saveRegistry;
         [Inject] private IdsRegistry _idsRegistry;
         [Inject] private UnitPool _unitPool;
         
@@ -36,13 +36,12 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsGroup
         private void Awake()
         {
             InjectManager.Inject(this);
-            if (_appData.AppMode == AppMode.Redactor)
-                _objectsRegistry.Register(this);
+            _saveRegistry.Register(this);
         }
 
         public void Initialize()
         {
-            _objectsRegistry.Register(this);
+            _saveRegistry.Register(this);
             _idsRegistry.Register(this);
             
             _disposables = new CompositeDisposable();
@@ -131,7 +130,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsGroup
             // if(returnToPool) BuildPool.Return(this);
             if (clearFromRegistry)
             {
-                _objectsRegistry.Unregister(this);
+                _saveRegistry.Unregister(this);
                 _idsRegistry.Unregister(this);
             }
             Destroy(gameObject);

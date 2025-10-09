@@ -1,5 +1,7 @@
 using System;
 using _General.Scripts._VContainer;
+using _General.Scripts.AllAppData;
+using _General.Scripts.Enums;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Interfaces;
@@ -10,14 +12,20 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
 {
     public class EnvironmentController : MonoBehaviour, ISavableController, IDestroyable
     {
+        [Inject] private AppData _appData;
+        [Inject] private SaveRegistry _saveRegistry;
         [SerializeField] protected EnvironmentModel _model;
-        [Inject] private ObjectsRegistry _objectsRegistry;
 
-        private void Start() => Initialize();
-        public void Initialize()
+        private void Awake()
         {
             InjectManager.Inject(this);
-            _objectsRegistry.Register(this);
+            if(_appData.AppMode == AppMode.Redactor)
+                _saveRegistry.Register(this);
+        }
+        
+        public void Initialize()
+        {
+            _saveRegistry.Register(this);
         }
 
         public ISavableModel GetSavableModel()
@@ -36,7 +44,7 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
 
         private void OnDestroy()
         {
-            _objectsRegistry.Unregister(this);
+            _saveRegistry.Unregister(this);
         }
     }
 }

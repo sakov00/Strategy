@@ -23,7 +23,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
         [Inject] private AppData _appData;
         [Inject] private UnitPool _unitPool;
         [Inject] private GameTimer _gameTimer;
-        [Inject] private ObjectsRegistry _objectsRegistry;
+        [Inject] private SaveRegistry _saveRegistry;
         
         [SerializeField] private EnemyRoadModel _model;
         [SerializeField] private EnemyRoadView _view;
@@ -50,7 +50,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
 
         public void Initialize()
         {
-            _objectsRegistry.Register(this);
+            _saveRegistry.Register(this);
 
             _model.SplineContainerData = _splineContainer.ToData();
 
@@ -135,7 +135,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
         private void OnDestroy()
         {
             _gameTimer.OnEverySecond -= Tick;
-            _objectsRegistry.Unregister(this);
+            _saveRegistry.Unregister(this);
         }
     }
 }

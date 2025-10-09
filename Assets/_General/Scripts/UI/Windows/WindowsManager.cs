@@ -56,8 +56,10 @@ namespace _General.Scripts.UI.Windows
 
         public void ShowFastWindow<T>() where T : BaseWindowPresenter
         {
+            var windowType = _windowsConfig.Windows[typeof(T)].Model.WindowType;
             var window = GetWindow<T>();
             window.Initialize();
+            if (windowType == WindowType.Popup) ShowDarkBackgroundFast();
             window.View.ShowFast();
         }
 
@@ -73,8 +75,10 @@ namespace _General.Scripts.UI.Windows
 
         public void HideFastWindow<T>() where T : BaseWindowPresenter
         {
+            var windowType = _windowsConfig.Windows[typeof(T)].Model.WindowType;
             var window = GetWindow<T>();
             window.Dispose();
+            if (windowType == WindowType.Popup) HideDarkBackgroundFast();
             window.View.HideFast();
         }
         
@@ -89,6 +93,14 @@ namespace _General.Scripts.UI.Windows
             return sequence;
         }
         
+        private void ShowDarkBackgroundFast()
+        {
+            var color = _darkBackground.color;
+            color.a = 0.5f;
+            _darkBackground.color = color;
+            _darkBackground.gameObject.SetActive(true);
+        }
+        
         private Tween HideDarkBackground()
         {
             var color = _darkBackground.color;
@@ -98,6 +110,14 @@ namespace _General.Scripts.UI.Windows
             sequence.AppendCallback(() => _darkBackground.gameObject.SetActive(false));
             sequence.SetUpdate(true);
             return sequence;
+        }
+        
+        private void HideDarkBackgroundFast()
+        {
+            var color = _darkBackground.color;
+            color.a = 0f;
+            _darkBackground.color = color;
+            _darkBackground.gameObject.SetActive(false);
         }
         
         private Transform GetParent(WindowType type)

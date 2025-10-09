@@ -63,7 +63,8 @@ namespace _Project.Scripts._VContainer
         private void RegisterRegistries(IContainerBuilder builder)
         {
             builder.Register<IdsRegistry>(Lifetime.Singleton).AsSelf();
-            builder.Register<ObjectsRegistry>(Lifetime.Singleton).AsSelf();
+            builder.Register<LiveRegistry>(Lifetime.Singleton).AsSelf();
+            builder.Register<SaveRegistry>(Lifetime.Singleton).AsSelf();
         }
         
         private void RegisterPools(IContainerBuilder builder)

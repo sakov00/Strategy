@@ -10,7 +10,7 @@ namespace _Project.Scripts.GameObjects.ActionSystems
 {
     public class DetectionAim
     {
-        [Inject] private ObjectsRegistry _objectsRegistry;
+        [Inject] private LiveRegistry _liveRegistry;
         
         private readonly IFightObjectModel _fightObjectModel;
         private readonly Transform _transform;
@@ -28,7 +28,7 @@ namespace _Project.Scripts.GameObjects.ActionSystems
             ObjectController nearestTarget = null;
             var nearestDistanceSqr = _fightObjectModel.DetectionRadius;
 
-            foreach (var obj in _objectsRegistry.GetAllByType<ObjectController>())
+            foreach (var obj in _liveRegistry.GetAllReactive())
             {
                 if (obj == null || obj.CurrentHealth <= 0 ||
                     obj.WarSide == _fightObjectModel.WarSide)

@@ -31,7 +31,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FlyingEnemy
         public override void Initialize()
         {
             InjectManager.Inject(this);
-            ObjectsRegistry.Register(this);
+            LiveRegistry.Register(this);
             
             Model.CurrentHealth = Model.MaxHealth;
 

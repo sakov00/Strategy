@@ -22,8 +22,8 @@ namespace _Project.Scripts.GameObjects.Abstract
         public override void Initialize()
         {
             InjectManager.Inject(this);
-            ObjectsRegistry.Register(this);
             IdsRegistry.Register(this);
+            LiveRegistry.Register(this);
             Dispose(false, false);
         }
         
@@ -37,8 +37,8 @@ namespace _Project.Scripts.GameObjects.Abstract
             if(returnToPool) BuildPool.Return(this);
             if (clearFromRegistry)
             {
-                ObjectsRegistry.Unregister(this);
                 IdsRegistry.Unregister(this);
+                LiveRegistry.Unregister(this);
             }
         }
     }

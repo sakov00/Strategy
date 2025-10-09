@@ -1,5 +1,7 @@
 using _General.Scripts._VContainer;
+using _General.Scripts.AllAppData;
 using _General.Scripts.DTO;
+using _General.Scripts.Enums;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Interfaces;
@@ -11,17 +13,24 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
 {
     public class TerrainController : MonoBehaviour, ISavableController, IDestroyable
     {
-        [Inject] private ObjectsRegistry _objectsRegistry;
+        [Inject] private AppData _appData;
+        [Inject] private SaveRegistry _saveRegistry;
         [SerializeField] private TerrainModel _model;
         [SerializeField] private MeshFilter _meshFilter;
         [SerializeField] private MeshCollider _meshCollider;
         [SerializeField] private NavMeshSurface _meshSurface;
         
-        private void Start() => Initialize();
+        private void Awake()
+        {
+            InjectManager.Inject(this);
+            if(_appData.AppMode == AppMode.Redactor)
+                _saveRegistry.Register(this);
+        }
+        
         public void Initialize()
         {
             InjectManager.Inject(this);
-            _objectsRegistry.Register(this);
+            _saveRegistry.Register(this);
         }
 
         public ISavableModel GetSavableModel()
@@ -95,7 +104,7 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
 
         private void OnDestroy()
         {
-            _objectsRegistry.Unregister(this);
+            _saveRegistry.Unregister(this);
         }
     }
 }

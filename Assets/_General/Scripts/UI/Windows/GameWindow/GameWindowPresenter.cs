@@ -9,11 +9,8 @@ using _General.Scripts.UI.Windows.WinWindow;
 using _Project.Scripts;
 using _Project.Scripts.GameObjects.Abstract.BaseObject;
 using _Project.Scripts.GameObjects.Additional.EnemyRoads;
-using _Project.Scripts.GameObjects.Concrete.FriendsGroup;
-using _Project.Scripts.GameObjects.Concrete.Player;
 using Cysharp.Threading.Tasks;
 using UniRx;
-using Unity.VisualScripting;
 using UnityEngine;
 using VContainer;
 
@@ -22,7 +19,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
     public class GameWindowPresenter : BaseWindowPresenter
     {
         [Inject] private AppData _appData;
-        [Inject] private ObjectsRegistry _objectsRegistry;
+        [Inject] private SaveRegistry _saveRegistry;
         [Inject] private GameManager _gameManager;
         
         private Action _winEventHandler;
@@ -59,18 +56,10 @@ namespace _General.Scripts.UI.Windows.GameWindow
         private void NextRoundOnClick()
         {
             _appData.LevelData.IsFighting = true;
-            _appData.LevelData.ObjectsForRestoring = _objectsRegistry
-                .GetAllByType<ObjectController>()
-                .Where(o => o is not PlayerController)
-                .Select(o => o.GetSavableModel().DeepClone())
-                .ToList();
+            _appData.LevelData.ObjectsForRestoring = _saveRegistry.GetAll()
+                .Select(o => o.GetSavableModel().DeepClone()).ToList();
             
-            _appData.LevelData.ObjectsForRestoring.AddRange(_objectsRegistry
-                .GetAllByType<FriendsGroupController>()
-                .Select(o => o.GetSavableModel().DeepClone())
-                .ToList()); 
-            
-            _objectsRegistry.GetAllByType<EnemyRoadController>().ForEach(x => x.StartSpawn());
+            _saveRegistry.GetAllByType<EnemyRoadController>().ForEach(x => x.StartSpawn());
             _appData.LevelEvents.Initialize();
         }
 

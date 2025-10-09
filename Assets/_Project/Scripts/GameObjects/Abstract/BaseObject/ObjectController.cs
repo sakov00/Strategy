@@ -14,8 +14,9 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
     public abstract class ObjectController : MonoBehaviour, ISavableController, IPoolableDispose, IId, IKilled
     {
         [Inject] protected AppData AppData;
-        [Inject] protected ObjectsRegistry ObjectsRegistry;
         [Inject] protected IdsRegistry IdsRegistry;
+        [Inject] protected LiveRegistry LiveRegistry;
+        [Inject] protected SaveRegistry SaveRegistry;
         
         protected abstract ObjectModel ObjectModel { get; }
         protected abstract ObjectView ObjectView { get; }
@@ -33,8 +34,7 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
 
         private void OnEnable()
         {
-            if (AppData.AppMode == AppMode.Redactor)
-                ObjectsRegistry.Register(this);
+            SaveRegistry.Register(this);
         }
 
         protected virtual void FixedUpdate()
@@ -48,7 +48,7 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         {
             Dispose(false);
             if (AppData.AppMode == AppMode.Redactor)
-                ObjectsRegistry.Unregister(this);
+                SaveRegistry.Unregister(this);
         }
 
         public abstract void Initialize();

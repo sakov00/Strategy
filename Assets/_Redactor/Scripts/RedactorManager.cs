@@ -30,7 +30,7 @@ namespace _Redactor.Scripts
 
         public override async UniTask LoadLevel(int levelIndex, bool isInitialize = true)
         {
-            ResetService.ResetLevel();
+            await ResetService.ResetLevel();
             await SaveLoadLevelService.LoadLevelDefault(levelIndex);
             await SceneCreator.InstantiateObjects(AppData.LevelData.SavableModels, isInitialize);
         }

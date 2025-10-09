@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using _Project.Scripts.GameObjects.Abstract.BaseObject;
 using _Project.Scripts.Interfaces;
 
 namespace _General.Scripts.Registries

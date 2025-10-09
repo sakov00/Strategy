@@ -19,7 +19,7 @@ namespace _General.Scripts.Services
     public class SaveLoadLevelService
     {
         [Inject] private AppData _appData;
-        [Inject] private ObjectsRegistry _objectsRegistry;
+        [Inject] private SaveRegistry _saveRegistry;
         
         private Dictionary<BuildType, Func<BuildController>> _buildTypeToClass;
         
@@ -49,9 +49,8 @@ namespace _General.Scripts.Services
 
         private async UniTask Save(string path)
         {
-            var allObjects = _objectsRegistry.GetAllByType<ISavableController>();
-            _appData.LevelData.SavableModels.Clear();
-            _appData.LevelData.SavableModels.AddRange(allObjects.Select(o => o.GetSavableModel()).ToList());
+            var allObjects = _saveRegistry.GetAll();
+            _appData.LevelData.SavableModels = allObjects.Select(o => o.GetSavableModel()).ToList();
 
             var data = MemoryPackSerializer.Serialize(_appData.LevelData);
             var compressed = LZ4Pickler.Pickle(data);

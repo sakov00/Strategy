@@ -4,6 +4,7 @@ using _General.Scripts._VContainer;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract;
+using _Project.Scripts.GameObjects.Abstract.BaseObject;
 using _Project.Scripts.GameObjects.Abstract.Unit;
 using Cysharp.Threading.Tasks;
 using UniRx;
@@ -14,7 +15,7 @@ namespace _General.Scripts.AllAppData
 {
     public class LevelEvents : IInitializable
     {
-        [Inject] private ObjectsRegistry _objectsRegistry;
+        [Inject] private LiveRegistry _liveRegistry;
 
         public event Func<UniTaskVoid> WinEvent;
         public event Func<UniTaskVoid> FailEvent;
@@ -23,33 +24,24 @@ namespace _General.Scripts.AllAppData
 
         public void Initialize()
         {
-            _objectsRegistry
-                .GetTypedList<UnitController>()
-                .ObserveRemove()
-                .Subscribe(removedUnit => TryInvokeAllEnemiesKilled(removedUnit.Value));
-
-
-            _objectsRegistry
-                .GetTypedList<BuildController>()
-                .ObserveRemove()
-                .Subscribe(_ => TryInvokeMainBuildDestroyed());
+            _liveRegistry.OnRemoveAsObservable()
+                .Subscribe(removedObject => TryInvokeAllEnemiesKilled(removedObject.Value));
+            
+            _liveRegistry.OnRemoveAsObservable()
+                .Subscribe(removedObject => TryInvokeMainBuildDestroyed(removedObject.Value));
         }
 
-        private void TryInvokeAllEnemiesKilled(UnitController unitController)
+        private void TryInvokeAllEnemiesKilled(ObjectController objectController)
         {
-            if (unitController.WarSide == WarSide.Friend ||
-                _objectsRegistry.GetTypedList<UnitController>().Any(x => x.WarSide == WarSide.Enemy))
-                return;
-            
-            WinEvent?.Invoke();
+            if (objectController.WarSide == WarSide.Enemy &&
+                _liveRegistry.GetAllByType<UnitController>().All(x => x.WarSide != WarSide.Enemy))
+                WinEvent?.Invoke();
         }
         
-        private void TryInvokeMainBuildDestroyed()
+        private void TryInvokeMainBuildDestroyed(ObjectController objectController)
         {
-            if (_objectsRegistry.GetTypedList<BuildController>().Any(x => x.BuildType == BuildType.MainBuild))
-                return;
-
-            FailEvent?.Invoke();
+            if (objectController is BuildController build && build.BuildType == BuildType.MainBuild)
+                FailEvent?.Invoke();
         }
     }
 }

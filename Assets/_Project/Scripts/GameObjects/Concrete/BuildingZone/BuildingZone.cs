@@ -21,7 +21,7 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
         [Inject] private AppData _appData;
         [Inject] private BuildingPrefabConfig _buildingPrefabConfig;
         [Inject] private BuildPool _buildPool;
-        [Inject] private ObjectsRegistry _objectsRegistry;
+        [Inject] private SaveRegistry _saveRegistry;
 
         [SerializeField] public BuildingZoneModel _model;
         
@@ -30,13 +30,12 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
         private void Awake()
         {
             InjectManager.Inject(this);
-            if (_appData.AppMode == AppMode.Redactor)
-                _objectsRegistry.Register(this);
+            _saveRegistry.Register(this);
         }
 
         public void Initialize()
         {
-            _objectsRegistry.Register(this);
+            _saveRegistry.Register(this);
         }
 
         public async UniTask TryBuy()
@@ -81,7 +80,7 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
 
         private void OnDestroy()
         {
-            _objectsRegistry.Unregister(this);
+            _saveRegistry.Unregister(this);
         }
     }
 }
