@@ -1,3 +1,4 @@
+using System;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
 using _General.Scripts.Enums;
@@ -28,6 +29,10 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         {
             HeightObject = ObjectView.GetHeightObject();
             InjectManager.Inject(this);
+        }
+
+        private void OnEnable()
+        {
             if (AppData.AppMode == AppMode.Redactor)
                 ObjectsRegistry.Register(this);
         }
