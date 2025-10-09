@@ -30,7 +30,6 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
         private void Awake()
         {
             InjectManager.Inject(this);
-            _saveRegistry.Register(this);
         }
 
         public void Initialize()

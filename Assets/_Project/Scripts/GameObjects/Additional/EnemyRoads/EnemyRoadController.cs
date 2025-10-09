@@ -42,14 +42,9 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             InjectManager.Inject(this);
         }
 
-        private void Start()
-        {
-            if (_appData.AppMode == AppMode.Redactor)
-                Initialize();
-        }
-
         public void Initialize()
         {
+            
             _saveRegistry.Register(this);
 
             _model.SplineContainerData = _splineContainer.ToData();

@@ -32,23 +32,14 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
             InjectManager.Inject(this);
         }
 
-        private void OnEnable()
-        {
-            SaveRegistry.Register(this);
-        }
-
         protected virtual void FixedUpdate()
         {
-            if (AppData.AppMode == AppMode.Redactor)
-                return;
             ObjectView.UpdateHealthBar(ObjectModel.CurrentHealth, ObjectModel.MaxHealth);
         }
 
         private void OnDestroy()
         {
             Dispose(false);
-            if (AppData.AppMode == AppMode.Redactor)
-                SaveRegistry.Unregister(this);
         }
 
         public abstract void Initialize();

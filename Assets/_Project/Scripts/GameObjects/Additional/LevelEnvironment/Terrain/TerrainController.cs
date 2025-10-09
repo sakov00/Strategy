@@ -23,13 +23,10 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
         private void Awake()
         {
             InjectManager.Inject(this);
-            if(_appData.AppMode == AppMode.Redactor)
-                _saveRegistry.Register(this);
         }
         
         public void Initialize()
         {
-            InjectManager.Inject(this);
             _saveRegistry.Register(this);
         }
 

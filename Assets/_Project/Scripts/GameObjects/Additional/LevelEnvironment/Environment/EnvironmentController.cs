@@ -15,12 +15,10 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
         [Inject] private AppData _appData;
         [Inject] private SaveRegistry _saveRegistry;
         [SerializeField] protected EnvironmentModel _model;
-
+        
         private void Awake()
         {
             InjectManager.Inject(this);
-            if(_appData.AppMode == AppMode.Redactor)
-                _saveRegistry.Register(this);
         }
         
         public void Initialize()

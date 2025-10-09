@@ -33,14 +33,9 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsGroup
         
         private CompositeDisposable _disposables;
 
-        private void Awake()
-        {
-            InjectManager.Inject(this);
-            _saveRegistry.Register(this);
-        }
-
         public void Initialize()
         {
+            InjectManager.Inject(this);
             _saveRegistry.Register(this);
             _idsRegistry.Register(this);
             

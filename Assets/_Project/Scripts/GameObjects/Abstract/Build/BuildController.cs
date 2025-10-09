@@ -21,9 +21,9 @@ namespace _Project.Scripts.GameObjects.Abstract
         
         public override void Initialize()
         {
-            InjectManager.Inject(this);
             IdsRegistry.Register(this);
             LiveRegistry.Register(this);
+            SaveRegistry.Register(this);
             Dispose(false, false);
         }
         
@@ -39,6 +39,7 @@ namespace _Project.Scripts.GameObjects.Abstract
             {
                 IdsRegistry.Unregister(this);
                 LiveRegistry.Unregister(this);
+                SaveRegistry.Unregister(this);
             }
         }
     }
