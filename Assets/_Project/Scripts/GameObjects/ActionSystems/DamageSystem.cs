@@ -70,7 +70,7 @@ namespace _Project.Scripts.GameObjects.ActionSystems
             }
 
             _fightObjectModel.AimObject.CurrentHealth -= _fightObjectModel.DamageAmount;
-            if (_fightObjectModel.AimObject.CurrentHealth <= 0) _fightObjectModel.AimObject.Dispose();
+            if (_fightObjectModel.AimObject.CurrentHealth <= 0) _fightObjectModel.AimObject.Killed();
             //_fightObjectModel.AimObject.ObjectModel.Transform.gameObject.SetActive(false);
         }
 

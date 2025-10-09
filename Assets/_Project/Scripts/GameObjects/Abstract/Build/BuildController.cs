@@ -27,6 +27,11 @@ namespace _Project.Scripts.GameObjects.Abstract
             Dispose(false, false);
         }
         
+        public override void Killed()
+        {
+            Dispose();
+        }
+        
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
             if(returnToPool) BuildPool.Return(this);

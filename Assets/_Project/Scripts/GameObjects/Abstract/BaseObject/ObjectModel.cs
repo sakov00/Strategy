@@ -39,7 +39,7 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         [SerializeField] private float _delayRegeneration = 3f;
         [SerializeField] private float _regenerateHealthInSecond = 5f;
         [SerializeField] private float _maxHealth = 100f;
-        [SerializeField] private float _currentHealth = 100f;
+        [SerializeField] protected float _currentHealth = 100f;
         
         public int SecondsWithoutDamage { get; set; }
         
@@ -68,7 +68,7 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         }
 
         [MemoryPackInclude]
-        public float CurrentHealth
+        public virtual float CurrentHealth
         {
             get => _currentHealth;
             set

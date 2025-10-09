@@ -11,7 +11,7 @@ using VContainer;
 
 namespace _Project.Scripts.GameObjects.Abstract.BaseObject
 {
-    public abstract class ObjectController : MonoBehaviour, ISavableController, IPoolableDispose, IId
+    public abstract class ObjectController : MonoBehaviour, ISavableController, IPoolableDispose, IId, IKilled
     {
         [Inject] protected AppData AppData;
         [Inject] protected ObjectsRegistry ObjectsRegistry;
@@ -54,6 +54,7 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         public abstract void Initialize();
         public abstract ISavableModel GetSavableModel();
         public abstract void SetSavableModel(ISavableModel model);
+        public abstract void Killed();
         public abstract void Dispose(bool returnToPool = true, bool clearFromRegistry = true);
     }
 }

@@ -70,8 +70,8 @@ namespace _Project.Scripts
             GlobalObjects.CameraController.CameraFollow.Init(GlobalObjects.CameraController.transform, playerController.transform);
             
             if(AppData.LevelData.IsFighting) AppData.LevelEvents.Initialize();
-            ApplicationEventsHandler.OnApplicationQuited += OnApplicationQuit;
-            ApplicationEventsHandler.OnApplicationPaused += OnApplicationPause;
+            // ApplicationEventsHandler.OnApplicationQuited += OnApplicationQuit;
+            // ApplicationEventsHandler.OnApplicationPaused += OnApplicationPause;
             
             WindowsManager.ShowFastWindow<GameWindowPresenter>();
             await WindowsManager.HideWindow<LoadingWindowPresenter>();

@@ -52,6 +52,11 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
             UnitView.Agent.enabled = true;
         }
 
+        public override void Killed()
+        {
+            Dispose();
+        }
+
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
             if (returnToPool)

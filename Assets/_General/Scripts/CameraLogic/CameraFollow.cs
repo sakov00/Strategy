@@ -29,7 +29,7 @@ namespace _General.Scripts.CameraLogic
 
         public async UniTask EnableFollowAnimation()
         {
-            _moveTween.Kill();
+            _moveTween?.Kill();
             if (_target == null) return; 
             var desiredPosition = _target.position + _offset;
 
@@ -46,7 +46,7 @@ namespace _General.Scripts.CameraLogic
         
         public void DisableFollowAnimation()
         {
-            _moveTween.Kill();
+            _moveTween?.Kill();
             _isFollow = false;
         }
 
