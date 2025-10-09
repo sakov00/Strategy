@@ -43,13 +43,13 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            _detectionAim.DetectAim();
-            _damageSystem.Attack();
+            _detectionAim?.DetectAim();
+            _damageSystem?.Attack();
         }
 
         private void Update()
         {
-            _playerMovementSystem.MoveTo(_appData.LevelData.MoveDirection);
+            _playerMovementSystem?.MoveTo(_appData.LevelData.MoveDirection);
         }
 
         public override ISavableModel GetSavableModel()

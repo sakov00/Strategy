@@ -19,9 +19,9 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherEnemy
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            _detectionAim.DetectAim();
-            _unitMovementSystem.MoveToAim();
-            _damageSystem.Attack();
+            _detectionAim?.DetectAim();
+            _unitMovementSystem?.MoveToAim();
+            _damageSystem?.Attack();
         }
 
         public override void Initialize()

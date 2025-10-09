@@ -4,8 +4,8 @@ namespace _Project.Scripts.GameObjects.Additional.Projectiles
 {
     public class Arrow : Projectile
     {
-        [Header("Flight Settings")] [SerializeField]
-        private Rigidbody _rb;
+        [Header("Flight Settings")] 
+        [SerializeField] private Rigidbody _rb;
 
         private void OnValidate()
         {

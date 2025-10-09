@@ -47,7 +47,7 @@ namespace _Project.Scripts._VContainer
 
         protected virtual void RegisterGameManager(IContainerBuilder builder)
         {
-            builder.Register<GameManager>(Lifetime.Singleton).AsSelf().As<IAsyncStartable>();
+            builder.Register<GameManager>(Lifetime.Singleton).AsSelf().As<IInitializable, IAsyncStartable>();
         }
         
         private void RegisterAppData(IContainerBuilder builder)

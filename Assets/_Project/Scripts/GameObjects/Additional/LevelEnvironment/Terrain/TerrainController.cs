@@ -17,7 +17,7 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
         [SerializeField] private MeshCollider _meshCollider;
         [SerializeField] private NavMeshSurface _meshSurface;
         
-        private void Awake() => Initialize();
+        private void Start() => Initialize();
         public void Initialize()
         {
             InjectManager.Inject(this);

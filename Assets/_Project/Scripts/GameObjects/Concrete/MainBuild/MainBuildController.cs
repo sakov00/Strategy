@@ -20,8 +20,8 @@ namespace _Project.Scripts.GameObjects.Concrete.MainBuild
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            _detectionAim.DetectAim();
-            _damageSystem.Attack();
+            _detectionAim?.DetectAim();
+            _damageSystem?.Attack();
         }
 
         public override void Initialize()

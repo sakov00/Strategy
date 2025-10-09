@@ -26,7 +26,7 @@ namespace _Redactor.Scripts.LevelRedactorWindow
         {
             base.Initialize();
             SaveLevelCommand.Subscribe(levelIndex => _redactorManager.SaveLevel(levelIndex)).AddTo(Disposables);
-            LoadLevelCommand.Subscribe(levelIndex => _redactorManager.LoadLevel(levelIndex).Forget()).AddTo(Disposables);
+            LoadLevelCommand.Subscribe(levelIndex => _redactorManager.LoadLevel(levelIndex, false).Forget()).AddTo(Disposables);
             PlayLevelCommand.Subscribe(levelIndex => _redactorManager.StartLevel(levelIndex).Forget()).AddTo(Disposables);
         }
     }

@@ -9,11 +9,11 @@ namespace _Project.Scripts.GameObjects.Additional.Projectiles
 {
     public abstract class Projectile : MonoBehaviour
     {
+        [Inject] private ProjectilePool _projectilePool;
         [field: SerializeField] public ProjectileType ProjectileType { get; set; }
 
         public int _damage;
         public WarSide _ownerWarSide;
-        [Inject] private ProjectilePool _projectilePool;
 
         private void Start()
         {

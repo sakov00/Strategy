@@ -1,4 +1,6 @@
+using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
+using _General.Scripts.Enums;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
@@ -22,19 +24,26 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         public WarSide WarSide => ObjectModel.WarSide;
         public float CurrentHealth { get => ObjectModel.CurrentHealth; set => ObjectModel.CurrentHealth = value; }
 
-        protected virtual void Start()
+        private void Awake()
         {
             HeightObject = ObjectView.GetHeightObject();
+            InjectManager.Inject(this);
+            if (AppData.AppMode == AppMode.Redactor)
+                ObjectsRegistry.Register(this);
         }
 
         protected virtual void FixedUpdate()
         {
+            if (AppData.AppMode == AppMode.Redactor)
+                return;
             ObjectView.UpdateHealthBar(ObjectModel.CurrentHealth, ObjectModel.MaxHealth);
         }
 
         private void OnDestroy()
         {
             Dispose(false);
+            if (AppData.AppMode == AppMode.Redactor)
+                ObjectsRegistry.Unregister(this);
         }
 
         public abstract void Initialize();

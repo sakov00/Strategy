@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _General.Scripts._GlobalLogic;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
+using _General.Scripts.Enums;
 using _General.Scripts.Extentions;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
@@ -36,11 +37,15 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             _splineContainer ??= GetComponent<SplineContainer>();
         }
 
-        private void Start() => Initialize();
+        private void Start()
+        {
+            InjectManager.Inject(this);
+            if (_appData.AppMode == AppMode.Redactor)
+                Initialize();
+        }
 
         public void Initialize()
         {
-            InjectManager.Inject(this);
             _objectsRegistry.Register(this);
 
             _model.SplineContainerData = _splineContainer.ToData();

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using _General.Scripts._VContainer;
+using _General.Scripts.AllAppData;
+using _General.Scripts.Enums;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Factories;
@@ -16,6 +18,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsGroup
 
     public class FriendsGroupController : MonoBehaviour, ISavableController, IPoolableDispose, ISelectable, IId
     {
+        [Inject] private AppData _appData;
         [Inject] private ObjectsRegistry _objectsRegistry;
         [Inject] private IdsRegistry _idsRegistry;
         [Inject] private UnitPool _unitPool;
@@ -29,7 +32,16 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsGroup
         public ReactiveCollection<UnitController> Units { get; set; } = new();
         
         private CompositeDisposable _disposables;
-        
+
+        private void Start()
+        {
+            if (_appData.AppMode == AppMode.Redactor)
+            {
+                InjectManager.Inject(this);
+                _objectsRegistry.Register(this);
+            }
+        }
+
         public void Initialize()
         {
             InjectManager.Inject(this);

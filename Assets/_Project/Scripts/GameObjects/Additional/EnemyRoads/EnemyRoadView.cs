@@ -18,14 +18,10 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
         [SerializeField] private SplineAnimate _animatePrefab;
         [SerializeField] private List<TextMeshPro> _enemyIcons;
         [SerializeField] private float _distanceBetweenIcons = 4;
-        
-        private List<SplineAnimate> _animates = new();
 
         public void Initialize(SplineContainer splineContainer)
         {
             InjectManager.Inject(this);
-            
-            if (_animates.Count != 0) return;
             
             var roadLength = splineContainer.Spline.GetLength();
             var countAnimateObjects = roadLength / _distanceBetweenIcons;
@@ -35,7 +31,6 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
                 splineAnimate.Container = splineContainer;
                 splineAnimate.StartOffset = i / countAnimateObjects;
                 splineAnimate.Play();
-                _animates.Add(splineAnimate);
             }
         }
 

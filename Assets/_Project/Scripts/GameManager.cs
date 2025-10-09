@@ -5,6 +5,7 @@ using _General.Scripts;
 using _General.Scripts._GlobalLogic;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
+using _General.Scripts.Enums;
 using _General.Scripts.Registries;
 using _General.Scripts.Services;
 using _General.Scripts.UI.Windows;
@@ -19,7 +20,7 @@ using VContainer.Unity;
 
 namespace _Project.Scripts
 {
-    public class GameManager : IAsyncStartable, IDisposable
+    public class GameManager : IInitializable, IAsyncStartable, IDisposable
     {
         [Inject] protected AppData AppData;
         [Inject] protected SaveLoadLevelService SaveLoadLevelService;
@@ -29,10 +30,14 @@ namespace _Project.Scripts
         [Inject] protected ObjectsRegistry ObjectsRegistry;
         [Inject] protected ApplicationEventsHandler ApplicationEventsHandler;
         
+        public virtual void Initialize()
+        {
+            Application.targetFrameRate = 120;
+            AppData.AppMode = AppMode.Game;
+        }
+        
         public virtual async UniTask StartAsync(CancellationToken cancellation = default)
         {
-            InjectManager.Inject(this);
-            Application.targetFrameRate = 120;
             WindowsManager.ShowFastWindow<LoadingWindowPresenter>();
             await StartLevel(AppData.User.CurrentLevel);
         }
@@ -73,12 +78,12 @@ namespace _Project.Scripts
             Time.timeScale = 1;
         }
         
-        public virtual async UniTask LoadLevel(int levelIndex)
+        public virtual async UniTask LoadLevel(int levelIndex, bool isInitialize = true)
         {
             // need return bool and handle(exists file or not)
             ResetService.ResetLevel();
             await SaveLoadLevelService.LoadLevel(levelIndex);
-            await SceneCreator.InstantiateObjects(AppData.LevelData.SavableModels);
+            await SceneCreator.InstantiateObjects(AppData.LevelData.SavableModels, isInitialize);
         }
         
         private void OnApplicationQuit()

@@ -10,7 +10,7 @@ namespace _Redactor.Scripts._VContainer
     {
         protected override void RegisterGameManager(IContainerBuilder builder)
         {
-            builder.Register<RedactorManager>(Lifetime.Singleton).AsSelf().As<IAsyncStartable, GameManager>();
+            builder.Register<RedactorManager>(Lifetime.Singleton).AsSelf().As<IInitializable, IAsyncStartable, GameManager>();
         }
     }
 }

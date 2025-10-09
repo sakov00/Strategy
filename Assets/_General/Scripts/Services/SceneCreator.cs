@@ -33,7 +33,7 @@ namespace _General.Scripts.Services
             { typeof(EnemyRoadModel), 5 },
         };
         
-        public async UniTask InstantiateObjects<T>(List<T> objects) where T : ISavableModel
+        public async UniTask InstantiateObjects<T>(List<T> objects, bool isInitialize = true) where T : ISavableModel
         {
             SortSavableModels(objects);
             foreach (var model in objects)
@@ -56,7 +56,7 @@ namespace _General.Scripts.Services
                 };
 
                 savableController?.SetSavableModel(model);
-                savableController?.Initialize();
+                if(isInitialize) savableController?.Initialize();
                 
                 await UniTask.NextFrame();
             }

@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
+using _General.Scripts.Enums;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Factories;
@@ -26,11 +27,15 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
         
         private Vector3 _originalScale;
 
-        private void Awake() => Initialize(); 
+        private void Awake()
+        {
+            InjectManager.Inject(this);
+            if (_appData.AppMode == AppMode.Redactor)
+                _objectsRegistry.Register(this);
+        }
 
         public void Initialize()
         {
-            InjectManager.Inject(this);
             _objectsRegistry.Register(this);
         }
 

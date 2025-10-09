@@ -13,7 +13,7 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
         [SerializeField] protected EnvironmentModel _model;
         [Inject] private ObjectsRegistry _objectsRegistry;
 
-        private void Awake() => Initialize();
+        private void Start() => Initialize();
         public void Initialize()
         {
             InjectManager.Inject(this);
