@@ -3,7 +3,7 @@ using VContainer.Unity;
 
 namespace _General.Scripts.Interfaces
 {
-    public interface ISavableController : IInitializable
+    public interface ISavableController : IInitializableAsync
     {
         public ISavableModel GetSavableModel();
         public void SetSavableModel(ISavableModel savableModel);

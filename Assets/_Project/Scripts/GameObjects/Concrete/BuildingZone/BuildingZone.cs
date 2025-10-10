@@ -1,11 +1,8 @@
-using System;
 using System.Linq;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
-using _General.Scripts.Enums;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
-using _Project.Scripts.Factories;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Pools;
 using _Project.Scripts.SO;
@@ -32,9 +29,10 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
             InjectManager.Inject(this);
         }
 
-        public void Initialize()
+        public UniTask InitializeAsync()
         {
             _saveRegistry.Register(this);
+            return default;
         }
 
         public async UniTask TryBuy()
@@ -59,7 +57,7 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
 
             _appData.LevelData.LevelMoney -= price;
             var build = _buildPool.Get(_model.BuildType, transform.position, transform.rotation);
-            build.Initialize();
+            build.InitializeAsync();
             Destroy();
         }
 

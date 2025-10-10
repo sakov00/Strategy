@@ -4,6 +4,7 @@ using _General.Scripts.Interfaces;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract.Unit;
 using _Project.Scripts.GameObjects.ActionSystems;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Concrete.FlyingEnemy
@@ -28,10 +29,9 @@ namespace _Project.Scripts.GameObjects.Concrete.FlyingEnemy
             _damageSystem?.Attack();
         }
 
-        public override void Initialize()
+        public override UniTask InitializeAsync()
         {
-            InjectManager.Inject(this);
-            LiveRegistry.Register(this);
+            base.InitializeAsync();
             
             Model.CurrentHealth = Model.MaxHealth;
 
@@ -39,6 +39,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FlyingEnemy
             _detectionAim = new DetectionAim(Model, transform);
             _damageSystem = new DamageSystem(Model, View, transform);
             View.Initialize();
+            return default;
         }
 
         public override ISavableModel GetSavableModel()

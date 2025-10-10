@@ -22,14 +22,6 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
         public Action<UnitController> OnKilled;
         public UnitType UnitType => UnitModel.UnitType;
 
-        public override void Initialize()
-        {
-            IdsRegistry.Register(this);
-            LiveRegistry.Register(this);
-            SaveRegistry.Register(this);
-            Dispose(false,false);
-        }
-
         public void SetWayToPoint(List<Vector3> waypoints)
         {
             UnitModel.WayToAim = waypoints;
@@ -59,18 +51,14 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
 
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
+            base.Dispose(returnToPool, clearFromRegistry);
             if (returnToPool)
             {
                 UnitPool.Return(this);
                 OnKilled?.Invoke(this);
                 OnKilled = null;
             }
-            if (clearFromRegistry)
-            {
-                IdsRegistry.Unregister(this);
-                LiveRegistry.Unregister(this);
-                SaveRegistry.Unregister(this);
-            }
+
         }
     }
 }

@@ -5,6 +5,7 @@ using _General.Scripts.Enums;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Interfaces;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -21,9 +22,10 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
             InjectManager.Inject(this);
         }
         
-        public void Initialize()
+        public UniTask InitializeAsync()
         {
             _saveRegistry.Register(this);
+            return default;
         }
 
         public ISavableModel GetSavableModel()

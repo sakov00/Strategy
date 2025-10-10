@@ -9,6 +9,7 @@ using _Project.Scripts.Factories;
 using _Project.Scripts.GameObjects.Abstract.Unit;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Pools;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using VContainer;
@@ -33,7 +34,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsGroup
         
         private CompositeDisposable _disposables;
 
-        public void Initialize()
+        public UniTask InitializeAsync()
         {
             InjectManager.Inject(this);
             _saveRegistry.Register(this);
@@ -55,6 +56,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsGroup
             }).AddTo(_disposables);
             
             AddFriends();
+            return default;
         }
         
         private void OnKilledHandler(UnitController removedUnit)
@@ -70,7 +72,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsGroup
                 {
                     var unitController = _unitPool.Get(Model.UnitType, transform.position);
                     unitController.SetWayToPoint(new List<Vector3> { transform.position });
-                    unitController.Initialize();
+                    unitController.InitializeAsync();
                     Units.Add(unitController);
                 }
 

@@ -9,6 +9,7 @@ using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Interfaces;
 using _Project.Scripts.Pools;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Splines;
 using VContainer;
@@ -42,9 +43,8 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             InjectManager.Inject(this);
         }
 
-        public void Initialize()
+        public UniTask InitializeAsync()
         {
-            
             _saveRegistry.Register(this);
 
             _model.SplineContainerData = _splineContainer.ToData();
@@ -60,6 +60,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
 
             _view.Initialize(_splineContainer);
             _view.RefreshInfoRound(_splineContainer, _model.RoundEnemyList);
+            return default;
         }
 
         public ISavableModel GetSavableModel()
@@ -121,7 +122,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             var wayPoints = new List<Vector3>();
             foreach (var position in _model.WorldPositions) wayPoints.Add(position + new Vector3(offsetX, 0f, 0f));
             var enemyController = _unitPool.Get(enemyData.enemyType, wayPoints[0]);
-            enemyController.Initialize();
+            enemyController.InitializeAsync();
             enemyController.SetWayToPoint(wayPoints);
         }
         

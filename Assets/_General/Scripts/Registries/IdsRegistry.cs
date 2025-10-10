@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using _General.Scripts.Interfaces;
 using _Project.Scripts.Interfaces;
 
 namespace _General.Scripts.Registries

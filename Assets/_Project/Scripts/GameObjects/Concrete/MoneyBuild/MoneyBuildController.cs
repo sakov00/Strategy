@@ -13,14 +13,15 @@ namespace _Project.Scripts.GameObjects.Concrete.MoneyBuild
         protected override BuildModel BuildModel => Model;
         protected override BuildView BuildView => View;
         
-        public override void Initialize()
+        public override UniTask InitializeAsync()
         {
-            base.Initialize();
+            base.InitializeAsync();
             
             Model.CurrentHealth = Model.MaxHealth;
             
             View.Initialize();
             AppData.LevelEvents.WinEvent += AddMoneyToPlayer;
+            return default;
         }
 
         private UniTaskVoid AddMoneyToPlayer()

@@ -69,7 +69,9 @@ namespace _General.Scripts.Services
 
             var compressed = await File.ReadAllBytesAsync(path);
             var data = LZ4Pickler.Unpickle(compressed);
+            await UniTask.NextFrame();
             var levelData = MemoryPackSerializer.Deserialize<LevelData>(data);
+            await UniTask.NextFrame();
             _appData.LevelData.SetData(levelData);
         }
     }

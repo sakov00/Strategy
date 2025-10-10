@@ -55,8 +55,11 @@ namespace _General.Scripts.Services
                     _ => null
                 };
 
-                savableController?.SetSavableModel(model);
-                if(isInitialize) savableController?.Initialize();
+                if(savableController == null)
+                    continue;
+                
+                savableController.SetSavableModel(model);
+                if(isInitialize) await savableController.InitializeAsync();
                 
                 await UniTask.NextFrame();
             }

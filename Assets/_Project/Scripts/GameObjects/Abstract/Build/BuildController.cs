@@ -19,14 +19,6 @@ namespace _Project.Scripts.GameObjects.Abstract
         public BuildType BuildType => BuildModel.BuildType;
         public int BuildPrice => BuildModel.BuildPrice;
         
-        public override void Initialize()
-        {
-            IdsRegistry.Register(this);
-            LiveRegistry.Register(this);
-            SaveRegistry.Register(this);
-            Dispose(false, false);
-        }
-        
         public override void Killed()
         {
             Dispose();
@@ -34,13 +26,8 @@ namespace _Project.Scripts.GameObjects.Abstract
         
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
+            base.Dispose(returnToPool, clearFromRegistry);
             if(returnToPool) BuildPool.Return(this);
-            if (clearFromRegistry)
-            {
-                IdsRegistry.Unregister(this);
-                LiveRegistry.Unregister(this);
-                SaveRegistry.Unregister(this);
-            }
         }
     }
 }

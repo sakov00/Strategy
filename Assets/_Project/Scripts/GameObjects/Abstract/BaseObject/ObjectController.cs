@@ -6,6 +6,8 @@ using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
 using _Project.Scripts.Interfaces;
+using Cysharp.Threading.Tasks;
+using UniRx.Toolkit;
 using UnityEngine;
 using VContainer;
 
@@ -36,16 +38,32 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         {
             ObjectView.UpdateHealthBar(ObjectModel.CurrentHealth, ObjectModel.MaxHealth);
         }
-
+        
         private void OnDestroy()
         {
             Dispose(false);
         }
-
-        public abstract void Initialize();
+        
+        public virtual UniTask InitializeAsync()
+        {
+            IdsRegistry.Register(this);
+            LiveRegistry.Register(this);
+            SaveRegistry.Register(this);
+            Dispose(false, false);
+            return default;
+        }
+        
         public abstract ISavableModel GetSavableModel();
         public abstract void SetSavableModel(ISavableModel model);
         public abstract void Killed();
-        public abstract void Dispose(bool returnToPool = true, bool clearFromRegistry = true);
+        public virtual void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
+        {
+            if (clearFromRegistry)
+            {
+                IdsRegistry.Unregister(this);
+                LiveRegistry.Unregister(this);
+                SaveRegistry.Unregister(this);
+            }
+        }
     }
 }

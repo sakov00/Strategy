@@ -1,4 +1,4 @@
-namespace _Project.Scripts.Interfaces
+namespace _General.Scripts.Interfaces
 {
     public interface IId
     {

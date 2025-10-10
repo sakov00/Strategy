@@ -5,6 +5,7 @@ using _Project.Scripts.GameObjects.Abstract;
 using _Project.Scripts.GameObjects.Abstract.Unit;
 using _Project.Scripts.GameObjects.Concrete.FriendsGroup;
 using _Project.Scripts.Pools;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using VContainer;
@@ -24,15 +25,16 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
         
         private FriendsGroupController FriendsGroup { get; set; }
 
-        public override void Initialize()
+        public override UniTask InitializeAsync()
         {
-            base.Initialize();
+            base.InitializeAsync();
             
             Model.CurrentHealth = Model.MaxHealth;
 
             SetFriendsGroup();
             
             View.Initialize();
+            return default;
         }
 
         private void SetFriendsGroup()
@@ -40,7 +42,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
             if (Model.FriendsGroupId == 0)
             {
                 FriendsGroup = _unitFactory.CreateFriendsGroup(Model.UnitType, View.GroupPoint.position);
-                FriendsGroup.Initialize();
+                FriendsGroup.InitializeAsync();
                 Model.FriendsGroupId = FriendsGroup.Id;
             }
             else
@@ -71,7 +73,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
             if (Model.NeedRestoreUnitsCount > 0)
             {
                 var unitController = _unitPool.Get(Model.UnitType, View.SpawnPoint.position);
-                unitController.Initialize();
+                unitController.InitializeAsync();
                 FriendsGroup.Units.Add(unitController);
                 Model.NeedRestoreUnitsCount--;
             }

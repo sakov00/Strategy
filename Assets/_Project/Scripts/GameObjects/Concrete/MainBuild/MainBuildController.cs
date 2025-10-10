@@ -3,6 +3,7 @@ using _General.Scripts.Interfaces;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract;
 using _Project.Scripts.GameObjects.ActionSystems;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Concrete.MainBuild
@@ -24,15 +25,16 @@ namespace _Project.Scripts.GameObjects.Concrete.MainBuild
             _damageSystem?.Attack();
         }
 
-        public override void Initialize()
+        public override UniTask InitializeAsync()
         {
-            base.Initialize();
+            base.InitializeAsync();
             
             Model.CurrentHealth = Model.MaxHealth;
             
             _detectionAim = new DetectionAim(Model, transform);
             _damageSystem = new DamageSystem(Model, View, transform);
             View.Initialize();
+            return default;
         }
 
         public override ISavableModel GetSavableModel()

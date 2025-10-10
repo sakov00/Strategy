@@ -4,6 +4,7 @@ using _General.Scripts.Interfaces;
 using _Project.Scripts.GameObjects.Abstract.Unit;
 using _Project.Scripts.GameObjects.ActionSystems;
 using _Project.Scripts.Interfaces;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -23,9 +24,9 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         private PlayerMovementSystem _playerMovementSystem;
         private RegenerationHpSystem _regenerationHpSystem;
 
-        public override void Initialize()
+        public override UniTask InitializeAsync()
         {
-            base.Initialize();
+            base.InitializeAsync();
             
             Model.CurrentHealth = Model.MaxHealth;
             
@@ -39,6 +40,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             _damageSystem = new DamageSystem(Model, View, transform);
             _regenerationHpSystem = new RegenerationHpSystem(Model, View);
             View.Initialize();
+            return default;
         }
 
         protected override void FixedUpdate()
@@ -82,7 +84,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             {
                 _gameTimer.OnEverySecond -= TryReturnToGame;
                 Model.CurrentTimeResurrection = 0;
-                Initialize();
+                InitializeAsync();
                 Model.IsNoDamageable = true;
                 _gameTimer.OnEverySecond += DisableNoDamage;
             }

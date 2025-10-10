@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
 using _General.Scripts.DTO;
@@ -5,8 +6,10 @@ using _General.Scripts.Enums;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
 using _Project.Scripts.Interfaces;
+using Cysharp.Threading.Tasks;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 using VContainer;
 
 namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
@@ -25,9 +28,10 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
             InjectManager.Inject(this);
         }
         
-        public void Initialize()
+        public async UniTask InitializeAsync()
         {
             _saveRegistry.Register(this);
+            await ChangeTerrain();
         }
 
         public ISavableModel GetSavableModel()
@@ -67,34 +71,71 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
             if (savableModel is TerrainModel terrainModel)
             {
                 _model = terrainModel;
-                if (_meshFilter != null && _model.Vertices != null && _model.UVs != null && _model.Triangles != null)
-                {
-                    var vertices = new Vector3[_model.Vertices.Length];
-                    for (var i = 0; i < vertices.Length; i++)
-                        vertices[i] = _model.Vertices[i].ToVector3();
-
-                    var uvs = new Vector2[_model.UVs.Length];
-                    for (var i = 0; i < uvs.Length; i++)
-                        uvs[i] = _model.UVs[i].ToVector2();
-
-                    var triangles = new ushort[_model.Triangles.Length];
-                    for (var i = 0; i < triangles.Length; i++)
-                        triangles[i] = _model.Triangles[i];
-
-                    var normals = new Vector3[_model.Normals.Length];
-                    for (var i = 0; i < normals.Length; i++)
-                        normals[i] = _model.Normals[i].ToVector3();
-
-                    _meshFilter.mesh.Clear();
-                    _meshFilter.mesh.SetVertices(vertices);
-                    _meshFilter.mesh.SetUVs(0, uvs);
-                    _meshFilter.mesh.SetTriangles(triangles, 0);
-                    _meshFilter.mesh.SetNormals(normals);
-                }
-                _meshCollider.sharedMesh = null;
-                _meshCollider.sharedMesh = _meshFilter.mesh;
-                _meshSurface.BuildNavMesh();
             }
+        }
+
+        private async UniTask ChangeTerrain()
+        {
+            if (_meshFilter != null && _model.Vertices != null && _model.UVs != null && _model.Triangles != null)
+            {
+                var vertices = new Vector3[_model.Vertices.Length];
+                for (var i = 0; i < vertices.Length; i++)
+                    vertices[i] = _model.Vertices[i].ToVector3();
+
+                var uvs = new Vector2[_model.UVs.Length];
+                for (var i = 0; i < uvs.Length; i++)
+                    uvs[i] = _model.UVs[i].ToVector2();
+
+                var triangles = new ushort[_model.Triangles.Length];
+                for (var i = 0; i < triangles.Length; i++)
+                    triangles[i] = _model.Triangles[i];
+
+                var normals = new Vector3[_model.Normals.Length];
+                for (var i = 0; i < normals.Length; i++)
+                    normals[i] = _model.Normals[i].ToVector3();
+
+                _meshFilter.mesh.Clear();
+                _meshFilter.mesh.SetVertices(vertices);
+                _meshFilter.mesh.SetUVs(0, uvs);
+                _meshFilter.mesh.SetTriangles(triangles, 0);
+                _meshFilter.mesh.SetNormals(normals);
+            }
+            _meshCollider.sharedMesh = null;
+            _meshCollider.sharedMesh = _meshFilter.mesh;
+            
+            if (_meshSurface.navMeshData == null)
+            {
+                _meshSurface.navMeshData = new NavMeshData();
+                NavMesh.AddNavMeshData(_meshSurface.navMeshData, _meshSurface.transform.position, _meshSurface.transform.rotation);
+            }
+            
+            var sources = new List<NavMeshBuildSource>();
+            var markups = new List<NavMeshBuildMarkup>();
+            
+            NavMeshBuilder.CollectSources(
+                null,
+                _meshSurface.layerMask,
+                _meshSurface.useGeometry,
+                _meshSurface.defaultArea,
+                markups,
+                sources
+            );
+
+            var bounds = new Bounds(sources[0].shape == NavMeshBuildSourceShape.Mesh ? _meshFilter.mesh.bounds.center : Vector3.zero, Vector3.zero);
+            foreach (var src in sources)
+            {
+                if (src.shape == NavMeshBuildSourceShape.Mesh)
+                    bounds.Encapsulate(_meshFilter.mesh.bounds);
+            }
+
+            var buildSettings = _meshSurface.GetBuildSettings();
+
+            await NavMeshBuilder.UpdateNavMeshDataAsync(
+                _meshSurface.navMeshData,
+                buildSettings,
+                sources,
+                bounds
+            );
         }
 
         public void Destroy() => Destroy(gameObject);
