@@ -66,13 +66,8 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
             return _model;
         }
 
-        public void SetSavableModel(ISavableModel savableModel)
-        {
-            if (savableModel is TerrainModel terrainModel)
-            {
-                _model = terrainModel;
-            }
-        }
+        public void SetSavableModel(ISavableModel savableModel) =>
+            _model.LoadFrom(savableModel);
 
         private async UniTask ChangeTerrain()
         {

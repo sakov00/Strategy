@@ -147,20 +147,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects._Object.MainBuild.MainBuildController
   <Model>k__BackingField:
     <Id>k__BackingField: 0
-    _warSide: 0
-    _delayRegeneration: 0
-    _regenerateHealthInSecond: 0
-    _maxHealth: 1000
+    <WarSide>k__BackingField: 0
+    <DelayRegeneration>k__BackingField: 3
+    <RegenerateHealthInSecond>k__BackingField: 5
+    <MaxHealth>k__BackingField: 1000
     _currentHealth: 1000
+    <SecondsWithoutDamage>k__BackingField: 0
     <BuildType>k__BackingField: 4
     <BuildPrice>k__BackingField: 0
-    _attackRange: 20
-    _damageAmount: 25
-    _allAnimAttackTime: 1
-    _animAttackTime: 1
-    _detectionRadius: 20
-    _typeAttack: 1
-    _aimObject: {fileID: 0}
+    <AttackRange>k__BackingField: 10
+    <DamageAmount>k__BackingField: 10
+    <AllAnimAttackTime>k__BackingField: 1
+    <AnimAttackTime>k__BackingField: 1
+    <DetectionRadius>k__BackingField: 20
+    <TypeAttack>k__BackingField: 1
+    <AimObject>k__BackingField: {fileID: 0}
   <View>k__BackingField: {fileID: 980575573167198939}
 --- !u!114 &980575573167198939
 MonoBehaviour:

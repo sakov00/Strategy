@@ -759,24 +759,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.Units.Enemies.ArcherEnemy.ArcherEnemyController
   <Model>k__BackingField:
     <Id>k__BackingField: 0
-    _warSide: 1
-    _delayRegeneration: 3
-    _regenerateHealthInSecond: 5
-    _maxHealth: 100
+    <WarSide>k__BackingField: 1
+    <DelayRegeneration>k__BackingField: 0
+    <RegenerateHealthInSecond>k__BackingField: 0
+    <SecondsWithoutDamage>k__BackingField: 0
+    <MaxHealth>k__BackingField: 100
     _currentHealth: 100
     <UnitType>k__BackingField: 4
-    _moveSpeed: 10
-    _rotationSpeed: 10
-    _gravity: -20
-    _attackRange: 10
-    _damageAmount: 10
-    _allAnimAttackTime: 1
-    _animAttackTime: 1
-    _detectionRadius: 20
-    _typeAttack: 1
-    _aimObject: {fileID: 0}
-    _currentWaypointIndex: 0
-    _wayToAim: []
+    <MoveSpeed>k__BackingField: 10
+    <RotationSpeed>k__BackingField: 10
+    <Gravity>k__BackingField: -20
+    <AttackRange>k__BackingField: 10
+    <DamageAmount>k__BackingField: 10
+    <AllAnimAttackTime>k__BackingField: 1
+    <AnimAttackTime>k__BackingField: 1
+    <DetectionRadius>k__BackingField: 20
+    <TypeAttack>k__BackingField: 1
+    <AimObject>k__BackingField: {fileID: 0}
+    <CurrentWaypointIndex>k__BackingField: 0
+    <WayToAim>k__BackingField: []
   <View>k__BackingField: {fileID: 2874532331939233336}
 --- !u!114 &2874532331939233336
 MonoBehaviour:
@@ -793,6 +794,7 @@ MonoBehaviour:
   _objRenderer: {fileID: 8306672324081057310}
   _healthBar: {fileID: 62154589785583304}
   _tooltip: {fileID: 0}
+  _outline: {fileID: 0}
   _animator: {fileID: 7389295262489941797}
   <Agent>k__BackingField: {fileID: 2010110707927957712}
   <ProjectileType>k__BackingField: 1

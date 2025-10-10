@@ -10,15 +10,35 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
     [MemoryPackable]
     public partial class TerrainModel : ISavableModel
     {
-        public Vector3Scaled[] Vertices { get; set; }
-        public Vector3Scaled[] Normals { get; set; }
-        public Vector2Scaled[] UVs { get; set; }
-        public ushort[] Triangles { get; set; }
-        public Vector3 SavePosition { get; set; }
-        public Quaternion SaveRotation { get; set; }
-        public ISavableModel DeepClone()
+        [MemoryPackInclude] public Vector3Scaled[] Vertices { get; set; }
+        [MemoryPackInclude] public Vector3Scaled[] Normals { get; set; }
+        [MemoryPackInclude] public Vector2Scaled[] UVs { get; set; }
+        [MemoryPackInclude] public ushort[] Triangles { get; set; }
+        [MemoryPackInclude] public Vector3 SavePosition { get; set; }
+        [MemoryPackInclude] public Quaternion SaveRotation { get; set; }
+        
+        public virtual void LoadFrom(ISavableModel model)
         {
-            return (TerrainModel)MemberwiseClone();
+            if (model is not TerrainModel objectModel) return;
+            Vertices = objectModel.Vertices;
+            Normals = objectModel.Normals;
+            UVs = objectModel.UVs;
+            Triangles = objectModel.Triangles;
+            SavePosition = objectModel.SavePosition;
+            SaveRotation = objectModel.SaveRotation;
+        }
+        
+        public ISavableModel GetSaveData()
+        {
+            return new TerrainModel
+            {
+                Vertices = Vertices,
+                Normals = Normals,
+                UVs = UVs,
+                Triangles = Triangles,
+                SavePosition = SavePosition,
+                SaveRotation = SaveRotation,
+            };
         }
     }
 }

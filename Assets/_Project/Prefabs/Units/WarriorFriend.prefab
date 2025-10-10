@@ -97,24 +97,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.Units.Friends.WarriorFriend.WarriorFriendController
   <Model>k__BackingField:
     <Id>k__BackingField: 0
-    _warSide: 0
-    _delayRegeneration: 3
-    _regenerateHealthInSecond: 5
-    _maxHealth: 100
+    <WarSide>k__BackingField: 0
+    <DelayRegeneration>k__BackingField: 3
+    <RegenerateHealthInSecond>k__BackingField: 5
+    <MaxHealth>k__BackingField: 100
     _currentHealth: 100
+    <SecondsWithoutDamage>k__BackingField: 0
     <UnitType>k__BackingField: 1
-    _moveSpeed: 10
-    _rotationSpeed: 10
-    _gravity: -20
-    _attackRange: 2
-    _damageAmount: 10
-    _allAnimAttackTime: 1
-    _animAttackTime: 1
-    _detectionRadius: 20
-    _typeAttack: 0
-    _aimObject: {fileID: 0}
-    _currentWaypointIndex: 0
-    _wayToAim: []
+    <MoveSpeed>k__BackingField: 10
+    <RotationSpeed>k__BackingField: 10
+    <Gravity>k__BackingField: -20
+    <AttackRange>k__BackingField: 1
+    <DamageAmount>k__BackingField: 10
+    <AllAnimAttackTime>k__BackingField: 1
+    <AnimAttackTime>k__BackingField: 1
+    <DetectionRadius>k__BackingField: 20
+    <TypeAttack>k__BackingField: 0
+    <AimObject>k__BackingField: {fileID: 0}
+    <CurrentWaypointIndex>k__BackingField: 0
+    <WayToAim>k__BackingField: []
   <View>k__BackingField: {fileID: 5516086144725825973}
 --- !u!114 &5516086144725825973
 MonoBehaviour:

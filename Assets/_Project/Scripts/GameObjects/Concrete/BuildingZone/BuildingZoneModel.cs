@@ -10,13 +10,28 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
     [MemoryPackable]
     public partial class BuildingZoneModel : ISavableModel
     {
-        [field: SerializeField] public BuildType BuildType { get; private set; }
-
-        public Vector3 SavePosition { get; set; }
-        public Quaternion SaveRotation { get; set; }
-        public ISavableModel DeepClone()
+        [MemoryPackInclude][field: SerializeField] public BuildType BuildType { get; private set; }
+        [MemoryPackInclude] public Vector3 SavePosition { get; set; }
+        [MemoryPackInclude] public Quaternion SaveRotation { get; set; }
+        
+        public virtual void LoadFrom(ISavableModel model)
         {
-            return (BuildingZoneModel)MemberwiseClone();
+            if (model is BuildingZoneModel objectModel)
+            {
+                BuildType = objectModel.BuildType;
+                SavePosition = objectModel.SavePosition;
+                SaveRotation = objectModel.SaveRotation;
+            }
+        }
+        
+        public ISavableModel GetSaveData()
+        {
+            return new BuildingZoneModel
+            {
+                BuildType = BuildType,
+                SavePosition = SavePosition,
+                SaveRotation = SaveRotation
+            };
         }
     }
 }

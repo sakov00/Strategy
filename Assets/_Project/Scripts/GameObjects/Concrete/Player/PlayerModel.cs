@@ -1,4 +1,5 @@
 using System;
+using _General.Scripts.Interfaces;
 using _Project.Scripts.GameObjects.Abstract.Unit;
 using MemoryPack;
 using UnityEngine;
@@ -9,32 +10,12 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
     [MemoryPackable]
     public partial class PlayerModel : UnitModel
     {
-        [Header("Resurrection")] 
-        [SerializeField] private int _needTimeNoDamage = 2;
-        [SerializeField] private int _currentTimeNoDamage;
-        [SerializeField] private bool _isNoDamageable;
-        [SerializeField] private int _needTimeResurrection = 3;
-        [SerializeField] private int _currentTimeResurrection;
-
-        public int NeedTimeNoDamage => _needTimeNoDamage;
-
-        public int CurrentTimeNoDamage
-        {
-            get => _currentTimeNoDamage;
-            set => _currentTimeNoDamage = value;
-        }
-        public bool IsNoDamageable
-        {
-            get => _isNoDamageable;
-            set => _isNoDamageable = value;
-        }
-
-        public int NeedTimeResurrection => _needTimeResurrection;
-        public int CurrentTimeResurrection
-        {
-            get => _currentTimeResurrection;
-            set => _currentTimeResurrection = value;
-        }
+        [field: Header("Resurrection")] 
+        [MemoryPackIgnore][field:SerializeField] public int NeedTimeNoDamage { get; set; } = 2;
+        [MemoryPackInclude][field:SerializeField] public int CurrentTimeNoDamage { get; set; }
+        [MemoryPackInclude][field:SerializeField] public bool IsNoDamageable { get; set; }
+        [MemoryPackIgnore][field:SerializeField] public int NeedTimeResurrection  { get; set; } = 3;
+        [MemoryPackInclude][field:SerializeField] public int CurrentTimeResurrection { get; set; }
         
         public override float CurrentHealth
         {
@@ -46,6 +27,15 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
                     SecondsWithoutDamage = 0;
                 _currentHealth = Mathf.Clamp(value, 0, MaxHealth);
             }
+        }
+        
+        public override void LoadFrom(ISavableModel model)
+        {
+            base.LoadFrom(model);
+            if (model is not PlayerModel objectModel) return;
+            CurrentTimeNoDamage = objectModel.CurrentTimeNoDamage;
+            IsNoDamageable = objectModel.IsNoDamageable;
+            CurrentTimeResurrection = objectModel.CurrentTimeResurrection;
         }
     }
 }

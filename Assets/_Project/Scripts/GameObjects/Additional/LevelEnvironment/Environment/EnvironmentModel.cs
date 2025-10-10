@@ -10,12 +10,26 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
     [MemoryPackable]
     public partial class EnvironmentModel : ISavableModel
     {
-        [field: SerializeField] public EnvironmentType EnvironmentType { get; set; }
-        public Vector3 SavePosition { get; set; }
-        public Quaternion SaveRotation { get; set; }
-        public ISavableModel DeepClone()
+        [MemoryPackInclude][field: SerializeField] public EnvironmentType EnvironmentType { get; set; }
+        [MemoryPackInclude] public Vector3 SavePosition { get; set; }
+        [MemoryPackInclude] public Quaternion SaveRotation { get; set; }
+        
+        public virtual void LoadFrom(ISavableModel model)
         {
-            return (EnvironmentModel)MemberwiseClone();
+            if (model is not EnvironmentModel objectModel) return;
+            EnvironmentType = objectModel.EnvironmentType;
+            SavePosition = objectModel.SavePosition;
+            SaveRotation = objectModel.SaveRotation;
+        }
+        
+        public ISavableModel GetSaveData()
+        {
+            return new EnvironmentModel
+            {
+                EnvironmentType = EnvironmentType,
+                SavePosition = SavePosition,
+                SaveRotation = SaveRotation
+            };
         }
     }
 }

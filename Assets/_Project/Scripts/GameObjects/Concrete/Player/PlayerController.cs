@@ -28,10 +28,15 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         {
             base.InitializeAsync();
             
-            Model.CurrentHealth = Model.MaxHealth;
+            View.Initialize();
+            View.UpdateLoadBar(Model.CurrentTimeResurrection, Model.NeedTimeResurrection);
             
-            if(Model.CurrentTimeResurrection != 0)
-                _gameTimer.OnEverySecond += TryReturnToGame;
+            if (Model.CurrentHealth == 0 || Model.CurrentTimeResurrection != 0)
+            {
+                Killed();
+                return default;
+            }
+
             if(Model.CurrentTimeNoDamage != 0)
                 _gameTimer.OnEverySecond += DisableNoDamage;
             
@@ -39,7 +44,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             _detectionAim = new DetectionAim(Model, transform);
             _damageSystem = new DamageSystem(Model, View, transform);
             _regenerationHpSystem = new RegenerationHpSystem(Model, View);
-            View.Initialize();
+
             return default;
         }
 
@@ -62,17 +67,13 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             return Model;
         }
 
-        public override void SetSavableModel(ISavableModel savableModel)
-        {
-            if (savableModel is PlayerModel playerModel)
-            {
-                Model = playerModel;
-            }
-        }
+        public override void SetSavableModel(ISavableModel savableModel) =>
+            Model.LoadFrom(savableModel);
 
         public override void Killed()
         {
-            Dispose(false);
+            Dispose(false,false);
+            LiveRegistry.Unregister(this);
             _gameTimer.OnEverySecond += TryReturnToGame;
         }
 
@@ -84,6 +85,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             {
                 _gameTimer.OnEverySecond -= TryReturnToGame;
                 Model.CurrentTimeResurrection = 0;
+                Model.CurrentHealth = Model.MaxHealth;
                 InitializeAsync();
                 Model.IsNoDamageable = true;
                 _gameTimer.OnEverySecond += DisableNoDamage;
@@ -104,8 +106,11 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
             base.Dispose(returnToPool, clearFromRegistry);
-            Model.CurrentTimeNoDamage = 0;
-            Model.CurrentTimeResurrection = 0;
+            if (returnToPool)
+            {
+                Model.CurrentTimeResurrection = 0;
+                Model.CurrentTimeNoDamage = 0;
+            }
             _gameTimer.OnEverySecond -= DisableNoDamage;
             _gameTimer.OnEverySecond -= TryReturnToGame;
             _detectionAim = null;

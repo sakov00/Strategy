@@ -1,7 +1,9 @@
 using System;
+using _General.Scripts.Interfaces;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract;
 using _Project.Scripts.GameObjects.Concrete.FriendsGroup;
+using _Project.Scripts.GameObjects.Concrete.MoneyBuild;
 using MemoryPack;
 using UnityEngine;
 
@@ -12,29 +14,19 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
     public partial class FriendsBuildModel : BuildModel
     {
         [Header("Units")] 
-        [field:SerializeField] private UnitType _unitType;
-        [field:SerializeField] private int _timeCreateUnits = 5;
-        [field:SerializeField] private int _friendsGroupId;
-
-        public UnitType UnitType
-        {
-            get => _unitType;
-            set => _unitType = value;
-        }
-
-        public int TimeCreateUnits
-        {
-            get => _timeCreateUnits;
-            set => _timeCreateUnits = value;
-        }
+        [MemoryPackIgnore][field:SerializeField] public UnitType UnitType { get; set; }
+        [MemoryPackIgnore][field:SerializeField] public int TimeCreateUnits { get; set; } = 5;
+        [MemoryPackInclude][field:SerializeField] public int FriendsGroupId { get; set; }
+        [MemoryPackInclude][field:SerializeField] public int NeedRestoreUnitsCount { get; set; }
+        [MemoryPackInclude][field:SerializeField] public int CurrentSpawnTimer { get; set; } = -1;
         
-        public int FriendsGroupId
+        public override void LoadFrom(ISavableModel model)
         {
-            get => _friendsGroupId;
-            set => _friendsGroupId = value;
+            base.LoadFrom(model);
+            if (model is not FriendsBuildModel objectModel) return;
+            FriendsGroupId = objectModel.FriendsGroupId;
+            NeedRestoreUnitsCount = objectModel.NeedRestoreUnitsCount;
+            CurrentSpawnTimer = objectModel.CurrentSpawnTimer;
         }
-        
-        public int NeedRestoreUnitsCount { get; set; }
-        public int CurrentSpawnTimer { get; set; } = -1;
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using _General.Scripts.Interfaces;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract.BaseObject;
 using _Project.Scripts.GameObjects.Concrete.FriendsBuild;
@@ -17,7 +18,14 @@ namespace _Project.Scripts.GameObjects.Abstract
     public abstract partial class BuildModel : ObjectModel
     {
         [field: Header("Build Data")]
-        [field: SerializeField] public BuildType BuildType { get; set; }
-        [field: SerializeField] public int BuildPrice { get; set; }
+        [MemoryPackInclude][field: SerializeField] public BuildType BuildType { get; set; }
+        [MemoryPackIgnore][field: SerializeField] public int BuildPrice { get; set; }
+        
+        public override void LoadFrom(ISavableModel model)
+        {
+            base.LoadFrom(model);
+            if (model is not BuildModel objectModel) return;
+            BuildType = objectModel.BuildType;
+        }
     }
 }

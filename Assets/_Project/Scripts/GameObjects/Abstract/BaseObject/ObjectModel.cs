@@ -32,42 +32,17 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
     [MemoryPackUnion(10, typeof(FlyingEnemyModel))]
     public abstract partial class ObjectModel : IHealthModel, ISavableModel
     {
-        [MemoryPackInclude] [field:SerializeField] public int Id { get; set; }
+        [MemoryPackInclude][field:SerializeField] public int Id { get; set; }
         
-        [Header("Health")] 
-        [SerializeField] private WarSide _warSide;
-        [SerializeField] private float _delayRegeneration = 3f;
-        [SerializeField] private float _regenerateHealthInSecond = 5f;
-        [SerializeField] private float _maxHealth = 100f;
-        [SerializeField] protected float _currentHealth = 100f;
-        
-        public int SecondsWithoutDamage { get; set; }
-        
-        public WarSide WarSide
-        {
-            get => _warSide;
-            set => _warSide = value;
-        }
-
-        public float DelayRegeneration
-        {
-            get => _delayRegeneration;
-            set => _delayRegeneration = value;
-        }
-
-        public float RegenerateHealthInSecond
-        {
-            get => _regenerateHealthInSecond;
-            set => _regenerateHealthInSecond = value;
-        }
-
-        public float MaxHealth
-        {
-            get => _maxHealth;
-            set => _maxHealth = value;
-        }
-
-        [MemoryPackInclude]
+        [field: Header("Health")] 
+        [MemoryPackIgnore][field:SerializeField] public WarSide WarSide { get; set; }
+        [MemoryPackIgnore][field:SerializeField] public float DelayRegeneration { get; set; } = 3f;
+        [MemoryPackIgnore][field:SerializeField] public float RegenerateHealthInSecond { get; set; } = 5f;
+        [MemoryPackInclude][field:SerializeField] public int SecondsWithoutDamage { get; set; }
+        [MemoryPackIgnore] [field: SerializeField] public float MaxHealth { get; set; } = 100f;
+        [MemoryPackInclude][SerializeField] protected float _currentHealth;
+        [MemoryPackInclude] public Vector3 SavePosition { get; set; }
+        [MemoryPackInclude] public Quaternion SaveRotation { get; set; }
         public virtual float CurrentHealth
         {
             get => _currentHealth;
@@ -79,10 +54,15 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
             }
         }
 
-        public Vector3 SavePosition { get; set; }
-        public Quaternion SaveRotation { get; set; }
-
-        public ISavableModel DeepClone()
+        public virtual void LoadFrom(ISavableModel model)
+        {
+            if (model is not ObjectModel objectModel) return;
+            Id = objectModel.Id;
+            SecondsWithoutDamage = objectModel.SecondsWithoutDamage;
+            _currentHealth = objectModel.CurrentHealth;
+        }
+        
+        public virtual ISavableModel GetSaveData()
         {
             return (ObjectModel)MemberwiseClone();
         }

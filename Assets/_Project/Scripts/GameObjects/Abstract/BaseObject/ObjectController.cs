@@ -58,6 +58,10 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         public abstract void Killed();
         public virtual void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
+            if (returnToPool)
+            {
+                ObjectModel.CurrentHealth = ObjectModel.MaxHealth;
+            }
             if (clearFromRegistry)
             {
                 IdsRegistry.Unregister(this);

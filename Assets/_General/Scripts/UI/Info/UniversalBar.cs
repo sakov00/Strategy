@@ -13,7 +13,7 @@ namespace _General.Scripts.UI.Info
             _universalBarRenderer ??= GetComponent<MeshRenderer>();
         }
 
-        public virtual void Start() 
+        public virtual void Awake() 
         {
             _universalBarRenderer.enabled = false;
             _matBlock = new MaterialPropertyBlock();

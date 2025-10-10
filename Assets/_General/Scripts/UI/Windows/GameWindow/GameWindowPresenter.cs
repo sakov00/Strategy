@@ -57,7 +57,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
         {
             _appData.LevelData.IsFighting = true;
             _appData.LevelData.ObjectsForRestoring = _saveRegistry.GetAll()
-                .Select(o => o.GetSavableModel().DeepClone()).ToList();
+                .Select(o => o.GetSavableModel().GetSaveData()).ToList();
             
             _saveRegistry.GetAllByType<EnemyRoadController>().ForEach(x => x.StartSpawn());
             _appData.LevelEvents.Initialize();

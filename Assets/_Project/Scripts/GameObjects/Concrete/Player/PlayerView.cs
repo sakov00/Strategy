@@ -13,7 +13,6 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         public override void Initialize()
         {
             base.Initialize();
-            _loadBar.UpdateBar(1, 1);
         }
 
         public void UpdateLoadBar(float currentValue, float maxValue)

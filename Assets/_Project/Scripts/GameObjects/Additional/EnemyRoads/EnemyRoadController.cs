@@ -43,6 +43,12 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             InjectManager.Inject(this);
         }
 
+        private void Start()
+        {
+            if (_appData.AppMode == AppMode.Redactor)
+                InitializeAsync();
+        }
+
         public UniTask InitializeAsync()
         {
             _saveRegistry.Register(this);
@@ -72,11 +78,8 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
 
         public void SetSavableModel(ISavableModel savableModel)
         {
-            if (savableModel is EnemyRoadModel buildingZoneModel)
-            {
-                _model = buildingZoneModel;
-                _splineContainer.ApplyData(_model.SplineContainerData);
-            }
+            _model.LoadFrom(savableModel);
+            _splineContainer.ApplyData(_model.SplineContainerData);
         }
 
         public void StartSpawn(bool isNew = true)

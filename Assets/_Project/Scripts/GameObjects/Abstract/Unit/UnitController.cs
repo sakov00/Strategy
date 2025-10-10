@@ -58,7 +58,6 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
                 OnKilled?.Invoke(this);
                 OnKilled = null;
             }
-
         }
     }
 }

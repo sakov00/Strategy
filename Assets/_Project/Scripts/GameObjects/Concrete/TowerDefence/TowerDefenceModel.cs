@@ -12,56 +12,13 @@ namespace _Project.Scripts.GameObjects.Concrete.TowerDefence
     [MemoryPackable]
     public partial class TowerDefenceModel : BuildModel, IFightObjectModel
     {
-        [Header("Attack")] [SerializeField] private float _attackRange = 20f;
-
-        [SerializeField] private int _damageAmount = 10;
-        [SerializeField] private float _allAnimAttackTime = 1f;
-        [SerializeField] private float _animAttackTime = 1f;
-        [SerializeField] private float _detectionRadius = 20f;
-        [SerializeField] private TypeAttack _typeAttack = TypeAttack.Distance;
-        [SerializeField] private ObjectController _aimObject;
-
-        public float AttackRange
-        {
-            get => _attackRange;
-            set => _attackRange = value;
-        }
-
-        public int DamageAmount
-        {
-            get => _damageAmount;
-            set => _damageAmount = value;
-        }
-
-        public float AllAnimAttackTime
-        {
-            get => _allAnimAttackTime;
-            set => _allAnimAttackTime = value;
-        }
-
-        public float AnimAttackTime
-        {
-            get => _animAttackTime;
-            set => _animAttackTime = value;
-        }
-
-        public float DetectionRadius
-        {
-            get => _detectionRadius;
-            set => _detectionRadius = value;
-        }
-
-        public TypeAttack TypeAttack
-        {
-            get => _typeAttack;
-            set => _typeAttack = value;
-        }
-
-        [MemoryPackIgnore]
-        public ObjectController AimObject
-        {
-            get => _aimObject;
-            set => _aimObject = value;
-        }
+        [field: Header("Attack")] 
+        [MemoryPackIgnore][field: SerializeField] public float AttackRange { get; set; } = 10f;
+        [MemoryPackIgnore][field: SerializeField] public int DamageAmount { get; set; } = 10;
+        [MemoryPackIgnore][field: SerializeField] public float AllAnimAttackTime { get; set; } = 1f;
+        [MemoryPackIgnore][field: SerializeField] public float AnimAttackTime { get; set; } = 1f;
+        [MemoryPackIgnore][field: SerializeField] public float DetectionRadius { get; set; } = 20f;
+        [MemoryPackIgnore][field: SerializeField] public TypeAttack TypeAttack { get; set; } = TypeAttack.Distance;
+        [MemoryPackIgnore][field: SerializeField] public ObjectController AimObject { get; set; }
     }
 }

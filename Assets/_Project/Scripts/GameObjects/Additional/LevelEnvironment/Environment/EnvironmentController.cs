@@ -35,10 +35,8 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Environment
             return _model;
         }
 
-        public void SetSavableModel(ISavableModel savableModel)
-        {
-            if (savableModel is EnvironmentModel buildingZoneModel) _model = buildingZoneModel;
-        }
+        public void SetSavableModel(ISavableModel savableModel) =>
+            _model.LoadFrom(savableModel);
 
         public void Destroy() => Destroy(gameObject);
 

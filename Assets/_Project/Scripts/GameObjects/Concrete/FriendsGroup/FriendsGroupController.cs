@@ -113,11 +113,9 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsGroup
             return Model;
         }
 
-        public void SetSavableModel(ISavableModel savableModel)
-        {
-            if (savableModel is FriendsGroupModel buildingZoneModel) Model = buildingZoneModel;
-        }
-
+        public void SetSavableModel(ISavableModel savableModel) =>
+            Model.LoadFrom(savableModel);
+        
         public void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
             _disposables?.Dispose();

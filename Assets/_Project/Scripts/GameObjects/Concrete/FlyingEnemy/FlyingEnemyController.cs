@@ -49,13 +49,8 @@ namespace _Project.Scripts.GameObjects.Concrete.FlyingEnemy
             return Model;
         }
 
-        public override void SetSavableModel(ISavableModel savableModel)
-        {
-            if (savableModel is FlyingEnemyModel unitModel)
-            {
-                Model = unitModel;
-            }
-        }
+        public override void SetSavableModel(ISavableModel savableModel) =>
+            Model.LoadFrom(savableModel);
         
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {

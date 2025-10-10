@@ -46,13 +46,8 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherEnemy
             return Model;
         }
 
-        public override void SetSavableModel(ISavableModel savableModel)
-        {
-            if (savableModel is ArcherEnemyModel unitModel)
-            {
-                Model = unitModel;
-            }
-        }
+        public override void SetSavableModel(ISavableModel savableModel) =>
+            Model.LoadFrom(savableModel);
 
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {

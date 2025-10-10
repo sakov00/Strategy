@@ -12,18 +12,38 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
     [MemoryPackable]
     public partial class EnemyRoadModel : ISavableModel
     {
-        [field: SerializeField] public List<EnemyGroup> RoundEnemyList { get; set; } = new();
-
-        public SplineContainerData SplineContainerData { get; set; } = new();
-        public List<Vector3> WorldPositions { get; set; } = new();
-        public int CurrentIndex { get; set; }
-        public float ElapsedTime { get; set; }
-
-        public Vector3 SavePosition { get; set; }
-        public Quaternion SaveRotation { get; set; }
-        public ISavableModel DeepClone()
+        [MemoryPackInclude][field: SerializeField] public List<EnemyGroup> RoundEnemyList { get; set; } = new();
+        [MemoryPackInclude] public SplineContainerData SplineContainerData { get; set; } = new();
+        [MemoryPackInclude] public List<Vector3> WorldPositions { get; set; } = new();
+        [MemoryPackInclude] public int CurrentIndex { get; set; }
+        [MemoryPackInclude] public float ElapsedTime { get; set; }
+        [MemoryPackInclude] public Vector3 SavePosition { get; set; }
+        [MemoryPackInclude] public Quaternion SaveRotation { get; set; }
+        
+        public virtual void LoadFrom(ISavableModel model)
         {
-            return (EnemyRoadModel)MemberwiseClone();
+            if (model is not EnemyRoadModel objectModel) return;
+            RoundEnemyList = objectModel.RoundEnemyList;
+            SplineContainerData = objectModel.SplineContainerData;
+            WorldPositions = objectModel.WorldPositions;
+            CurrentIndex = objectModel.CurrentIndex;
+            ElapsedTime = objectModel.ElapsedTime;
+            SavePosition = objectModel.SavePosition;
+            SaveRotation = objectModel.SaveRotation;
+        }
+        
+        public ISavableModel GetSaveData()
+        {
+            return new EnemyRoadModel
+            {
+                RoundEnemyList = RoundEnemyList,
+                SplineContainerData = SplineContainerData,
+                WorldPositions = WorldPositions,
+                CurrentIndex = CurrentIndex,
+                ElapsedTime = ElapsedTime,
+                SavePosition = SavePosition,
+                SaveRotation = SaveRotation
+            };
         }
     }
 
@@ -31,15 +51,14 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
     [MemoryPackable]
     public partial class EnemyGroup
     {
-        public List<EnemyWithTime> enemies;
+        [MemoryPackInclude] public List<EnemyWithTime> enemies;
     }
 
     [Serializable]
     [MemoryPackable]
     public partial class EnemyWithTime
     {
-        [Min(0f)] public float time;
-
-        public UnitType enemyType;
+        [MemoryPackInclude][Min(0f)] public float time;
+        [MemoryPackInclude] public UnitType enemyType;
     }
 }

@@ -68,10 +68,8 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
             return _model;
         }
 
-        public void SetSavableModel(ISavableModel savableModel)
-        {
-            if (savableModel is BuildingZoneModel buildingZoneModel) _model = buildingZoneModel;
-        }
+        public void SetSavableModel(ISavableModel savableModel) =>
+            _model.LoadFrom(savableModel);
 
         public void Destroy() => Destroy(gameObject);
 

@@ -39,13 +39,8 @@ namespace _Project.Scripts.GameObjects.Concrete.MoneyBuild
             return Model;
         }
 
-        public override void SetSavableModel(ISavableModel savableModel)
-        {
-            if (savableModel is MoneyBuildModel moneyBuildModel)
-            {
-                Model = moneyBuildModel;
-            }
-        }
+        public override void SetSavableModel(ISavableModel savableModel) =>
+            Model.LoadFrom(savableModel);
         
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
