@@ -5,6 +5,7 @@ using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
 using _Project.Scripts.Enums;
 using TMPro;
+using Unity.Splines.Examples;
 using UnityEngine;
 using UnityEngine.Splines;
 using VContainer;
@@ -15,23 +16,14 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
     {
         [Inject] private AppData _appData;
         
-        [SerializeField] private SplineAnimate _animatePrefab;
+        [SerializeField] private LoftRoadBehaviour _loftRoadBehaviour;
         [SerializeField] private List<TextMeshPro> _enemyIcons;
         [SerializeField] private float _distanceBetweenIcons = 4;
 
         public void Initialize(SplineContainer splineContainer)
         {
             InjectManager.Inject(this);
-            
-            var roadLength = splineContainer.Spline.GetLength();
-            var countAnimateObjects = roadLength / _distanceBetweenIcons;
-            for (var i = 0; i < countAnimateObjects; i++)
-            {
-                var splineAnimate = Instantiate(_animatePrefab, transform);
-                splineAnimate.Container = splineContainer;
-                splineAnimate.StartOffset = i / countAnimateObjects;
-                splineAnimate.Play();
-            }
+            _loftRoadBehaviour.LoftAllRoads();
         }
 
         public void RefreshInfoRound(SplineContainer splineContainer, List<EnemyGroup> roundEnemyList)

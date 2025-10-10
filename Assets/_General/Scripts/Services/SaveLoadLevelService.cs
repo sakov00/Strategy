@@ -13,6 +13,7 @@ using MemoryPack;
 using UnityEngine;
 using VContainer;
 using K4os.Compression.LZ4;
+using UnityEngine.Networking;
 
 namespace _General.Scripts.Services
 {
@@ -28,8 +29,8 @@ namespace _General.Scripts.Services
         private static string GetProgressSavePath(int index) 
             => Path.Combine(Application.persistentDataPath, $"level_progress_{index}.dat");
 
-        public async UniTask LoadLevelDefault(int index) => await Load(GetDefaultSavePath(index));
-        public async UniTask LoadLevelProgress(int index) => await Load(GetProgressSavePath(index));
+        public async UniTask LoadLevelDefault(int index) => await LoadFromStreamingAssets(GetDefaultSavePath(index));
+        public async UniTask LoadLevelProgress(int index) => await LoadFromPersistentPath(GetProgressSavePath(index));
         public async UniTask SaveLevelDefault(int index) => await Save(GetDefaultSavePath(index));
         public async UniTask SaveLevelProgress(int index) => await Save(GetProgressSavePath(index));
 
@@ -41,10 +42,11 @@ namespace _General.Scripts.Services
                 await LoadLevelDefault(index);
         }
 
-        public void RemoveProgress(int index)
+        public void RemoveProgress(int fakeIndex)
         {
-            if(File.Exists(GetProgressSavePath(index)))
-                File.Delete(GetProgressSavePath(index));
+            var path = GetProgressSavePath(fakeIndex);
+            if (File.Exists(path))
+                File.Delete(path);
         }
 
         private async UniTask Save(string path)
@@ -59,7 +61,7 @@ namespace _General.Scripts.Services
             Debug.Log($"Level saved to {path}");
         }
 
-        private async UniTask Load(string path)
+        private async UniTask LoadFromPersistentPath(string path)
         {
             if (!File.Exists(path))
             {
@@ -69,6 +71,24 @@ namespace _General.Scripts.Services
 
             var compressed = await File.ReadAllBytesAsync(path);
             var data = LZ4Pickler.Unpickle(compressed);
+            await UniTask.NextFrame();
+            var levelData = MemoryPackSerializer.Deserialize<LevelData>(data);
+            await UniTask.NextFrame();
+            _appData.LevelData.SetData(levelData);
+        }
+
+        private async UniTask LoadFromStreamingAssets(string path)
+        {
+            using var request = UnityWebRequest.Get(path);
+            await request.SendWebRequest();
+
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogWarning($"Failed to load level at {path}: {request.error}");
+                return;
+            }
+            
+            var data = LZ4Pickler.Unpickle(request.downloadHandler.data);
             await UniTask.NextFrame();
             var levelData = MemoryPackSerializer.Deserialize<LevelData>(data);
             await UniTask.NextFrame();

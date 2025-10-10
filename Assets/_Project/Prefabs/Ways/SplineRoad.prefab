@@ -127,8 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a707726b7c7743c4855d6204bda52ad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.EnemyRoads.EnemyRoadView
-  _animatePrefab: {fileID: 2931828360219052694, guid: d76c765517115134a8702fef6bceb93b,
-    type: 3}
+  _loftRoadBehaviour: {fileID: 2206013256424038267}
   _enemyIcons:
   - {fileID: 9151757912118067560}
   - {fileID: 9208011910899648912}
