@@ -16,7 +16,7 @@ namespace _Project.Scripts.GameObjects.Additional.Projectiles
         
         [field: SerializeField] public IFightController Owner { get; set; }
         [field: SerializeField] public ProjectileType ProjectileType { get; set; }
-        [field: SerializeField] public int Damage { get; set; }
+        [field: SerializeField] public float Damage { get; set; }
         [field: SerializeField] public WarSide OwnerWarSide { get; set; }
 
         private void Start()
@@ -39,7 +39,7 @@ namespace _Project.Scripts.GameObjects.Additional.Projectiles
                 target.CurrentHealth -= Damage;
                 ReturnToPool();
                 if (Owner is PlayerController playerController)
-                    playerController.Model.CurrentValueUltimate += 10;
+                    playerController.AddUltimateValue();
                 if (target.CurrentHealth <= 0)
                     target.Killed();
                 

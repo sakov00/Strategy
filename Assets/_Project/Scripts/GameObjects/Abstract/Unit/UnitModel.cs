@@ -35,7 +35,8 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
 
         [field: Header("Attack")] 
         [MemoryPackIgnore][field: SerializeField] public float AttackRange { get; set; } = 10f;
-        [MemoryPackIgnore][field: SerializeField] public int DamageAmount { get; set; } = 10;
+        [MemoryPackIgnore][field: SerializeField] public float DefaultDamageAmount { get; set; } = 10;
+        [MemoryPackInclude][field: SerializeField] public float DamageAmount { get; set; } = 10;
         [MemoryPackIgnore][field: SerializeField] public float AllAnimAttackTime { get; set; } = 1f;
         [MemoryPackIgnore][field: SerializeField] public float AnimAttackTime { get; set; } = 1f;
         [MemoryPackIgnore][field: SerializeField] public float DetectionRadius { get; set; } = 20f;
@@ -51,6 +52,7 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
             base.LoadData(model);
             if (model is not UnitModel objectModel) return;
             UnitType = objectModel.UnitType;
+            DamageAmount = objectModel.DamageAmount;
             CurrentWaypointIndex = objectModel.CurrentWaypointIndex;
             WayToAim = objectModel.WayToAim;
         }
@@ -58,6 +60,7 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
         protected void FillUnitModelData(UnitModel model)
         {
             model.UnitType = UnitType;
+            DamageAmount = model.DamageAmount;
             model.CurrentWaypointIndex = CurrentWaypointIndex;
             model.WayToAim = WayToAim;
         }

@@ -11,15 +11,22 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
     public partial class PlayerModel : UnitModel
     {
         [field: Header("Resurrection")] 
-        [MemoryPackIgnore][field:SerializeField] public int NeedTimeNoDamage { get; set; } = 2;
+        [MemoryPackIgnore][field:SerializeField] public int DurationTimeNoDamage { get; set; } = 2;
         [MemoryPackInclude][field:SerializeField] public int CurrentTimeNoDamage { get; set; }
         [MemoryPackInclude][field:SerializeField] public bool IsNoDamageable { get; set; }
-        [MemoryPackIgnore][field:SerializeField] public int NeedTimeResurrection  { get; set; } = 3;
+        [MemoryPackIgnore][field:SerializeField] public int DurationTimeResurrection  { get; set; } = 3;
         [MemoryPackInclude][field:SerializeField] public int CurrentTimeResurrection { get; set; }
+        [MemoryPackInclude][field:SerializeField] public bool IsKilled { get; set; }
 
         [field: Header("Abilities")]
-        [MemoryPackIgnore][field: SerializeField] public int NeedValueUltimate { get; set; } = 100;
-        [MemoryPackInclude][field: SerializeField] public int CurrentValueUltimate { get; set; }
+        [MemoryPackIgnore][field: SerializeField] public int MaxValueUltimate { get; set; } = 100;
+
+        [MemoryPackInclude][field: SerializeField] private int _currentValueUltimate;
+        [MemoryPackIgnore] [field: SerializeField] public int ShootRewardValue { get; set; } = 10;
+        [MemoryPackIgnore] [field: SerializeField] public int DurationUltimate { get; set; } = 5;
+        [MemoryPackInclude] [field: SerializeField] public int CurrentTimeUltimate { get; set; }
+        [MemoryPackInclude][field:SerializeField] public bool IsActiveUltimate { get; set; }
+        [MemoryPackIgnore] [field: SerializeField] public float UltimateUpDamageModifier { get; set; } = 2f;
         
         public override float CurrentHealth
         {
@@ -33,6 +40,12 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             }
         }
         
+        public int CurrentValueUltimate
+        {
+            get => _currentValueUltimate;
+            set => _currentValueUltimate = Mathf.Clamp(value, 0, MaxValueUltimate);
+        }
+        
         public override void LoadData(ISavableModel model)
         {
             base.LoadData(model);
@@ -40,7 +53,10 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             CurrentTimeNoDamage = objectModel.CurrentTimeNoDamage;
             IsNoDamageable = objectModel.IsNoDamageable;
             CurrentTimeResurrection = objectModel.CurrentTimeResurrection;
+            IsKilled = objectModel.IsKilled;
             CurrentValueUltimate = objectModel.CurrentValueUltimate;
+            CurrentTimeUltimate = objectModel.CurrentTimeUltimate;
+            IsActiveUltimate = objectModel.IsActiveUltimate;
         }
         
         public override ISavableModel GetSaveData()
@@ -50,7 +66,10 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
                 CurrentTimeNoDamage = CurrentTimeNoDamage,
                 IsNoDamageable = IsNoDamageable,
                 CurrentTimeResurrection = CurrentTimeResurrection,
+                IsKilled = IsKilled,
                 CurrentValueUltimate = CurrentValueUltimate,
+                CurrentTimeUltimate = CurrentTimeUltimate,
+                IsActiveUltimate = IsActiveUltimate,
             };
             FillObjectModelData(model);
             FillUnitModelData(model);

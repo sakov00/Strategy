@@ -15,7 +15,7 @@ namespace _Project.Scripts.GameObjects.Concrete.TowerDefence
     {
         [field: Header("Attack")] 
         [MemoryPackIgnore][field: SerializeField] public float AttackRange { get; set; } = 10f;
-        [MemoryPackIgnore][field: SerializeField] public int DamageAmount { get; set; } = 10;
+        [MemoryPackIgnore][field: SerializeField] public float DamageAmount { get; set; } = 10;
         [MemoryPackIgnore][field: SerializeField] public float AllAnimAttackTime { get; set; } = 1f;
         [MemoryPackIgnore][field: SerializeField] public float AnimAttackTime { get; set; } = 1f;
         [MemoryPackIgnore][field: SerializeField] public float DetectionRadius { get; set; } = 20f;

@@ -29,15 +29,18 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             base.InitializeAsync();
             
             View.Initialize();
-            View.UpdateLoadBar(Model.CurrentTimeResurrection, Model.NeedTimeResurrection);
+            View.UpdateLoadBar(Model.CurrentTimeResurrection, Model.DurationTimeResurrection);
             
-            if (Model.CurrentHealth == 0 || Model.CurrentTimeResurrection != 0)
+            if (Model.IsActiveUltimate)
+                _gameTimer.OnEverySecond += DisableUltimate;
+            
+            if (Model.IsKilled)
             {
                 Killed();
                 return default;
             }
 
-            if(Model.CurrentTimeNoDamage != 0)
+            if(Model.IsNoDamageable)
                 _gameTimer.OnEverySecond += DisableNoDamage;
             
             _playerMovementSystem = new PlayerMovementSystem(Model, View, transform);
@@ -53,7 +56,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             base.FixedUpdate();
             _detectionAim?.DetectAim();
             _damageSystem?.Attack();
-            View.UpdateUltimateBar(Model.CurrentValueUltimate, Model.NeedValueUltimate);
+            View.UpdateUltimateBar(Model.CurrentValueUltimate, Model.MaxValueUltimate);
         }
 
         private void Update()
@@ -71,24 +74,50 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         public override void SetSavableModel(ISavableModel savableModel) =>
             Model.LoadData(savableModel);
 
+        public void AddUltimateValue()
+        {
+            Model.CurrentValueUltimate += Model.ShootRewardValue;
+            if (Model.IsActiveUltimate == false && Model.CurrentValueUltimate == Model.MaxValueUltimate)
+            {
+                Model.IsActiveUltimate = true;
+                Model.DamageAmount *= Model.UltimateUpDamageModifier;
+                _gameTimer.OnEverySecond += DisableUltimate;
+            }
+        }
+
+        private void DisableUltimate()
+        {
+            Model.CurrentTimeUltimate++;
+            if (Model.CurrentTimeUltimate == Model.DurationUltimate)
+            {
+                Model.IsActiveUltimate = false;
+                Model.DamageAmount = Model.DefaultDamageAmount;
+                Model.CurrentValueUltimate = 0;
+                Model.CurrentTimeUltimate = 0;
+                _gameTimer.OnEverySecond -= DisableUltimate;
+            }
+        }
+
         public override void Killed()
         {
             Dispose(false,false);
             LiveRegistry.Unregister(this);
+            Model.IsKilled = true;
             _gameTimer.OnEverySecond += TryReturnToGame;
         }
 
         private void TryReturnToGame()
         {
             Model.CurrentTimeResurrection++;
-            View.UpdateLoadBar(Model.CurrentTimeResurrection, Model.NeedTimeResurrection);
-            if (Model.CurrentTimeResurrection == Model.NeedTimeResurrection)
+            View.UpdateLoadBar(Model.CurrentTimeResurrection, Model.DurationTimeResurrection);
+            if (Model.CurrentTimeResurrection == Model.DurationTimeResurrection)
             {
-                _gameTimer.OnEverySecond -= TryReturnToGame;
                 Model.CurrentTimeResurrection = 0;
                 Model.CurrentHealth = Model.MaxHealth;
+                Model.IsKilled = false;
                 InitializeAsync();
                 Model.IsNoDamageable = true;
+                _gameTimer.OnEverySecond -= TryReturnToGame;
                 _gameTimer.OnEverySecond += DisableNoDamage;
             }
         }
@@ -96,7 +125,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         private void DisableNoDamage()
         {
             Model.CurrentTimeNoDamage++;
-            if (Model.CurrentTimeNoDamage == Model.NeedTimeNoDamage)
+            if (Model.CurrentTimeNoDamage == Model.DurationTimeNoDamage)
             {
                 _gameTimer.OnEverySecond -= DisableNoDamage; 
                 Model.CurrentTimeNoDamage = 0;
@@ -109,9 +138,16 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             base.Dispose(returnToPool, clearFromRegistry);
             if (returnToPool)
             {
+                Model.DamageAmount = Model.DefaultDamageAmount;
+                Model.IsActiveUltimate = false;
+                Model.IsKilled = false;
+                Model.IsNoDamageable = false;
+                Model.CurrentValueUltimate = 0;
+                Model.CurrentTimeUltimate = 0;
                 Model.CurrentTimeResurrection = 0;
                 Model.CurrentTimeNoDamage = 0;
             }
+            _gameTimer.OnEverySecond -= DisableUltimate;
             _gameTimer.OnEverySecond -= DisableNoDamage;
             _gameTimer.OnEverySecond -= TryReturnToGame;
             _detectionAim = null;

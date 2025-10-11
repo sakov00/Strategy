@@ -13,7 +13,7 @@ namespace _Project.Scripts.Interfaces.Model
         public float CurrentHealth { get; set; }
         
         public float AttackRange { get; set; }
-        public int DamageAmount { get; set; }
+        public float DamageAmount { get; set; }
         public float AllAnimAttackTime { get; set; }
         public float AnimAttackTime { get; set; }
         public float DetectionRadius { get; set; }
