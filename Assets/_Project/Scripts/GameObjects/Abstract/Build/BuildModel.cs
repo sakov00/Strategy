@@ -21,11 +21,16 @@ namespace _Project.Scripts.GameObjects.Abstract
         [MemoryPackInclude][field: SerializeField] public BuildType BuildType { get; set; }
         [MemoryPackIgnore][field: SerializeField] public int BuildPrice { get; set; }
         
-        public override void LoadFrom(ISavableModel model)
+        public override void LoadData(ISavableModel model)
         {
-            base.LoadFrom(model);
+            base.LoadData(model);
             if (model is not BuildModel objectModel) return;
             BuildType = objectModel.BuildType;
+        }
+        
+        protected void FillBuildModelData(BuildModel model)
+        {
+            model.BuildType = BuildType;
         }
     }
 }

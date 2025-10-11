@@ -114,7 +114,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsGroup
         }
 
         public void SetSavableModel(ISavableModel savableModel) =>
-            Model.LoadFrom(savableModel);
+            Model.LoadData(savableModel);
         
         public void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {

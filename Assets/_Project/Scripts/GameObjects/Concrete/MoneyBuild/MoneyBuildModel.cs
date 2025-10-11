@@ -14,13 +14,23 @@ namespace _Project.Scripts.GameObjects.Concrete.MoneyBuild
         [Header("Money")] 
         [MemoryPackInclude][field:SerializeField] public int AddMoneyValue { get; set; } = 1;
         
-        public override void LoadFrom(ISavableModel model)
+        public override void LoadData(ISavableModel model)
         {
-            base.LoadFrom(model);
+            base.LoadData(model);
             if (model is MoneyBuildModel objectModel)
             {
                 AddMoneyValue = objectModel.AddMoneyValue;
             }
+        }
+        public override ISavableModel GetSaveData()
+        {
+            var model = new MoneyBuildModel
+            {
+                AddMoneyValue = AddMoneyValue,
+            };
+            FillObjectModelData(model);
+            FillBuildModelData(model);
+            return model;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using _General.Scripts.Interfaces;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract;
 using _Project.Scripts.GameObjects.Abstract.BaseObject;
@@ -20,5 +21,13 @@ namespace _Project.Scripts.GameObjects.Concrete.MainBuild
         [MemoryPackIgnore][field: SerializeField] public float DetectionRadius { get; set; } = 20f;
         [MemoryPackIgnore][field: SerializeField] public TypeAttack TypeAttack { get; set; } = TypeAttack.Distance;
         [MemoryPackIgnore][field: SerializeField] public ObjectController AimObject { get; set; }
+        
+        public override ISavableModel GetSaveData()
+        {
+            var model = new MainBuildModel();
+            FillObjectModelData(model);
+            FillBuildModelData(model);
+            return model;
+        }
     }
 }

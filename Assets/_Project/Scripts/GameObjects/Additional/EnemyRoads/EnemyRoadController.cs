@@ -78,7 +78,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
 
         public void SetSavableModel(ISavableModel savableModel)
         {
-            _model.LoadFrom(savableModel);
+            _model.LoadData(savableModel);
             _splineContainer.ApplyData(_model.SplineContainerData);
         }
 

@@ -67,7 +67,7 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
         }
 
         public void SetSavableModel(ISavableModel savableModel) =>
-            _model.LoadFrom(savableModel);
+            _model.LoadData(savableModel);
 
         private async UniTask ChangeTerrain()
         {

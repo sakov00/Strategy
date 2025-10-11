@@ -68,7 +68,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         }
 
         public override void SetSavableModel(ISavableModel savableModel) =>
-            Model.LoadFrom(savableModel);
+            Model.LoadData(savableModel);
 
         public override void Killed()
         {

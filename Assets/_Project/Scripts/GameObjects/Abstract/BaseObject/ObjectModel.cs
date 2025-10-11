@@ -54,17 +54,22 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
             }
         }
 
-        public virtual void LoadFrom(ISavableModel model)
+        public virtual void LoadData(ISavableModel model)
         {
             if (model is not ObjectModel objectModel) return;
             Id = objectModel.Id;
             SecondsWithoutDamage = objectModel.SecondsWithoutDamage;
             _currentHealth = objectModel.CurrentHealth;
         }
-        
-        public virtual ISavableModel GetSaveData()
+
+        public abstract ISavableModel GetSaveData();
+        protected void FillObjectModelData(ObjectModel model)
         {
-            return (ObjectModel)MemberwiseClone();
+            model.Id = Id;
+            model.SecondsWithoutDamage = SecondsWithoutDamage;
+            model.CurrentHealth = CurrentHealth;
+            model.SavePosition = SavePosition;
+            model.SaveRotation = SaveRotation;
         }
     }
 }

@@ -97,7 +97,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
         }
 
         public override void SetSavableModel(ISavableModel savableModel) =>
-            Model.LoadFrom(savableModel);
+            Model.LoadData(savableModel);
         
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {

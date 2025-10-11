@@ -17,7 +17,7 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
         [MemoryPackInclude] public Vector3 SavePosition { get; set; }
         [MemoryPackInclude] public Quaternion SaveRotation { get; set; }
         
-        public virtual void LoadFrom(ISavableModel model)
+        public virtual void LoadData(ISavableModel model)
         {
             if (model is not TerrainModel objectModel) return;
             Vertices = objectModel.Vertices;

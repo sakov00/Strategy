@@ -46,13 +46,20 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
         [MemoryPackInclude][field: SerializeField] public int CurrentWaypointIndex { get; set; }
         [MemoryPackInclude][field: SerializeField] public List<Vector3> WayToAim { get; set; }
         
-        public override void LoadFrom(ISavableModel model)
+        public override void LoadData(ISavableModel model)
         {
-            base.LoadFrom(model);
+            base.LoadData(model);
             if (model is not UnitModel objectModel) return;
             UnitType = objectModel.UnitType;
             CurrentWaypointIndex = objectModel.CurrentWaypointIndex;
             WayToAim = objectModel.WayToAim;
+        }
+        
+        protected void FillUnitModelData(UnitModel model)
+        {
+            model.UnitType = UnitType;
+            model.CurrentWaypointIndex = CurrentWaypointIndex;
+            model.WayToAim = WayToAim;
         }
     }
 }

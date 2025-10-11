@@ -20,7 +20,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
         [MemoryPackInclude] public Vector3 SavePosition { get; set; }
         [MemoryPackInclude] public Quaternion SaveRotation { get; set; }
         
-        public virtual void LoadFrom(ISavableModel model)
+        public virtual void LoadData(ISavableModel model)
         {
             if (model is not EnemyRoadModel objectModel) return;
             RoundEnemyList = objectModel.RoundEnemyList;

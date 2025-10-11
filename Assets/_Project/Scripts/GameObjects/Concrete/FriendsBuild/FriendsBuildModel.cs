@@ -20,13 +20,26 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
         [MemoryPackInclude][field:SerializeField] public int NeedRestoreUnitsCount { get; set; }
         [MemoryPackInclude][field:SerializeField] public int CurrentSpawnTimer { get; set; } = -1;
         
-        public override void LoadFrom(ISavableModel model)
+        public override void LoadData(ISavableModel model)
         {
-            base.LoadFrom(model);
+            base.LoadData(model);
             if (model is not FriendsBuildModel objectModel) return;
             FriendsGroupId = objectModel.FriendsGroupId;
             NeedRestoreUnitsCount = objectModel.NeedRestoreUnitsCount;
             CurrentSpawnTimer = objectModel.CurrentSpawnTimer;
+        }
+        
+        public override ISavableModel GetSaveData()
+        {
+            var model = new FriendsBuildModel
+            {
+                FriendsGroupId = FriendsGroupId,
+                NeedRestoreUnitsCount = NeedRestoreUnitsCount,
+                CurrentSpawnTimer = CurrentSpawnTimer,
+            };
+            FillObjectModelData(model);
+            FillBuildModelData(model);
+            return model;
         }
     }
 }

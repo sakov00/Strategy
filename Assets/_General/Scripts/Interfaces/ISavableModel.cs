@@ -44,7 +44,7 @@ namespace _General.Scripts.Interfaces
     {
         public Vector3 SavePosition { get; set; }
         public Quaternion SaveRotation { get; set; }
-        public void LoadFrom(ISavableModel savableModel);
+        public void LoadData(ISavableModel savableModel);
         public ISavableModel GetSaveData();
     }
 }

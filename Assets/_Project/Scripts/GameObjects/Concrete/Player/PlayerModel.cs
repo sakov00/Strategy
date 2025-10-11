@@ -29,13 +29,26 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             }
         }
         
-        public override void LoadFrom(ISavableModel model)
+        public override void LoadData(ISavableModel model)
         {
-            base.LoadFrom(model);
+            base.LoadData(model);
             if (model is not PlayerModel objectModel) return;
             CurrentTimeNoDamage = objectModel.CurrentTimeNoDamage;
             IsNoDamageable = objectModel.IsNoDamageable;
             CurrentTimeResurrection = objectModel.CurrentTimeResurrection;
+        }
+        
+        public override ISavableModel GetSaveData()
+        {
+            var model = new PlayerModel
+            {
+                CurrentTimeNoDamage = CurrentTimeNoDamage,
+                IsNoDamageable = IsNoDamageable,
+                CurrentTimeResurrection = CurrentTimeResurrection,
+            };
+            FillObjectModelData(model);
+            FillUnitModelData(model);
+            return model;
         }
     }
 }

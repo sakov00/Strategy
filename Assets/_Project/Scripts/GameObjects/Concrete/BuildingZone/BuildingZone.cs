@@ -69,7 +69,7 @@ namespace _Project.Scripts.GameObjects.Concrete.BuildingZone
         }
 
         public void SetSavableModel(ISavableModel savableModel) =>
-            _model.LoadFrom(savableModel);
+            _model.LoadData(savableModel);
 
         public void Destroy() => Destroy(gameObject);
 
