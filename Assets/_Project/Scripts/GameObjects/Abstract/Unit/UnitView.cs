@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 namespace _Project.Scripts.GameObjects.Abstract.Unit
 {
-    public class UnitView : ObjectView, IAttackableView
+    public class UnitView : ObjectView, IFightView
     {
         private static readonly int IsWalking = Animator.StringToHash("IsWalking");
         private static readonly int IsAttack = Animator.StringToHash("IsAttack");

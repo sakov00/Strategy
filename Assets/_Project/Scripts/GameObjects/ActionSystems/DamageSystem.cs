@@ -1,7 +1,7 @@
 using _General.Scripts._VContainer;
 using _General.Scripts.Extentions;
-using _General.Scripts.Registries;
 using _Project.Scripts.Enums;
+using _Project.Scripts.Interfaces;
 using _Project.Scripts.Interfaces.Model;
 using _Project.Scripts.Interfaces.View;
 using _Project.Scripts.Pools;
@@ -12,85 +12,115 @@ namespace _Project.Scripts.GameObjects.ActionSystems
 {
     public class DamageSystem
     {
-        private readonly IAttackableView _attackableView;
-
-        private readonly IFightObjectModel _fightObjectModel;
-        private readonly Transform _transform;
-        private Coroutine _attackCoroutine;
-
-        private float _lastAttackTime = -Mathf.Infinity;
         [Inject] private ProjectilePool _projectilePool;
 
-        public DamageSystem(IFightObjectModel fightObjectModel, IAttackableView attackableView, Transform transform)
+        private readonly IFightController _controller;
+        private readonly Transform _transform;
+        private float _lastAttackTime = -Mathf.Infinity;
+
+        private IFightModel Model => _controller.FightModel;
+        private IFightView View => _controller.FightView;
+
+        public DamageSystem(IFightController controller, Transform transform)
         {
-            _fightObjectModel = fightObjectModel;
-            _attackableView = attackableView;
+            _controller = controller;
             _transform = transform;
 
             InjectManager.Inject(this);
+            SubscribeToAttackEvent();
+        }
 
-            if (fightObjectModel.TypeAttack == TypeAttack.Melee) _attackableView.AttackHitEvent += MeleeAttack;
-            if (fightObjectModel.TypeAttack == TypeAttack.Distance) _attackableView.AttackHitEvent += DistanceAttack;
+        private void SubscribeToAttackEvent()
+        {
+            switch (Model.TypeAttack)
+            {
+                case TypeAttack.Melee:
+                    View.AttackHitEvent += MeleeAttack;
+                    break;
+                case TypeAttack.Distance:
+                    View.AttackHitEvent += DistanceAttack;
+                    break;
+            }
         }
 
         public void Attack()
         {
-            if (_fightObjectModel.AimObject == null || _fightObjectModel.AimObject.Equals(null))
+            if (Model.AimObject == null || Model.AimObject.Equals(null))
                 return;
 
-            if (Time.time - _lastAttackTime < _fightObjectModel.AllAnimAttackTime)
+            if (Time.time - _lastAttackTime < Model.AllAnimAttackTime)
                 return;
 
-            var distance =
-                PositionExtention.GetDistanceBetweenObjects(_transform, _fightObjectModel.AimObject.transform);
-            if (distance > _fightObjectModel.AttackRange)
+            if (!IsTargetInRange())
             {
-                _attackableView.SetWalking(true);
+                View.SetWalking(true);
                 return;
             }
 
             _lastAttackTime = Time.time;
-            _attackableView.SetAttack(true);
+            View.SetAttack(true);
         }
 
         private void MeleeAttack()
         {
-            if (_fightObjectModel.AimObject == null)
+            if (!IsTargetValidAndInRange())
             {
-                _attackableView.SetWalking(true);
+                View.SetWalking(true);
                 return;
             }
 
-            var distance =
-                PositionExtention.GetDistanceBetweenObjects(_transform, _fightObjectModel.AimObject.transform);
-            if (distance > _fightObjectModel.AttackRange)
-            {
-                _attackableView.SetWalking(true);
-                return;
-            }
+            var target = Model.AimObject;
+            target.CurrentHealth -= Model.DamageAmount;
 
-            _fightObjectModel.AimObject.CurrentHealth -= _fightObjectModel.DamageAmount;
-            if (_fightObjectModel.AimObject.CurrentHealth <= 0) _fightObjectModel.AimObject.Killed();
-            //_fightObjectModel.AimObject.ObjectModel.Transform.gameObject.SetActive(false);
+            if (target.CurrentHealth <= 0)
+                target.Killed();
         }
 
         private void DistanceAttack()
         {
-            if (_attackableView.FirePoint == null || _fightObjectModel.AimObject == null)
+            if (View.FirePoint == null || Model.AimObject == null)
                 return;
 
-            var projectile = _projectilePool.Get(_attackableView.ProjectileType, _attackableView.FirePoint.position);
-            projectile._damage = _fightObjectModel.DamageAmount;
-            projectile._ownerWarSide = _fightObjectModel.WarSide;
-            projectile.LaunchToPoint(_fightObjectModel.AimObject.transform.position +
-                                     Vector3.up * (_fightObjectModel.AimObject.HeightObject / 2),
-                _attackableView.ProjectileSpeed);
+            var projectile = _projectilePool.Get(View.ProjectileType, View.FirePoint.position);
+            projectile.Owner = _controller;
+            projectile.OwnerWarSide = Model.WarSide;
+            projectile.Damage = Model.DamageAmount;
+
+            var targetPosition = Model.AimObject.transform.position +
+                                 Vector3.up * (Model.AimObject.HeightObject / 2f);
+
+            projectile.LaunchToPoint(targetPosition, View.ProjectileSpeed);
+        }
+
+        private bool IsTargetValidAndInRange()
+        {
+            if (Model.AimObject == null)
+                return false;
+
+            return IsTargetInRange();
+        }
+
+        private bool IsTargetInRange()
+        {
+            var targetTransform = Model.AimObject?.transform;
+            if (targetTransform == null)
+                return false;
+
+            var distance = PositionExtention.GetDistanceBetweenObjects(_transform, targetTransform);
+            return distance <= Model.AttackRange;
         }
 
         public void Dispose()
         {
-            if (_fightObjectModel.TypeAttack == TypeAttack.Melee) _attackableView.AttackHitEvent -= MeleeAttack;
-            if (_fightObjectModel.TypeAttack == TypeAttack.Distance) _attackableView.AttackHitEvent -= DistanceAttack;
+            switch (Model.TypeAttack)
+            {
+                case TypeAttack.Melee:
+                    View.AttackHitEvent -= MeleeAttack;
+                    break;
+                case TypeAttack.Distance:
+                    View.AttackHitEvent -= DistanceAttack;
+                    break;
+            }
         }
     }
 }

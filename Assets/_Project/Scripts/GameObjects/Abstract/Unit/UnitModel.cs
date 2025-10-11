@@ -23,7 +23,7 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
     [MemoryPackUnion(3, typeof(ArcherEnemyModel))]
     [MemoryPackUnion(4, typeof(ArcherFriendModel))]
     [MemoryPackUnion(5, typeof(FlyingEnemyModel))]
-    public abstract partial class UnitModel : ObjectModel, IFightObjectModel
+    public abstract partial class UnitModel : ObjectModel, IFightModel
     {
         [field: Header("Unit Type")]
         [MemoryPackInclude][field: SerializeField] public UnitType UnitType { get; set; }

@@ -4,13 +4,15 @@ using _General.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract.BaseObject;
 using _Project.Scripts.Interfaces;
+using _Project.Scripts.Interfaces.Model;
+using _Project.Scripts.Interfaces.View;
 using _Project.Scripts.Pools;
 using UnityEngine;
 using VContainer;
 
 namespace _Project.Scripts.GameObjects.Abstract.Unit
 {
-    public abstract class UnitController : ObjectController
+    public abstract class UnitController : ObjectController, IFightController
     {
         [Inject] protected UnitPool UnitPool;
 
@@ -18,6 +20,8 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
         protected abstract UnitView UnitView { get; }
         protected override ObjectModel ObjectModel => UnitModel;
         protected override ObjectView ObjectView => UnitView;
+        public IFightModel FightModel => UnitModel;
+        public IFightView FightView => UnitView;
         
         public Action<UnitController> OnKilled;
         public UnitType UnitType => UnitModel.UnitType;

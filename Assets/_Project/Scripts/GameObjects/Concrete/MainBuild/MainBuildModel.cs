@@ -11,7 +11,7 @@ namespace _Project.Scripts.GameObjects.Concrete.MainBuild
 {
     [Serializable]
     [MemoryPackable]
-    public partial class MainBuildModel : BuildModel, IFightObjectModel
+    public partial class MainBuildModel : BuildModel, IFightModel
     {
         [field: Header("Attack")] 
         [MemoryPackIgnore][field: SerializeField] public float AttackRange { get; set; } = 10f;

@@ -42,7 +42,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             
             _playerMovementSystem = new PlayerMovementSystem(Model, View, transform);
             _detectionAim = new DetectionAim(Model, transform);
-            _damageSystem = new DamageSystem(Model, View, transform);
+            _damageSystem = new DamageSystem(this, transform);
             _regenerationHpSystem = new RegenerationHpSystem(Model, View);
 
             return default;
@@ -53,6 +53,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             base.FixedUpdate();
             _detectionAim?.DetectAim();
             _damageSystem?.Attack();
+            View.UpdateUltimateBar(Model.CurrentValueUltimate, Model.NeedValueUltimate);
         }
 
         private void Update()

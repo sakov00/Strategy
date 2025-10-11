@@ -30,7 +30,7 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
     [MemoryPackUnion(8, typeof(ArcherEnemyModel))]
     [MemoryPackUnion(9, typeof(ArcherFriendModel))]
     [MemoryPackUnion(10, typeof(FlyingEnemyModel))]
-    public abstract partial class ObjectModel : IHealthModel, ISavableModel
+    public abstract partial class ObjectModel : ISavableModel
     {
         [MemoryPackInclude][field:SerializeField] public int Id { get; set; }
         

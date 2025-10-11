@@ -37,7 +37,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FlyingEnemy
 
             _unitMovementSystem = new UnitMovementSystem(Model, View, transform);
             _detectionAim = new DetectionAim(Model, transform);
-            _damageSystem = new DamageSystem(Model, View, transform);
+            _damageSystem = new DamageSystem(this, transform);
             View.Initialize();
             return default;
         }

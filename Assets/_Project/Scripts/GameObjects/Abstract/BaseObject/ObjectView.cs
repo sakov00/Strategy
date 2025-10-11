@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Abstract.BaseObject
 {
-    public abstract class ObjectView : MonoBehaviour, IHealthView
+    public abstract class ObjectView : MonoBehaviour
     {
         [SerializeField] protected Renderer _objRenderer;
         [SerializeField] protected UniversalBar _healthBar;

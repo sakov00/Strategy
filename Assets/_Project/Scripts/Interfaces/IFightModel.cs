@@ -3,8 +3,15 @@ using _Project.Scripts.GameObjects.Abstract.BaseObject;
 
 namespace _Project.Scripts.Interfaces.Model
 {
-    public interface IAttackableModel
+    public interface IFightModel
     {
+        public WarSide WarSide { get; }
+        public float DelayRegeneration { get; }
+        public float RegenerateHealthInSecond { get; }
+        public int SecondsWithoutDamage { get; set; }
+        public float MaxHealth { get; }
+        public float CurrentHealth { get; set; }
+        
         public float AttackRange { get; set; }
         public int DamageAmount { get; set; }
         public float AllAnimAttackTime { get; set; }

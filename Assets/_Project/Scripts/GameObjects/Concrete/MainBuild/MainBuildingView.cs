@@ -7,7 +7,7 @@ using UnityEngine;
 namespace _Project.Scripts.GameObjects.Concrete.MainBuild
 {
     [Serializable]
-    public class MainBuildingView : BuildView, IAttackableView
+    public class MainBuildingView : BuildView, IFightView
     {
         [field: SerializeField] public ProjectileType ProjectileType { get; set; }
         [field: SerializeField] public Transform FirePoint { get; set; }

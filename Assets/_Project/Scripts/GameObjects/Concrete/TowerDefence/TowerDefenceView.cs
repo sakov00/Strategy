@@ -7,7 +7,7 @@ using UnityEngine;
 namespace _Project.Scripts.GameObjects.Concrete.TowerDefence
 {
     [Serializable]
-    public class TowerDefenceView : BuildView, IAttackableView
+    public class TowerDefenceView : BuildView, IFightView
     {
         [field: SerializeField] public ProjectileType ProjectileType { get; set; }
         [field: SerializeField] public Transform FirePoint { get; set; }

@@ -1,6 +1,9 @@
 using _General.Scripts._VContainer;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract.BaseObject;
+using _Project.Scripts.GameObjects.Abstract.Unit;
+using _Project.Scripts.GameObjects.Concrete.Player;
+using _Project.Scripts.Interfaces;
 using _Project.Scripts.Pools;
 using UnityEngine;
 using VContainer;
@@ -10,10 +13,11 @@ namespace _Project.Scripts.GameObjects.Additional.Projectiles
     public abstract class Projectile : MonoBehaviour
     {
         [Inject] private ProjectilePool _projectilePool;
+        
+        [field: SerializeField] public IFightController Owner { get; set; }
         [field: SerializeField] public ProjectileType ProjectileType { get; set; }
-
-        public int _damage;
-        public WarSide _ownerWarSide;
+        [field: SerializeField] public int Damage { get; set; }
+        [field: SerializeField] public WarSide OwnerWarSide { get; set; }
 
         private void Start()
         {
@@ -30,11 +34,15 @@ namespace _Project.Scripts.GameObjects.Additional.Projectiles
         {
             var target = other.GetComponent<ObjectController>();
 
-            if (target != null && target.WarSide != _ownerWarSide)
+            if (target != null && target.WarSide != OwnerWarSide)
             {
-                target.CurrentHealth -= _damage;
+                target.CurrentHealth -= Damage;
                 ReturnToPool();
-                if (target.CurrentHealth <= 0) target.Killed();
+                if (Owner is PlayerController playerController)
+                    playerController.Model.CurrentValueUltimate += 10;
+                if (target.CurrentHealth <= 0)
+                    target.Killed();
+                
             }
             else if (target != null)
             {

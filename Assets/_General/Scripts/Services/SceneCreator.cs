@@ -47,7 +47,7 @@ namespace _General.Scripts.Services
                     FriendsGroupModel friendsGroupModel => 
                         _unitFactory.CreateFriendsGroup(friendsGroupModel.UnitType, friendsGroupModel.SavePosition, friendsGroupModel.SaveRotation),
                     TerrainModel terrainModel => 
-                        _environmentFactory.CreateTerrain(0),
+                        _environmentFactory.CreateTerrain(terrainModel.SavePosition, terrainModel.SaveRotation),
                     EnemyRoadModel enemyRoadModel => 
                         _environmentFactory.CreateRoads(enemyRoadModel.SavePosition, enemyRoadModel.SaveRotation),
                     BuildingZoneModel buildingZoneModel => 

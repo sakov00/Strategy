@@ -12,12 +12,12 @@ namespace _Project.Scripts.GameObjects.ActionSystems
     {
         [Inject] private LiveRegistry _liveRegistry;
         
-        private readonly IFightObjectModel _fightObjectModel;
+        private readonly IFightModel _fightModel;
         private readonly Transform _transform;
 
-        public DetectionAim(IFightObjectModel fightObjectModel, Transform transform)
+        public DetectionAim(IFightModel fightModel, Transform transform)
         {
-            _fightObjectModel = fightObjectModel;
+            _fightModel = fightModel;
             _transform = transform;
 
             InjectManager.Inject(this);
@@ -26,12 +26,12 @@ namespace _Project.Scripts.GameObjects.ActionSystems
         public void DetectAim()
         {
             ObjectController nearestTarget = null;
-            var nearestDistanceSqr = _fightObjectModel.DetectionRadius;
+            var nearestDistanceSqr = _fightModel.DetectionRadius;
 
             foreach (var obj in _liveRegistry.GetAllReactive())
             {
                 if (obj == null || obj.CurrentHealth <= 0 ||
-                    obj.WarSide == _fightObjectModel.WarSide)
+                    obj.WarSide == _fightModel.WarSide)
                     continue;
 
                 var distance = PositionExtention.GetDistanceBetweenObjects(_transform, obj.transform);
@@ -42,7 +42,7 @@ namespace _Project.Scripts.GameObjects.ActionSystems
                 }
             }
 
-            _fightObjectModel.AimObject = nearestTarget;
+            _fightModel.AimObject = nearestTarget;
         }
     }
 }

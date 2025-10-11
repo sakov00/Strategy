@@ -26,9 +26,9 @@ namespace _Project.Scripts.Factories
             return environmentController;
         }
 
-        public TerrainController CreateTerrain(int levelIndex)
+        public TerrainController CreateTerrain(Vector3 position = default, Quaternion rotation = default)
         {
-            return _resolver.Instantiate(_levelsConfig.terrainControllers[levelIndex]);
+            return _resolver.Instantiate(_levelsConfig.terrainPrefab, position, rotation);
         }
         
         public EnemyRoadController CreateRoads(Vector3 position = default, Quaternion rotation = default)

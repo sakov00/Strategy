@@ -16,6 +16,10 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         [MemoryPackInclude][field:SerializeField] public bool IsNoDamageable { get; set; }
         [MemoryPackIgnore][field:SerializeField] public int NeedTimeResurrection  { get; set; } = 3;
         [MemoryPackInclude][field:SerializeField] public int CurrentTimeResurrection { get; set; }
+
+        [field: Header("Abilities")]
+        [MemoryPackIgnore][field: SerializeField] public int NeedValueUltimate { get; set; } = 100;
+        [MemoryPackInclude][field: SerializeField] public int CurrentValueUltimate { get; set; }
         
         public override float CurrentHealth
         {
@@ -36,6 +40,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             CurrentTimeNoDamage = objectModel.CurrentTimeNoDamage;
             IsNoDamageable = objectModel.IsNoDamageable;
             CurrentTimeResurrection = objectModel.CurrentTimeResurrection;
+            CurrentValueUltimate = objectModel.CurrentValueUltimate;
         }
         
         public override ISavableModel GetSaveData()
@@ -45,6 +50,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
                 CurrentTimeNoDamage = CurrentTimeNoDamage,
                 IsNoDamageable = IsNoDamageable,
                 CurrentTimeResurrection = CurrentTimeResurrection,
+                CurrentValueUltimate = CurrentValueUltimate,
             };
             FillObjectModelData(model);
             FillUnitModelData(model);

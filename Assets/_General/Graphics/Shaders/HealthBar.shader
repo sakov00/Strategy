@@ -1,72 +1,61 @@
-Shader "UI/HealthBar" {
-    Properties {
-        _MainTex ("Texture", 2D) = "white" {}
-        _Fill ("Fill", float) = 0
+Shader "Custom/Bar3D"
+{
+    Properties
+    {
+        _Fill("Fill Amount", Range(0,1)) = 1
+        _FillColor("Fill Color", Color) = (0,1,0,1)
+        _EmptyColor("Empty Color", Color) = (1,0,0,1)
     }
-    SubShader {
-        Tags { "Queue"="Overlay" }
+
+    SubShader
+    {
+        Tags { "RenderType"="Opaque" "RenderPipeline"="UniversalRenderPipeline" }
         LOD 100
 
-        Pass {
-            ZTest Off
+        Pass
+        {
+            Name "ForwardLit"
+            Tags { "LightMode"="UniversalForward" }
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            // make fog work
-            #pragma multi_compile_fog
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            #pragma multi_compile_instancing
-
-
-            #include "UnityCG.cginc"
-
-            struct appdata {
-                float4 vertex : POSITION;
+            struct Attributes
+            {
+                float4 positionOS : POSITION;
                 float2 uv : TEXCOORD0;
-                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
-            struct v2f {
+            struct Varyings
+            {
+                float4 positionHCS : SV_POSITION;
                 float2 uv : TEXCOORD0;
-                float4 vertex : SV_POSITION;
-                // If you need instance data in the fragment shader, uncomment next line
-                //UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
+            CBUFFER_START(UnityPerMaterial)
+                float _Fill;
+                float4 _FillColor;
+                float4 _EmptyColor;
+            CBUFFER_END
 
-            UNITY_INSTANCING_BUFFER_START(Props)
-            UNITY_DEFINE_INSTANCED_PROP(float, _Fill)
-            UNITY_INSTANCING_BUFFER_END(Props)
-
-            v2f vert (appdata v) {
-                v2f o;
-                UNITY_SETUP_INSTANCE_ID(v);
-                // If you need instance data in the fragment shader, uncomment next line
-                // UNITY_TRANSFER_INSTANCE_ID(v, o);
-
-                float fill = UNITY_ACCESS_INSTANCED_PROP(Props, _Fill);
-
-                o.vertex = UnityObjectToClipPos(v.vertex);
-
-                // generate UVs from fill level (assumed texture is clamped)
-                o.uv = v.uv;
-                o.uv.x += 0.5 - fill;
-                return o;
+            Varyings vert (Attributes IN)
+            {
+                Varyings OUT;
+                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+                OUT.uv = IN.uv;
+                return OUT;
             }
 
-            fixed4 frag (v2f i) : SV_Target {
-
-                // Could access instanced data here too like:
-                // UNITY_SETUP_INSTANCE_ID(i);
-                // UNITY_ACCESS_INSTANCED_PROP(Props, _Foo);
-                // But, remember to uncomment lines flagged above
-
-                return tex2D(_MainTex, i.uv);
+            half4 frag (Varyings IN) : SV_Target
+            {
+                // заполненная часть — слева направо
+                float filled = step(IN.uv.x, _Fill);
+                float4 color = lerp(_EmptyColor, _FillColor, filled);
+                return color;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

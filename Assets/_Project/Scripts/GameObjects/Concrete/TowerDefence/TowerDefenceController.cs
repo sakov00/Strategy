@@ -3,17 +3,22 @@ using _General.Scripts.Interfaces;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract;
 using _Project.Scripts.GameObjects.ActionSystems;
+using _Project.Scripts.Interfaces;
+using _Project.Scripts.Interfaces.Model;
+using _Project.Scripts.Interfaces.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Concrete.TowerDefence
 {
-    public class TowerDefenceController : BuildController
+    public class TowerDefenceController : BuildController, IFightController
     {
         [field: SerializeField] public TowerDefenceModel Model { get; private set; }
         [field: SerializeField] public TowerDefenceView View { get; private set; }
         protected override BuildModel BuildModel => Model;
         protected override BuildView BuildView => View;
+        public IFightModel FightModel => Model;
+        public IFightView FightView => View;
         
         private DamageSystem _damageSystem;
         private DetectionAim _detectionAim;
@@ -32,7 +37,7 @@ namespace _Project.Scripts.GameObjects.Concrete.TowerDefence
             Model.CurrentHealth = Model.MaxHealth;
 
             _detectionAim = new DetectionAim(Model, transform);
-            _damageSystem = new DamageSystem(Model, View, transform);
+            _damageSystem = new DamageSystem(this, transform);
             View.Initialize();
             return default;
         }

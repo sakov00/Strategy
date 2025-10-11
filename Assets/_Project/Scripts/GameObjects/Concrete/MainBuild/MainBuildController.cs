@@ -2,18 +2,24 @@ using _General.Scripts._VContainer;
 using _General.Scripts.Interfaces;
 using _Project.Scripts.Enums;
 using _Project.Scripts.GameObjects.Abstract;
+using _Project.Scripts.GameObjects.Abstract.Unit;
 using _Project.Scripts.GameObjects.ActionSystems;
+using _Project.Scripts.Interfaces;
+using _Project.Scripts.Interfaces.Model;
+using _Project.Scripts.Interfaces.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Project.Scripts.GameObjects.Concrete.MainBuild
 {
-    public class MainBuildController : BuildController
+    public class MainBuildController : BuildController, IFightController
     {
         [field: SerializeField] public MainBuildModel Model { get; private set; }
         [field: SerializeField] public MainBuildingView View { get; private set; }
         protected override BuildModel BuildModel => Model;
         protected override BuildView BuildView => View;
+        public IFightModel FightModel => Model;
+        public IFightView FightView => View;
         
         private DamageSystem _damageSystem;
         private DetectionAim _detectionAim;
@@ -32,7 +38,7 @@ namespace _Project.Scripts.GameObjects.Concrete.MainBuild
             Model.CurrentHealth = Model.MaxHealth;
             
             _detectionAim = new DetectionAim(Model, transform);
-            _damageSystem = new DamageSystem(Model, View, transform);
+            _damageSystem = new DamageSystem(this, transform);
             View.Initialize();
             return default;
         }

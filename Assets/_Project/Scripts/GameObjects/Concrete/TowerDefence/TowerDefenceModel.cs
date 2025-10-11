@@ -11,7 +11,7 @@ namespace _Project.Scripts.GameObjects.Concrete.TowerDefence
 {
     [Serializable]
     [MemoryPackable]
-    public partial class TowerDefenceModel : BuildModel, IFightObjectModel
+    public partial class TowerDefenceModel : BuildModel, IFightModel
     {
         [field: Header("Attack")] 
         [MemoryPackIgnore][field: SerializeField] public float AttackRange { get; set; } = 10f;

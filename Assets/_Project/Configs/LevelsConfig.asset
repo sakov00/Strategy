@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4bbb2adad240988eef68090d318c5c, type: 3}
   m_Name: LevelsConfig
   m_EditorClassIdentifier: 
-  terrainControllers:
-  - {fileID: 8150207810336336586, guid: cf7d0713a791ec34c85886295f2bfd66, type: 3}
+  terrainPrefab: {fileID: 8150207810336336586, guid: cf7d0713a791ec34c85886295f2bfd66,
+    type: 3}
   environmentPrefabs: []
   roadPrefab: {fileID: 1685506476759625920, guid: df8d665daa488034f889c1b9a52f7bfc,
     type: 3}
