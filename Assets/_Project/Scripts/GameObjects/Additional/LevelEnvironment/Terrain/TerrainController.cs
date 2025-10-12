@@ -76,18 +76,26 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
                 var vertices = new Vector3[_model.Vertices.Length];
                 for (var i = 0; i < vertices.Length; i++)
                     vertices[i] = _model.Vertices[i].ToVector3();
+                
+                await UniTask.Yield();
 
                 var uvs = new Vector2[_model.UVs.Length];
                 for (var i = 0; i < uvs.Length; i++)
                     uvs[i] = _model.UVs[i].ToVector2();
+                
+                await UniTask.Yield();
 
                 var triangles = new ushort[_model.Triangles.Length];
                 for (var i = 0; i < triangles.Length; i++)
                     triangles[i] = _model.Triangles[i];
+                
+                await UniTask.Yield();
 
                 var normals = new Vector3[_model.Normals.Length];
                 for (var i = 0; i < normals.Length; i++)
                     normals[i] = _model.Normals[i].ToVector3();
+                
+                await UniTask.Yield();
 
                 _meshFilter.mesh.Clear();
                 _meshFilter.mesh.SetVertices(vertices);

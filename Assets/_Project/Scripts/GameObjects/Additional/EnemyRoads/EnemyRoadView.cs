@@ -22,7 +22,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
         [SerializeField] private List<TextMeshPro> _enemyIcons;
         [SerializeField] private float _distanceBetweenIcons = 4;
 
-        public void Initialize(SplineContainer splineContainer)
+        private void Awake()
         {
             InjectManager.Inject(this);
             if(_appData.AppMode == AppMode.Game)

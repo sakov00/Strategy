@@ -66,7 +66,6 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             
             StartSpawn(false);
 
-            _view.Initialize(_splineContainer);
             _view.RefreshInfoRound(_splineContainer, _model.RoundEnemyList);
             CreateRoadMesh();
             return default;

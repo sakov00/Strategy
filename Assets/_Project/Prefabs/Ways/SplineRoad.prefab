@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8545495577338552256}
   - component: {fileID: 7578898236394250671}
   - component: {fileID: 3007797554529870370}
-  - component: {fileID: 2206013256424038267}
+  - component: {fileID: 5763930403049467171}
   m_Layer: 0
   m_Name: SplineRoad
   m_TagString: Untagged
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a707726b7c7743c4855d6204bda52ad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.GameObjects.EnemyRoads.EnemyRoadView
-  _loftRoadBehaviour: {fileID: 2206013256424038267}
+  _loftRoadBehaviour: {fileID: 5763930403049467171}
   _enemyIcons:
   - {fileID: 9151757912118067560}
   - {fileID: 9208011910899648912}
@@ -189,7 +189,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2494130065611548957}
   m_Mesh: {fileID: 0}
---- !u!114 &2206013256424038267
+--- !u!114 &5763930403049467171
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

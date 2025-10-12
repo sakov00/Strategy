@@ -19,7 +19,7 @@ namespace _General.Scripts.Services
             foreach (var obj in _saveRegistry.GetAllByType<IDestroyable>())
             {
                 obj.Destroy();
-                await UniTask.NextFrame();
+                await UniTask.Yield();
             }
 
             foreach (var obj in _saveRegistry.GetAllByType<IPoolableDispose>())

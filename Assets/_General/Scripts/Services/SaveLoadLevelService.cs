@@ -40,7 +40,7 @@ namespace _General.Scripts.Services
                 await LoadLevelProgress(index);
             else
                 await LoadLevelDefault(index);
-            await UniTask.NextFrame();
+            await UniTask.Yield();
         }
 
         public void RemoveProgress(int fakeIndex)

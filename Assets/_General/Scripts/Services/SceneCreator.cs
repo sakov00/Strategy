@@ -61,7 +61,7 @@ namespace _General.Scripts.Services
                 savableController.SetSavableModel(model);
                 if(isInitialize) await savableController.InitializeAsync();
                 
-                await UniTask.NextFrame();
+                await UniTask.Yield();
             }
         }
         
