@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using _General.Scripts._VContainer;
 using _General.Scripts.AllAppData;
+using _General.Scripts.Enums;
 using _Project.Scripts.Enums;
 using TMPro;
+using Unity.Mathematics;
 using Unity.Splines.Examples;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -23,7 +25,8 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
         public void Initialize(SplineContainer splineContainer)
         {
             InjectManager.Inject(this);
-            _loftRoadBehaviour.LoftAllRoads();
+            if(_appData.AppMode == AppMode.Game)
+                _loftRoadBehaviour.enabled = false;
         }
 
         public void RefreshInfoRound(SplineContainer splineContainer, List<EnemyGroup> roundEnemyList)

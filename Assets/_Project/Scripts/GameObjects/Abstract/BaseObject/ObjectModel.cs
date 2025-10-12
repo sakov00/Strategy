@@ -39,7 +39,7 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         [MemoryPackIgnore][field:SerializeField] public float DelayRegeneration { get; set; } = 3f;
         [MemoryPackIgnore][field:SerializeField] public float RegenerateHealthInSecond { get; set; } = 5f;
         [MemoryPackInclude][field:SerializeField] public int SecondsWithoutDamage { get; set; }
-        [MemoryPackIgnore] [field: SerializeField] public float MaxHealth { get; set; } = 100f;
+        [MemoryPackInclude] [field: SerializeField] public float MaxHealth { get; set; } = 100f;
         [MemoryPackInclude][SerializeField] protected float _currentHealth;
         [MemoryPackInclude] public Vector3 SavePosition { get; set; }
         [MemoryPackInclude] public Quaternion SaveRotation { get; set; }
@@ -59,7 +59,7 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
             if (model is not ObjectModel objectModel) return;
             Id = objectModel.Id;
             SecondsWithoutDamage = objectModel.SecondsWithoutDamage;
-            _currentHealth = objectModel.CurrentHealth;
+            CurrentHealth = objectModel.CurrentHealth;
         }
 
         public abstract ISavableModel GetSaveData();
