@@ -40,6 +40,7 @@ namespace _General.Scripts.Services
                 await LoadLevelProgress(index);
             else
                 await LoadLevelDefault(index);
+            await UniTask.NextFrame();
         }
 
         public void RemoveProgress(int fakeIndex)
@@ -54,9 +55,11 @@ namespace _General.Scripts.Services
             var allObjects = _saveRegistry.GetAll();
             _appData.LevelData.SavableModels = allObjects.Select(o => o.GetSavableModel()).ToList();
 
-            var data = MemoryPackSerializer.Serialize(_appData.LevelData);
-            var compressed = LZ4Pickler.Pickle(data);
-            await File.WriteAllBytesAsync(path, compressed);
+            await using var stream = new MemoryStream();
+            await MemoryPackSerializer.SerializeAsync(stream, _appData.LevelData);
+            byte[] serializedData = stream.ToArray();
+            var compressedAsync = LZ4Pickler.Pickle(serializedData);
+            await File.WriteAllBytesAsync(path, compressedAsync);
             
             Debug.Log($"Level saved to {path}");
         }
@@ -71,9 +74,8 @@ namespace _General.Scripts.Services
 
             var compressed = await File.ReadAllBytesAsync(path);
             var data = LZ4Pickler.Unpickle(compressed);
-            await UniTask.NextFrame();
-            var levelData = MemoryPackSerializer.Deserialize<LevelData>(data);
-            await UniTask.NextFrame();
+            await using var stream = new MemoryStream(data);
+            var levelData = await MemoryPackSerializer.DeserializeAsync<LevelData>(stream);
             _appData.LevelData.SetData(levelData);
         }
 
@@ -89,9 +91,8 @@ namespace _General.Scripts.Services
             }
             
             var data = LZ4Pickler.Unpickle(request.downloadHandler.data);
-            await UniTask.NextFrame();
-            var levelData = MemoryPackSerializer.Deserialize<LevelData>(data);
-            await UniTask.NextFrame();
+            await using var stream = new MemoryStream(data);
+            var levelData = await MemoryPackSerializer.DeserializeAsync<LevelData>(stream);
             _appData.LevelData.SetData(levelData);
         }
     }

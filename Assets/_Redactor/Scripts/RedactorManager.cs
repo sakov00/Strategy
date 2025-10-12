@@ -21,6 +21,7 @@ namespace _Redactor.Scripts
         public override async UniTask StartAsync(CancellationToken cancellation = default)
         {
             WindowsManager.ShowFastWindow<LevelRedactorWindowPresenter>();
+            SetSavableData();
         }
         
         public override async UniTask StartLevel(int levelIndex)

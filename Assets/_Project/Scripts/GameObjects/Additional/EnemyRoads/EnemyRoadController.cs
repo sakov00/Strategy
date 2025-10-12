@@ -68,7 +68,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
 
             _view.Initialize(_splineContainer);
             _view.RefreshInfoRound(_splineContainer, _model.RoundEnemyList);
-            ChangeRoadMesh();
+            CreateRoadMesh();
             return default;
         }
 
@@ -110,7 +110,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
             _splineContainer.ApplyData(_model.SplineContainerData);
         }
 
-        private void ChangeRoadMesh()
+        private void CreateRoadMesh()
         {
             if (_meshFilter != null && _model.Vertices != null && _model.UVs != null && _model.Triangles != null)
             {

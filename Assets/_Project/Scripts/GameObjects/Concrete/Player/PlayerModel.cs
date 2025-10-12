@@ -40,7 +40,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             }
         }
         
-        public int CurrentValueUltimate
+        [MemoryPackInclude] public int CurrentValueUltimate
         {
             get => _currentValueUltimate;
             set => _currentValueUltimate = Mathf.Clamp(value, 0, MaxValueUltimate);
