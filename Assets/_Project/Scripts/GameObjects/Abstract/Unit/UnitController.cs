@@ -61,6 +61,7 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
                 UnitPool.Return(this);
                 OnKilled?.Invoke(this);
                 OnKilled = null;
+                UnitModel.AimObject = null;
             }
         }
     }

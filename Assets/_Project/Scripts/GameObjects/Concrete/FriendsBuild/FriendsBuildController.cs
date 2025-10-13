@@ -102,6 +102,10 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
             base.Dispose(returnToPool, clearFromRegistry);
+            if (returnToPool)
+            {
+                Model.FriendsGroupId = 0;
+            }
             _gameTimer.Unsubscribe(HandleSpawnTimer);
             if(FriendsGroup != null) FriendsGroup.UnitOnKilled -= CheckRemovedUnit;
         }

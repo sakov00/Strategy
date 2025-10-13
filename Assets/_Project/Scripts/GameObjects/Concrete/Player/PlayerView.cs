@@ -15,6 +15,15 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         {
             base.Initialize();
         }
+        
+        public override void SetWalking(bool isWalking)
+        {
+        }
+
+        public override void SetAttacking(bool isAttacking)
+        {
+            OnAttackHit();
+        }
 
         public void UpdateLoadBar(float currentValue, float maxValue)
         {

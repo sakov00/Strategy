@@ -22,8 +22,16 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
 
         private bool _isAttacking;
         private bool _isWalking;
+        
+        public override void Initialize()
+        {
+            base.Initialize();
+            _isWalking = true;
+            _isAttacking = false;
+            UpdateAnimatorState();
+        }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (_animator == null) return;
 
@@ -31,7 +39,7 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
             Agent.isStopped = !state.IsName("Walking");
         }
 
-        public void SetWalking(bool isWalking)
+        public virtual void SetWalking(bool isWalking)
         {
             if (_isWalking == isWalking) return;
             _isWalking = isWalking;
@@ -41,7 +49,7 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
             UpdateAnimatorState();
         }
 
-        public void SetAttacking(bool isAttacking)
+        public virtual void SetAttacking(bool isAttacking)
         {
             if (_isAttacking == isAttacking) return;
             _isAttacking = isAttacking;
@@ -51,7 +59,7 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
             UpdateAnimatorState();
         }
 
-        private void UpdateAnimatorState()
+        protected virtual void UpdateAnimatorState()
         {
             if (_animator == null) return;
 
@@ -62,13 +70,6 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
         public void OnAttackHit()
         {
             AttackHitEvent?.Invoke();
-        }
-
-        public override void Initialize()
-        {
-            base.Initialize();
-            _isWalking = true;
-            UpdateAnimatorState();
         }
 
         public Vector3 GetPosition() => transform.position;

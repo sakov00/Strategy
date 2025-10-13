@@ -53,6 +53,7 @@ namespace _Project.Scripts.GameObjects.Concrete.TowerDefence
         {
             base.Dispose(returnToPool, clearFromRegistry);
             _damageSystem?.Dispose();
+            Model.AimObject = null;
         }
     }
 }

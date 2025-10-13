@@ -56,6 +56,7 @@ namespace _Project.Scripts.GameObjects.Concrete.MainBuild
         {
             base.Dispose(returnToPool, clearFromRegistry);
             _damageSystem?.Dispose();
+            Model.AimObject = null;
         }
     }
 }
