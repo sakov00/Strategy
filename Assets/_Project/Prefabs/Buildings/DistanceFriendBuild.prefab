@@ -180,16 +180,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Model>k__BackingField:
     <Id>k__BackingField: 0
-    _warSide: 0
-    _delayRegeneration: 3
-    _regenerateHealthInSecond: 5
-    _maxHealth: 100
+    <WarSide>k__BackingField: 0
+    <DelayRegeneration>k__BackingField: 3
+    <RegenerateHealthInSecond>k__BackingField: 5
+    <SecondsWithoutDamage>k__BackingField: 0
+    <MaxHealth>k__BackingField: 100
     _currentHealth: 100
     <BuildType>k__BackingField: 3
     <BuildPrice>k__BackingField: 0
-    _unitType: 3
-    _timeCreateUnits: 5
-    _friendsGroupId: 0
+    <UnitType>k__BackingField: 3
+    <TimeCreateUnits>k__BackingField: 5
+    <FriendsGroupId>k__BackingField: 0
+    <NeedRestoreUnitsCount>k__BackingField: 0
+    <CurrentSpawnTimer>k__BackingField: -1
   <View>k__BackingField: {fileID: 2514190455966307293}
 --- !u!114 &2514190455966307293
 MonoBehaviour:

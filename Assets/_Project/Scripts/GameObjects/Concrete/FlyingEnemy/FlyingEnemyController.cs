@@ -18,13 +18,11 @@ namespace _Project.Scripts.GameObjects.Concrete.FlyingEnemy
         protected override UnitView UnitView => View;
         
         private DamageSystem _damageSystem;
-        private DetectionAim _detectionAim;
         private UnitMovementSystem _unitMovementSystem;
         
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            _detectionAim?.DetectAim();
             _unitMovementSystem?.MoveToAim();
             _damageSystem?.Attack();
         }
@@ -36,7 +34,6 @@ namespace _Project.Scripts.GameObjects.Concrete.FlyingEnemy
             Model.CurrentHealth = Model.MaxHealth;
 
             _unitMovementSystem = new UnitMovementSystem(Model, View, transform);
-            _detectionAim = new DetectionAim(Model, transform);
             _damageSystem = new DamageSystem(this, transform);
             View.Initialize();
             return default;

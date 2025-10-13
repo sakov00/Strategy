@@ -59,7 +59,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
             if (Model.NeedRestoreUnitsCount > 0 && Model.CurrentSpawnTimer < 0)
             {
                 Model.CurrentSpawnTimer = 0;
-                _gameTimer.OnEverySecond += HandleSpawnTimer;
+                _gameTimer.Subscribe(1f, HandleSpawnTimer);
             }
         }
 
@@ -84,7 +84,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
             }
             else
             {
-                _gameTimer.OnEverySecond -= HandleSpawnTimer;
+                _gameTimer.Unsubscribe(HandleSpawnTimer);
                 Model.CurrentSpawnTimer = -1;
             }
         }
@@ -102,7 +102,7 @@ namespace _Project.Scripts.GameObjects.Concrete.FriendsBuild
         public override void Dispose(bool returnToPool = true, bool clearFromRegistry = true)
         {
             base.Dispose(returnToPool, clearFromRegistry);
-            _gameTimer.OnEverySecond -= HandleSpawnTimer;
+            _gameTimer.Unsubscribe(HandleSpawnTimer);
             if(FriendsGroup != null) FriendsGroup.UnitOnKilled -= CheckRemovedUnit;
         }
     }

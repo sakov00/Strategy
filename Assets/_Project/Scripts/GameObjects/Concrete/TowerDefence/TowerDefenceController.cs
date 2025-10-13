@@ -21,12 +21,10 @@ namespace _Project.Scripts.GameObjects.Concrete.TowerDefence
         public IFightView FightView => View;
         
         private DamageSystem _damageSystem;
-        private DetectionAim _detectionAim;
 
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            _detectionAim?.DetectAim();
             _damageSystem?.Attack();
         }
 
@@ -36,7 +34,6 @@ namespace _Project.Scripts.GameObjects.Concrete.TowerDefence
             
             Model.CurrentHealth = Model.MaxHealth;
 
-            _detectionAim = new DetectionAim(Model, transform);
             _damageSystem = new DamageSystem(this, transform);
             View.Initialize();
             return default;

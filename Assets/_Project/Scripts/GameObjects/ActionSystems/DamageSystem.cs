@@ -52,22 +52,16 @@ namespace _Project.Scripts.GameObjects.ActionSystems
                 return;
 
             if (!IsTargetInRange())
-            {
-                View.SetWalking(true);
                 return;
-            }
-
+            
             _lastAttackTime = Time.time;
-            View.SetAttack(true);
+            View.SetAttacking(true);
         }
 
         private void MeleeAttack()
         {
             if (!IsTargetValidAndInRange())
-            {
-                View.SetWalking(true);
                 return;
-            }
 
             var target = Model.AimObject;
             target.CurrentHealth -= Model.DamageAmount;
@@ -102,11 +96,11 @@ namespace _Project.Scripts.GameObjects.ActionSystems
 
         private bool IsTargetInRange()
         {
-            var targetTransform = Model.AimObject?.transform;
-            if (targetTransform == null)
+            if (Model.AimObject == null)
                 return false;
-
-            var distance = PositionExtention.GetDistanceBetweenObjects(_transform, targetTransform);
+            
+            var distance = PositionExtension.GetDistanceBetweenObjects(_transform.position, _transform.localScale,
+                Model.AimObject.transform.position, Model.AimObject.transform.localScale);
             return distance <= Model.AttackRange;
         }
 

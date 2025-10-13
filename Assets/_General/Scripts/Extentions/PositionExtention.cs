@@ -2,37 +2,53 @@ using UnityEngine;
 
 namespace _General.Scripts.Extentions
 {
-    public static class PositionExtention
+    public static class PositionExtension
     {
-        public static float GetDistanceBetweenObjects(Transform a, Transform b)
+        public static float GetDistanceBetweenObjects(Vector3 aPosition, Vector3 aLocalScale, Vector3 bPosition,  Vector3 bLocalScale)
         {
-            var dir = (b.position - a.position).normalized;
-            var aExtent = Vector3.Dot(a.localScale / 2f, AbsVector(dir));
-            var bExtent = Vector3.Dot(b.localScale / 2f, AbsVector(-dir));
+            Vector3 delta = bPosition - aPosition;
+            float centerDistance = delta.magnitude;
 
-            var centerDistance = Vector3.Distance(a.position, b.position);
-            var edgeDistance = centerDistance - aExtent - bExtent;
+            // Если центры совпадают — объекты в одной точке
+            if (centerDistance <= Mathf.Epsilon)
+                return 0f;
+
+            Vector3 dir = delta / centerDistance;
+
+            float aExtent = Vector3.Dot(aLocalScale * 0.5f, Abs(dir));
+            float bExtent = Vector3.Dot(bLocalScale * 0.5f, Abs(dir));
+
+            float edgeDistance = centerDistance - aExtent - bExtent;
 
             return Mathf.Max(0f, edgeDistance);
         }
-        
-        public static float GetDistanceBetweenObjects(Transform a, Transform b, out Vector3 pointA, out Vector3 pointB)
+
+        public static float GetDistanceBetweenObjects(Vector3 aPosition, Vector3 aLocalScale, Vector3 bPosition, Vector3 bLocalScale,
+            out Vector3 pointA, out Vector3 pointB)
         {
-            var dir = (b.position - a.position).normalized;
+            Vector3 delta = bPosition - aPosition;
+            float centerDistance = delta.magnitude;
 
-            var aExtent = Vector3.Dot(a.localScale / 2f, AbsVector(dir));
-            var bExtent = Vector3.Dot(b.localScale / 2f, AbsVector(-dir));
+            if (centerDistance <= Mathf.Epsilon)
+            {
+                pointA = aPosition;
+                pointB = bPosition;
+                return 0f;
+            }
 
-            var centerDistance = Vector3.Distance(a.position, b.position);
+            Vector3 dir = delta / centerDistance;
 
-            pointA = a.position + dir * aExtent;
-            pointB = b.position - dir * bExtent;
+            float aExtent = Vector3.Dot(aLocalScale * 0.5f, Abs(dir));
+            float bExtent = Vector3.Dot(bLocalScale * 0.5f, Abs(dir));
 
-            var edgeDistance = centerDistance - aExtent - bExtent;
+            pointA = aPosition + dir * aExtent;
+            pointB = bPosition - dir * bExtent;
+
+            float edgeDistance = centerDistance - aExtent - bExtent;
 
             return Mathf.Max(0f, edgeDistance);
         }
-        
-        public static Vector3 AbsVector(Vector3 v) => new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
+
+        private static Vector3 Abs(Vector3 v) => new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
     }
 }

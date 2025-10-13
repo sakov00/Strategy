@@ -20,30 +20,43 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
 
         public event Action AttackHitEvent;
 
+        private bool _isAttacking;
+        private bool _isWalking;
+
+        private void Update()
+        {
+            if (_animator == null) return;
+
+            var state = _animator.GetCurrentAnimatorStateInfo(0);
+            Agent.isStopped = !state.IsName("Walking");
+        }
+
         public void SetWalking(bool isWalking)
         {
-            if (_animator == null)
-                return;
+            if (_isWalking == isWalking) return;
+            _isWalking = isWalking;
 
-            ResetAnimations();
+            if (isWalking)
+                _isAttacking = false;
+            UpdateAnimatorState();
         }
 
-        public void SetAttack(bool isAttacking)
+        public void SetAttacking(bool isAttacking)
         {
-            if (_animator == null)
-            {
-                AttackHitEvent?.Invoke();
-                return;
-            }
+            if (_isAttacking == isAttacking) return;
+            _isAttacking = isAttacking;
 
-            ResetAnimations();
-            _animator.SetBool(IsAttack, isAttacking);
+            if (isAttacking)
+                _isWalking = false;
+            UpdateAnimatorState();
         }
 
-        public override void Initialize()
-        { 
-            base.Initialize();
-            SetWalking(true);
+        private void UpdateAnimatorState()
+        {
+            if (_animator == null) return;
+
+            _animator.SetBool(IsWalking, _isWalking && !_isAttacking);
+            _animator.SetBool(IsAttack, _isAttacking);
         }
 
         public void OnAttackHit()
@@ -51,9 +64,14 @@ namespace _Project.Scripts.GameObjects.Abstract.Unit
             AttackHitEvent?.Invoke();
         }
 
-        private void ResetAnimations()
+        public override void Initialize()
         {
-            _animator.SetBool(IsAttack, false);
+            base.Initialize();
+            _isWalking = true;
+            UpdateAnimatorState();
         }
+
+        public Vector3 GetPosition() => transform.position;
+        public Vector3 GetScale() => transform.localScale;
     }
 }

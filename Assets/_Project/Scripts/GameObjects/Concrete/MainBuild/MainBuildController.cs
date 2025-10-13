@@ -18,16 +18,16 @@ namespace _Project.Scripts.GameObjects.Concrete.MainBuild
         [field: SerializeField] public MainBuildingView View { get; private set; }
         protected override BuildModel BuildModel => Model;
         protected override BuildView BuildView => View;
+
         public IFightModel FightModel => Model;
         public IFightView FightView => View;
         
         private DamageSystem _damageSystem;
-        private DetectionAim _detectionAim;
+        private float _heightObject;
 
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            _detectionAim?.DetectAim();
             _damageSystem?.Attack();
         }
 
@@ -37,7 +37,6 @@ namespace _Project.Scripts.GameObjects.Concrete.MainBuild
             
             Model.CurrentHealth = Model.MaxHealth;
             
-            _detectionAim = new DetectionAim(Model, transform);
             _damageSystem = new DamageSystem(this, transform);
             View.Initialize();
             return default;

@@ -9,6 +9,7 @@ using _Project.Scripts.GameObjects.Concrete.FlyingEnemy;
 using _Project.Scripts.GameObjects.Concrete.Player;
 using _Project.Scripts.GameObjects.Concrete.WarriorEnemy;
 using _Project.Scripts.GameObjects.Concrete.WarriorFriend;
+using _Project.Scripts.Interfaces;
 using _Project.Scripts.Interfaces.Model;
 using MemoryPack;
 using UnityEngine;

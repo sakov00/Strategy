@@ -15,14 +15,12 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherFriend
         protected override UnitView UnitView => View;
         
         private DamageSystem _damageSystem;
-        private DetectionAim _detectionAim;
         private RegenerationHpSystem _regenerationHpSystem;
         private UnitMovementSystem _unitMovementSystem;
 
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            _detectionAim?.DetectAim();
             _unitMovementSystem?.MoveToAim();
             _damageSystem?.Attack();
         }
@@ -34,7 +32,6 @@ namespace _Project.Scripts.GameObjects.Concrete.ArcherFriend
             Model.CurrentHealth = Model.MaxHealth;
             
             _unitMovementSystem = new UnitMovementSystem(Model, View, transform);
-            _detectionAim = new DetectionAim(Model, transform);
             _damageSystem = new DamageSystem(this, transform);
             _regenerationHpSystem = new RegenerationHpSystem(Model, View);
             

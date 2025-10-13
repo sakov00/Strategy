@@ -156,8 +156,8 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
                 _model.ElapsedTime = 0f;
             }
 
-            _gameTimer.OnEverySecond -= Tick;
-            _gameTimer.OnEverySecond += Tick;
+            _gameTimer.Unsubscribe(Tick);
+            _gameTimer.Subscribe(1f, Tick);
         }
 
         private void Tick()
@@ -171,7 +171,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
                 _model.CurrentIndex++;
             }
 
-            if (_model.CurrentIndex >= _currentEnemyList.Count) _gameTimer.OnEverySecond -= Tick;
+            if (_model.CurrentIndex >= _currentEnemyList.Count) _gameTimer.Unsubscribe(Tick);
         }
 
         private void Spawn(EnemyWithTime enemyData)
@@ -188,7 +188,7 @@ namespace _Project.Scripts.GameObjects.Additional.EnemyRoads
         
         private void OnDestroy()
         {
-            _gameTimer.OnEverySecond -= Tick;
+            _gameTimer.Unsubscribe(Tick);
             _saveRegistry.Unregister(this);
         }
     }

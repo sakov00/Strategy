@@ -5,6 +5,7 @@ using _General.Scripts.DTO;
 using _General.Scripts.Enums;
 using _General.Scripts.Interfaces;
 using _General.Scripts.Registries;
+using _Project.Scripts.GameObjects.ActionSystems;
 using _Project.Scripts.Interfaces;
 using Cysharp.Threading.Tasks;
 using Unity.AI.Navigation;
@@ -18,6 +19,7 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
     {
         [Inject] private AppData _appData;
         [Inject] private SaveRegistry _saveRegistry;
+        
         [SerializeField] private TerrainModel _model;
         [SerializeField] private MeshFilter _meshFilter;
         [SerializeField] private MeshCollider _meshCollider;
@@ -139,6 +141,13 @@ namespace _Project.Scripts.GameObjects.Additional.LevelEnvironment.Terrain
                 sources,
                 bounds
             );
+        }
+
+        private float GetAreaValue()
+        {
+            var worldSize = Vector3.Scale(_meshFilter.sharedMesh.bounds.size, transform.lossyScale);
+            var groundArea = worldSize.x * worldSize.z;
+            return groundArea;
         }
 
         public void Destroy() => Destroy(gameObject);

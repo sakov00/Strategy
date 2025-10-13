@@ -20,7 +20,6 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         protected override UnitView UnitView => View;
         
         private DamageSystem _damageSystem;
-        private DetectionAim _detectionAim;
         private PlayerMovementSystem _playerMovementSystem;
         private RegenerationHpSystem _regenerationHpSystem;
 
@@ -32,7 +31,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             View.UpdateLoadBar(Model.CurrentTimeResurrection, Model.DurationTimeResurrection);
             
             if (Model.IsActiveUltimate)
-                _gameTimer.OnEverySecond += DisableUltimate;
+                _gameTimer.Subscribe(1f, DisableUltimate);
             
             if (Model.IsKilled)
             {
@@ -41,10 +40,9 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             }
 
             if(Model.IsNoDamageable)
-                _gameTimer.OnEverySecond += DisableNoDamage;
+                _gameTimer.Subscribe(1f, DisableNoDamage);
             
             _playerMovementSystem = new PlayerMovementSystem(Model, View, transform);
-            _detectionAim = new DetectionAim(Model, transform);
             _damageSystem = new DamageSystem(this, transform);
             _regenerationHpSystem = new RegenerationHpSystem(Model, View);
 
@@ -54,7 +52,6 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            _detectionAim?.DetectAim();
             _damageSystem?.Attack();
             View.UpdateUltimateBar(Model.CurrentValueUltimate, Model.MaxValueUltimate);
         }
@@ -81,7 +78,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             {
                 Model.IsActiveUltimate = true;
                 Model.DamageAmount *= Model.UltimateUpDamageModifier;
-                _gameTimer.OnEverySecond += DisableUltimate;
+                _gameTimer.Subscribe(1f, DisableUltimate);
             }
         }
 
@@ -94,7 +91,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
                 Model.DamageAmount = Model.DefaultDamageAmount;
                 Model.CurrentValueUltimate = 0;
                 Model.CurrentTimeUltimate = 0;
-                _gameTimer.OnEverySecond -= DisableUltimate;
+                _gameTimer.Unsubscribe(DisableUltimate);
             }
         }
 
@@ -103,7 +100,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             Dispose(false,false);
             LiveRegistry.Unregister(this);
             Model.IsKilled = true;
-            _gameTimer.OnEverySecond += TryReturnToGame;
+            _gameTimer.Subscribe(1f, TryReturnToGame);
         }
 
         private void TryReturnToGame()
@@ -117,8 +114,8 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
                 Model.IsKilled = false;
                 InitializeAsync();
                 Model.IsNoDamageable = true;
-                _gameTimer.OnEverySecond -= TryReturnToGame;
-                _gameTimer.OnEverySecond += DisableNoDamage;
+                _gameTimer.Unsubscribe(TryReturnToGame);
+                _gameTimer.Subscribe(1f, DisableNoDamage);
             }
         }
         
@@ -127,7 +124,7 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
             Model.CurrentTimeNoDamage++;
             if (Model.CurrentTimeNoDamage == Model.DurationTimeNoDamage)
             {
-                _gameTimer.OnEverySecond -= DisableNoDamage; 
+                _gameTimer.Unsubscribe(DisableNoDamage);
                 Model.CurrentTimeNoDamage = 0;
                 Model.IsNoDamageable = false;
             }
@@ -147,10 +144,9 @@ namespace _Project.Scripts.GameObjects.Concrete.Player
                 Model.CurrentTimeResurrection = 0;
                 Model.CurrentTimeNoDamage = 0;
             }
-            _gameTimer.OnEverySecond -= DisableUltimate;
-            _gameTimer.OnEverySecond -= DisableNoDamage;
-            _gameTimer.OnEverySecond -= TryReturnToGame;
-            _detectionAim = null;
+            _gameTimer.Unsubscribe(DisableUltimate);
+            _gameTimer.Unsubscribe(DisableNoDamage);
+            _gameTimer.Unsubscribe(TryReturnToGame);
             _playerMovementSystem = null;
             _regenerationHpSystem?.Dispose();
             _damageSystem?.Dispose();

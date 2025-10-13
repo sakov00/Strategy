@@ -19,12 +19,12 @@ namespace _Project.Scripts.GameObjects.ActionSystems
             _objectModel = healthModel;
             _objectView = objectView;
 
-            _gameTimer.OnEverySecond += TryRegenerateHealth;
+            _gameTimer.Subscribe(1f, TryRegenerateHealth);
         }
 
         public void Dispose()
         {
-            _gameTimer.OnEverySecond -= TryRegenerateHealth;
+            _gameTimer.Unsubscribe(TryRegenerateHealth);
         }
 
         private void TryRegenerateHealth()

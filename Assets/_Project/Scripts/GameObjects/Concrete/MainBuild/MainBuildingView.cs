@@ -21,10 +21,13 @@ namespace _Project.Scripts.GameObjects.Concrete.MainBuild
         {
         }
 
-        public void SetAttack(bool isAttacking)
+        public void SetAttacking(bool isAttacking)
         {
             AttackHitEvent?.Invoke();
         }
+        
+        public Vector3 GetPosition() => transform.position;
+        public Vector3 GetScale() => transform.localScale;
 
         public event Action AttackHitEvent;
     }

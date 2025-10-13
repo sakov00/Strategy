@@ -24,7 +24,7 @@ namespace _Project.Scripts.GameObjects.Abstract.BaseObject
         protected abstract ObjectView ObjectView { get; }
         
         public int Id { get => ObjectModel.Id; set => ObjectModel.Id = value; }
-        public float HeightObject { get; protected set; }
+        public float HeightObject { get; set; }
         public WarSide WarSide => ObjectModel.WarSide;
         public float CurrentHealth { get => ObjectModel.CurrentHealth; set => ObjectModel.CurrentHealth = value; }
 

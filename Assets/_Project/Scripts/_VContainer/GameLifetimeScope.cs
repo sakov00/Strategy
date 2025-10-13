@@ -7,6 +7,7 @@ using _General.Scripts.Services;
 using _General.Scripts.SO;
 using _General.Scripts.UI.Windows;
 using _Project.Scripts.Factories;
+using _Project.Scripts.GameObjects.ActionSystems;
 using _Project.Scripts.Pools;
 using _Project.Scripts.SO;
 using UnityEngine;
@@ -100,6 +101,8 @@ namespace _Project.Scripts._VContainer
             builder.Register<ResetLevelService>(Lifetime.Singleton).AsSelf();
             builder.Register<SaveLoadLevelService>(Lifetime.Singleton).AsSelf();
             builder.Register<SceneCreator>(Lifetime.Singleton).AsSelf();
+            
+            builder.Register<SpatialDetectionSystem>(Lifetime.Singleton).AsSelf().As<ITickable>();
         }
     }
 }
