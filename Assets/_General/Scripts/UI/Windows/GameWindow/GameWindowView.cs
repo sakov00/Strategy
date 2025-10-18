@@ -1,7 +1,10 @@
 using _General.Scripts._GlobalLogic;
 using _General.Scripts.AllAppData;
+using _General.Scripts.Enums;
+using _General.Scripts.Services;
 using _General.Scripts.UI.Elements;
 using _General.Scripts.UI.Windows.BaseWindow;
+using Cysharp.Threading.Tasks;
 using Joystick_Pack.Scripts.Base;
 using TMPro;
 using UniRx;
@@ -15,6 +18,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
     public class GameWindowView : BaseWindowView
     {
         [Inject] private AppData _appData;
+        [Inject] private SoundManager _soundManager;
         
         [Header("Presenter")]
         [SerializeField] private GameWindowPresenter _presenter;
@@ -38,6 +42,7 @@ namespace _General.Scripts.UI.Windows.GameWindow
         public override void Initialize()
         {
             base.Initialize();
+            
             _presenter.OpenPauseWindowCommand.BindTo(_openPauseMenuButton).AddTo(Disposables);
             _presenter.NextRoundCommand.BindTo(_nextRoundButton).AddTo(Disposables);
             _presenter.SetStrategyModeCommand.BindTo(_strategyModeButton).AddTo(Disposables);
@@ -58,6 +63,22 @@ namespace _General.Scripts.UI.Windows.GameWindow
                         _joystick.gameObject.SetActive(true);
                     }
                 })
+                .AddTo(Disposables);
+            
+            _openPauseMenuButton.OnClickAsObservable()
+                .Subscribe(_ => _soundManager.PlaySFX(SoundKey.ButtonClickSound))
+                .AddTo(Disposables);
+
+            _nextRoundButton.OnClickAsObservable()
+                .Subscribe(_ =>
+                {
+                    _soundManager.PlaySFX(SoundKey.ButtonClickSound);
+                    _soundManager.PlayMusicAsync(SoundKey.BattleMusic).Forget();
+                })
+                .AddTo(Disposables);
+
+            _strategyModeButton.OnClickAsObservable()
+                .Subscribe(_ => _soundManager.PlaySFX(SoundKey.ButtonClickSound))
                 .AddTo(Disposables);
             
             _appData.LevelData.IsFightingReactive

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using _General.Scripts;
 using _General.Scripts._GlobalLogic;
@@ -23,6 +24,7 @@ namespace _Project.Scripts
 {
     public class GameManager : IInitializable, IAsyncStartable, IDisposable
     {
+        [Inject] protected SoundManager SoundManager;
         [Inject] protected AppData AppData;
         [Inject] protected SaveLoadLevelService SaveLoadLevelService;
         [Inject] protected ResetLevelService ResetService;
@@ -39,6 +41,7 @@ namespace _Project.Scripts
         
         public virtual async UniTask StartAsync(CancellationToken cancellation = default)
         {
+            SoundManager.PlayMusicAsync(SoundKey.MenuMusic).Forget();
             WindowsManager.ShowFastWindow<LoadingWindowPresenter>();
             await StartLevel(AppData.User.CurrentLevel);
         }

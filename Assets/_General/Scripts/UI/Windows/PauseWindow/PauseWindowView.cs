@@ -1,13 +1,18 @@
+using _General.Scripts.Enums;
+using _General.Scripts.Services;
 using _General.Scripts.UI.Windows.BaseWindow;
 using DG.Tweening;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace _General.Scripts.UI.Windows.PauseWindow
 {
     public class PauseWindowView : BaseWindowView
     {
+        [Inject] private SoundManager _soundManager;
+        
         [Header("Presenter")]
         [SerializeField] private PauseWindowPresenter _presenter;
 
@@ -22,6 +27,18 @@ namespace _General.Scripts.UI.Windows.PauseWindow
             _presenter.HomeCommand.BindTo(_homeButton).AddTo(Disposables);
             _presenter.RestartCommand.BindTo(_restartButton).AddTo(Disposables);
             _presenter.ContinueCommand.BindTo(_continueButton).AddTo(Disposables);
+            
+            _homeButton.OnClickAsObservable()
+                .Subscribe(_ => _soundManager.PlaySFX(SoundKey.ButtonClickSound))
+                .AddTo(Disposables);
+
+            _restartButton.OnClickAsObservable()
+                .Subscribe(_ => _soundManager.PlaySFX(SoundKey.ButtonClickSound))
+                .AddTo(Disposables);
+
+            _continueButton.OnClickAsObservable()
+                .Subscribe(_ => _soundManager.PlaySFX(SoundKey.ButtonClickSound))
+                .AddTo(Disposables);
         }
         
         public override Tween Show()
